@@ -1,12 +1,16 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.1)
 PROJECT(AirBattle)
 
+SET(CMAKE_AUTOMOC ON)
+
 SET(Qt5_COMPONENTS Core Gui Widgets)
 FIND_PACKAGE(Qt5 COMPONENTS ${Qt5_COMPONENTS} REQUIRED)
 
-SET(HEADERS MyRect.h)
+SET(HEADERS MyRect.h
+            Bullet.h)
 
-SET(SOURCES MyRect.cpp)
+SET(SOURCES MyRect.cpp
+            Bullet.cpp)
 
 SET(LIBS Qt5::Core
          Qt5::Gui
