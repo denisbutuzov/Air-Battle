@@ -15,14 +15,6 @@ void MyRect::keyPressEvent(QKeyEvent *event)
     {
         setPos(x() + 10, y());
     }
-    else if(event->key() == Qt::Key_Up)
-    {
-        setPos(x(), y() - 10);
-    }
-    else if(event->key() == Qt::Key_Down)
-    {
-        setPos(x(), y() + 10);
-    }
     //create a bullet
     else if(event->key() == Qt::Key_Space)
     {
