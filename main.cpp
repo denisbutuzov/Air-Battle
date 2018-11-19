@@ -10,17 +10,18 @@ int main(int argc, char *argv[])
 
     //create a scene
     QGraphicsScene *scene = new QGraphicsScene();
+    scene->setSceneRect(0, 0, 800, 600);
 
     //create an item to put unto the scene
-    MyRect *rect = new MyRect();
-    rect->setRect(0, 0, 100, 100);
+    MyRect *player = new MyRect();
+    player->setRect(0, 0, 100, 100);
 
     //make rect focusable
-    rect->setFlag(QGraphicsItem::ItemIsFocusable);
-    rect->setFocus();
+    player->setFlag(QGraphicsItem::ItemIsFocusable);
+    player->setFocus();
 
     //add the item to the scene
-    scene->addItem(rect);
+    scene->addItem(player);
 
     //add a view
     QGraphicsView *view = new QGraphicsView(scene);
@@ -29,6 +30,10 @@ int main(int argc, char *argv[])
 
     //show the view
     view->show();
+    view->setFixedSize(800, 600);
+
+    //place the item on the view
+    player->setPos(view->width()/2 - player->rect().width()/2, view->height() - player->rect().height());
 
     return a.exec();
 }
