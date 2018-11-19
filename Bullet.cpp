@@ -1,4 +1,5 @@
 #include <QTimer>
+#include <QGraphicsScene>
 
 #include "Bullet.h"
 
@@ -18,4 +19,11 @@ void Bullet::move()
 {
     //move bullet up
     setPos(x(), y() - 10);
+
+    //delete bullet
+    if(y() + rect().height() < 0)
+    {
+        scene()->removeItem(this);
+        delete this;
+    }
 }
