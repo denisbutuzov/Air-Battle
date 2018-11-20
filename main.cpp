@@ -1,6 +1,7 @@
 #include <QApplication>
 #include <QGraphicsScene>
 #include <QGraphicsView>
+#include <QTimer>
 
 #include "MyRect.h"
 
@@ -32,8 +33,14 @@ int main(int argc, char *argv[])
     view->show();
     view->setFixedSize(800, 600);
 
-    //place the item on the view
+    //place player on the view
     player->setPos(view->width()/2 - player->rect().width()/2, view->height() - player->rect().height());
+
+    //spawn enemies
+    QTimer *timer = new QTimer();
+    QObject::connect(timer, SIGNAL(timeout()), player, SLOT(spawn()));
+
+    timer->start(2000);
 
     return a.exec();
 }

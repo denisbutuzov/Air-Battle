@@ -7,15 +7,16 @@ SET(Qt5_COMPONENTS Core Gui Widgets)
 FIND_PACKAGE(Qt5 COMPONENTS ${Qt5_COMPONENTS} REQUIRED)
 
 SET(HEADERS include/MyRect.h
-            include/Bullet.h)
+            include/Bullet.h
+            include/Enemy.h)
 
 SET(SOURCES src/MyRect.cpp
-            src/Bullet.cpp)
+            src/Bullet.cpp
+            src/Enemy.cpp)
 
 SET(LIBS Qt5::Core
          Qt5::Gui
-         Qt5::Widgets
-)
+         Qt5::Widgets)
 
 ADD_EXECUTABLE(${PROJECT_NAME} main.cpp ${SOURCES} ${HEADERS})
 TARGET_LINK_LIBRARIES(${PROJECT_NAME}  PUBLIC ${LIBS})
