@@ -3,7 +3,7 @@ PROJECT(AirBattle)
 
 SET(CMAKE_AUTOMOC ON)
 
-SET(Qt5_COMPONENTS Core Gui Widgets)
+SET(Qt5_COMPONENTS Core Gui Widgets Multimedia)
 FIND_PACKAGE(Qt5 COMPONENTS ${Qt5_COMPONENTS} REQUIRED)
 
 SET(HEADERS include/Game.h
@@ -22,7 +22,8 @@ SET(SOURCES src/Game.cpp
 
 SET(LIBS Qt5::Core
          Qt5::Gui
-         Qt5::Widgets)
+         Qt5::Widgets
+         Qt5::Multimedia)
 
 ADD_EXECUTABLE(${PROJECT_NAME} main.cpp ${SOURCES} ${HEADERS})
 TARGET_LINK_LIBRARIES(${PROJECT_NAME}  PUBLIC ${LIBS})
