@@ -10,13 +10,15 @@ SET(HEADERS include/Game.h
             include/Player.h
             include/Bullet.h
             include/Enemy.h
-            include/Score.h)
+            include/Score.h
+            include/Health.h)
 
 SET(SOURCES src/Game.cpp
             src/Player.cpp
             src/Bullet.cpp
             src/Enemy.cpp
-            src/Score.cpp)
+            src/Score.cpp
+            src/Health.cpp)
 
 SET(LIBS Qt5::Core
          Qt5::Gui
