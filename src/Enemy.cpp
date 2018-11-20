@@ -3,7 +3,11 @@
 #include <QTimer>
 #include <QGraphicsScene>
 
+#include "Game.h"
+
 #include "Enemy.h"
+
+extern Game *game;
 
 Enemy::Enemy()
 {
@@ -29,6 +33,10 @@ void Enemy::move()
     //delete enemy
     if(y() > scene()->height())
     {
+        //decrease the health
+        game->health_->decrease();
+
+        //remove from the scene
         scene()->removeItem(this);
         delete this;
     }

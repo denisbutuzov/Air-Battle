@@ -24,6 +24,11 @@ Game::Game(QWidget *parent)
     //create the score
     score_ = new Score();
     scene_->addItem(score_);
+    //create the health
+    health_ = new Health();
+    health_->setPos(0, 25);
+    scene_->addItem(health_);
+
 
     //add a view
     setScene(scene_);
