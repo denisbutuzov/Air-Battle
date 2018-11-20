@@ -3,7 +3,7 @@
 #include <QGraphicsView>
 #include <QTimer>
 
-#include "MyRect.h"
+#include "Player.h"
 
 int main(int argc, char *argv[])
 {
@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
     scene->setSceneRect(0, 0, 800, 600);
 
     //create an item to put unto the scene
-    MyRect *player = new MyRect();
+    Player *player = new Player();
     player->setRect(0, 0, 100, 100);
 
     //make rect focusable

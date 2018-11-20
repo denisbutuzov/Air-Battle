@@ -6,11 +6,11 @@ SET(CMAKE_AUTOMOC ON)
 SET(Qt5_COMPONENTS Core Gui Widgets)
 FIND_PACKAGE(Qt5 COMPONENTS ${Qt5_COMPONENTS} REQUIRED)
 
-SET(HEADERS include/MyRect.h
+SET(HEADERS include/Player.h
             include/Bullet.h
             include/Enemy.h)
 
-SET(SOURCES src/MyRect.cpp
+SET(SOURCES src/Player.cpp
             src/Bullet.cpp
             src/Enemy.cpp)
 
