@@ -22,7 +22,7 @@ void Player::keyPressEvent(QKeyEvent *event)
     //press right key - move to right
     else if(event->key() == Qt::Key_Right)
     {
-        if(x() + 100 < 800)
+        if(x() + rect().width() < scene()->width())
         {
             setPos(x() + 10, y());
         }
@@ -31,7 +31,7 @@ void Player::keyPressEvent(QKeyEvent *event)
     else if(event->key() == Qt::Key_Space)
     {
         Bullet *bullet = new Bullet();
-        bullet->setPos(x() + sideCounter * 90, y());
+        bullet->setPos(x() + sideCounter * (rect().width() - bullet->rect().width()), y());
         scene()->addItem(bullet);
 
         sideCounter++;
