@@ -6,6 +6,12 @@
 
 #include "Player.h"
 
+Player::Player(QGraphicsItem *parent): QGraphicsRectItem(parent)
+{
+    bulletsound_ = new QMediaPlayer();
+    bulletsound_->setMedia(QUrl("file:///home/denis/Projects/Air-Battle/resources/bullet.wav"));
+}
+
 void Player::keyPressEvent(QKeyEvent *event)
 {
     if(event->key() == Qt::Key_Left)
@@ -24,6 +30,16 @@ void Player::keyPressEvent(QKeyEvent *event)
         Bullet *bullet = new Bullet();
         bullet->setPos(x(), y());
         scene()->addItem(bullet);
+
+        //play bullet sound
+        if(bulletsound_->state() == QMediaPlayer::PlayingState)
+        {
+            bulletsound_->setPosition(0);
+        }
+        else if(bulletsound_->state() == QMediaPlayer::StoppedState)
+        {
+            bulletsound_->play();
+        }
     }
 }
 
