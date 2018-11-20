@@ -1,5 +1,8 @@
 #include <QTimer>
 #include <QGraphicsScene>
+#include <QList>
+
+#include "Enemy.h"
 
 #include "Bullet.h"
 
@@ -17,6 +20,24 @@ Bullet::Bullet()
 
 void Bullet::move()
 {
+    //destroy enemy and bullet
+    QList<QGraphicsItem *> colliding_items = collidingItems();
+    for(int i = 0, n = colliding_items.size(); i < n; i++)
+    {
+        if(typeid(*(colliding_items[i])) == typeid(Enemy))
+        {
+            //remove them both
+            scene()->removeItem(colliding_items[i]);
+            scene()->removeItem(this);
+
+            //delete them both
+            delete colliding_items[i];
+            delete this;
+
+            return;
+        }
+    }
+
     //move bullet up
     setPos(x(), y() - 10);
 
