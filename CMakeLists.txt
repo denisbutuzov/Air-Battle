@@ -6,13 +6,17 @@ SET(CMAKE_AUTOMOC ON)
 SET(Qt5_COMPONENTS Core Gui Widgets)
 FIND_PACKAGE(Qt5 COMPONENTS ${Qt5_COMPONENTS} REQUIRED)
 
-SET(HEADERS include/Player.h
+SET(HEADERS include/Game.h
+            include/Player.h
             include/Bullet.h
-            include/Enemy.h)
+            include/Enemy.h
+            include/Score.h)
 
-SET(SOURCES src/Player.cpp
+SET(SOURCES src/Game.cpp
+            src/Player.cpp
             src/Bullet.cpp
-            src/Enemy.cpp)
+            src/Enemy.cpp
+            src/Score.cpp)
 
 SET(LIBS Qt5::Core
          Qt5::Gui
