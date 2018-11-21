@@ -18,6 +18,9 @@ Bullet::Bullet()
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));
 
     timer->start(50);
+
+    boomsound_ = new QMediaPlayer();
+    boomsound_->setMedia(QUrl("qrc:/sounds/sounds/boom.wav"));
 }
 
 void Bullet::move()
@@ -28,6 +31,16 @@ void Bullet::move()
     {
         if(typeid(*(colliding_items[i])) == typeid(Enemy))
         {
+            //play destroy sound
+            if(boomsound_->state() == QMediaPlayer::PlayingState)
+            {
+                boomsound_->setPosition(0);
+            }
+            else if(boomsound_->state() == QMediaPlayer::StoppedState)
+            {
+                boomsound_->play();
+            }
+
             //increase the score
             game->score_->increase();
 

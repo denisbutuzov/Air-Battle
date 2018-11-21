@@ -6,6 +6,12 @@
 
 #include "Player.h"
 
+Player::Player(QGraphicsItem *parent): QGraphicsRectItem(parent)
+{
+    bulletsound_ = new QMediaPlayer();
+    bulletsound_->setMedia(QUrl("qrc:/sounds/sounds/bullet.wav"));
+}
+
 void Player::keyPressEvent(QKeyEvent *event)
 {
     //variable for alternation shots
@@ -38,6 +44,16 @@ void Player::keyPressEvent(QKeyEvent *event)
         if(sideCounter > 1)
         {
             sideCounter = 0;
+        }
+
+        //play bullet sound
+        if(bulletsound_->state() == QMediaPlayer::PlayingState)
+        {
+            bulletsound_->setPosition(0);
+        }
+        else if(bulletsound_->state() == QMediaPlayer::StoppedState)
+        {
+            bulletsound_->play();
         }
     }
 }
