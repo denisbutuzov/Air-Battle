@@ -37,7 +37,7 @@ void Player::keyPressEvent(QKeyEvent *event)
     else if(event->key() == Qt::Key_Space)
     {
         Bullet *bullet = new Bullet();
-        bullet->setPos(x() + sideCounter * (rect().width() - bullet->rect().width()), y());
+        bullet->setPos(x() + sideCounter * (rect().width() - bullet->pixmap().width()), y());
         scene()->addItem(bullet);
 
         sideCounter++;
