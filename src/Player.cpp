@@ -9,7 +9,7 @@
 Player::Player(QGraphicsItem *parent): QGraphicsRectItem(parent)
 {
     bulletsound_ = new QMediaPlayer();
-    bulletsound_->setMedia(QUrl("file:///home/denis/Projects/Air-Battle/resources/bullet.wav"));
+    bulletsound_->setMedia(QUrl("qrc:/sounds/sounds/bullet.wav"));
 }
 
 void Player::keyPressEvent(QKeyEvent *event)

@@ -1,5 +1,6 @@
 #include <QGraphicsScene>
 #include <QGraphicsView>
+#include <QMediaPlaylist>
 #include <QTimer>
 
 #include "Game.h"
@@ -42,6 +43,15 @@ Game::Game(QWidget *parent)
     //spawn enemies
     QTimer *timer = new QTimer();
     QObject::connect(timer, SIGNAL(timeout()), player_, SLOT(spawn()));
+
+    //play background sound
+    QMediaPlaylist *playlist = new QMediaPlaylist();
+    playlist->addMedia(QUrl("qrc:/sounds/sounds/plane.wav"));
+    playlist->setPlaybackMode(QMediaPlaylist::Loop);
+
+    QMediaPlayer *backsound = new QMediaPlayer();
+    backsound->setPlaylist(playlist);
+    backsound->play();
 
     timer->start(2000);
 }

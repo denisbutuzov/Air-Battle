@@ -21,7 +21,7 @@ Bullet::Bullet()
     timer->start(50);
 
     boomsound_ = new QMediaPlayer();
-    boomsound_->setMedia(QUrl("file:///home/denis/Projects/Air-Battle/resources/boom.wav"));
+    boomsound_->setMedia(QUrl("qrc:/sounds/sounds/boom.wav"));
 }
 
 void Bullet::move()
