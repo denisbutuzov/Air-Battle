@@ -1,6 +1,5 @@
 #include <QTimer>
 #include <QGraphicsScene>
-#include <QList>
 
 #include "Enemy.h"
 #include "Game.h"
