@@ -18,4 +18,5 @@ void Rocket::setPixmap()
 Rocket::Rocket(QGraphicsItem *parent): QGraphicsPixmapItem(parent)
 {
     loadSettings();
+    shotSound().play();
 }

@@ -2,7 +2,7 @@
 
 void Bullet::setSpeed()
 {
-    speed() = 5;
+    speed() = 10;
 }
 
 void Bullet::setShotSound()
@@ -18,4 +18,5 @@ void Bullet::setPixmap()
 Bullet::Bullet(QGraphicsItem *parent): QGraphicsPixmapItem(parent)
 {
     loadSettings();
+    shotSound().play();
 }
