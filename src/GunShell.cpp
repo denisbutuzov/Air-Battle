@@ -1,17 +1,18 @@
 #include <QTimer>
 #include <QGraphicsScene>
 
-#include "Enemy.h"
-
 #include "GunShell.h"
 
-void GunShell::loadGunShellSettings()
+void GunShell::loadSettings()
 {
     //set speed of gun shell
-    setGunShellSpeed();
+    setSpeed();
 
     //set sound of shot
     setShotSound();
+
+    //set image of gun shell
+    setPixmap();
 
     //connect
     QTimer *timer = new QTimer();
@@ -20,10 +21,20 @@ void GunShell::loadGunShellSettings()
     timer->start(20);
 }
 
+unsigned int &GunShell::speed()
+{
+    return speed_;
+}
+
+QMediaPlayer &GunShell::shotSound()
+{
+    return shotSound_;
+}
+
 void GunShell::move()
 {
     //move gun shell up
-    setPos(x(), y() - gunShellSpeed_);
+    setPos(x(), y() - speed_);
 
     //delete gun shell
     if(y() + pixmap().height() < 0)
