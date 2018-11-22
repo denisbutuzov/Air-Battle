@@ -6,7 +6,7 @@
 
 #include "Player.h"
 
-Player::Player(QGraphicsItem *parent): QGraphicsRectItem(parent)
+Player::Player(QGraphicsItem *parent): QGraphicsPixmapItem(parent)
 {
     bulletsound_ = new QMediaPlayer();
     bulletsound_->setMedia(QUrl("qrc:/sounds/sounds/bullet.wav"));
@@ -28,7 +28,7 @@ void Player::keyPressEvent(QKeyEvent *event)
     //press right key - move to right
     else if(event->key() == Qt::Key_Right)
     {
-        if(x() + rect().width() < scene()->width())
+        if(x() + pixmap().width() < scene()->width())
         {
             setPos(x() + 10, y());
         }
@@ -37,7 +37,7 @@ void Player::keyPressEvent(QKeyEvent *event)
     else if(event->key() == Qt::Key_Space)
     {
         Bullet *bullet = new Bullet();
-        bullet->setPos(x() + sideCounter * (rect().width() - bullet->pixmap().width()), y());
+        bullet->setPos(x() + sideCounter * (pixmap().width() - bullet->pixmap().width()), y());
         scene()->addItem(bullet);
 
         sideCounter++;
