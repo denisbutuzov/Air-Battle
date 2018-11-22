@@ -53,5 +53,8 @@ Game::Game(QWidget *parent)
     backsound->setPlaylist(playlist);
     backsound->play();
 
+    //set background image
+    setBackgroundBrush(QBrush(QImage(":/images/images/background.jpeg")));
+
     timer->start(2000);
 }
