@@ -1,4 +1,4 @@
-#include <stdlib.h>
+#include <cstdlib>
 
 #include <QTimer>
 #include <QGraphicsScene>
@@ -11,12 +11,12 @@ extern Game *game;
 
 Enemy::Enemy()
 {
-    //drew the enemy
-    setRect(0, 0, 100, 100);
+    //draw player
+    setPixmap(QPixmap(":/images/images/enemy_plane.png"));
 
     //set random position of enemy
     int random_number = rand() % 700;
-    setPos(random_number, 0 - rect().height());
+    setPos(random_number, 0 - pixmap().height());
 
     //connect
     QTimer *timer = new QTimer();

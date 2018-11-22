@@ -13,7 +13,7 @@ Game::Game(QWidget *parent)
 
     //create an item to put unto the scene
     player_ = new Player();
-    player_->setRect(0, 0, 100, 100);
+    player_->setPixmap(QPixmap(":/images/images/player_plane.png"));
 
     //make rect focusable
     player_->setFlag(QGraphicsItem::ItemIsFocusable);
@@ -38,7 +38,7 @@ Game::Game(QWidget *parent)
     setFixedSize(800, 600);
 
     //place player on the view
-    player_->setPos(width()/2 - player_->rect().width()/2, height() - player_->rect().height());
+    player_->setPos(width()/2 - player_->pixmap().width()/2, height() - player_->pixmap().height());
 
     //spawn enemies
     QTimer *timer = new QTimer();
@@ -52,6 +52,9 @@ Game::Game(QWidget *parent)
     QMediaPlayer *backsound = new QMediaPlayer();
     backsound->setPlaylist(playlist);
     backsound->play();
+
+    //set background image
+    setBackgroundBrush(QBrush(QImage(":/images/images/background.jpeg")));
 
     timer->start(2000);
 }

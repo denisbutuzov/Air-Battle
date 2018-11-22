@@ -1,10 +1,10 @@
 #pragma once
 
-#include <QGraphicsRectItem>
+#include <QGraphicsPixmapItem>
 #include <QMediaPlayer>
 #include <QObject>
 
-class Bullet: public QObject, public QGraphicsRectItem
+class Bullet: public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
 private:
