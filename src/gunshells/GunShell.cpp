@@ -32,7 +32,7 @@ QMediaPlayer &GunShell::shotSound()
 }
 
 void GunShell::move()
-{
+{  
     //move gun shell up
     setPos(x(), y() - speed_);
 

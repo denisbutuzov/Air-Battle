@@ -2,8 +2,11 @@
 
 #include <QTimer>
 #include <QGraphicsScene>
+#include <QMediaPlayer>
 
 #include "Game.h"
+#include "Bullet.h"
+#include "Rocket.h"
 
 #include "Enemy.h"
 
@@ -27,12 +30,16 @@ Enemy::Enemy()
 
 void Enemy::move()
 {
-    //destroy player and enemy
+    //destroy enemy and gun shell
     QList<QGraphicsItem *> colliding_items = collidingItems();
     for(int i = 0, n = colliding_items.size(); i < n; i++)
     {
-        if(typeid(*(colliding_items[i])) == typeid(Player))
+        if((typeid(*(colliding_items[i])) == typeid(Bullet)) || (typeid(*(colliding_items[i])) == typeid(Rocket)))
         {
+            QMediaPlayer *destroySound = new QMediaPlayer();
+            destroySound->setMedia(QUrl("qrc:/sounds/sounds/boom.wav"));
+            destroySound->play();
+
             //remove them both from scene
             scene()->removeItem(colliding_items[i]);
             scene()->removeItem(this);

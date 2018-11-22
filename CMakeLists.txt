@@ -9,20 +9,20 @@ FIND_PACKAGE(Qt5 COMPONENTS ${Qt5_COMPONENTS} REQUIRED)
 
 SET(HEADERS include/Game.h
             include/Player.h
-            include/GunShell.h
-            include/Bullet.h
-            include/Rocket.h
-            include/Enemy.h
+            include/gunshells/GunShell.h
+            include/gunshells/Bullet.h
+            include/gunshells/Rocket.h
+            include/enemies/Enemy.h
             include/Score.h
             include/Health.h
 )
 
 SET(SOURCES src/Game.cpp
             src/Player.cpp
-            src/GunShell.cpp
-            src/Bullet.cpp
-            src/Rocket.cpp
-            src/Enemy.cpp
+            src/gunshells/GunShell.cpp
+            src/gunshells/Bullet.cpp
+            src/gunshells/Rocket.cpp
+            src/enemies/Enemy.cpp
             src/Score.cpp
             src/Health.cpp
 )
@@ -37,4 +37,6 @@ SET(RESOURCES resources/res.qrc)
 
 ADD_EXECUTABLE(${PROJECT_NAME} main.cpp ${SOURCES} ${HEADERS} ${RESOURCES})
 TARGET_LINK_LIBRARIES(${PROJECT_NAME}  PUBLIC ${LIBS})
-TARGET_INCLUDE_DIRECTORIES(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+TARGET_INCLUDE_DIRECTORIES(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
+                                                  ${CMAKE_CURRENT_SOURCE_DIR}/include/gunshells
+                                                  ${CMAKE_CURRENT_SOURCE_DIR}/include/enemies)
