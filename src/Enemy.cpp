@@ -11,12 +11,12 @@ extern Game *game;
 
 Enemy::Enemy()
 {
-    //set random position of enemy
-    int random_number = rand() % 700;
-    setPos(random_number, 0);
-
     //drew the enemy
     setRect(0, 0, 100, 100);
+
+    //set random position of enemy
+    int random_number = rand() % 700;
+    setPos(random_number, 0 - rect().height());
 
     //connect
     QTimer *timer = new QTimer();
