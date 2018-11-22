@@ -8,5 +8,6 @@
         <file>images/bullet.png</file>
         <file>images/enemy_plane.png</file>
         <file>images/player_plane.png</file>
+        <file>images/background.jpeg</file>
     </qresource>
 </RCC>
