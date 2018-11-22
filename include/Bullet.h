@@ -1,16 +1,13 @@
 #pragma once
 
-#include <QGraphicsPixmapItem>
-#include <QMediaPlayer>
-#include <QObject>
+#include "GunShell.h"
 
-class Bullet: public QObject, public QGraphicsPixmapItem
+class Bullet: public GunShell
 {
-    Q_OBJECT
 private:
-    QMediaPlayer *boomsound_;
+    virtual void setSpeed() override final;
+    virtual void setShotSound() override final;
+    virtual void setPixmap() override final;
 public:
-    Bullet();
-public slots:
-    void move();
+    Bullet(QGraphicsItem *parent = nullptr);
 };
