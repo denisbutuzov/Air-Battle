@@ -13,6 +13,7 @@ SET(HEADERS include/Game.h
             include/Enemy.h
             include/Score.h
             include/Health.h
+            include/GunShell.h
 )
 
 SET(SOURCES src/Game.cpp
@@ -21,6 +22,7 @@ SET(SOURCES src/Game.cpp
             src/Enemy.cpp
             src/Score.cpp
             src/Health.cpp
+            src/GunShell.cpp
 )
 
 SET(LIBS Qt5::Core
