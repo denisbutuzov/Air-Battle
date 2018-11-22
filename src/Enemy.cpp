@@ -15,8 +15,8 @@ Enemy::Enemy()
     int random_number = rand() % 700;
     setPos(random_number, 0);
 
-    //drew the enemy
-    setRect(0, 0, 100, 100);
+    //draw player
+    setPixmap(QPixmap(":/images/images/enemy_plane.png"));
 
     //connect
     QTimer *timer = new QTimer();
