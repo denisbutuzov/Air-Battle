@@ -35,7 +35,7 @@ void Player::keyPressEvent(QKeyEvent *event)
     //press space key - create a bullet
     else if(event->key() == Qt::Key_Space)
     {
-        GunShell *bullet = new Rocket();
+        Bullet *bullet = new Bullet();
         bullet->setPos(x() + sideCounter * (pixmap().width() - bullet->pixmap().width()), y() + 70);
         scene()->addItem(bullet);
 
@@ -44,6 +44,13 @@ void Player::keyPressEvent(QKeyEvent *event)
         {
             sideCounter = 0;
         }
+    }
+    //press V key - create a rocket
+    else if(event->key() == Qt::Key_V)
+    {
+        Rocket *rocket = new Rocket();
+        rocket->setPos(x() + (pixmap().width() - rocket->pixmap().width())/2, y() - 20);
+        scene()->addItem(rocket);
     }
 }
 
