@@ -9,20 +9,22 @@ FIND_PACKAGE(Qt5 COMPONENTS ${Qt5_COMPONENTS} REQUIRED)
 
 SET(HEADERS include/Game.h
             include/Player.h
+            include/GunShell.h
             include/Bullet.h
+            include/Rocket.h
             include/Enemy.h
             include/Score.h
             include/Health.h
-            include/GunShell.h
 )
 
 SET(SOURCES src/Game.cpp
             src/Player.cpp
+            src/GunShell.cpp
             src/Bullet.cpp
+            src/Rocket.cpp
             src/Enemy.cpp
             src/Score.cpp
             src/Health.cpp
-            src/GunShell.cpp
 )
 
 SET(LIBS Qt5::Core
