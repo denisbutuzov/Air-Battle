@@ -13,6 +13,7 @@ SET(HEADERS include/Game.h
             include/gunshells/Bullet.h
             include/gunshells/Rocket.h
             include/enemies/Enemy.h
+            include/weapons/Weapon.h
             include/Score.h
             include/Health.h
 )
@@ -23,6 +24,7 @@ SET(SOURCES src/Game.cpp
             src/gunshells/Bullet.cpp
             src/gunshells/Rocket.cpp
             src/enemies/Enemy.cpp
+            src/weapons/Weapon.cpp
             src/Score.cpp
             src/Health.cpp
 )
