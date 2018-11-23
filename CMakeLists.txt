@@ -41,4 +41,5 @@ ADD_EXECUTABLE(${PROJECT_NAME} main.cpp ${SOURCES} ${HEADERS} ${RESOURCES})
 TARGET_LINK_LIBRARIES(${PROJECT_NAME}  PUBLIC ${LIBS})
 TARGET_INCLUDE_DIRECTORIES(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
                                                   ${CMAKE_CURRENT_SOURCE_DIR}/include/gunshells
-                                                  ${CMAKE_CURRENT_SOURCE_DIR}/include/enemies)
+                                                  ${CMAKE_CURRENT_SOURCE_DIR}/include/enemies
+                                                  ${CMAKE_CURRENT_SOURCE_DIR}/include/weapons)
