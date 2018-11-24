@@ -1,29 +1,27 @@
 #include <QGraphicsScene>
+#include <QTimer>
 
 #include "SpawnObject.h"
 
-void SpawnObject::findCollidingItems(QMap<QGraphicsItem *, std::function<void> > &matching)
+SpawnObject::SpawnObject(QGraphicsItem *parent): QGraphicsPixmapItem(parent)
 {
-    //find colliding items
-    QList<QGraphicsItem *> colliding_items = collidingItems();
-    for(int i = 0, n = colliding_items.size(); i < n; i++)
-    {
-        for(auto className : matching.uniqueKeys())
-        {
-            if(typeid(colliding_items[i]) == typeid(className))
-            {
-                matching.find(className).value();
-            }
-        }
-    }
+    //set random position of spawn object
+    int random_number = rand() % 700;
+    setPos(random_number, 0 - pixmap().height());
+
+    //set speed of object
+    setSpeed();
+
+    //start moving
+    QTimer *timer = new QTimer();
+    connect(timer, SIGNAL(timeout()), this, SLOT(move()));
+    timer->start(50);
 }
 
 void SpawnObject::move()
 {
-    findCollidingItems();
-
     //move object down
-    setPos(x(), y() + 5);
+    setPos(x(), y() + speed_);
 
     //delete when object is behind the scene
     if(y() > scene()->height())
@@ -32,4 +30,9 @@ void SpawnObject::move()
         scene()->removeItem(this);
         delete this;
     }
+}
+
+void SpawnObject::setSpeed()
+{
+    speed_ = 5;
 }

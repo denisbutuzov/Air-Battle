@@ -1,16 +1,20 @@
 #pragma once
 
-#include <functional>
-
-#include <QMap>
 #include <QObject>
 #include <QGraphicsPixmapItem>
+
+#include "TypeInfoWrapper.h"
 
 class SpawnObject: public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
-private:
-    void findCollidingItems(QMap<QGraphicsItem *, std::function<void> > &matching);
+public:
+    SpawnObject(QGraphicsItem *parent = nullptr);
 public slots:
-    void move();
+    virtual void move();
+private:
+    virtual void setSpeed();
+    virtual void setObjectImage() = 0;
+private:
+    unsigned int speed_;
 };
