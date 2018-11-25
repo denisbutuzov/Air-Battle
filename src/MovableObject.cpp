@@ -22,3 +22,8 @@ void MovableObject::draw(QGraphicsScene *scene)
 
     timer->start(50);
 }
+
+unsigned int &MovableObject::speed()
+{
+    return speed_;
+}
