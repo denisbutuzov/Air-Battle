@@ -10,7 +10,6 @@ FIND_PACKAGE(Qt5 COMPONENTS ${Qt5_COMPONENTS} REQUIRED)
 SET(HEADERS include/Game.h
             include/GameObject.h
             include/Player.h
-            include/TypeInfoWrapper.h
             include/SpawnObject.h
             include/gunshells/GunShell.h
             include/gunshells/Bullet.h
