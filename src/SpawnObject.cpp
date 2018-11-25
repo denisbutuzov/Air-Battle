@@ -25,7 +25,7 @@ void SpawnObject::setSpeed()
     speed() = 5;
 }
 
-void SpawnObject::setObjectPos()
+void SpawnObject::setStartObjectPos()
 {
     int random_number = rand() % static_cast<int>(scene()->width() - pixmap().width());
     setPos(random_number, 0 - pixmap().height());

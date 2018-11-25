@@ -11,5 +11,5 @@ public slots:
     virtual void move() override final;
 private:
     virtual void setSpeed() override;
-    virtual void setObjectPos() override final;
+    virtual void setStartObjectPos() override final;
 };

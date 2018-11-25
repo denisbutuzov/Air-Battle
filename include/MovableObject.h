@@ -9,7 +9,7 @@ class MovableObject
     Q_OBJECT
 public:
     MovableObject(QGraphicsItem *parent = nullptr);
-    virtual void draw(QGraphicsScene *scene) override;
+    virtual void show(QGraphicsScene *scene) override final;
 public slots:
     virtual void move() = 0;
 protected:

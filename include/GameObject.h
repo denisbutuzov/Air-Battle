@@ -9,8 +9,8 @@ class GameObject
 public:
     GameObject(QGraphicsItem *parent = nullptr);
     virtual ~GameObject() = default;
-    virtual void draw(QGraphicsScene *scene);
+    virtual void show(QGraphicsScene *scene);
 private:
     virtual void setObjectImage() = 0;
-    virtual void setObjectPos() = 0;
+    virtual void setStartObjectPos() = 0;
 };

@@ -8,10 +8,10 @@ MovableObject::MovableObject(QGraphicsItem *parent)
 
 }
 
-void MovableObject::draw(QGraphicsScene *scene)
+void MovableObject::show(QGraphicsScene *scene)
 {
-    //call basic method draw
-    GameObject::draw(scene);
+    //call basic method show
+    GameObject::show(scene);
 
     //set speed of object
     setSpeed();

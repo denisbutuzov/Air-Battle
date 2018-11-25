@@ -6,9 +6,9 @@ GameObject::GameObject(QGraphicsItem *parent)
 
 }
 
-void GameObject::draw(QGraphicsScene *scene)
+void GameObject::show(QGraphicsScene *scene)
 {
     setObjectImage();
-    setObjectPos();
+    setStartObjectPos();
     scene->addItem(this);
 }
