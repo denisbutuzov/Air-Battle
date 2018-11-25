@@ -1,20 +1,15 @@
 #pragma once
 
-#include <QObject>
-#include <QGraphicsPixmapItem>
+#include "MovableObject.h"
 
-#include "TypeInfoWrapper.h"
-
-class SpawnObject: public QObject, public QGraphicsPixmapItem
+class SpawnObject
+        : public MovableObject
 {
-    Q_OBJECT
 public:
     SpawnObject(QGraphicsItem *parent = nullptr);
 public slots:
-    virtual void move();
+    virtual void move() override final;
 private:
-    virtual void setSpeed();
-    virtual void setObjectImage() = 0;
-private:
-    unsigned int speed_;
+    virtual void setSpeed() override;
+    virtual void setObjectPos() override final;
 };
