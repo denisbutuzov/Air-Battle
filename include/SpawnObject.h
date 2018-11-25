@@ -8,8 +8,7 @@ class SpawnObject
 public:
     SpawnObject(QGraphicsItem *parent = nullptr);
 public slots:
-    virtual void move() override final;
+    virtual void move() override;
 private:
-    virtual void setSpeed() override;
     virtual void setStartObjectPos() override final;
 };
