@@ -15,7 +15,7 @@ public slots:
 protected:
     unsigned int &speed();
 private:
-    virtual void setSpeed() = 0;
+    virtual void setSpeed();
 private:
     unsigned int speed_;
 };

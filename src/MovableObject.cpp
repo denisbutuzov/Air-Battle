@@ -27,3 +27,8 @@ unsigned int &MovableObject::speed()
 {
     return speed_;
 }
+
+void MovableObject::setSpeed()
+{
+    speed_ = 5;
+}
