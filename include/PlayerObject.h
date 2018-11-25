@@ -1,15 +1,11 @@
 #pragma once
 
-#include <QGraphicsPixmapItem>
-#include <QMediaPlayer>
-#include <QObject>
+#include "GameObject.h"
 
-class Player: public QObject, public QGraphicsPixmapItem
+class PlayerObject
+        : public GameObject
 {
-    Q_OBJECT
 public:
-    Player(QGraphicsItem *parent = nullptr);
-    void keyPressEvent(QKeyEvent *event) override;
-public slots:
-    void spawn();
+    PlayerObject(QGraphicsItem *parent = nullptr);
+    void keyPressEvent(QKeyEvent *event) override final;
 };

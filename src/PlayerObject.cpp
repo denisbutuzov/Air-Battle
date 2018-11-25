@@ -1,17 +1,17 @@
 #include <QKeyEvent>
-#include <QGraphicsScene>
 
 #include "Bullet.h"
 #include "Rocket.h"
 #include "Enemy.h"
 
-#include "Player.h"
+#include "PlayerObject.h"
 
-Player::Player(QGraphicsItem *parent): QGraphicsPixmapItem(parent)
+PlayerObject::PlayerObject(QGraphicsItem *parent)
+    : GameObject(parent)
 {
 }
 
-void Player::keyPressEvent(QKeyEvent *event)
+void PlayerObject::keyPressEvent(QKeyEvent *event)
 {
     //variable for alternation shots
     static int sideCounter = 0;
@@ -52,11 +52,4 @@ void Player::keyPressEvent(QKeyEvent *event)
         rocket->setPos(x() + (pixmap().width() - rocket->pixmap().width())/2, y() - 20);
         scene()->addItem(rocket);
     }
-}
-
-void Player::spawn()
-{
-    //create an enemy
-    Enemy *enemy = new Enemy();
-    enemy->draw(scene());
 }
