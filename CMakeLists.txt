@@ -8,6 +8,7 @@ SET(Qt5_COMPONENTS Core Gui Widgets Multimedia)
 FIND_PACKAGE(Qt5 COMPONENTS ${Qt5_COMPONENTS} REQUIRED)
 
 SET(HEADERS include/Game.h
+            include/GameObject.h
             include/Player.h
             include/TypeInfoWrapper.h
             include/SpawnObject.h
@@ -21,6 +22,7 @@ SET(HEADERS include/Game.h
 )
 
 SET(SOURCES src/Game.cpp
+            src/GameObject.cpp
             src/Player.cpp
             src/SpawnObject.cpp
             src/gunshells/GunShell.cpp
