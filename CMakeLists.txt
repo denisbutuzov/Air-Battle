@@ -9,7 +9,7 @@ FIND_PACKAGE(Qt5 COMPONENTS ${Qt5_COMPONENTS} REQUIRED)
 
 SET(HEADERS include/Game.h
             include/GameObject.h
-            include/Player.h
+            include/PlayerObject.h
             include/SpawnObject.h
             include/gunshells/GunShell.h
             include/gunshells/Bullet.h
@@ -22,7 +22,7 @@ SET(HEADERS include/Game.h
 
 SET(SOURCES src/Game.cpp
             src/GameObject.cpp
-            src/Player.cpp
+            src/PlayerObject.cpp
             src/SpawnObject.cpp
             src/gunshells/GunShell.cpp
             src/gunshells/Bullet.cpp
