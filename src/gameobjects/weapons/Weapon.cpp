@@ -1,6 +1,6 @@
 #include <QGraphicsScene>
 
-#include "Player.h"
+#include "PlayerObject.h"
 
 #include "Weapon.h"
 

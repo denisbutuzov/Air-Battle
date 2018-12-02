@@ -36,8 +36,7 @@ void PlayerObject::keyPressEvent(QKeyEvent *event)
     else if(event->key() == Qt::Key_Space)
     {
         Bullet *bullet = new Bullet();
-        bullet->setPos(x() + sideCounter * (pixmap().width() - bullet->pixmap().width()), y() + 70);
-        scene()->addItem(bullet);
+        bullet->init(scene());
 
         sideCounter++;
         if(sideCounter > 1)
@@ -49,7 +48,16 @@ void PlayerObject::keyPressEvent(QKeyEvent *event)
     else if(event->key() == Qt::Key_V)
     {
         Rocket *rocket = new Rocket();
-        rocket->setPos(x() + (pixmap().width() - rocket->pixmap().width())/2, y() - 20);
-        scene()->addItem(rocket);
+        rocket->init(scene());
     }
+}
+
+void PlayerObject::setObjectImage()
+{
+    setPixmap(QPixmap(":/images/images/player_plane.png"));
+}
+
+void PlayerObject::setStartObjectPos()
+{
+    setPos(scene()->width()/2 - pixmap().width()/2, scene()->height() - pixmap().height());
 }

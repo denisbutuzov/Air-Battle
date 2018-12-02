@@ -8,10 +8,10 @@ MovableObject::MovableObject(QGraphicsItem *parent)
 
 }
 
-void MovableObject::show(QGraphicsScene *scene)
+void MovableObject::init(QGraphicsScene *scene)
 {
     //call basic method show
-    GameObject::show(scene);
+    GameObject::init(scene);
 
     //set speed of object
     setSpeed();
@@ -21,6 +21,12 @@ void MovableObject::show(QGraphicsScene *scene)
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));
 
     timer->start(50);
+}
+
+void MovableObject::destroyObject(GameObject *object)
+{
+    scene()->removeItem(object);
+    delete object;
 }
 
 unsigned int &MovableObject::speed()

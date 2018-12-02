@@ -8,4 +8,7 @@ class PlayerObject
 public:
     PlayerObject(QGraphicsItem *parent = nullptr);
     void keyPressEvent(QKeyEvent *event) override final;
+private:
+    virtual void setObjectImage() override final;
+    virtual void setStartObjectPos() override final;
 };
