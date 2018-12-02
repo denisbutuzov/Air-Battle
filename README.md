@@ -1,7 +1,7 @@
 # Air-Battle
-#![Air-Battle](http://i58.fastpic.ru/big/2013/1029/ce/2532ee118f42154eea18722bb7fb25ce.jpeg)
+![Air-Battle](http://i58.fastpic.ru/big/2013/1029/ce/2532ee118f42154eea18722bb7fb25ce.jpeg)
 
-###Architecture
+### Architecture
 
 The architecture of the classes used is shown in the figure:
 
