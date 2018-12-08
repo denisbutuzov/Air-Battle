@@ -8,7 +8,6 @@ class GameObject
 {
 public:
     GameObject(QGraphicsItem *parent = nullptr);
-    virtual ~GameObject() = default;
     virtual void init(QGraphicsScene *scene);
 private:
     virtual void setObjectImage() = 0;
