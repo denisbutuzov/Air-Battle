@@ -12,7 +12,7 @@ SET(HEADERS include/Game.h
             include/gameobjects/PlayerObject.h
             include/gameobjects/MovableObject.h
             include/gameobjects/SpawnObject.h
-            include/gameobjects/gunshells/GunShell.h
+            include/gameobjects/gunshells/Gunshell.h
             include/gameobjects/gunshells/Bullet.h
             include/gameobjects/gunshells/Rocket.h
             include/gameobjects/enemies/Enemy.h
@@ -23,7 +23,7 @@ SET(SOURCES src/Game.cpp
             src/gameobjects/PlayerObject.cpp
             src/gameobjects/MovableObject.cpp
             src/gameobjects/SpawnObject.cpp
-            src/gameobjects/gunshells/GunShell.cpp
+            src/gameobjects/gunshells/Gunshell.cpp
             src/gameobjects/gunshells/Bullet.cpp
             src/gameobjects/gunshells/Rocket.cpp
             src/gameobjects/enemies/Enemy.cpp
