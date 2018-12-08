@@ -5,7 +5,6 @@
 MovableObject::MovableObject(QGraphicsItem *parent)
     : GameObject(parent)
 {
-
 }
 
 void MovableObject::init(QGraphicsScene *scene)
@@ -23,18 +22,29 @@ void MovableObject::init(QGraphicsScene *scene)
     timer->start(50);
 }
 
-void MovableObject::destroyObject(GameObject *object)
+unsigned int MovableObject::speed() const
+{
+    return speed_;
+}
+
+void MovableObject::destroy()
+{
+    destroy(this);
+}
+
+void MovableObject::destroy(GameObject *object)
 {
     scene()->removeItem(object);
     delete object;
 }
 
-unsigned int &MovableObject::speed()
+void MovableObject::setSpeed(unsigned int speed)
 {
-    return speed_;
+    speed_ = speed;
 }
 
 void MovableObject::setSpeed()
 {
-    speed_ = 5;
+    setSpeed(5);
 }
+

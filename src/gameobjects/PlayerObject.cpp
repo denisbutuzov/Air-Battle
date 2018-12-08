@@ -2,7 +2,6 @@
 
 #include "Bullet.h"
 #include "Rocket.h"
-#include "Enemy.h"
 
 #include "PlayerObject.h"
 
@@ -13,9 +12,6 @@ PlayerObject::PlayerObject(QGraphicsItem *parent)
 
 void PlayerObject::keyPressEvent(QKeyEvent *event)
 {
-    //variable for alternation shots
-    static int sideCounter = 0;
-
     //press left key - move to left
     if(event->key() == Qt::Key_Left)
     {
@@ -35,19 +31,13 @@ void PlayerObject::keyPressEvent(QKeyEvent *event)
     //press space key - create a bullet
     else if(event->key() == Qt::Key_Space)
     {
-        Bullet *bullet = new Bullet();
+        Bullet *bullet = new Bullet(x() + pixmap().width()/2, y());
         bullet->init(scene());
-
-        sideCounter++;
-        if(sideCounter > 1)
-        {
-            sideCounter = 0;
-        }
     }
     //press V key - create a rocket
     else if(event->key() == Qt::Key_V)
     {
-        Rocket *rocket = new Rocket();
+        Rocket *rocket = new Rocket(x() + pixmap().width()/2, y());
         rocket->init(scene());
     }
 }

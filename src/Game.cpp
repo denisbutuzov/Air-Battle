@@ -1,7 +1,4 @@
-#include <QGraphicsScene>
-#include <QGraphicsView>
 #include <QMediaPlaylist>
-#include <QMediaPlayer>
 #include <QTimer>
 
 #include "PlayerObject.h"
@@ -11,18 +8,9 @@
 
 Game::Game(QWidget *parent)
 {
-
     //create a scene
     scene_ = new QGraphicsScene();
     scene_->setSceneRect(0, 0, 800, 600);
-
-    //create an item to put unto the scene
-    player_ = new PlayerObject();
-    player_->init(scene_);
-
-    //make rect focusable
-    player_->setFlag(QGraphicsItem::ItemIsFocusable);
-    player_->setFocus();
 
     //add a view
     setScene(scene_);
@@ -30,11 +18,17 @@ Game::Game(QWidget *parent)
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setFixedSize(800, 600);
 
+    //create an item to put unto the scene
+    player_ = new PlayerObject();
+    player_->init(scene_);
+    //make rect focusable
+    player_->setFlag(QGraphicsItem::ItemIsFocusable);
+    player_->setFocus();
+
     //play background sound
     QMediaPlaylist *playlist = new QMediaPlaylist();
     playlist->addMedia(QUrl("qrc:/sounds/sounds/plane.wav"));
     playlist->setPlaybackMode(QMediaPlaylist::Loop);
-
     QMediaPlayer *backsound = new QMediaPlayer();
     backsound->setPlaylist(playlist);
     backsound->play();
@@ -44,7 +38,7 @@ Game::Game(QWidget *parent)
 
     //spawn enemies
     QTimer *timer = new QTimer();
-    //connect(timer, SIGNAL(timeout()), player_, SLOT(spawn()));
+    connect(timer, SIGNAL(timeout()), SLOT(spawn()));
     timer->start(2000);
 }
 

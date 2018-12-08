@@ -3,7 +3,6 @@
 SpawnObject::SpawnObject(QGraphicsItem *parent)
     : MovableObject(parent)
 {
-
 }
 
 void SpawnObject::move()
@@ -14,9 +13,8 @@ void SpawnObject::move()
     //delete object when it is behind the scene
     if(y() > scene()->height())
     {
-        //remove from the scene
-        scene()->removeItem(this);
-        delete this;
+        //remove from the scene and memory
+        destroy();
     }
 }
 

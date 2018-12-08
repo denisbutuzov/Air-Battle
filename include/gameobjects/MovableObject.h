@@ -10,11 +10,13 @@ class MovableObject
 public:
     MovableObject(QGraphicsItem *parent = nullptr);
     virtual void init(QGraphicsScene *scene) override;
+    unsigned int speed() const;
 public slots:
     virtual void move() = 0;
 protected:
-    void destroyObject(GameObject *object);
-    unsigned int &speed();
+    void destroy();
+    void destroy(GameObject *object);
+    void setSpeed(unsigned int speed);
 private:
     virtual void setSpeed();
 private:

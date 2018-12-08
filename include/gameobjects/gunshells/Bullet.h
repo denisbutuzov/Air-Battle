@@ -1,15 +1,14 @@
 #pragma once
 
-#include "GunShell.h"
+#include "Gunshell.h"
 
 class Bullet
-        : public GunShell
+        : public Gunshell
 {
 public:
     Bullet(QGraphicsItem *parent = nullptr);
+    Bullet(qreal x, qreal y);
 private:
     virtual void setObjectImage() override final;
-    virtual void setStartObjectPos() override final;
-    virtual void setDamage() override final;
     virtual QString pathToSound() override final;
 };

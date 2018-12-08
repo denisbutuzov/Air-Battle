@@ -1,11 +1,8 @@
 #pragma once
 
-#include <QGraphicsScene>
 #include <QGraphicsView>
 
 #include "PlayerObject.h"
-#include "Score.h"
-#include "Health.h"
 
 class Game
         : public QGraphicsView
@@ -15,7 +12,7 @@ public:
     Game(QWidget *parent = nullptr);
 public slots:
     void spawn();
-public:
+private:
     QGraphicsScene *scene_;
     PlayerObject *player_;
 };

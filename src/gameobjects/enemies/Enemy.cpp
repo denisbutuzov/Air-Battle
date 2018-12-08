@@ -1,36 +1,48 @@
 #include <QMediaPlayer>
 
-#include "GunShell.h"
+#include "Gunshell.h"
 
 #include "Enemy.h"
 
 Enemy::Enemy(QGraphicsItem *parent)
     : SpawnObject(parent)
 {
+}
+
+void Enemy::init(QGraphicsScene *scene)
+{
+    SpawnObject::init(scene);
     setHitpoint();
 }
 
 void Enemy::move()
 {
+    SpawnObject::move();
+
     //find colliding items
     QList<QGraphicsItem *> colliding_items = collidingItems();
     for(int i = 0, n = colliding_items.size(); i < n; i++)
     {
-        if(GunShell *gunshell = dynamic_cast<GunShell *>(colliding_items[i]))
+        if(Gunshell *gunshell = dynamic_cast<Gunshell *>(colliding_items[i]))
         {
-            collision(gunshell);
-            return;
+            findCollision(gunshell);
         }
     }
-
-    //call move method
-    SpawnObject::move();
 }
 
-void Enemy::collision(GunShell *gunshell)
+void Enemy::setHitpoint(int hitpoint)
 {
+    hitpoint_ = hitpoint;
+}
 
-    if(hitpoint_ - static_cast<int>(gunshell->getDamage()) <= 0)
+void Enemy::setHitpoint()
+{
+    setHitpoint(2);
+}
+void Enemy::findCollision(Gunshell *gunshell)
+{
+    hitpoint_ -= static_cast<int>(gunshell->damage());
+    if(hitpoint_ <= 0)
     {
         //play sound of destroing object
         QMediaPlayer *sound = new QMediaPlayer();
@@ -38,23 +50,19 @@ void Enemy::collision(GunShell *gunshell)
         sound->play();
 
         //delete object from scene and memory
-        destroyObject(this);
+        destroy(gunshell);
+        destroy();
     }
     else
     {
         //delete gunshell from scene and memory
-        destroyObject(gunshell);
+        destroy(gunshell);
     }
 }
 
 void Enemy::setObjectImage()
 {
     setPixmap(QPixmap(":/images/images/enemy_plane.png"));
-}
-
-void Enemy::setHitpoint()
-{
-    hitpoint_ = 1;
 }
 
 

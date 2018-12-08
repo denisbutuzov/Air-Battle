@@ -1,7 +1,6 @@
 #pragma once
 
-#include "GunShell.h"
-
+#include "Gunshell.h"
 #include "SpawnObject.h"
 
 class Enemy
@@ -9,12 +8,15 @@ class Enemy
 {
 public:
     Enemy(QGraphicsItem *parent = nullptr);
+    virtual void init(QGraphicsScene *scene) override final;
 public slots:
     virtual void move() override final;
+protected:
+    void setHitpoint(int hitpoint);
 private:
-    void collision(GunShell *gunshell);
-    virtual void setObjectImage() override;
     virtual void setHitpoint();
+    virtual void setObjectImage() override;
+    void findCollision(Gunshell *gunshell);
 private:
     int hitpoint_;
 };

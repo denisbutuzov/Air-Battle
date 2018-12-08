@@ -1,9 +1,13 @@
 #include "Rocket.h"
 
 Rocket::Rocket(QGraphicsItem *parent)
-    : GunShell(parent)
+    : Gunshell(parent)
 {
+}
 
+Rocket::Rocket(qreal x, qreal y)
+    : Gunshell(x, y)
+{
 }
 
 void Rocket::setObjectImage()
@@ -11,14 +15,9 @@ void Rocket::setObjectImage()
     setPixmap(QPixmap(":/images/images/rocket.png"));
 }
 
-void Rocket::setStartObjectPos()
-{
-
-}
-
 void Rocket::setDamage()
 {
-    damage() = 2;
+    Gunshell::setDamage(2);
 }
 
 QString Rocket::pathToSound()
