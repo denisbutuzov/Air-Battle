@@ -2,6 +2,9 @@
 #include <QTimer>
 
 #include "PlayerObject.h"
+#include "SpawnObject.h"
+#include "Machinegun.h"
+#include "Bazooka.h"
 #include "Enemy.h"
 
 #include "Game.h"
@@ -44,6 +47,26 @@ Game::Game(QWidget *parent)
 
 void Game::spawn()
 {
-    Enemy *enemy = new Enemy();
-    enemy->init(scene());
+    static int n = 0;
+    SpawnObject *spawnObject = nullptr;
+
+    if(n++ == 6)
+    {
+        int random_number = rand() % 10;
+        if(random_number > 5)
+        {
+            spawnObject = new Bazooka();
+        }
+        else
+        {
+            spawnObject = new Machinegun();
+        }
+        n = 0;
+    }
+    else
+    {
+        spawnObject = new Enemy();
+    }
+
+    spawnObject->init(scene());
 }

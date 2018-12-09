@@ -1,13 +1,19 @@
 #include <QKeyEvent>
 
-#include "Bullet.h"
-#include "Rocket.h"
+#include "HandMachinegun.h"
 
 #include "PlayerObject.h"
 
 PlayerObject::PlayerObject(QGraphicsItem *parent)
     : GameObject(parent)
 {
+    weapon_ = new HandMachinegun();
+}
+
+void PlayerObject::takeWeapon(IHandWeapon *weapon)
+{
+    delete weapon_;
+    weapon_ = weapon;
 }
 
 void PlayerObject::keyPressEvent(QKeyEvent *event)
@@ -31,15 +37,13 @@ void PlayerObject::keyPressEvent(QKeyEvent *event)
     //press space key - create a bullet
     else if(event->key() == Qt::Key_Space)
     {
-        Bullet *bullet = new Bullet(x() + pixmap().width()/2, y());
-        bullet->init(scene());
+        shoot();
     }
-    //press V key - create a rocket
-    else if(event->key() == Qt::Key_V)
-    {
-        Rocket *rocket = new Rocket(x() + pixmap().width()/2, y());
-        rocket->init(scene());
-    }
+}
+
+void PlayerObject::shoot()
+{
+    weapon_->shoot(scene(), x() + pixmap().width()/2, y());
 }
 
 void PlayerObject::setObjectImage()

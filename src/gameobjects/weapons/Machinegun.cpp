@@ -1,3 +1,5 @@
+#include "HandMachinegun.h"
+
 #include "Machinegun.h"
 
 Machinegun::Machinegun(QGraphicsItem *parent)
@@ -8,4 +10,9 @@ Machinegun::Machinegun(QGraphicsItem *parent)
 void Machinegun::setObjectImage()
 {
     setPixmap(QPixmap(":/images/images/machinegun.png"));
+}
+
+IHandWeapon *Machinegun::handWeapon()
+{
+    return new HandMachinegun();
 }

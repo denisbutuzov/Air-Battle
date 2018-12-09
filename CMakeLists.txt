@@ -19,6 +19,9 @@ SET(HEADERS include/Game.h
             include/gameobjects/weapons/Machinegun.h
             include/gameobjects/weapons/Bazooka.h
             include/gameobjects/enemies/Enemy.h
+            include/handweapons/IHandWeapon.h
+            include/handweapons/HandMachinegun.h
+            include/handweapons/HandBazooka.h
 )
 
 SET(SOURCES src/Game.cpp
@@ -33,6 +36,8 @@ SET(SOURCES src/Game.cpp
             src/gameobjects/weapons/Machinegun.cpp
             src/gameobjects/weapons/Bazooka.cpp
             src/gameobjects/enemies/Enemy.cpp
+            src/handweapons/HandMachinegun.cpp
+            src/handweapons/HandBazooka.cpp
 )
 
 SET(LIBS Qt5::Core
@@ -49,4 +54,5 @@ TARGET_INCLUDE_DIRECTORIES(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/in
                                                   ${CMAKE_CURRENT_SOURCE_DIR}/include/gameobjects/
                                                   ${CMAKE_CURRENT_SOURCE_DIR}/include/gameobjects/gunshells
                                                   ${CMAKE_CURRENT_SOURCE_DIR}/include/gameobjects/enemies
-                                                  ${CMAKE_CURRENT_SOURCE_DIR}/include/gameobjects/weapons)
+                                                  ${CMAKE_CURRENT_SOURCE_DIR}/include/gameobjects/weapons
+                                                  ${CMAKE_CURRENT_SOURCE_DIR}/include/handweapons/)
