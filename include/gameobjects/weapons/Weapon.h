@@ -1,14 +1,14 @@
 #pragma once
 
-#include <QGraphicsPixmapItem>
+#include "SpawnObject.h"
 
-#include "GunShell.h"
-
-class Weapon: public QGraphicsPixmapItem
+class Weapon
+        : public SpawnObject
 {
+public:
+    Weapon(QGraphicsItem *parent = nullptr);
 private:
-    GunShell *gunShell_;
-public slots:
-    void move();
+    virtual void setSpeed() override final;
 };
+
 
