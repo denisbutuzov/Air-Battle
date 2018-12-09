@@ -1,19 +1,18 @@
 #pragma once
 
-#include <QGraphicsScene>
 #include <QGraphicsView>
 
-#include "Player.h"
-#include "Score.h"
-#include "Health.h"
+#include "PlayerObject.h"
 
-class Game: public QGraphicsView
+class Game
+        : public QGraphicsView
 {
-public:
-    QGraphicsScene *scene_;
-    Player *player_;
-    Score *score_;
-    Health *health_;
+    Q_OBJECT
 public:
     Game(QWidget *parent = nullptr);
+public slots:
+    void spawn();
+private:
+    QGraphicsScene *scene_;
+    PlayerObject *player_;
 };
