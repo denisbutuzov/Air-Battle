@@ -39,6 +39,7 @@ void Enemy::setHitpoint()
 {
     setHitpoint(2);
 }
+
 void Enemy::findCollision(Gunshell *gunshell)
 {
     hitpoint_ -= static_cast<int>(gunshell->damage());

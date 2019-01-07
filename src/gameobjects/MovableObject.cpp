@@ -16,7 +16,7 @@ void MovableObject::init(QGraphicsScene *scene)
     setSpeed();
 
     //connect
-    QTimer *timer = new QTimer();
+    QTimer *timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));
 
     timer->start(50);

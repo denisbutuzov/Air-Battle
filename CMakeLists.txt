@@ -4,6 +4,8 @@ PROJECT(AirBattle)
 SET(CMAKE_AUTOMOC ON)
 SET(CMAKE_AUTORCC ON)
 
+set (CMAKE_CXX_STANDARD 14)
+
 SET(Qt5_COMPONENTS Core Gui Widgets Multimedia)
 FIND_PACKAGE(Qt5 COMPONENTS ${Qt5_COMPONENTS} REQUIRED)
 
@@ -22,6 +24,10 @@ SET(HEADERS include/Game.h
             include/handweapons/IHandWeapon.h
             include/handweapons/HandMachinegun.h
             include/handweapons/HandBazooka.h
+            include/levelfactories/AbstractLevelFactory.h
+            include/levelfactories/Level1Factory.h
+            include/levelfactories/Level2Factory.h
+            include/levelfactories/Level3Factory.h
 )
 
 SET(SOURCES src/Game.cpp
@@ -38,6 +44,9 @@ SET(SOURCES src/Game.cpp
             src/gameobjects/enemies/Enemy.cpp
             src/handweapons/HandMachinegun.cpp
             src/handweapons/HandBazooka.cpp
+            src/levelfactories/Level1Factory.cpp
+            src/levelfactories/Level2Factory.cpp
+            src/levelfactories/Level3Factory.cpp
 )
 
 SET(LIBS Qt5::Core
@@ -55,4 +64,5 @@ TARGET_INCLUDE_DIRECTORIES(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/in
                                                   ${CMAKE_CURRENT_SOURCE_DIR}/include/gameobjects/gunshells
                                                   ${CMAKE_CURRENT_SOURCE_DIR}/include/gameobjects/enemies
                                                   ${CMAKE_CURRENT_SOURCE_DIR}/include/gameobjects/weapons
-                                                  ${CMAKE_CURRENT_SOURCE_DIR}/include/handweapons/)
+                                                  ${CMAKE_CURRENT_SOURCE_DIR}/include/handweapons/
+                                                  ${CMAKE_CURRENT_SOURCE_DIR}/include/levelfactories/)
