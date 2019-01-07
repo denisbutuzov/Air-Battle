@@ -48,7 +48,7 @@ void PlayerObject::shoot()
 
 void PlayerObject::setObjectImage()
 {
-    setPixmap(QPixmap(":/images/images/player_plane.png"));
+    setPixmap(QPixmap(":/images/images/Player.png"));
 }
 
 void PlayerObject::setStartObjectPos()
