@@ -13,13 +13,13 @@ Game::Game(QWidget *parent)
 {
     //create a scene
     scene_ = new QGraphicsScene();
-    scene_->setSceneRect(0, 0, 800, 600);
+    scene_->setSceneRect(0, 0, 600, 800);
 
     //add a view
     setScene(scene_);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    setFixedSize(800, 600);
+    setFixedSize(600, 800);
 
     //create an item to put unto the scene
     player_ = new PlayerObject();
@@ -37,7 +37,7 @@ Game::Game(QWidget *parent)
     backsound->play();
 
     //set background image
-    setBackgroundBrush(QBrush(QImage(":/images/images/background.jpeg")));
+    setBackgroundBrush(QBrush(QImage(":/images/images/Space.jpg")));
 
     //spawn enemies
     QTimer *timer = new QTimer();

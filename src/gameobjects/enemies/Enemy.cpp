@@ -63,7 +63,7 @@ void Enemy::findCollision(Gunshell *gunshell)
 
 void Enemy::setObjectImage()
 {
-    setPixmap(QPixmap(":/images/images/enemy_plane.png"));
+    setPixmap(QPixmap(":/images/images/Enemy2.png"));
 }
 
 
