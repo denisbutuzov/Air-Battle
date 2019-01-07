@@ -7,11 +7,12 @@
     </qresource>
     <qresource prefix="/images">
         <file>images/bullet.png</file>
-        <file>images/enemy_plane.png</file>
-        <file>images/player_plane.png</file>
-        <file>images/background.jpeg</file>
         <file>images/rocket.png</file>
         <file>images/bazooka.png</file>
         <file>images/machinegun.png</file>
+        <file>images/Player.png</file>
+        <file>images/Enemy1.png</file>
+        <file>images/Enemy2.png</file>
+        <file>images/Space.jpg</file>
     </qresource>
 </RCC>
