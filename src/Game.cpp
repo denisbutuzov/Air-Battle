@@ -1,8 +1,8 @@
 #include <QMediaPlaylist>
 #include <QTimer>
 
-#include "PlayerObject.h"
-#include "SpawnObject.h"
+#include <memory>
+
 #include "Level1Factory.h"
 
 #include "Game.h"
@@ -46,8 +46,8 @@ Game::Game(QWidget *parent)
 
 void Game::spawn()
 {
-    auto *factory = new Level1Factory(scene_);
-    auto *spawnObject = callFactory(factory);
+    auto factory = std::make_unique<Level1Factory>(scene_);
+    auto *spawnObject = callFactory(factory.get());
     spawnObject->init();
 }
 
