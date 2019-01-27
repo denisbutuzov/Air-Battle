@@ -4,14 +4,14 @@
 
 #include "Enemy.h"
 
-Enemy::Enemy(QGraphicsItem *parent)
-    : SpawnObject(parent)
+Enemy::Enemy(QGraphicsScene *scene)
+    : SpawnObject(scene)
 {
 }
 
-void Enemy::init(QGraphicsScene *scene)
+void Enemy::init()
 {
-    SpawnObject::init(scene);
+    SpawnObject::init();
     setHitpoint();
 }
 
@@ -35,11 +35,6 @@ void Enemy::setHitpoint(int hitpoint)
     hitpoint_ = hitpoint;
 }
 
-void Enemy::setHitpoint()
-{
-    setHitpoint(2);
-}
-
 void Enemy::findCollision(Gunshell *gunshell)
 {
     hitpoint_ -= static_cast<int>(gunshell->damage());
@@ -59,11 +54,6 @@ void Enemy::findCollision(Gunshell *gunshell)
         //delete gunshell from scene and memory
         destroy(gunshell);
     }
-}
-
-void Enemy::setObjectImage()
-{
-    setPixmap(QPixmap(":/images/images/Enemy2.png"));
 }
 
 

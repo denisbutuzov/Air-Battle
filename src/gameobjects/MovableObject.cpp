@@ -2,15 +2,15 @@
 
 #include "MovableObject.h"
 
-MovableObject::MovableObject(QGraphicsItem *parent)
-    : GameObject(parent)
+MovableObject::MovableObject(QGraphicsScene *scene)
+    : GameObject(scene)
 {
 }
 
-void MovableObject::init(QGraphicsScene *scene)
+void MovableObject::init()
 {
     //call basic method show
-    GameObject::init(scene);
+    GameObject::init();
 
     //set speed of object
     setSpeed();

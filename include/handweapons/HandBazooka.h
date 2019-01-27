@@ -1,9 +1,10 @@
-#include "IHandWeapon.h"
+#include "HandWeapon.h"
 
 class HandBazooka
-        : public IHandWeapon
+        : public HandWeapon
 {
 public:
-    HandBazooka() = default;
-    virtual void shoot(QGraphicsScene *scene, qreal x, qreal y) override final;
+    HandBazooka(QGraphicsScene *scene);
+
+    virtual void shoot(qreal x, qreal y) override final;
 };

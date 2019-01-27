@@ -6,8 +6,9 @@ class Bazooka
         : public Weapon
 {
 public:
-    Bazooka(QGraphicsItem *parent = nullptr);
+    Bazooka(QGraphicsScene *scene);
+
 private:
     virtual void setObjectImage() override final;
-    virtual IHandWeapon *handWeapon() override final;
+    virtual HandWeapon *handWeapon() override final;
 };

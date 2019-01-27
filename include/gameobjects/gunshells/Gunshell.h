@@ -8,24 +8,31 @@ class Gunshell
         : public MovableObject
 {
 public:
-    Gunshell(QGraphicsItem *parent = nullptr);
-    Gunshell(qreal x, qreal y);
     virtual ~Gunshell() override;
-    virtual void init(QGraphicsScene *scene) override final;
+
+    virtual void init() override final;
+
     unsigned int damage() const;
+
 public slots:
     virtual void move() override final;
+
 protected:
+    Gunshell(QGraphicsScene *scene, qreal x, qreal y);
+
     void setDamage(unsigned int damage);
+
 private:
-    virtual void setDamage();
     virtual void setStartObjectPos() override final;
     virtual void setSpeed() override;
-    virtual QString pathToSound() = 0;
+    virtual void setDamage();
+    virtual QString pathToShotSound() const = 0;
+
     void playShotSound();
+
 private:
     unsigned int damage_;
     QMediaPlayer *shotSound_;
-    qreal startX_;
-    qreal startY_;
+    qreal x_;
+    qreal y_;
 };

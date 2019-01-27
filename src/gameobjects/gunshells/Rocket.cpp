@@ -1,12 +1,7 @@
 #include "Rocket.h"
 
-Rocket::Rocket(QGraphicsItem *parent)
-    : Gunshell(parent)
-{
-}
-
-Rocket::Rocket(qreal x, qreal y)
-    : Gunshell(x, y)
+Rocket::Rocket(QGraphicsScene *scene, qreal x, qreal y)
+    : Gunshell(scene, x, y)
 {
 }
 
@@ -20,7 +15,7 @@ void Rocket::setDamage()
     Gunshell::setDamage(2);
 }
 
-QString Rocket::pathToSound()
+QString Rocket::pathToShotSound() const
 {
     return QString("qrc:/sounds/sounds/rocket.wav");
 }

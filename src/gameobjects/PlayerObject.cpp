@@ -4,13 +4,18 @@
 
 #include "PlayerObject.h"
 
-PlayerObject::PlayerObject(QGraphicsItem *parent)
-    : GameObject(parent)
+PlayerObject::PlayerObject(QGraphicsScene *scene)
+    : GameObject(scene)
 {
-    weapon_ = new HandMachinegun();
+    weapon_ = new HandMachinegun(scene);
 }
 
-void PlayerObject::takeWeapon(IHandWeapon *weapon)
+PlayerObject::~PlayerObject()
+{
+    delete weapon_;
+}
+
+void PlayerObject::takeWeapon(HandWeapon *weapon)
 {
     delete weapon_;
     weapon_ = weapon;
@@ -41,11 +46,6 @@ void PlayerObject::keyPressEvent(QKeyEvent *event)
     }
 }
 
-void PlayerObject::shoot()
-{
-    weapon_->shoot(scene(), x() + pixmap().width()/2, y());
-}
-
 void PlayerObject::setObjectImage()
 {
     setPixmap(QPixmap(":/images/images/Player.png"));
@@ -54,4 +54,9 @@ void PlayerObject::setObjectImage()
 void PlayerObject::setStartObjectPos()
 {
     setPos(scene()->width()/2 - pixmap().width()/2, scene()->height() - pixmap().height());
+}
+
+void PlayerObject::shoot() const
+{
+    weapon_->shoot(x() + pixmap().width()/2, y());
 }

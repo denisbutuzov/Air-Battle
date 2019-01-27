@@ -2,8 +2,8 @@
 
 #include "Machinegun.h"
 
-Machinegun::Machinegun(QGraphicsItem *parent)
-    : Weapon(parent)
+Machinegun::Machinegun(QGraphicsScene *scene)
+    : Weapon(scene)
 {
 }
 
@@ -12,7 +12,7 @@ void Machinegun::setObjectImage()
     setPixmap(QPixmap(":/images/images/machinegun.png"));
 }
 
-IHandWeapon *Machinegun::handWeapon()
+HandWeapon *Machinegun::handWeapon()
 {
-    return new HandMachinegun();
+    return new HandMachinegun(scene());
 }

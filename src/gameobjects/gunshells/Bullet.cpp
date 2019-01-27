@@ -1,12 +1,7 @@
 #include "Bullet.h"
 
-Bullet::Bullet(QGraphicsItem *parent)
-    : Gunshell(parent)
-{
-}
-
-Bullet::Bullet(qreal x, qreal y)
-    : Gunshell(x, y)
+Bullet::Bullet(QGraphicsScene *scene, qreal x, qreal y)
+    : Gunshell(scene, x, y)
 {
 }
 
@@ -15,10 +10,7 @@ void Bullet::setObjectImage()
     setPixmap(QPixmap(":/images/images/bullet.png"));
 }
 
-QString Bullet::pathToSound()
+QString Bullet::pathToShotSound() const
 {
     return QString("qrc:/sounds/sounds/bullet.wav");
 }
-
-
-

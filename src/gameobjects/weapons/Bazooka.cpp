@@ -2,8 +2,8 @@
 
 #include "Bazooka.h"
 
-Bazooka::Bazooka(QGraphicsItem *parent)
-    : Weapon(parent)
+Bazooka::Bazooka(QGraphicsScene *scene)
+    : Weapon(scene)
 {
 }
 
@@ -12,7 +12,7 @@ void Bazooka::setObjectImage()
     setPixmap(QPixmap(":/images/images/bazooka.png"));
 }
 
-IHandWeapon *Bazooka::handWeapon()
+HandWeapon *Bazooka::handWeapon()
 {
-    return new HandBazooka();
+    return new HandBazooka(scene());
 }

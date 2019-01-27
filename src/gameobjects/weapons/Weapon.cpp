@@ -2,8 +2,8 @@
 
 #include "Weapon.h"
 
-Weapon::Weapon(QGraphicsItem *parent)
-    : SpawnObject(parent)
+Weapon::Weapon(QGraphicsScene *scene)
+    : SpawnObject(scene)
 {
 }
 
@@ -15,7 +15,7 @@ void Weapon::move()
     QList<QGraphicsItem *> colliding_items = collidingItems();
     for(int i = 0, n = colliding_items.size(); i < n; i++)
     {
-        if(PlayerObject *player = dynamic_cast<PlayerObject *>(colliding_items[i]))
+        if(auto *player = dynamic_cast<PlayerObject *>(colliding_items[i]))
         {
             player->takeWeapon(handWeapon());
             destroy();

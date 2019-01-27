@@ -2,8 +2,13 @@
 
 #include "HandBazooka.h"
 
-void HandBazooka::shoot(QGraphicsScene *scene, qreal x, qreal y)
+HandBazooka::HandBazooka(QGraphicsScene *scene)
+    : HandWeapon(scene)
 {
-    Rocket *rocket = new Rocket(x, y);
-    rocket->init(scene);
+}
+
+void HandBazooka::shoot(qreal x, qreal y)
+{
+    Rocket *rocket = new Rocket(scene(), x, y);
+    rocket->init();
 }

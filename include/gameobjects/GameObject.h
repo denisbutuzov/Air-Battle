@@ -7,10 +7,17 @@ class GameObject
         : public QGraphicsPixmapItem
 {
 public:
-    GameObject(QGraphicsItem *parent = nullptr);
-    virtual void init(QGraphicsScene *scene);
+    virtual ~GameObject() = default;
+
+    virtual void init();
+
+protected:
+    GameObject(QGraphicsScene *scene);
 
 private:
     virtual void setObjectImage() = 0;
     virtual void setStartObjectPos() = 0;
+
+private:
+    QGraphicsScene *scene_;
 };

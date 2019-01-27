@@ -1,5 +1,5 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 3.1)
-PROJECT(AirBattle)
+PROJECT(SpaceBattle)
 
 SET(CMAKE_AUTOMOC ON)
 SET(CMAKE_AUTORCC ON)
@@ -21,13 +21,14 @@ SET(HEADERS include/Game.h
             include/gameobjects/weapons/Machinegun.h
             include/gameobjects/weapons/Bazooka.h
             include/gameobjects/enemies/Enemy.h
-            include/handweapons/IHandWeapon.h
+            include/gameobjects/enemies/Enemy1.h
+            include/gameobjects/enemies/Enemy2.h
+            include/handweapons/HandWeapon.h
             include/handweapons/HandMachinegun.h
             include/handweapons/HandBazooka.h
             include/levelfactories/AbstractLevelFactory.h
             include/levelfactories/Level1Factory.h
             include/levelfactories/Level2Factory.h
-            include/levelfactories/Level3Factory.h
 )
 
 SET(SOURCES src/Game.cpp
@@ -42,11 +43,14 @@ SET(SOURCES src/Game.cpp
             src/gameobjects/weapons/Machinegun.cpp
             src/gameobjects/weapons/Bazooka.cpp
             src/gameobjects/enemies/Enemy.cpp
+            src/gameobjects/enemies/Enemy1.cpp
+            src/gameobjects/enemies/Enemy2.cpp
+	    src/handweapons/HandWeapon.cpp
             src/handweapons/HandMachinegun.cpp
             src/handweapons/HandBazooka.cpp
-            src/levelfactories/Level1Factory.cpp
+	    src/levelfactories/AbstractLevelFactory.cpp
+	    src/levelfactories/Level1Factory.cpp
             src/levelfactories/Level2Factory.cpp
-            src/levelfactories/Level3Factory.cpp
 )
 
 SET(LIBS Qt5::Core

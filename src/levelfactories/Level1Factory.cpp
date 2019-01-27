@@ -1,13 +1,26 @@
 #include "Machinegun.h"
+#include "Enemy1.h"
+#include "Enemy2.h"
 
 #include "Level1Factory.h"
 
-std::unique_ptr<Enemy> Level1Factory::enemy() const
+Level1Factory::Level1Factory(QGraphicsScene *scene)
+    : AbstractLevelFactory(scene)
 {
-    return std::make_unique<Enemy>();
 }
 
-std::unique_ptr<Weapon> Level1Factory::weapon() const
+Enemy *Level1Factory::enemy() const
 {
-    return std::make_unique<Machinegun>();
+    QVector<std::function<Enemy*()>> enemyCreatingVector
+    {
+         {[&](){return new Enemy1(scene());}},
+         {[&](){return new Enemy2(scene());}}
+    };
+
+    return enemyCreatingVector[rand() % enemyCreatingVector.size()]();
+}
+
+Weapon *Level1Factory::weapon() const
+{
+    return new Machinegun(scene());
 }
