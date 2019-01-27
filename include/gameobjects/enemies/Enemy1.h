@@ -7,6 +7,7 @@ class Enemy1
 {
 public:
     Enemy1(QGraphicsScene *scene);
+    virtual ~Enemy1() override = default;
 
 private:
     virtual void setHitpoint() override final;

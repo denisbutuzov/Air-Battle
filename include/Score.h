@@ -2,11 +2,18 @@
 
 #include <QGraphicsTextItem>
 
-class Score: public QGraphicsTextItem
+class Score:
+        public QGraphicsTextItem
 {
-private:
-    int score_;
 public:
-    Score(QGraphicsItem *parent = nullptr);
+    static Score *instance();
     void increase();
+    void init(QGraphicsScene *scene);
+
+protected:
+    Score();
+
+private:
+    static Score *instance_;
+    unsigned int score_;
 };

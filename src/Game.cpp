@@ -4,6 +4,9 @@
 #include <memory>
 
 #include "Level1Factory.h"
+#include "Level2Factory.h"
+#include "Level3Factory.h"
+#include "Score.h"
 
 #include "Game.h"
 
@@ -22,6 +25,10 @@ Game::Game(QWidget *parent)
     //create an item to put unto the scene
     player_ = new PlayerObject(scene_);
     player_->init();
+
+    Score *score = Score::instance();
+    score->init(scene_);
+
 
     //make rect focusable
     player_->setFlag(QGraphicsItem::ItemIsFocusable);
@@ -46,7 +53,7 @@ Game::Game(QWidget *parent)
 
 void Game::spawn()
 {
-    auto factory = std::make_unique<Level1Factory>(scene_);
+    auto factory = std::make_unique<Level3Factory>(scene_);
     auto *spawnObject = callFactory(factory.get());
     spawnObject->init();
 }

@@ -7,7 +7,9 @@ class Enemy
         : public SpawnObject
 {
 public:
-    virtual void init() override final;
+    virtual ~Enemy() override = default;
+
+    virtual void init() override;
 
 public slots:
     virtual void move() override final;

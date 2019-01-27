@@ -10,6 +10,7 @@ SET(Qt5_COMPONENTS Core Gui Widgets Multimedia)
 FIND_PACKAGE(Qt5 COMPONENTS ${Qt5_COMPONENTS} REQUIRED)
 
 SET(HEADERS include/Game.h
+            include/Score.h
             include/gameobjects/GameObject.h
             include/gameobjects/PlayerObject.h
             include/gameobjects/MovableObject.h
@@ -23,15 +24,19 @@ SET(HEADERS include/Game.h
             include/gameobjects/enemies/Enemy.h
             include/gameobjects/enemies/Enemy1.h
             include/gameobjects/enemies/Enemy2.h
-            include/handweapons/HandWeapon.h
+            include/gameobjects/enemies/enemydecorators/AbstractEnemyDecorator.h
+	    include/gameobjects/enemies/enemydecorators/ShieldDecorator.h
+	    include/handweapons/HandWeapon.h
             include/handweapons/HandMachinegun.h
             include/handweapons/HandBazooka.h
             include/levelfactories/AbstractLevelFactory.h
             include/levelfactories/Level1Factory.h
             include/levelfactories/Level2Factory.h
+            include/levelfactories/Level3Factory.h
 )
 
 SET(SOURCES src/Game.cpp
+            src/Score.cpp
             src/gameobjects/GameObject.cpp
             src/gameobjects/PlayerObject.cpp
             src/gameobjects/MovableObject.cpp
@@ -45,12 +50,15 @@ SET(SOURCES src/Game.cpp
             src/gameobjects/enemies/Enemy.cpp
             src/gameobjects/enemies/Enemy1.cpp
             src/gameobjects/enemies/Enemy2.cpp
+	    src/gameobjects/enemies/enemydecorators/AbstractEnemyDecorator.cpp
+	    src/gameobjects/enemies/enemydecorators/ShieldDecorator.cpp
 	    src/handweapons/HandWeapon.cpp
             src/handweapons/HandMachinegun.cpp
             src/handweapons/HandBazooka.cpp
 	    src/levelfactories/AbstractLevelFactory.cpp
 	    src/levelfactories/Level1Factory.cpp
             src/levelfactories/Level2Factory.cpp
+            src/levelfactories/Level3Factory.cpp
 )
 
 SET(LIBS Qt5::Core
@@ -67,6 +75,7 @@ TARGET_INCLUDE_DIRECTORIES(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/in
                                                   ${CMAKE_CURRENT_SOURCE_DIR}/include/gameobjects/
                                                   ${CMAKE_CURRENT_SOURCE_DIR}/include/gameobjects/gunshells
                                                   ${CMAKE_CURRENT_SOURCE_DIR}/include/gameobjects/enemies
+                                                  ${CMAKE_CURRENT_SOURCE_DIR}/include/gameobjects/enemies/enemydecorators
                                                   ${CMAKE_CURRENT_SOURCE_DIR}/include/gameobjects/weapons
                                                   ${CMAKE_CURRENT_SOURCE_DIR}/include/handweapons/
                                                   ${CMAKE_CURRENT_SOURCE_DIR}/include/levelfactories/)

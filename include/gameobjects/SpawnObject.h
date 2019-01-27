@@ -15,5 +15,5 @@ protected:
     SpawnObject(QGraphicsScene *scene);
 
 private:
-    virtual void setStartObjectPos() override final;
+    virtual void setStartObjectPos() override;
 };

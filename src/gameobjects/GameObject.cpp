@@ -1,5 +1,5 @@
 #include "GameObject.h"
-
+#include <QDebug>
 GameObject::GameObject(QGraphicsScene *scene)
     :  scene_(scene)
 {
