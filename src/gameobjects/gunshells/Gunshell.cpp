@@ -1,13 +1,9 @@
 #include "Gunshell.h"
 
-Gunshell::Gunshell(QGraphicsItem *parent)
-    : MovableObject(parent)
-{
-}
-
-Gunshell::Gunshell(qreal x, qreal y)
-    : startX_(x)
-    , startY_(y)
+Gunshell::Gunshell(QGraphicsScene *scene, qreal x, qreal y)
+    : MovableObject(scene)
+    , x_(x)
+    , y_(y)
 {
 }
 
@@ -16,9 +12,9 @@ Gunshell::~Gunshell()
     delete shotSound_;
 }
 
-void Gunshell::init(QGraphicsScene *scene)
+void Gunshell::init()
 {
-    MovableObject::init(scene);
+    MovableObject::init();
     playShotSound();
     setDamage();
 }
@@ -52,7 +48,7 @@ void Gunshell::setDamage()
 
 void Gunshell::setStartObjectPos()
 {
-    setPos(startX_, startY_);
+    setPos(x_, y_);
 }
 
 void Gunshell::setSpeed()
@@ -63,6 +59,6 @@ void Gunshell::setSpeed()
 void Gunshell::playShotSound()
 {
     shotSound_ = new QMediaPlayer();
-    shotSound_->setMedia(QUrl(pathToSound()));
+    shotSound_->setMedia(QUrl(pathToShotSound()));
     shotSound_->play();
 }

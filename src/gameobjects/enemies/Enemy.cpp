@@ -1,17 +1,19 @@
 #include <QMediaPlayer>
 
+#include "AbstractEnemyDecorator.h"
 #include "Gunshell.h"
+#include "Score.h"
 
 #include "Enemy.h"
 
-Enemy::Enemy(QGraphicsItem *parent)
-    : SpawnObject(parent)
+Enemy::Enemy(QGraphicsScene *scene)
+    : SpawnObject(scene)
 {
 }
 
-void Enemy::init(QGraphicsScene *scene)
+void Enemy::init()
 {
-    SpawnObject::init(scene);
+    SpawnObject::init();
     setHitpoint();
 }
 
@@ -35,19 +37,25 @@ void Enemy::setHitpoint(int hitpoint)
     hitpoint_ = hitpoint;
 }
 
-void Enemy::setHitpoint()
-{
-    setHitpoint(2);
-}
 void Enemy::findCollision(Gunshell *gunshell)
 {
     hitpoint_ -= static_cast<int>(gunshell->damage());
     if(hitpoint_ <= 0)
     {
-        //play sound of destroing object
-        QMediaPlayer *sound = new QMediaPlayer();
-        sound->setMedia(QUrl("qrc:/sounds/sounds/boom.wav"));
-        sound->play();
+        if(Enemy *enemy = dynamic_cast<AbstractEnemyDecorator *>(this))
+        {
+            Score::instance()->increase();
+            //play sound of destroing object
+            QMediaPlayer *sound = new QMediaPlayer();
+            sound->setMedia(QUrl("qrc:/sounds/sounds/boom.wav"));
+            sound->play();
+        }
+        else
+        {
+            QMediaPlayer *sound = new QMediaPlayer();
+            sound->setMedia(QUrl("qrc:/sounds/sounds/boom.wav"));
+            sound->play();
+        }
 
         //delete object from scene and memory
         destroy(gunshell);
@@ -58,11 +66,6 @@ void Enemy::findCollision(Gunshell *gunshell)
         //delete gunshell from scene and memory
         destroy(gunshell);
     }
-}
-
-void Enemy::setObjectImage()
-{
-    setPixmap(QPixmap(":/images/images/Enemy2.png"));
 }
 
 

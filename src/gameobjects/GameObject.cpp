@@ -1,13 +1,14 @@
 #include "GameObject.h"
 
-GameObject::GameObject(QGraphicsItem *parent)
-    : QGraphicsPixmapItem(parent)
+GameObject::GameObject(QGraphicsScene *scene)
+    :  scene_(scene)
 {
 }
 
-void GameObject::init(QGraphicsScene *scene)
+void GameObject::init()
 {
-    scene->addItem(this);
+    scene_->addItem(this);
+
     setObjectImage();
     setStartObjectPos();
 }

@@ -1,7 +1,7 @@
 #include "SpawnObject.h"
 
-SpawnObject::SpawnObject(QGraphicsItem *parent)
-    : MovableObject(parent)
+SpawnObject::SpawnObject(QGraphicsScene *scene)
+    : MovableObject(scene)
 {
 }
 
@@ -20,6 +20,6 @@ void SpawnObject::move()
 
 void SpawnObject::setStartObjectPos()
 {
-    int random_number = rand() % static_cast<int>(scene()->width() - pixmap().width());
-    setPos(random_number, 0 - pixmap().height());
+    int randomNumber = rand() % static_cast<int>(scene()->width() - pixmap().width());
+    setPos(randomNumber, 0 - pixmap().height());
 }

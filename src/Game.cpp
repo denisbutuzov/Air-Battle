@@ -1,11 +1,13 @@
 #include <QMediaPlaylist>
 #include <QTimer>
 
-#include "PlayerObject.h"
-#include "SpawnObject.h"
-#include "Machinegun.h"
-#include "Bazooka.h"
-#include "Enemy.h"
+#include <memory>
+
+#include "Level1Factory.h"
+#include "Level2Factory.h"
+#include "Level3Factory.h"
+#include "Score.h"
+#include "Health.h"
 
 #include "Game.h"
 
@@ -22,8 +24,14 @@ Game::Game(QWidget *parent)
     setFixedSize(600, 800);
 
     //create an item to put unto the scene
-    player_ = new PlayerObject();
-    player_->init(scene_);
+    player_ = new PlayerObject(scene_);
+    player_->init();
+
+    Score *score = Score::instance();
+    score->init(scene_);
+
+    health_ = new Health(scene_, QPointF(scene_->width() - 180, 10));
+
     //make rect focusable
     player_->setFlag(QGraphicsItem::ItemIsFocusable);
     player_->setFocus();
@@ -47,26 +55,20 @@ Game::Game(QWidget *parent)
 
 void Game::spawn()
 {
-    static int n = 0;
-    SpawnObject *spawnObject = nullptr;
+    auto factory = std::make_unique<Level3Factory>(scene_);
+    auto *spawnObject = callFactory(factory.get());
+    spawnObject->init();
+}
 
-    if(n++ == 6)
+SpawnObject *Game::callFactory(AbstractLevelFactory *factory)
+{
+    unsigned int n = rand() % 7;
+    if(n > 4)
     {
-        int random_number = rand() % 10;
-        if(random_number > 5)
-        {
-            spawnObject = new Bazooka();
-        }
-        else
-        {
-            spawnObject = new Machinegun();
-        }
-        n = 0;
+        return factory->weapon();
     }
     else
     {
-        spawnObject = new Enemy();
+        return factory->enemy();
     }
-
-    spawnObject->init(scene());
 }

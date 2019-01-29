@@ -6,10 +6,11 @@ class Machinegun
         : public Weapon
 {
 public:
-    Machinegun(QGraphicsItem *parent = nullptr);
+    Machinegun(QGraphicsScene *scene);
+
 private:
     virtual void setObjectImage() override final;
-    virtual IHandWeapon *handWeapon() override final;
+    virtual HandWeapon *handWeapon() override final;
 };
 
 

@@ -1,18 +1,20 @@
 #pragma once
 
 #include "SpawnObject.h"
-#include "IHandWeapon.h"
+#include "HandWeapon.h"
 
 class Weapon
         : public SpawnObject
 {
-public:
-    Weapon(QGraphicsItem *parent = nullptr);
 public slots:
     virtual void move() override final;
+
+protected:
+    Weapon(QGraphicsScene *scene);
+
 private:
-    virtual IHandWeapon *handWeapon() = 0;
     virtual void setSpeed() override final;
+    virtual HandWeapon *handWeapon() = 0;
 };
 
 

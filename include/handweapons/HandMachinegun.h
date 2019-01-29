@@ -1,9 +1,12 @@
-#include "IHandWeapon.h"
+#pragma once
+
+#include "HandWeapon.h"
 
 class HandMachinegun
-        : public IHandWeapon
+        : public HandWeapon
 {
 public:
-    HandMachinegun() = default;
-    virtual void shoot(QGraphicsScene *scene, qreal x, qreal y) override final;
+    HandMachinegun(QGraphicsScene *scene);
+
+    virtual void shoot(qreal x, qreal y) override final;
 };

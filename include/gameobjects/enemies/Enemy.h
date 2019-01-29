@@ -7,16 +7,23 @@ class Enemy
         : public SpawnObject
 {
 public:
-    Enemy(QGraphicsItem *parent = nullptr);
-    virtual void init(QGraphicsScene *scene) override final;
+    virtual ~Enemy() override = default;
+
+    virtual void init() override;
+
 public slots:
     virtual void move() override final;
+
 protected:
+    Enemy(QGraphicsScene *scene);
+
     void setHitpoint(int hitpoint);
+
 private:
-    virtual void setHitpoint();
-    virtual void setObjectImage() override;
+    virtual void setHitpoint() = 0;
+
     void findCollision(Gunshell *gunshell);
+
 private:
     int hitpoint_;
 };
