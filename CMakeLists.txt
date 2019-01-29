@@ -11,8 +11,10 @@ FIND_PACKAGE(Qt5 COMPONENTS ${Qt5_COMPONENTS} REQUIRED)
 
 SET(HEADERS include/Game.h
             include/Score.h
+            include/Health.h
             include/gameobjects/GameObject.h
             include/gameobjects/PlayerObject.h
+            include/gameobjects/HeartObject.h
             include/gameobjects/MovableObject.h
             include/gameobjects/SpawnObject.h
             include/gameobjects/gunshells/Gunshell.h
@@ -37,8 +39,10 @@ SET(HEADERS include/Game.h
 
 SET(SOURCES src/Game.cpp
             src/Score.cpp
+            src/Health.cpp
             src/gameobjects/GameObject.cpp
             src/gameobjects/PlayerObject.cpp
+            src/gameobjects/HeartObject.cpp
             src/gameobjects/MovableObject.cpp
             src/gameobjects/SpawnObject.cpp
             src/gameobjects/gunshells/Gunshell.cpp

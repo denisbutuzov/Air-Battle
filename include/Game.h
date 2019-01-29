@@ -3,6 +3,7 @@
 #include <QGraphicsView>
 
 #include "PlayerObject.h"
+#include "Health.h"
 #include "AbstractLevelFactory.h"
 
 class Game
@@ -21,4 +22,5 @@ private:
 private:
     QGraphicsScene *scene_;
     PlayerObject *player_;
+    Health *health_;
 };

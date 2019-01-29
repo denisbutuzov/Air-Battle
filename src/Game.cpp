@@ -7,6 +7,7 @@
 #include "Level2Factory.h"
 #include "Level3Factory.h"
 #include "Score.h"
+#include "Health.h"
 
 #include "Game.h"
 
@@ -29,6 +30,7 @@ Game::Game(QWidget *parent)
     Score *score = Score::instance();
     score->init(scene_);
 
+    health_ = new Health(scene_, QPointF(scene_->width() - 180, 10));
 
     //make rect focusable
     player_->setFlag(QGraphicsItem::ItemIsFocusable);
