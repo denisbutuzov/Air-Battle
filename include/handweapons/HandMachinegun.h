@@ -1,3 +1,5 @@
+#pragma once
+
 #include "HandWeapon.h"
 
 class HandMachinegun

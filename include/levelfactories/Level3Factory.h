@@ -1,3 +1,5 @@
+#pragma once
+
 #include "AbstractLevelFactory.h"
 
 class Level3Factory

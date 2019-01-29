@@ -1,3 +1,5 @@
+#pragma once
+
 #include "AbstractEnemyDecorator.h"
 
 class ShieldDecorator

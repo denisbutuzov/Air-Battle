@@ -1,7 +1,7 @@
 #include <QTimer>
 
 #include "MovableObject.h"
-#include <QDebug>
+
 MovableObject::MovableObject(QGraphicsScene *scene)
     : GameObject(scene)
 {
