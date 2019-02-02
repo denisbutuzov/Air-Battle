@@ -13,8 +13,6 @@
 
 Game::Game(QWidget *parent)
 {
-    level_ = 1;
-
     //create a scene
     scene_ = new QGraphicsScene();
     scene_->setSceneRect(0, 0, 600, 800);
@@ -33,6 +31,9 @@ Game::Game(QWidget *parent)
     score->init(scene_);
 
     health_ = new Health(scene_, QPointF(scene_->width() - 180, 10));
+
+    level_ = new Level(scene_, QPointF(scene_->width()/2 - 65, 0));
+    level_->init();
 
     //make rect focusable
     player_->setFlag(QGraphicsItem::ItemIsFocusable);
@@ -56,14 +57,14 @@ Game::Game(QWidget *parent)
 
     //level change
     auto *levelChangeTimer = new QTimer();
-    connect(levelChangeTimer, SIGNAL(timeout()), SLOT(levelChange()));
-    levelChangeTimer->start(50000);
+    connect(levelChangeTimer, SIGNAL(timeout()), level_, SLOT(change()));
+    levelChangeTimer->start(10000);
 }
 
 void Game::spawn()
 {
     std::unique_ptr<AbstractLevelFactory> factory;
-    switch(level_)
+    switch(level_->level())
     {
     case 1:
         factory = std::make_unique<Level1Factory>(scene_);
@@ -95,10 +96,3 @@ SpawnObject *Game::createSpawnObject(AbstractLevelFactory *factory)
     }
 }
 
-void Game::levelChange()
-{
-    if (level_ != 3)
-    {
-        ++level_;
-    }
-}

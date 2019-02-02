@@ -4,6 +4,7 @@
 
 #include "PlayerObject.h"
 #include "Health.h"
+#include "Level.h"
 #include "AbstractLevelFactory.h"
 
 class Game
@@ -18,11 +19,10 @@ private:
 
 private slots:
     void spawn();
-    void levelChange();
 
 private:
     QGraphicsScene *scene_;
     PlayerObject *player_;
     Health *health_;
-    unsigned int level_;
+    Level *level_;
 };
