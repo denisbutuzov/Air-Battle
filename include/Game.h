@@ -3,6 +3,7 @@
 #include <QGraphicsView>
 
 #include "PlayerObject.h"
+#include "Score.h"
 #include "Health.h"
 #include "Level.h"
 #include "AbstractLevelFactory.h"
@@ -23,6 +24,7 @@ private slots:
 private:
     QGraphicsScene *scene_;
     PlayerObject *player_;
+    Score *score_;
     Health *health_;
     Level *level_;
 };

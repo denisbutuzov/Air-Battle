@@ -19,6 +19,6 @@ public slots:
 
 private:
     unsigned int level_;
-    QGraphicsScene *scene_;
     QPointF coordinate_;
+    QGraphicsScene *scene_;
 };

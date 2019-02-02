@@ -27,8 +27,8 @@ Game::Game(QWidget *parent)
     player_ = new PlayerObject(scene_);
     player_->init();
 
-    Score *score = Score::instance();
-    score->init(scene_);
+    score_ = Score::instance();
+    score_->show(scene_);
 
     health_ = new Health(scene_, QPointF(scene_->width() - 180, 10));
 

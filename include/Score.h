@@ -7,8 +7,8 @@ class Score:
 {
 public:
     static Score *instance();
+    void show(QGraphicsScene *scene);
     void increase();
-    void init(QGraphicsScene *scene);
 
 protected:
     Score();
