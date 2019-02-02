@@ -56,11 +56,11 @@ Game::Game(QWidget *parent)
 void Game::spawn()
 {
     auto factory = std::make_unique<Level3Factory>(scene_);
-    auto *spawnObject = callFactory(factory.get());
+    auto *spawnObject = createSpawnObject(factory.get());
     spawnObject->init();
 }
 
-SpawnObject *Game::callFactory(AbstractLevelFactory *factory)
+SpawnObject *Game::createSpawnObject(AbstractLevelFactory *factory)
 {
     unsigned int n = rand() % 7;
     if(n > 4)

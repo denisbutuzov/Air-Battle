@@ -17,7 +17,7 @@ public slots:
     void spawn();
 
 private:
-    SpawnObject *callFactory(AbstractLevelFactory *factory);
+    SpawnObject *createSpawnObject(AbstractLevelFactory *factory);
 
 private:
     QGraphicsScene *scene_;
