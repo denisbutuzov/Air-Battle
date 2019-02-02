@@ -8,10 +8,10 @@ class Level
     Q_OBJECT
 
 public:
-    Level(QGraphicsScene *scene_, QPointF coordinate);
+    Level();
     ~Level() = default;
 
-    void init();
+    void show(QGraphicsScene *scene_, QPointF coordinate = QPointF(0.0, 0.0));
     unsigned int level() const;
 
 public slots:
@@ -19,6 +19,4 @@ public slots:
 
 private:
     unsigned int level_;
-    QPointF coordinate_;
-    QGraphicsScene *scene_;
 };
