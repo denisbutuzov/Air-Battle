@@ -44,7 +44,6 @@ void Enemy::findCollision(Gunshell *gunshell)
     {
         if(Enemy *enemy = dynamic_cast<AbstractEnemyDecorator *>(this))
         {
-            Score::instance()->increase();
             //play sound of destroing object
             QMediaPlayer *sound = new QMediaPlayer();
             sound->setMedia(QUrl("qrc:/sounds/sounds/boom.wav"));
@@ -52,6 +51,7 @@ void Enemy::findCollision(Gunshell *gunshell)
         }
         else
         {
+            Score::instance()->increase();
             QMediaPlayer *sound = new QMediaPlayer();
             sound->setMedia(QUrl("qrc:/sounds/sounds/boom.wav"));
             sound->play();
