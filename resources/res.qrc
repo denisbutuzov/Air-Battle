@@ -14,5 +14,7 @@
         <file>images/Enemy1.png</file>
         <file>images/Enemy2.png</file>
         <file>images/Space.jpg</file>
+        <file>images/EnemyShield.png</file>
+        <file>images/Heart.png</file>
     </qresource>
 </RCC>

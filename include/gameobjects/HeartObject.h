@@ -5,8 +5,8 @@
 #include "GameObject.h"
 
 const int WIDTH_BETWEEN_HEARTOBJECTS = 5;
-const int WIDTH_SCALE_HEARTOBJECT = 30;
-const int HEIGHT_SCALE_HEARTOBJECT = 30;
+const int WIDTH_SCALE_HEARTOBJECT = 25;
+const int HEIGHT_SCALE_HEARTOBJECT = 25;
 
 class Health;
 

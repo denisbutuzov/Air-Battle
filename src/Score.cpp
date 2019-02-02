@@ -6,19 +6,12 @@
 Score *Score::instance_ = nullptr;
 
 Score::Score()
+    : score_(0)
 {
-    //initialize the score
-    score_ = 0;
-
     //draw the text
-    setPlainText(QString("Score: " + QString::number(score_)));
     setDefaultTextColor(Qt::white);
     setFont(QFont("times", 20, QFont::Bold));
-}
-
-void Score::init(QGraphicsScene *scene)
-{
-    scene->addItem(this);
+    setPlainText(QString("Score: " + QString::number(score_)));
 }
 
 Score *Score::instance()
@@ -30,9 +23,14 @@ Score *Score::instance()
     return instance_;
 }
 
+void Score::show(QGraphicsScene *scene, QPointF coordinate)
+{
+    scene->addItem(this);
+    setPos(coordinate);
+}
+
 void Score::increase()
 {
-    score_++;
     //update score on view
-    setPlainText(QString("Score: " + QString::number(score_)));
+    setPlainText(QString("Score: " + QString::number(++score_)));
 }

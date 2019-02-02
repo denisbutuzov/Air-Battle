@@ -27,10 +27,14 @@ Game::Game(QWidget *parent)
     player_ = new PlayerObject(scene_);
     player_->init();
 
-    Score *score = Score::instance();
-    score->init(scene_);
+    score_ = Score::instance();
+    score_->show(scene_);
 
-    health_ = new Health(scene_, QPointF(scene_->width() - 180, 10));
+    health_ = Health::instance();
+    health_->show(scene_, QPointF(scene_->width() - 155.0, 10.0));
+
+    level_ = new Level();
+    level_->show(scene_, QPointF(scene_->width()/2 - 65.0, 0.0));
 
     //make rect focusable
     player_->setFlag(QGraphicsItem::ItemIsFocusable);
@@ -47,20 +51,40 @@ Game::Game(QWidget *parent)
     //set background image
     setBackgroundBrush(QBrush(QImage(":/images/images/Space.jpg")));
 
-    //spawn enemies
-    QTimer *timer = new QTimer();
-    connect(timer, SIGNAL(timeout()), SLOT(spawn()));
-    timer->start(2000);
+    //spawn game objects
+    auto *spawnObjectTimer = new QTimer();
+    connect(spawnObjectTimer, SIGNAL(timeout()), SLOT(spawn()));
+    spawnObjectTimer->start(2000);
+
+    //level change
+    auto *levelChangeTimer = new QTimer();
+    connect(levelChangeTimer, SIGNAL(timeout()), level_, SLOT(change()));
+    levelChangeTimer->start(10000);
 }
 
 void Game::spawn()
 {
-    auto factory = std::make_unique<Level3Factory>(scene_);
-    auto *spawnObject = callFactory(factory.get());
+    std::unique_ptr<AbstractLevelFactory> factory;
+    switch(level_->level())
+    {
+    case 1:
+        factory = std::make_unique<Level1Factory>(scene_);
+        break;
+    case 2:
+        factory = std::make_unique<Level2Factory>(scene_);
+        break;
+    case 3:
+        factory = std::make_unique<Level3Factory>(scene_);
+        break;
+    default:
+        break;
+    }
+
+    auto *spawnObject = createSpawnObject(factory.get());
     spawnObject->init();
 }
 
-SpawnObject *Game::callFactory(AbstractLevelFactory *factory)
+SpawnObject *Game::createSpawnObject(AbstractLevelFactory *factory)
 {
     unsigned int n = rand() % 7;
     if(n > 4)
@@ -72,3 +96,4 @@ SpawnObject *Game::callFactory(AbstractLevelFactory *factory)
         return factory->enemy();
     }
 }
+

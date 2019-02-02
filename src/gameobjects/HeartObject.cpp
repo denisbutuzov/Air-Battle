@@ -15,7 +15,7 @@ QPointF HeartObject::coordinate() const
 
 void HeartObject::setObjectImage()
 {
-    setPixmap(QPixmap(":/images/images/Player.png").scaled(WIDTH_SCALE_HEARTOBJECT, HEIGHT_SCALE_HEARTOBJECT));
+    setPixmap(QPixmap(":/images/images/Heart.png").scaled(WIDTH_SCALE_HEARTOBJECT, HEIGHT_SCALE_HEARTOBJECT));
 }
 
 void HeartObject::setStartObjectPos()

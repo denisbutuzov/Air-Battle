@@ -1,10 +1,26 @@
 #include "Health.h"
 
-Health::Health(QGraphicsScene *scene, QPointF coordinate)
+Health *Health::instance_ = nullptr;
+
+Health::Health()
     : maxHeartsNumber_(MAX_HEARTS_NUMBER)
-    , scene_(scene)
-    , coordinate_(coordinate)
 {
+}
+
+Health *Health::instance()
+{
+    if(instance_ == nullptr)
+    {
+        instance_ = new Health();
+    }
+    return instance_;
+}
+
+void Health::show(QGraphicsScene *scene, QPointF coordinate)
+{
+    scene_ = scene;
+    coordinate_ = coordinate;
+
     for (int i = 0; i < maxHeartsNumber_; i++)
     {
         addHeart();

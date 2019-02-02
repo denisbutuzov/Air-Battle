@@ -23,5 +23,5 @@ void ShieldDecorator::setHitpoint()
 
 void ShieldDecorator::setObjectImage()
 {
-    setPixmap(QPixmap(":/images/images/Enemy1.png"));
+    setPixmap(QPixmap(":/images/images/EnemyShield.png"));
 }
