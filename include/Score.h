@@ -7,7 +7,7 @@ class Score:
 {
 public:
     static Score *instance();
-    void show(QGraphicsScene *scene);
+    void show(QGraphicsScene *scene, QPointF coordinate = QPointF(0.0, 0.0));
     void increase();
 
 protected:

@@ -9,8 +9,8 @@ Score::Score()
     : score_(0)
 {
     //draw the text
-    setFont(QFont("times", 20, QFont::Bold));
     setDefaultTextColor(Qt::white);
+    setFont(QFont("times", 20, QFont::Bold));
     setPlainText(QString("Score: " + QString::number(score_)));
 }
 
@@ -23,9 +23,10 @@ Score *Score::instance()
     return instance_;
 }
 
-void Score::show(QGraphicsScene *scene)
+void Score::show(QGraphicsScene *scene, QPointF coordinate)
 {
     scene->addItem(this);
+    setPos(coordinate);
 }
 
 void Score::increase()
