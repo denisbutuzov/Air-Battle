@@ -3,6 +3,7 @@
 #include "AbstractEnemyDecorator.h"
 #include "Gunshell.h"
 #include "Score.h"
+#include "Health.h"
 
 #include "Enemy.h"
 
@@ -19,7 +20,16 @@ void Enemy::init()
 
 void Enemy::move()
 {
-    SpawnObject::move();
+    //move object down
+    setPos(x(), y() + speed());
+
+    //delete object when it is behind the scene
+    if(y() > scene()->height())
+    {
+        //remove from the scene and memory
+        Health::instance()->decrease();
+        destroy();
+    }
 
     //find colliding items
     QList<QGraphicsItem *> colliding_items = collidingItems();
