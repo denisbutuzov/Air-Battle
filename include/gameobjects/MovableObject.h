@@ -9,7 +9,7 @@ class MovableObject
     Q_OBJECT
 
 public:
-    virtual ~MovableObject() override = default;
+    virtual ~MovableObject() override;
     virtual void init() override;
 
     unsigned int speed() const;
@@ -28,5 +28,6 @@ private:
     virtual void setSpeed();
 
 private:
+    QTimer *moveObjectTimer_;
     unsigned int speed_;
 };

@@ -7,6 +7,11 @@ MovableObject::MovableObject(QGraphicsScene *scene)
 {
 }
 
+MovableObject::~MovableObject()
+{
+    delete moveObjectTimer_;
+}
+
 void MovableObject::init()
 {
     //call basic method show
@@ -16,10 +21,10 @@ void MovableObject::init()
     setSpeed();
 
     //connect
-    QTimer *timer = new QTimer(this);
-    connect(timer, SIGNAL(timeout()), this, SLOT(move()));
+    moveObjectTimer_ = new QTimer(this);
+    connect(moveObjectTimer_, SIGNAL(timeout()), this, SLOT(move()));
 
-    timer->start(50);
+    moveObjectTimer_->start(50);
 }
 
 unsigned int MovableObject::speed() const
