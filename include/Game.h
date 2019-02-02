@@ -13,14 +13,16 @@ class Game
 public:
     Game(QWidget *parent = nullptr);
 
-public slots:
-    void spawn();
-
 private:
     SpawnObject *createSpawnObject(AbstractLevelFactory *factory);
+
+private slots:
+    void spawn();
+    void levelChange();
 
 private:
     QGraphicsScene *scene_;
     PlayerObject *player_;
     Health *health_;
+    unsigned int level_;
 };

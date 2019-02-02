@@ -13,6 +13,8 @@
 
 Game::Game(QWidget *parent)
 {
+    level_ = 1;
+
     //create a scene
     scene_ = new QGraphicsScene();
     scene_->setSceneRect(0, 0, 600, 800);
@@ -47,15 +49,35 @@ Game::Game(QWidget *parent)
     //set background image
     setBackgroundBrush(QBrush(QImage(":/images/images/Space.jpg")));
 
-    //spawn enemies
-    QTimer *timer = new QTimer();
-    connect(timer, SIGNAL(timeout()), SLOT(spawn()));
-    timer->start(2000);
+    //spawn game objects
+    auto *spawnObjectTimer = new QTimer();
+    connect(spawnObjectTimer, SIGNAL(timeout()), SLOT(spawn()));
+    spawnObjectTimer->start(2000);
+
+    //level change
+    auto *levelChangeTimer = new QTimer();
+    connect(levelChangeTimer, SIGNAL(timeout()), SLOT(levelChange()));
+    levelChangeTimer->start(50000);
 }
 
 void Game::spawn()
 {
-    auto factory = std::make_unique<Level3Factory>(scene_);
+    std::unique_ptr<AbstractLevelFactory> factory;
+    switch(level_)
+    {
+    case 1:
+        factory = std::make_unique<Level1Factory>(scene_);
+        break;
+    case 2:
+        factory = std::make_unique<Level2Factory>(scene_);
+        break;
+    case 3:
+        factory = std::make_unique<Level3Factory>(scene_);
+        break;
+    default:
+        break;
+    }
+
     auto *spawnObject = createSpawnObject(factory.get());
     spawnObject->init();
 }
@@ -70,5 +92,13 @@ SpawnObject *Game::createSpawnObject(AbstractLevelFactory *factory)
     else
     {
         return factory->enemy();
+    }
+}
+
+void Game::levelChange()
+{
+    if (level_ != 3)
+    {
+        ++level_;
     }
 }
