@@ -30,10 +30,11 @@ Game::Game(QWidget *parent)
     score_ = Score::instance();
     score_->show(scene_);
 
-    health_ = new Health(scene_, QPointF(scene_->width() - 180, 10));
+    health_ = Health::instance();
+    health_->show(scene_, QPointF(scene_->width() - 155.0, 10.0));
 
     level_ = new Level();
-    level_->show(scene_, QPointF(scene_->width()/2 - 65, 0));
+    level_->show(scene_, QPointF(scene_->width()/2 - 65.0, 0.0));
 
     //make rect focusable
     player_->setFlag(QGraphicsItem::ItemIsFocusable);
