@@ -13,6 +13,7 @@ public:
 protected:
     Score();
     Score(const Score &other) = delete;
+    Score(Score &&other) = delete;
 
     Score &operator=(const Score &other) = delete;
 
