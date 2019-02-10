@@ -2,6 +2,8 @@
 
 #include <QQueue>
 
+#include "functional"
+
 #include "Health.h"
 #include "HeartObject.h"
 #include "AbstractObserver.h"
@@ -23,6 +25,7 @@ public:
 private:
     void addHeart();
     void removeHeart();
+    void repeatWhileSizesAreNotEqual(std::function<void()> &&callBack);
 
 private:
     Health *subject_;

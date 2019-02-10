@@ -10,17 +10,11 @@ void HealthObserver::update()
 {
     if(static_cast<unsigned int>(hearts_.size()) < subject_->health())
     {
-        while(static_cast<unsigned int>(hearts_.size()) != subject_->health())
-        {
-            addHeart();
-        }
+        repeatWhileSizesAreNotEqual(std::bind(&HealthObserver::addHeart, this));
     }
     else
     {
-        while(static_cast<unsigned int>(hearts_.size()) != subject_->health())
-        {
-            removeHeart();
-        }
+        repeatWhileSizesAreNotEqual(std::bind(&HealthObserver::removeHeart, this));
     }
 }
 
@@ -56,4 +50,12 @@ void HealthObserver::removeHeart()
 {
     auto *heart = hearts_.dequeue();
     delete heart;
+}
+
+void HealthObserver::repeatWhileSizesAreNotEqual(std::function<void ()> &&callBack)
+{
+    while(static_cast<unsigned int>(hearts_.size()) != subject_->health())
+    {
+        callBack();
+    }
 }
