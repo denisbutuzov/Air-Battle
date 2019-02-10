@@ -8,6 +8,7 @@
 #include "Level3Factory.h"
 #include "Score.h"
 #include "Health.h"
+#include "Level.h"
 
 #include "Game.h"
 
@@ -27,14 +28,14 @@ Game::Game(QWidget *parent)
     player_ = new PlayerObject(scene_);
     player_->init();
 
-    score_ = Score::instance();
-    score_->show(scene_);
+    scoreObs_ = new ScoreObserver(Score::instance());
+    scoreObs_->show(scene_);
 
-    health_ = Health::instance();
-    health_->show(scene_, QPointF(scene_->width() - 155.0, 10.0));
+    healthObs_ = new HealthObserver(Health::instance());
+    healthObs_->show(scene_, QPointF(scene_->width() - 155.0, 10.0));
 
-    level_ = new Level();
-    level_->show(scene_, QPointF(scene_->width()/2 - 65.0, 0.0));
+    levelObs_ = new LevelObserver(Level::instance());
+    levelObs_->show(scene_, QPointF(scene_->width()/2 - 65.0, 0.0));
 
     //make rect focusable
     player_->setFlag(QGraphicsItem::ItemIsFocusable);
@@ -58,14 +59,14 @@ Game::Game(QWidget *parent)
 
     //level change
     auto *levelChangeTimer = new QTimer();
-    connect(levelChangeTimer, SIGNAL(timeout()), level_, SLOT(change()));
+    connect(levelChangeTimer, SIGNAL(timeout()), Level::instance(), SLOT(increase()));
     levelChangeTimer->start(10000);
 }
 
 void Game::spawn()
 {
     std::unique_ptr<AbstractLevelFactory> factory;
-    switch(level_->level())
+    switch(Level::instance()->level())
     {
     case 1:
         factory = std::make_unique<Level1Factory>(scene_);

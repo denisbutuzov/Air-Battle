@@ -1,8 +1,8 @@
-#include "Health.h"
+#include "HealthObserver.h"
 
 #include "HeartObject.h"
 
-HeartObject::HeartObject(QGraphicsScene *scene, Health *parent)
+HeartObject::HeartObject(QGraphicsScene *scene, HealthObserver *parent)
     : GameObject(scene)
     , parent_(parent)
 {

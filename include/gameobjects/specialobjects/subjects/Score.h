@@ -1,14 +1,14 @@
 #pragma once
 
-#include <QGraphicsTextItem>
+#include "AbstractSubject.h"
 
-class Score:
-        public QGraphicsTextItem
+class Score
+        : public AbstractSubject
 {
 public:
     static Score *instance();
-    void show(QGraphicsScene *scene, QPointF coordinate = QPointF(0.0, 0.0));
     void increase();
+    unsigned int score() const;
 
 protected:
     Score();
@@ -16,6 +16,7 @@ protected:
     Score(Score &&other) = delete;
 
     Score &operator=(const Score &other) = delete;
+    Score &operator=(Score &&other) = delete;
 
 private:
     static Score *instance_;

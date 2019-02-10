@@ -3,9 +3,9 @@
 #include <QGraphicsView>
 
 #include "PlayerObject.h"
-#include "Score.h"
-#include "Health.h"
-#include "Level.h"
+#include "ScoreObserver.h"
+#include "HealthObserver.h"
+#include "LevelObserver.h"
 #include "AbstractLevelFactory.h"
 
 class Game
@@ -24,7 +24,7 @@ private slots:
 private:
     QGraphicsScene *scene_;
     PlayerObject *player_;
-    Score *score_;
-    Health *health_;
-    Level *level_;
+    ScoreObserver *scoreObs_;
+    HealthObserver *healthObs_;
+    LevelObserver *levelObs_;
 };
