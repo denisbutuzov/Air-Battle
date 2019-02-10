@@ -10,14 +10,19 @@ SET(Qt5_COMPONENTS Core Gui Widgets Multimedia)
 FIND_PACKAGE(Qt5 COMPONENTS ${Qt5_COMPONENTS} REQUIRED)
 
 SET(HEADERS include/Game.h
-            include/Score.h
-            include/Health.h
-            include/Level.h
             include/gameobjects/GameObject.h
             include/gameobjects/PlayerObject.h
             include/gameobjects/HeartObject.h
             include/gameobjects/MovableObject.h
             include/gameobjects/SpawnObject.h
+            include/gameobjects/specialobjects/observers/AbstractObserver.h
+            include/gameobjects/specialobjects/observers/LevelObserver.h
+            include/gameobjects/specialobjects/observers/HealthObserver.h
+            include/gameobjects/specialobjects/observers/ScoreObserver.h
+            include/gameobjects/specialobjects/subjects/AbstractSubject.h
+            include/gameobjects/specialobjects/subjects/Level.h
+            include/gameobjects/specialobjects/subjects/Health.h
+            include/gameobjects/specialobjects/subjects/Score.h
             include/gameobjects/gunshells/Gunshell.h
             include/gameobjects/gunshells/Bullet.h
             include/gameobjects/gunshells/Rocket.h
@@ -39,14 +44,18 @@ SET(HEADERS include/Game.h
 )
 
 SET(SOURCES src/Game.cpp
-            src/Score.cpp
-            src/Health.cpp
-            src/Level.cpp
             src/gameobjects/GameObject.cpp
             src/gameobjects/PlayerObject.cpp
             src/gameobjects/HeartObject.cpp
             src/gameobjects/MovableObject.cpp
             src/gameobjects/SpawnObject.cpp
+            src/gameobjects/specialobjects/subjects/AbstractSubject.cpp
+            src/gameobjects/specialobjects/observers/LevelObserver.cpp
+            src/gameobjects/specialobjects/observers/HealthObserver.cpp
+            src/gameobjects/specialobjects/observers/ScoreObserver.cpp
+            src/gameobjects/specialobjects/subjects/Level.cpp
+            src/gameobjects/specialobjects/subjects/Health.cpp
+            src/gameobjects/specialobjects/subjects/Score.cpp
             src/gameobjects/gunshells/Gunshell.cpp
             src/gameobjects/gunshells/Bullet.cpp
             src/gameobjects/gunshells/Rocket.cpp
@@ -78,10 +87,12 @@ SET(RESOURCES resources/res.qrc)
 ADD_EXECUTABLE(${PROJECT_NAME} main.cpp ${SOURCES} ${HEADERS} ${RESOURCES})
 TARGET_LINK_LIBRARIES(${PROJECT_NAME}  PUBLIC ${LIBS})
 TARGET_INCLUDE_DIRECTORIES(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
-                                                  ${CMAKE_CURRENT_SOURCE_DIR}/include/gameobjects/
+                                                  ${CMAKE_CURRENT_SOURCE_DIR}/include/gameobjects/specialobjects/observers
+                                                  ${CMAKE_CURRENT_SOURCE_DIR}/include/gameobjects/specialobjects/subjects
+                                                  ${CMAKE_CURRENT_SOURCE_DIR}/include/gameobjects
                                                   ${CMAKE_CURRENT_SOURCE_DIR}/include/gameobjects/gunshells
                                                   ${CMAKE_CURRENT_SOURCE_DIR}/include/gameobjects/enemies
                                                   ${CMAKE_CURRENT_SOURCE_DIR}/include/gameobjects/enemies/enemydecorators
                                                   ${CMAKE_CURRENT_SOURCE_DIR}/include/gameobjects/weapons
-                                                  ${CMAKE_CURRENT_SOURCE_DIR}/include/handweapons/
-                                                  ${CMAKE_CURRENT_SOURCE_DIR}/include/levelfactories/)
+                                                  ${CMAKE_CURRENT_SOURCE_DIR}/include/handweapons
+                                                  ${CMAKE_CURRENT_SOURCE_DIR}/include/levelfactories)

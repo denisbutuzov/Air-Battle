@@ -1,20 +1,18 @@
 #pragma once
 
-#include <QPointF>
-
 #include "GameObject.h"
 
 const int WIDTH_BETWEEN_HEARTOBJECTS = 5;
 const int WIDTH_SCALE_HEARTOBJECT = 25;
 const int HEIGHT_SCALE_HEARTOBJECT = 25;
 
-class Health;
+class HealthObserver;
 
 class HeartObject
         : public GameObject
 {
 public:
-    HeartObject(QGraphicsScene *scene, Health *parent);
+    HeartObject(QGraphicsScene *scene, HealthObserver *parent);
     virtual ~HeartObject() override = default;
 
     QPointF coordinate() const;
@@ -24,5 +22,5 @@ private:
     virtual void setStartObjectPos() override final;
 
 private:
-    Health *parent_;
+    HealthObserver *parent_;
 };
