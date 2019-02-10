@@ -5,7 +5,6 @@
 #include "Score.h"
 #include "AbstractObserver.h"
 
-
 class ScoreObserver
         : public QGraphicsTextItem
         , public AbstractObserver
