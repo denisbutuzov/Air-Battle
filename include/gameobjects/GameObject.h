@@ -1,7 +1,8 @@
 #pragma once
 
 #include <QGraphicsPixmapItem>
-#include <QGraphicsScene>
+
+class QGraphicsScene;
 
 class GameObject
         : public QGraphicsPixmapItem

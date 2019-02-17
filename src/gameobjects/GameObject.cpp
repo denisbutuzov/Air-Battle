@@ -1,3 +1,5 @@
+#include <QGraphicsScene>
+
 #include "GameObject.h"
 
 GameObject::GameObject(QGraphicsScene *scene)
