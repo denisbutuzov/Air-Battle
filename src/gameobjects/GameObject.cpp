@@ -8,7 +8,6 @@ GameObject::GameObject(QGraphicsScene *scene)
 void GameObject::init()
 {
     scene_->addItem(this);
-
     setObjectImage();
     setStartObjectPos();
 }

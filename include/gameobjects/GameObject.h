@@ -8,7 +8,6 @@ class GameObject
 {
 public:
     virtual ~GameObject() = default;
-
     virtual void init();
 
 protected:
