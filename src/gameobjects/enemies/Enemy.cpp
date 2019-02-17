@@ -1,3 +1,4 @@
+#include <QGraphicsScene>
 #include <QMediaPlayer>
 
 #include "AbstractEnemyDecorator.h"

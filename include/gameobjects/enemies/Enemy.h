@@ -1,7 +1,8 @@
 #pragma once
 
-#include "Gunshell.h"
 #include "SpawnObject.h"
+
+class Gunshell;
 
 class Enemy
         : public SpawnObject
