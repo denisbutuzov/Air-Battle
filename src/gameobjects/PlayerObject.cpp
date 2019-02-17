@@ -1,3 +1,4 @@
+#include <QGraphicsScene>
 #include <QKeyEvent>
 
 #include "HandMachinegun.h"
