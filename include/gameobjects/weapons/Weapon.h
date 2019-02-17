@@ -1,7 +1,8 @@
 #pragma once
 
 #include "SpawnObject.h"
-#include "HandWeapon.h"
+
+class HandWeapon;
 
 class Weapon
         : public SpawnObject
