@@ -1,3 +1,4 @@
+#include <QGraphicsScene>
 #include <QTimer>
 
 #include "MovableObject.h"
