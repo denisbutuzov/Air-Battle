@@ -1,7 +1,8 @@
 #pragma once
 
-#include "HandWeapon.h"
 #include "GameObject.h"
+
+class HandWeapon;
 
 class PlayerObject
         : public GameObject
