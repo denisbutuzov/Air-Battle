@@ -1,5 +1,7 @@
 #include <QGraphicsScene>
 
+#include "Level.h"
+
 #include "LevelObserver.h"
 
 LevelObserver::LevelObserver(Level *level)

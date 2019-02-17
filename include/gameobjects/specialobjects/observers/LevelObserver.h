@@ -2,8 +2,9 @@
 
 #include <QGraphicsTextItem>
 
-#include "Level.h"
 #include "AbstractObserver.h"
+
+class Level;
 
 class LevelObserver
         : public QGraphicsTextItem
