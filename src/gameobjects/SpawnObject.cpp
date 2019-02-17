@@ -1,3 +1,5 @@
+#include <QGraphicsScene>
+
 #include "SpawnObject.h"
 
 SpawnObject::SpawnObject(QGraphicsScene *scene)
