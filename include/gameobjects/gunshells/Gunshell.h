@@ -1,8 +1,8 @@
 #pragma once
 
-#include <QMediaPlayer>
-
 #include "MovableObject.h"
+
+class QMediaPlayer;
 
 class Gunshell
         : public MovableObject

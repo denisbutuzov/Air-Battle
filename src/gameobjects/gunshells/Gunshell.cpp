@@ -1,3 +1,5 @@
+#include <QMediaPlayer>
+
 #include "Gunshell.h"
 
 Gunshell::Gunshell(QGraphicsScene *scene, qreal x, qreal y)
