@@ -1,14 +1,22 @@
 #include <QMediaPlaylist>
+#include <QMediaPlayer>
 #include <QTimer>
 
 #include <memory>
 
+#include "PlayerObject.h"
+#include "SpawnObject.h"
+#include "ScoreObserver.h"
+#include "HealthObserver.h"
+#include "LevelObserver.h"
 #include "Level1Factory.h"
 #include "Level2Factory.h"
 #include "Level3Factory.h"
 #include "Score.h"
 #include "Health.h"
 #include "Level.h"
+#include "Weapon.h"
+#include "Enemy.h"
 
 #include "Game.h"
 
