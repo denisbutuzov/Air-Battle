@@ -2,8 +2,9 @@
 
 #include <QGraphicsTextItem>
 
-#include "Score.h"
 #include "AbstractObserver.h"
+
+class Score;
 
 class ScoreObserver
         : public QGraphicsTextItem
