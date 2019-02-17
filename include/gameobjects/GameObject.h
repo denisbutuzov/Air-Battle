@@ -2,8 +2,6 @@
 
 #include <QGraphicsPixmapItem>
 
-class QGraphicsScene;
-
 class GameObject
         : public QGraphicsPixmapItem
 {
