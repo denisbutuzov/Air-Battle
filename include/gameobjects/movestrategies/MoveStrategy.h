@@ -5,9 +5,20 @@ class qreal;
 class MoveStrategy
 {
 public:
+    enum class DIRECTION
+    {
+        UP,
+        DOWN
+    };
+
     virtual ~MoveStrategy();
-    virtual void move(qreal &x, qreal &y) = 0;
+    virtual void move(qreal &x, qreal &y, qreal speed) = 0;
 
 protected:
-    MoveStrategy() = default;
+    MoveStrategy(DIRECTION dir);
+
+    DIRECTION direction() const;
+
+private:
+    DIRECTION dir_;
 };
