@@ -11,7 +11,7 @@ public:
         DOWN
     };
 
-    virtual ~MoveStrategy();
+    virtual ~MoveStrategy() = default;
     virtual void move(qreal &x, qreal &y, qreal speed) = 0;
 
 protected:
