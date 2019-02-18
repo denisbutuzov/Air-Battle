@@ -2,6 +2,8 @@
 
 #include "GameObject.h"
 
+class MoveStrategy;
+
 class MovableObject
         : public QObject
         , public GameObject
@@ -29,5 +31,6 @@ private:
 
 private:
     QTimer *moveObjectTimer_;
+    MoveStrategy *moveStrategy_;
     unsigned int speed_;
 };

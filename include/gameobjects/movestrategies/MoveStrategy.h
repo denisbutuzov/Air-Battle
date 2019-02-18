@@ -1,6 +1,6 @@
 #pragma once
 
-class qreal;
+#include <QtGlobal>
 
 class MoveStrategy
 {

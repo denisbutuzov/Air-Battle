@@ -1,5 +1,3 @@
-#include <QtGlobal>
-
 #include "MoveByLine.h"
 
 MoveByLine::MoveByLine(MoveStrategy::DIRECTION dir)
