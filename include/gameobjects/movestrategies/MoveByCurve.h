@@ -6,6 +6,6 @@ class MoveByCurve
         : public MoveStrategy
 {
 public:
-    MoveByCurve() = default;
-    virtual void move(qreal &x, qreal &y) override final;
+    MoveByCurve(DIRECTION dir);
+    virtual void move(qreal &x, qreal &y, qreal speed) override final;
 };
