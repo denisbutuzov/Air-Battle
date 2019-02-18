@@ -6,6 +6,6 @@ class MoveByLine
         : public MoveStrategy
 {
 public:
-    MoveByLine() = default;
-    virtual void move(qreal &x, qreal &y) override final;
+    MoveByLine(DIRECTION dir);
+    virtual void move(qreal &x, qreal &y, qreal speed) override final;
 };
