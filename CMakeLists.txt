@@ -15,6 +15,7 @@ SET(HEADERS include/Game.h
             include/gameobjects/HeartObject.h
             include/gameobjects/MovableObject.h
             include/gameobjects/SpawnObject.h
+            include/gameobjects/movestrategies/MoveStrategy.h
             include/gameobjects/specialobjects/observers/AbstractObserver.h
             include/gameobjects/specialobjects/observers/LevelObserver.h
             include/gameobjects/specialobjects/observers/HealthObserver.h
@@ -87,6 +88,7 @@ SET(RESOURCES resources/res.qrc)
 ADD_EXECUTABLE(${PROJECT_NAME} main.cpp ${SOURCES} ${HEADERS} ${RESOURCES})
 TARGET_LINK_LIBRARIES(${PROJECT_NAME}  PUBLIC ${LIBS})
 TARGET_INCLUDE_DIRECTORIES(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
+                                                  ${CMAKE_CURRENT_SOURCE_DIR}/include/gameobjects/movestrategies
                                                   ${CMAKE_CURRENT_SOURCE_DIR}/include/gameobjects/specialobjects/observers
                                                   ${CMAKE_CURRENT_SOURCE_DIR}/include/gameobjects/specialobjects/subjects
                                                   ${CMAKE_CURRENT_SOURCE_DIR}/include/gameobjects
