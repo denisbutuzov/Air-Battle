@@ -16,6 +16,8 @@ SET(HEADERS include/Game.h
             include/gameobjects/MovableObject.h
             include/gameobjects/SpawnObject.h
             include/gameobjects/movestrategies/MoveStrategy.h
+            include/gameobjects/movestrategies/MoveByLine.h
+            include/gameobjects/movestrategies/MoveByCurve.h
             include/gameobjects/specialobjects/observers/AbstractObserver.h
             include/gameobjects/specialobjects/observers/LevelObserver.h
             include/gameobjects/specialobjects/observers/HealthObserver.h
