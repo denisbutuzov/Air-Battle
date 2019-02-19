@@ -1,7 +1,7 @@
 #include "Enemy1.h"
 
-Enemy1::Enemy1(QGraphicsScene *scene)
-    : Enemy(scene)
+Enemy1::Enemy1(QGraphicsScene *scene, MoveStrategy *moveStrategy)
+    : Enemy(scene, moveStrategy)
 {
 }
 
