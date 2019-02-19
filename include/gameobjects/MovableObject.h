@@ -21,7 +21,6 @@ public slots:
 protected:
     MovableObject(QGraphicsScene *scene);
 
-    void destroy();
     void destroy(GameObject *object);
     void setSpeed(unsigned int speed);
 
@@ -34,7 +33,7 @@ private:
 
     virtual void setSpeed();
     virtual LOCATION checkOnBackstage(MoveStrategy::DIRECTION dir);
-    virtual void OnLeaveFromScene() = 0;
+    virtual void OnLeaveFromScene();
     virtual void OnMeetOtherObject(GameObject *otherObject) = 0;
 
 private:

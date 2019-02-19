@@ -56,11 +56,6 @@ void MovableObject::move()
     }
 }
 
-void MovableObject::destroy()
-{
-    destroy(this);
-}
-
 void MovableObject::destroy(GameObject *object)
 {
     scene()->removeItem(object);
@@ -95,6 +90,11 @@ MovableObject::LOCATION MovableObject::checkOnBackstage(MoveStrategy::DIRECTION 
     }
 
     return LOCATION::ON_SCENE;
+}
+
+void MovableObject::OnLeaveFromScene()
+{
+    destroy(this);
 }
 
 
