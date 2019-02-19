@@ -1,8 +1,7 @@
 #pragma once
 
 #include "GameObject.h"
-
-class MoveStrategy;
+#include "MoveStrategy.h"
 
 class MovableObject
         : public QObject
@@ -17,7 +16,7 @@ public:
     unsigned int speed() const;
 
 public slots:
-    virtual void move() = 0;
+    void move();
 
 protected:
     MovableObject(QGraphicsScene *scene);
@@ -27,7 +26,16 @@ protected:
     void setSpeed(unsigned int speed);
 
 private:
+    enum class LOCATION
+    {
+        ON_SCENE,
+        BEHIND_SCENE
+    };
+
     virtual void setSpeed();
+    virtual LOCATION checkOnBackstage(MoveStrategy::DIRECTION dir);
+    virtual void OnLeaveFromScene() = 0;
+    virtual void OnMeetOtherObject(GameObject *otherObject) = 0;
 
 private:
     QTimer *moveObjectTimer_;
