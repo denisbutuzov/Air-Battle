@@ -2,8 +2,8 @@
 
 #include "SpawnObject.h"
 
-SpawnObject::SpawnObject(QGraphicsScene *scene)
-    : MovableObject(scene)
+SpawnObject::SpawnObject(QGraphicsScene *scene, MoveStrategy *moveStrategy)
+    : MovableObject(scene, moveStrategy)
 {
 }
 

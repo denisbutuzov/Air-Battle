@@ -9,7 +9,7 @@ public:
     virtual ~SpawnObject() override = default;
 
 protected:
-    SpawnObject(QGraphicsScene *scene);
+    SpawnObject(QGraphicsScene *scene, MoveStrategy *moveStrategy);
 
 private:
     virtual void setStartObjectPos() override;
