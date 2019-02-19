@@ -3,14 +3,16 @@
 
 #include "MovableObject.h"
 
-MovableObject::MovableObject(QGraphicsScene *scene)
+MovableObject::MovableObject(QGraphicsScene *scene, MoveStrategy *moveStrategy)
     : GameObject(scene)
+    , moveStrategy_(moveStrategy)
 {
 }
 
 MovableObject::~MovableObject()
 {
     delete moveObjectTimer_;
+    delete moveStrategy_;
 }
 
 void MovableObject::init()
@@ -31,6 +33,11 @@ void MovableObject::init()
 unsigned int MovableObject::speed() const
 {
     return speed_;
+}
+
+MoveStrategy *MovableObject::moveStrategy() const
+{
+    return moveStrategy_;
 }
 
 void MovableObject::move()
@@ -54,6 +61,11 @@ void MovableObject::move()
             OnMeetOtherObject(otherObject);
         }
     }
+}
+
+void MovableObject::OnLeaveFromScene()
+{
+    destroy(this);
 }
 
 void MovableObject::destroy(GameObject *object)
@@ -91,10 +103,3 @@ MovableObject::LOCATION MovableObject::checkOnBackstage(MoveStrategy::DIRECTION 
 
     return LOCATION::ON_SCENE;
 }
-
-void MovableObject::OnLeaveFromScene()
-{
-    destroy(this);
-}
-
-

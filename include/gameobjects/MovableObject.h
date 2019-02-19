@@ -14,12 +14,14 @@ public:
     virtual void init() override;
 
     unsigned int speed() const;
+    MoveStrategy *moveStrategy() const;
 
 public slots:
     void move();
 
 protected:
-    MovableObject(QGraphicsScene *scene);
+    MovableObject(QGraphicsScene *scene, MoveStrategy *moveStrategy);
+    virtual void OnLeaveFromScene();
 
     void destroy(GameObject *object);
     void setSpeed(unsigned int speed);
@@ -33,7 +35,6 @@ private:
 
     virtual void setSpeed();
     virtual LOCATION checkOnBackstage(MoveStrategy::DIRECTION dir);
-    virtual void OnLeaveFromScene();
     virtual void OnMeetOtherObject(GameObject *otherObject) = 0;
 
 private:
