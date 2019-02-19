@@ -8,9 +8,6 @@ class SpawnObject
 public:
     virtual ~SpawnObject() override = default;
 
-public slots:
-    virtual void move() override;
-
 protected:
     SpawnObject(QGraphicsScene *scene);
 
