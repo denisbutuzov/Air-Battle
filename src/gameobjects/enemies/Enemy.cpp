@@ -29,14 +29,13 @@ void Enemy::setHitpoint(int hitpoint)
 
 void Enemy::OnMeetOtherObject(GameObject *otherObject)
 {
-    const std::type_info &otherObject_info = typeid(otherObject);
-    if(otherObject_info == typeid(Gunshell *))
+    if(auto *gunshell = dynamic_cast<Gunshell *>(otherObject))
     {
-        onMeetGunshell(dynamic_cast<Gunshell *>(otherObject));
+        onMeetGunshell(gunshell);
     }
-    else if(otherObject_info == typeid(PlayerObject *))
+    else if(auto *player = dynamic_cast<PlayerObject *>(otherObject))
     {
-        onMeetPlayer(dynamic_cast<PlayerObject *>(otherObject));
+        onMeetPlayer(player);
     }
 }
 
