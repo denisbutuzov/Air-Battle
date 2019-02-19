@@ -2,8 +2,8 @@
 
 #include "Machinegun.h"
 
-Machinegun::Machinegun(QGraphicsScene *scene)
-    : Weapon(scene)
+Machinegun::Machinegun(QGraphicsScene *scene, MoveStrategy *moveStrategy)
+    : Weapon(scene, moveStrategy)
 {
 }
 
