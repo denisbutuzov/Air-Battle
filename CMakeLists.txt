@@ -54,6 +54,7 @@ SET(SOURCES src/Game.cpp
             src/gameobjects/SpawnObject.cpp
             src/gameobjects/movestrategies/MoveStrategy.cpp
             src/gameobjects/movestrategies/MoveByLine.cpp
+            src/gameobjects/movestrategies/MoveByCurve.cpp
             src/gameobjects/specialobjects/subjects/AbstractSubject.cpp
             src/gameobjects/specialobjects/observers/LevelObserver.cpp
             src/gameobjects/specialobjects/observers/HealthObserver.cpp
