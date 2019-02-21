@@ -18,5 +18,5 @@ void MoveByCurve::move(qreal &x, qreal &y, qreal speed)
         y += speed;
     }
 
-    x += 5 * std::sin(0.01 * y);
+    x += 5 * std::sin(0.02 * y);
 }
