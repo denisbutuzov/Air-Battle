@@ -18,6 +18,7 @@ SET(HEADERS include/Game.h
             include/gameobjects/movestrategies/MoveStrategy.h
             include/gameobjects/movestrategies/MoveByLine.h
             include/gameobjects/movestrategies/MoveByCurve.h
+            include/gameobjects/movestrategies/MoveByRandom.h
             include/gameobjects/specialobjects/observers/AbstractObserver.h
             include/gameobjects/specialobjects/observers/LevelObserver.h
             include/gameobjects/specialobjects/observers/HealthObserver.h
@@ -55,6 +56,7 @@ SET(SOURCES src/Game.cpp
             src/gameobjects/movestrategies/MoveStrategy.cpp
             src/gameobjects/movestrategies/MoveByLine.cpp
             src/gameobjects/movestrategies/MoveByCurve.cpp
+            src/gameobjects/movestrategies/MoveByRandom.cpp
             src/gameobjects/specialobjects/subjects/AbstractSubject.cpp
             src/gameobjects/specialobjects/observers/LevelObserver.cpp
             src/gameobjects/specialobjects/observers/HealthObserver.cpp
