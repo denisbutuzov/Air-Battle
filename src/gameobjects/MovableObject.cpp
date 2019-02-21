@@ -42,10 +42,7 @@ MoveStrategy *MovableObject::moveStrategy() const
 
 void MovableObject::move()
 {
-    auto tempX = x();
-    auto tempY = y();
-    moveStrategy_->move(tempX, tempY, speed_);
-    setPos(tempX, tempY);
+    moveStrategy_->move(this);
 
     auto location = checkOnBackstage(moveStrategy_->direction());
     if(location == LOCATION::BEHIND_SCENE)

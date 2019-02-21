@@ -1,3 +1,5 @@
+#include "MovableObject.h"
+
 #include "MoveByRandom.h"
 
 MoveByRandom::MoveByRandom(MoveStrategy::DIRECTION dir)
@@ -5,16 +7,18 @@ MoveByRandom::MoveByRandom(MoveStrategy::DIRECTION dir)
 {
 }
 
-void MoveByRandom::move(qreal &x, qreal &y, qreal speed)
+void MoveByRandom::move(MovableObject *object)
 {
+    auto tempX = object->x();
+    auto tempY = object->y();
     if(direction() == DIRECTION::UP)
     {
-        y -= speed;
+        tempY -= object->speed();
     }
     else
     {
-        y += speed;
+        tempY += object->speed();
     }
-
-    x += 10 * (rand() % 3 - 1);
+    tempX += 10 * (rand() % 3 - 1);
+    object->setPos(tempX, tempY);
 }

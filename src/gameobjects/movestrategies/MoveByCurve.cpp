@@ -1,5 +1,7 @@
 #include <cmath>
 
+#include "MovableObject.h"
+
 #include "MoveByCurve.h"
 
 MoveByCurve::MoveByCurve(MoveStrategy::DIRECTION dir)
@@ -7,16 +9,18 @@ MoveByCurve::MoveByCurve(MoveStrategy::DIRECTION dir)
 {
 }
 
-void MoveByCurve::move(qreal &x, qreal &y, qreal speed)
+void MoveByCurve::move(MovableObject *object)
 {
+    auto tempX = object->x();
+    auto tempY = object->y();
     if(direction() == DIRECTION::UP)
     {
-        y -= speed;
+        tempY -= object->speed();
     }
     else
     {
-        y += speed;
+        tempY += object->speed();
     }
-
-    x += 5 * std::sin(0.02 * y);
+    tempX += 5 * std::sin(0.02 * tempY);
+    object->setPos(tempX, tempY);
 }

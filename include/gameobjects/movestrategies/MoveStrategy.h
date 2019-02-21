@@ -1,6 +1,6 @@
 #pragma once
 
-#include <QtGlobal>
+class MovableObject;
 
 class MoveStrategy
 {
@@ -12,7 +12,7 @@ public:
     };
 
     virtual ~MoveStrategy() = default;
-    virtual void move(qreal &x, qreal &y, qreal speed) = 0;
+    virtual void move(MovableObject *object) = 0;
 
     DIRECTION direction() const;
 
