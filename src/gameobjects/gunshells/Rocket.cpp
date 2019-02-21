@@ -1,7 +1,8 @@
 #include "Rocket.h"
 
-Rocket::Rocket(QGraphicsScene *scene, qreal x, qreal y)
-    : Gunshell(scene, x, y)
+Rocket::Rocket(QGraphicsScene *scene, qreal x, qreal y,
+               MoveStrategy *moveStrategy)
+    : Gunshell(scene, x, y, moveStrategy)
 {
 }
 

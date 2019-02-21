@@ -1,5 +1,7 @@
 #include <QGraphicsScene>
 
+#include "Score.h"
+
 #include "ScoreObserver.h"
 
 ScoreObserver::ScoreObserver(Score *score)

@@ -1,7 +1,8 @@
 #pragma once
 
-#include "Enemy.h"
-#include "Weapon.h"
+class QGraphicsScene;
+class Weapon;
+class Enemy;
 
 class AbstractLevelFactory
 {

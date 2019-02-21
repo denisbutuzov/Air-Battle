@@ -1,6 +1,8 @@
 #pragma once
 
-#include <QGraphicsScene>
+#include <QtGlobal>
+
+class QGraphicsScene;
 
 class HandWeapon
 {

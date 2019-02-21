@@ -1,14 +1,12 @@
 #pragma once
 
 #include <QGraphicsPixmapItem>
-#include <QGraphicsScene>
 
 class GameObject
         : public QGraphicsPixmapItem
 {
 public:
     virtual ~GameObject() = default;
-
     virtual void init();
 
 protected:

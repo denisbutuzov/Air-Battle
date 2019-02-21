@@ -15,6 +15,9 @@ SET(HEADERS include/Game.h
             include/gameobjects/HeartObject.h
             include/gameobjects/MovableObject.h
             include/gameobjects/SpawnObject.h
+            include/gameobjects/movestrategies/MoveStrategy.h
+            include/gameobjects/movestrategies/MoveByLine.h
+            include/gameobjects/movestrategies/MoveByCurve.h
             include/gameobjects/specialobjects/observers/AbstractObserver.h
             include/gameobjects/specialobjects/observers/LevelObserver.h
             include/gameobjects/specialobjects/observers/HealthObserver.h
@@ -49,6 +52,9 @@ SET(SOURCES src/Game.cpp
             src/gameobjects/HeartObject.cpp
             src/gameobjects/MovableObject.cpp
             src/gameobjects/SpawnObject.cpp
+            src/gameobjects/movestrategies/MoveStrategy.cpp
+            src/gameobjects/movestrategies/MoveByLine.cpp
+            src/gameobjects/movestrategies/MoveByCurve.cpp
             src/gameobjects/specialobjects/subjects/AbstractSubject.cpp
             src/gameobjects/specialobjects/observers/LevelObserver.cpp
             src/gameobjects/specialobjects/observers/HealthObserver.cpp
@@ -87,6 +93,7 @@ SET(RESOURCES resources/res.qrc)
 ADD_EXECUTABLE(${PROJECT_NAME} main.cpp ${SOURCES} ${HEADERS} ${RESOURCES})
 TARGET_LINK_LIBRARIES(${PROJECT_NAME}  PUBLIC ${LIBS})
 TARGET_INCLUDE_DIRECTORIES(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
+                                                  ${CMAKE_CURRENT_SOURCE_DIR}/include/gameobjects/movestrategies
                                                   ${CMAKE_CURRENT_SOURCE_DIR}/include/gameobjects/specialobjects/observers
                                                   ${CMAKE_CURRENT_SOURCE_DIR}/include/gameobjects/specialobjects/subjects
                                                   ${CMAKE_CURRENT_SOURCE_DIR}/include/gameobjects

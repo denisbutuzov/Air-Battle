@@ -1,3 +1,8 @@
+#include <QGraphicsScene>
+
+#include "Health.h"
+#include "HeartObject.h"
+
 #include "HealthObserver.h"
 
 HealthObserver::HealthObserver(Health *health)

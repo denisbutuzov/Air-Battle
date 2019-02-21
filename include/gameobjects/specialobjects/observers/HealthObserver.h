@@ -1,14 +1,15 @@
 #pragma once
 
 #include <QQueue>
+#include <QPointF>
 
 #include "functional"
 
-#include "Health.h"
-#include "HeartObject.h"
 #include "AbstractObserver.h"
 
+class Health;
 class HeartObject;
+class QGraphicsScene;
 
 class HealthObserver
         : public AbstractObserver

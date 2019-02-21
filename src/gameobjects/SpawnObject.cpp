@@ -1,21 +1,10 @@
+#include <QGraphicsScene>
+
 #include "SpawnObject.h"
 
-SpawnObject::SpawnObject(QGraphicsScene *scene)
-    : MovableObject(scene)
+SpawnObject::SpawnObject(QGraphicsScene *scene, MoveStrategy *moveStrategy)
+    : MovableObject(scene, moveStrategy)
 {
-}
-
-void SpawnObject::move()
-{
-    //move object down
-    setPos(x(), y() + speed());
-
-    //delete object when it is behind the scene
-    if(y() > scene()->height())
-    {
-        //remove from the scene and memory
-        destroy();
-    }
 }
 
 void SpawnObject::setStartObjectPos()

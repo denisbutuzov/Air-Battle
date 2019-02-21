@@ -2,8 +2,8 @@
 
 #include "Bazooka.h"
 
-Bazooka::Bazooka(QGraphicsScene *scene)
-    : Weapon(scene)
+Bazooka::Bazooka(QGraphicsScene *scene, MoveStrategy *moveStrategy)
+    : Weapon(scene, moveStrategy)
 {
 }
 

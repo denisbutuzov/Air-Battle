@@ -6,7 +6,7 @@ class Enemy2
         : public Enemy
 {
 public:
-    Enemy2(QGraphicsScene *scene);
+    Enemy2(QGraphicsScene *scene, MoveStrategy *moveStrategy = new MoveByLine(MoveStrategy::DIRECTION::DOWN));
     virtual ~Enemy2() override = default;
 
 private:

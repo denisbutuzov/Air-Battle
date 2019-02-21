@@ -2,11 +2,12 @@
 
 #include <QGraphicsView>
 
-#include "PlayerObject.h"
-#include "ScoreObserver.h"
-#include "HealthObserver.h"
-#include "LevelObserver.h"
-#include "AbstractLevelFactory.h"
+class SpawnObject;
+class PlayerObject;
+class ScoreObserver;
+class HealthObserver;
+class LevelObserver;
+class AbstractLevelFactory;
 
 class Game
         : public QGraphicsView

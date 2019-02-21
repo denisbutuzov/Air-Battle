@@ -1,7 +1,7 @@
 #include "AbstractEnemyDecorator.h"
 
 AbstractEnemyDecorator::AbstractEnemyDecorator(QGraphicsScene *scene, Enemy *enemy)
-    : Enemy(scene)
+    : Enemy(scene, enemy->moveStrategy())
     , enemy_(enemy)
 {
 }

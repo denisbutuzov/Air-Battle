@@ -6,7 +6,7 @@ class Bazooka
         : public Weapon
 {
 public:
-    Bazooka(QGraphicsScene *scene);
+    Bazooka(QGraphicsScene *scene, MoveStrategy *moveStrategy = new MoveByLine(MoveStrategy::DIRECTION::DOWN));
 
 private:
     virtual void setObjectImage() override final;

@@ -6,7 +6,7 @@ class Machinegun
         : public Weapon
 {
 public:
-    Machinegun(QGraphicsScene *scene);
+    Machinegun(QGraphicsScene *scene, MoveStrategy *moveStrategy = new MoveByLine(MoveStrategy::DIRECTION::DOWN));
 
 private:
     virtual void setObjectImage() override final;

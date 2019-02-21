@@ -1,3 +1,5 @@
+#include <QGraphicsScene>
+
 #include "GameObject.h"
 
 GameObject::GameObject(QGraphicsScene *scene)
@@ -8,7 +10,6 @@ GameObject::GameObject(QGraphicsScene *scene)
 void GameObject::init()
 {
     scene_->addItem(this);
-
     setObjectImage();
     setStartObjectPos();
 }
