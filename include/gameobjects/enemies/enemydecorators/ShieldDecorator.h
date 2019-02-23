@@ -8,7 +8,6 @@ class ShieldDecorator
 public:
     ShieldDecorator(QGraphicsScene *scene, Enemy *enemy);
     virtual ~ShieldDecorator() override = default;
-
     virtual void init() override final;
 
 private:
