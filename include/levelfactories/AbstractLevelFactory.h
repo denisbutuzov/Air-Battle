@@ -8,7 +8,6 @@ class AbstractLevelFactory
 {
 public:
     virtual ~AbstractLevelFactory() = default;
-
     virtual Enemy *enemy() const = 0;
     virtual Weapon *weapon() const = 0;
 
