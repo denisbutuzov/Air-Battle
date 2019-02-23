@@ -2,7 +2,7 @@
 
 Level *Level::instance_ = nullptr;
 
-Level::Level(unsigned int maxLevel)
+Level::Level(uint16_t maxLevel)
     : level_(1)
     , maxLevel_(maxLevel)
 {
@@ -17,7 +17,7 @@ Level *Level::instance()
     return instance_;
 }
 
-unsigned int Level::level() const
+uint16_t Level::level() const
 {
     return level_;
 }

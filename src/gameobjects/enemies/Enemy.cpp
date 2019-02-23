@@ -22,7 +22,7 @@ void Enemy::init()
     setHitpoint();
 }
 
-void Enemy::setHitpoint(int hitpoint)
+void Enemy::setHitpoint(int16_t hitpoint)
 {
     hitpoint_ = hitpoint;
 }
@@ -46,7 +46,7 @@ void Enemy::onMeetPlayer(PlayerObject *player)
 
 void Enemy::onMeetGunshell(Gunshell *gunshell)
 {
-    hitpoint_ -= static_cast<int>(gunshell->damage());
+    hitpoint_ -= static_cast<int16_t>(gunshell->damage());
     if(hitpoint_ <= 0)
     {
         if(Enemy *enemy = dynamic_cast<AbstractEnemyDecorator *>(this))

@@ -3,7 +3,7 @@
 #include <QQueue>
 #include <QPointF>
 
-#include "functional"
+#include <functional>
 
 #include "AbstractObserver.h"
 
@@ -16,7 +16,6 @@ class HealthObserver
 {
 public:
     HealthObserver(Health *health);
-
     virtual void update() override;
 
     void show(QGraphicsScene *scene, QPointF coordinate = QPointF(0.0, 0.0));

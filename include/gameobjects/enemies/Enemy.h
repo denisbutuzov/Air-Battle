@@ -17,7 +17,7 @@ protected:
     Enemy(QGraphicsScene *scene, MoveStrategy *moveStrategy = new MoveByLine(MoveStrategy::DIRECTION::DOWN));
     virtual void OnLeaveFromScene() override;
 
-    void setHitpoint(int hitpoint);
+    void setHitpoint(int16_t hitpoint);
 
 private:
     virtual void setHitpoint() = 0;
@@ -26,5 +26,5 @@ private:
     virtual void onMeetGunshell(Gunshell *gunshell);
 
 private:
-    int hitpoint_;
+    int16_t hitpoint_;
 };

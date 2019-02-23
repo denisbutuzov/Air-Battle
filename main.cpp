@@ -8,7 +8,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    std::srand(static_cast<unsigned int>(std::time(nullptr)));
+    std::srand(static_cast<uint16_t>(std::time(nullptr)));
     Game *game = new Game();
     game->show();
 

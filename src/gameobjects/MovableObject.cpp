@@ -30,7 +30,7 @@ void MovableObject::init()
     moveObjectTimer_->start(50);
 }
 
-unsigned int MovableObject::speed() const
+uint16_t MovableObject::speed() const
 {
     return speed_;
 }
@@ -71,7 +71,7 @@ void MovableObject::destroy(GameObject *object)
     delete object;
 }
 
-void MovableObject::setSpeed(unsigned int speed)
+void MovableObject::setSpeed(uint16_t speed)
 {
     speed_ = speed;
 }
