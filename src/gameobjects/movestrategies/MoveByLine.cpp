@@ -1,3 +1,5 @@
+#include "MovableObject.h"
+
 #include "MoveByLine.h"
 
 MoveByLine::MoveByLine(MoveStrategy::DIRECTION dir)
@@ -5,14 +7,17 @@ MoveByLine::MoveByLine(MoveStrategy::DIRECTION dir)
 {
 }
 
-void MoveByLine::move(qreal &x, qreal &y, qreal speed)
+void MoveByLine::move(MovableObject *object)
 {
+    auto tempX = object->x();
+    auto tempY = object->y();
     if(direction() == DIRECTION::UP)
     {
-        y -= speed;
+        tempY -= object->speed();
     }
     else
     {
-        y += speed;
+        tempY += object->speed();
     }
+    object->setPos(tempX, tempY);
 }

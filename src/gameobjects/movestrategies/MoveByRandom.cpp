@@ -1,15 +1,13 @@
-#include <cmath>
-
 #include "MovableObject.h"
 
-#include "MoveByCurve.h"
+#include "MoveByRandom.h"
 
-MoveByCurve::MoveByCurve(MoveStrategy::DIRECTION dir)
+MoveByRandom::MoveByRandom(MoveStrategy::DIRECTION dir)
     : MoveStrategy(dir)
 {
 }
 
-void MoveByCurve::move(MovableObject *object)
+void MoveByRandom::move(MovableObject *object)
 {
     auto tempX = object->x();
     auto tempY = object->y();
@@ -21,6 +19,6 @@ void MoveByCurve::move(MovableObject *object)
     {
         tempY += object->speed();
     }
-    tempX += 5 * std::sin(0.02 * tempY);
+    tempX += 10 * (rand() % 3 - 1);
     object->setPos(tempX, tempY);
 }

@@ -2,10 +2,10 @@
 
 #include "MoveStrategy.h"
 
-class MoveByLine
+class MoveByRandom
         : public MoveStrategy
 {
 public:
-    MoveByLine(DIRECTION dir);
+    MoveByRandom(DIRECTION dir);
     virtual void move(MovableObject *object) override final;
 };
