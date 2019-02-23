@@ -22,12 +22,12 @@ void Gunshell::init()
     setDamage();
 }
 
-unsigned int Gunshell::damage() const
+uint16_t Gunshell::damage() const
 {
     return damage_;
 }
 
-void Gunshell::setDamage(unsigned int damage)
+void Gunshell::setDamage(uint16_t damage)
 {
     damage_ = damage;
 }

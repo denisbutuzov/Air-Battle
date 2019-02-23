@@ -13,7 +13,7 @@ public:
     virtual ~MovableObject() override;
     virtual void init() override;
 
-    unsigned int speed() const;
+    uint16_t speed() const;
     MoveStrategy *moveStrategy() const;
 
 public slots:
@@ -24,7 +24,7 @@ protected:
     virtual void OnLeaveFromScene();
 
     void destroy(GameObject *object);
-    void setSpeed(unsigned int speed);
+    void setSpeed(uint16_t speed);
 
 private:
     enum class LOCATION
@@ -40,5 +40,5 @@ private:
 private:
     QTimer *moveObjectTimer_;
     MoveStrategy *moveStrategy_;
-    unsigned int speed_;
+    uint16_t speed_;
 };

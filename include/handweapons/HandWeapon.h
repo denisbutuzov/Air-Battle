@@ -8,7 +8,6 @@ class HandWeapon
 {
 public:
     virtual ~HandWeapon() = default;
-
     virtual void shoot(qreal x, qreal y) = 0;
 
 protected:

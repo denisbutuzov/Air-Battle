@@ -7,7 +7,6 @@ class AbstractEnemyDecorator
 {
 public:
     virtual ~AbstractEnemyDecorator() override = default;
-
     virtual void init() override;
 
 protected:

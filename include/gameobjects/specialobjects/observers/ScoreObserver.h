@@ -12,7 +12,6 @@ class ScoreObserver
 {
 public:
     ScoreObserver(Score *score);
-
     virtual void update() override;
 
     void show(QGraphicsScene *scene, QPointF coordinate = QPointF(0.0, 0.0));

@@ -7,6 +7,5 @@ class HandMachinegun
 {
 public:
     HandMachinegun(QGraphicsScene *scene);
-
     virtual void shoot(qreal x, qreal y) override final;
 };
