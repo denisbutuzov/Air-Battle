@@ -7,6 +7,5 @@ class HandBazooka
 {
 public:
     HandBazooka(QGraphicsScene *scene);
-
     virtual void shoot(qreal x, qreal y) override final;
 };
