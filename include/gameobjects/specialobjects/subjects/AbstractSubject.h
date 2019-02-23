@@ -8,7 +8,6 @@ class AbstractSubject
 {
 public:
     virtual ~AbstractSubject() = default;
-
     virtual void attach(AbstractObserver *observer);
     virtual void detach(AbstractObserver *observer);
     virtual void notify();
