@@ -1,60 +1,22 @@
-#include <QMediaPlayer>
-
 #include "Gunshell.h"
 
-Gunshell::Gunshell(QGraphicsScene *scene, qreal x, qreal y,
-                   MoveStrategy *moveStrategy)
-    : MovableObject(scene, moveStrategy)
-    , x_(x)
-    , y_(y)
+Gunshell::Gunshell(const std::shared_ptr<QGraphicsScene> &scene,
+                   std::unique_ptr<MoveStrategy> &&moveStrategy)
+    : MovableObject(scene, std::move(moveStrategy))
 {
 }
 
-Gunshell::~Gunshell()
-{
-    delete shotSound_;
-}
-
-void Gunshell::init()
-{
-    MovableObject::init();
-    playShotSound();
-    setDamage();
-}
-
-uint16_t Gunshell::damage() const
-{
-    return damage_;
-}
-
-void Gunshell::setDamage(uint16_t damage)
+void Gunshell::setDamage(unsigned int damage)
 {
     damage_ = damage;
 }
 
-void Gunshell::setDamage()
+unsigned int Gunshell::damage() const
 {
-    setDamage(1);
+    return damage_;
 }
 
-void Gunshell::setStartObjectPos()
+void Gunshell::onMeetOtherObject(GameObject *otherObject)
 {
-    setPos(x_, y_);
 }
 
-void Gunshell::setSpeed()
-{
-    MovableObject::setSpeed(10);
-}
-
-void Gunshell::OnMeetOtherObject(GameObject *otherObject)
-{
-
-}
-
-void Gunshell::playShotSound()
-{
-    shotSound_ = new QMediaPlayer();
-    shotSound_->setMedia(QUrl(pathToShotSound()));
-    shotSound_->play();
-}

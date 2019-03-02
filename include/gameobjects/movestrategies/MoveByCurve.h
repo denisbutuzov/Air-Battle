@@ -7,5 +7,5 @@ class MoveByCurve
 {
 public:
     MoveByCurve(DIRECTION dir);
-    virtual void move(MovableObject *object) override final;
+    virtual void move(MovableObject &object) override final;
 };

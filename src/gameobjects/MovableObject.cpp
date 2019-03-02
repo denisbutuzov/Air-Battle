@@ -3,51 +3,52 @@
 
 #include "MovableObject.h"
 
-MovableObject::MovableObject(QGraphicsScene *scene, MoveStrategy *moveStrategy)
+MovableObject::MovableObject(const std::shared_ptr<QGraphicsScene> &scene,
+                             std::unique_ptr<MoveStrategy> &&moveStrategy)
     : GameObject(scene)
-    , moveStrategy_(moveStrategy)
+    , moveStrategy_(std::move(moveStrategy))
 {
 }
 
-MovableObject::~MovableObject()
-{
-    delete moveObjectTimer_;
-    delete moveStrategy_;
-}
+MovableObject::~MovableObject() = default;
 
 void MovableObject::init()
 {
-    //call basic method show
+    //call basic method init()
     GameObject::init();
 
-    //set speed of object
-    setSpeed();
-
     //connect
-    moveObjectTimer_ = new QTimer(this);
-    connect(moveObjectTimer_, SIGNAL(timeout()), this, SLOT(move()));
+    moveTimer_ = std::make_unique<QTimer>();
+    connect(moveTimer_.get(), SIGNAL(timeout()),
+            this, SLOT(move()));
 
-    moveObjectTimer_->start(50);
+    moveTimer_->start(50);
 }
 
-uint16_t MovableObject::speed() const
+void MovableObject::destroy()
+{
+    scene()->removeItem(this);
+    delete this;
+}
+
+void MovableObject::setSpeed(unsigned int speed)
+{
+    speed_ = speed;
+}
+
+unsigned int MovableObject::speed() const
 {
     return speed_;
 }
 
-MoveStrategy *MovableObject::moveStrategy() const
-{
-    return moveStrategy_;
-}
-
 void MovableObject::move()
 {
-    moveStrategy_->move(this);
+    moveStrategy_->move(*this);
 
     auto location = checkOnBackstage(moveStrategy_->direction());
     if(location == LOCATION::BEHIND_SCENE)
     {
-        OnLeaveFromScene();
+        onLeaveFromScene();
     }
 
     QList<QGraphicsItem *> colliding_items = collidingItems();
@@ -55,30 +56,14 @@ void MovableObject::move()
     {
         if(auto *otherObject = dynamic_cast<GameObject *>(colliding_items[i]))
         {
-            OnMeetOtherObject(otherObject);
+            onMeetOtherObject(otherObject);
         }
     }
 }
 
-void MovableObject::OnLeaveFromScene()
+void MovableObject::onLeaveFromScene()
 {
-    destroy(this);
-}
-
-void MovableObject::destroy(GameObject *object)
-{
-    scene()->removeItem(object);
-    delete object;
-}
-
-void MovableObject::setSpeed(uint16_t speed)
-{
-    speed_ = speed;
-}
-
-void MovableObject::setSpeed()
-{
-    setSpeed(5);
+    destroy();
 }
 
 MovableObject::LOCATION MovableObject::checkOnBackstage(MoveStrategy::DIRECTION dir)
@@ -97,6 +82,10 @@ MovableObject::LOCATION MovableObject::checkOnBackstage(MoveStrategy::DIRECTION 
             return LOCATION::BEHIND_SCENE;
         }
     }
-
     return LOCATION::ON_SCENE;
 }
+
+
+
+
+

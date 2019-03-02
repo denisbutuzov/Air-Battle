@@ -1,20 +1,19 @@
 #pragma once
 
 #include "MoveByLine.h"
-#include "SpawnObject.h"
+#include "MovableObject.h"
 
 class HandWeapon;
 
 class Weapon
-        : public SpawnObject
+        : public MovableObject
 {
-protected:
-    Weapon(QGraphicsScene *scene, MoveStrategy *moveStrategy = new MoveByLine(MoveStrategy::DIRECTION::DOWN));
+public:
+    Weapon(QGraphicsScene &scene,
+           MoveStrategy &&moveStrategy = MoveByLine(MoveStrategy::DIRECTION::DOWN));
+    virtual ~Weapon() override = default;
 
 private:
-    virtual void setSpeed() override final;
-    virtual void OnMeetOtherObject(GameObject *otherObject) override;
-    virtual HandWeapon *handWeapon() = 0;
+    virtual void onMeetOtherObject(GameObject *otherObject) override;
+    virtual HandWeapon &handWeapon();
 };
-
-

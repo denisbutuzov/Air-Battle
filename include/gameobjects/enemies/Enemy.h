@@ -1,30 +1,22 @@
 #pragma once
 
 #include "MoveByLine.h"
-#include "SpawnObject.h"
-
-class Gunshell;
-class PlayerObject;
+#include "MovableObject.h"
 
 class Enemy
-        : public SpawnObject
+        : public MovableObject
 {
 public:
+    Enemy(const std::shared_ptr<QGraphicsScene> &scene,
+          std::unique_ptr<MoveStrategy> &&moveStrategy = std::make_unique<MoveByLine>(MoveStrategy::DIRECTION::DOWN));
     virtual ~Enemy() override = default;
-    virtual void init() override;
 
-protected:
-    Enemy(QGraphicsScene *scene, MoveStrategy *moveStrategy = new MoveByLine(MoveStrategy::DIRECTION::DOWN));
-    virtual void OnLeaveFromScene() override;
-
-    void setHitpoint(int16_t hitpoint);
+    void setHitpoint(unsigned int hitpoint);
+    unsigned int hitpoint() const;
 
 private:
-    virtual void setHitpoint() = 0;
-    virtual void OnMeetOtherObject(GameObject *otherObject) override;
-    virtual void onMeetPlayer(PlayerObject *player);
-    virtual void onMeetGunshell(Gunshell *gunshell);
+    virtual void onMeetOtherObject(GameObject *otherObject) override;
 
 private:
-    int16_t hitpoint_;
+    unsigned int hitpoint_;
 };

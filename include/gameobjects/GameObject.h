@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QGraphicsPixmapItem>
+#include <memory>
 
 class GameObject
         : public QGraphicsPixmapItem
@@ -10,12 +11,8 @@ public:
     virtual void init();
 
 protected:
-    GameObject(QGraphicsScene *scene);
+    GameObject(const std::shared_ptr<QGraphicsScene> &scene);
 
 private:
-    virtual void setObjectImage() = 0;
-    virtual void setStartObjectPos() = 0;
-
-private:
-    QGraphicsScene *scene_;
+    std::shared_ptr<QGraphicsScene> scene_;
 };

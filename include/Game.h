@@ -1,13 +1,10 @@
 #pragma once
 
 #include <QGraphicsView>
+#include <memory>
 
-class SpawnObject;
 class PlayerObject;
-class ScoreObserver;
-class HealthObserver;
-class LevelObserver;
-class AbstractLevelFactory;
+class MovableObject;
 
 class Game
         : public QGraphicsView
@@ -16,17 +13,13 @@ class Game
 
 public:
     Game(QWidget *parent = nullptr);
-
-private:
-    SpawnObject *createSpawnObject(AbstractLevelFactory *factory);
+    ~Game();
 
 private slots:
     void spawn();
 
 private:
-    QGraphicsScene *scene_;
-    PlayerObject *player_;
-    ScoreObserver *scoreObs_;
-    HealthObserver *healthObs_;
-    LevelObserver *levelObs_;
+    std::shared_ptr<QGraphicsScene> scene_;
+    std::unique_ptr<PlayerObject> player_;
+    std::unique_ptr<QTimer> spawnObjectTimer_;
 };

@@ -2,17 +2,14 @@
 
 #include "Weapon.h"
 
-Weapon::Weapon(QGraphicsScene *scene, MoveStrategy *moveStrategy)
-    : SpawnObject(scene, moveStrategy)
+Weapon::Weapon(QGraphicsScene &scene,
+               MoveStrategy &&moveStrategy)
+    : MovableObject(scene, std::move(moveStrategy))
 {
+
 }
 
-void Weapon::setSpeed()
-{
-    MovableObject::setSpeed(4);
-}
-
-void Weapon::OnMeetOtherObject(GameObject *otherObject)
+void Weapon::onMeetOtherObject(GameObject *otherObject)
 {
     if(auto *player = dynamic_cast<PlayerObject *>(otherObject))
     {
@@ -20,3 +17,8 @@ void Weapon::OnMeetOtherObject(GameObject *otherObject)
         destroy(this);
     }
 }
+
+HandWeapon &Weapon::handWeapon()
+{
+}
+

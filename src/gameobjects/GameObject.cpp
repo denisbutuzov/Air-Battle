@@ -2,7 +2,7 @@
 
 #include "GameObject.h"
 
-GameObject::GameObject(QGraphicsScene *scene)
+GameObject::GameObject(const std::shared_ptr<QGraphicsScene> &scene)
     :  scene_(scene)
 {
 }
@@ -10,6 +10,4 @@ GameObject::GameObject(QGraphicsScene *scene)
 void GameObject::init()
 {
     scene_->addItem(this);
-    setObjectImage();
-    setStartObjectPos();
 }

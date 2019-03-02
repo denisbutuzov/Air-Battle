@@ -1,86 +1,21 @@
-#include <QGraphicsScene>
-#include <QMediaPlayer>
-
-#include <typeinfo>
-
-#include "AbstractEnemyDecorator.h"
-#include "Gunshell.h"
-#include "Score.h"
-#include "Health.h"
-#include "PlayerObject.h"
-
 #include "Enemy.h"
 
-Enemy::Enemy(QGraphicsScene *scene, MoveStrategy *moveStrategy)
-    : SpawnObject(scene, moveStrategy)
+Enemy::Enemy(const std::shared_ptr<QGraphicsScene> &scene,
+             std::unique_ptr<MoveStrategy> &&moveStrategy)
+    : MovableObject(scene, std::move(moveStrategy))
 {
 }
 
-void Enemy::init()
-{
-    SpawnObject::init();
-    setHitpoint();
-}
-
-void Enemy::setHitpoint(int16_t hitpoint)
+void Enemy::setHitpoint(unsigned int hitpoint)
 {
     hitpoint_ = hitpoint;
 }
 
-void Enemy::OnMeetOtherObject(GameObject *otherObject)
+unsigned int Enemy::hitpoint() const
 {
-    if(auto *gunshell = dynamic_cast<Gunshell *>(otherObject))
-    {
-        onMeetGunshell(gunshell);
-    }
-    else if(auto *player = dynamic_cast<PlayerObject *>(otherObject))
-    {
-        onMeetPlayer(player);
-    }
+    return hitpoint_;
 }
 
-void Enemy::onMeetPlayer(PlayerObject *player)
+void Enemy::onMeetOtherObject(GameObject *otherObject)
 {
-
 }
-
-void Enemy::onMeetGunshell(Gunshell *gunshell)
-{
-    hitpoint_ -= static_cast<int16_t>(gunshell->damage());
-    if(hitpoint_ <= 0)
-    {
-        if(Enemy *enemy = dynamic_cast<AbstractEnemyDecorator *>(this))
-        {
-            //play sound of destroing object
-            QMediaPlayer *sound = new QMediaPlayer();
-            sound->setMedia(QUrl("qrc:/sounds/sounds/boom.wav"));
-            sound->play();
-        }
-        else
-        {
-            Score::instance()->increase();
-            QMediaPlayer *sound = new QMediaPlayer();
-            sound->setMedia(QUrl("qrc:/sounds/sounds/boom.wav"));
-            sound->play();
-        }
-
-        //delete object from scene and memory
-        destroy(gunshell);
-        destroy(this);
-    }
-    else
-    {
-        //delete gunshell from scene and memory
-        destroy(gunshell);
-    }
-}
-
-void Enemy::OnLeaveFromScene()
-{
-    Health::instance()->decrease();
-    MovableObject::OnLeaveFromScene();
-}
-
-
-
-

@@ -1,11 +1,18 @@
+#include "Gunshell.h"
+
 #include "HandWeapon.h"
 
-HandWeapon::HandWeapon(QGraphicsScene *scene)
+HandWeapon::HandWeapon(const std::shared_ptr<QGraphicsScene> &scene)
     : scene_(scene)
 {
 }
 
-QGraphicsScene *HandWeapon::scene() const
+void HandWeapon::shoot(qreal x, qreal y)
 {
-    return scene_;
+    auto *gunshell = new Gunshell(scene_);
+    gunshell->setPixmap(QPixmap(":/images/images/Bullet.png"));
+    gunshell->setSpeed(10);
+    gunshell->setDamage(1);
+    gunshell->setPos(x, y);
+    gunshell->init();
 }

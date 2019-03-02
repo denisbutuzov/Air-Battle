@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include "GameObject.h"
 #include "MoveStrategy.h"
@@ -13,18 +13,17 @@ public:
     virtual ~MovableObject() override;
     virtual void init() override;
 
-    uint16_t speed() const;
-    MoveStrategy *moveStrategy() const;
+    void destroy();
+    void setSpeed(unsigned int speed);
+    unsigned int speed() const;
 
 public slots:
     void move();
 
 protected:
-    MovableObject(QGraphicsScene *scene, MoveStrategy *moveStrategy);
-    virtual void OnLeaveFromScene();
-
-    void destroy(GameObject *object);
-    void setSpeed(uint16_t speed);
+    MovableObject(const std::shared_ptr<QGraphicsScene> &scene,
+                  std::unique_ptr<MoveStrategy> &&moveStrategy);
+    virtual void onLeaveFromScene();
 
 private:
     enum class LOCATION
@@ -33,12 +32,11 @@ private:
         BEHIND_SCENE
     };
 
-    virtual void setSpeed();
     virtual LOCATION checkOnBackstage(MoveStrategy::DIRECTION dir);
-    virtual void OnMeetOtherObject(GameObject *otherObject) = 0;
+    virtual void onMeetOtherObject(GameObject *otherObject) = 0;
 
 private:
-    QTimer *moveObjectTimer_;
-    MoveStrategy *moveStrategy_;
-    uint16_t speed_;
+    std::unique_ptr<QTimer> moveTimer_;
+    std::unique_ptr<MoveStrategy> moveStrategy_;
+    unsigned int speed_;
 };

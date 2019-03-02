@@ -3,18 +3,11 @@
         <file>sounds/boom.wav</file>
         <file>sounds/bullet.wav</file>
         <file>sounds/plane.wav</file>
-        <file>sounds/rocket.wav</file>
     </qresource>
     <qresource prefix="/images">
-        <file>images/bullet.png</file>
-        <file>images/rocket.png</file>
-        <file>images/bazooka.png</file>
-        <file>images/machinegun.png</file>
         <file>images/Player.png</file>
-        <file>images/Enemy1.png</file>
-        <file>images/Enemy2.png</file>
         <file>images/Space.jpg</file>
-        <file>images/EnemyShield.png</file>
-        <file>images/Heart.png</file>
+        <file>images/Bullet.png</file>
+        <file>images/Enemy.png</file>
     </qresource>
 </RCC>

@@ -8,20 +8,17 @@ class PlayerObject
         : public GameObject
 {
 public:
-    PlayerObject(QGraphicsScene *scene);
+    PlayerObject(const std::shared_ptr<QGraphicsScene> &scene,
+                 std::unique_ptr<HandWeapon> &&weapon);
     virtual ~PlayerObject() override;
 
-    void takeWeapon(HandWeapon *weapon);
-
-protected:
-    void keyPressEvent(QKeyEvent *event) override final;
-
 private:
-    virtual void setObjectImage() override final;
-    virtual void setStartObjectPos() override final;
+    virtual void keyPressEvent(QKeyEvent *event) override final;
 
     void shoot() const;
+    void stepToLeft();
+    void stepToRight();
 
 private:
-    HandWeapon *weapon_;
+    std::unique_ptr<HandWeapon> weapon_;
 };
