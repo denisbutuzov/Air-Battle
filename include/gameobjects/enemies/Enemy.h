@@ -3,6 +3,8 @@
 #include "MoveByLine.h"
 #include "MovableObject.h"
 
+class Gunshell;
+
 class Enemy
         : public MovableObject
 {
@@ -16,6 +18,8 @@ public:
 
 private:
     virtual void onMeetOtherObject(GameObject *otherObject) override;
+
+    void onMeetGunshell(Gunshell *gunshell);
 
 private:
     unsigned int hitpoint_;
