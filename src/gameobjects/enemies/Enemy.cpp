@@ -1,3 +1,6 @@
+#include "Gunshell.h"
+#include "PlayerObject.h"
+
 #include "Enemy.h"
 
 Enemy::Enemy(const std::shared_ptr<QGraphicsScene> &scene,
@@ -18,4 +21,12 @@ unsigned int Enemy::hitpoint() const
 
 void Enemy::onMeetOtherObject(GameObject *otherObject)
 {
+    if(auto *gunshell = dynamic_cast<Gunshell *>(otherObject))
+    {
+
+    }
+    else if(auto *player = dynamic_cast<PlayerObject *>(otherObject))
+    {
+
+    }
 }
