@@ -1,11 +1,11 @@
 #include "AbstractLevelFactory.h"
 
-AbstractLevelFactory::AbstractLevelFactory(QGraphicsScene *scene)
+AbstractLevelFactory::AbstractLevelFactory(const std::shared_ptr<QGraphicsScene> &scene)
     : scene_(scene)
 {
 }
 
-QGraphicsScene *AbstractLevelFactory::scene() const
+std::shared_ptr<QGraphicsScene> &AbstractLevelFactory::scene()
 {
     return scene_;
 }
