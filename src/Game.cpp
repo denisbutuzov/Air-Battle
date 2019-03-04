@@ -1,5 +1,9 @@
 #include <QTimer>
 
+#include <memory>
+
+#include "Level1Factory.h"
+#include "Level2Factory.h"
 #include "PlayerObject.h"
 #include "HandWeapon.h"
 #include "Enemy.h"
@@ -40,11 +44,14 @@ Game::~Game() = default;
 
 void Game::spawn()
 {
-    auto *enemy = new Enemy(scene_);
-    enemy->setPixmap(QPixmap(":/images/images/Enemy.png"));
-    enemy->setSpeed(6);
-    enemy->setHitpoint(2);
-    int randomNumber = rand() % static_cast<int>(scene_->width() - enemy->pixmap().width());
-    enemy->setPos(randomNumber, 0 - enemy->pixmap().height());
-    enemy->init();
+    std::unique_ptr<AbstractLevelFactory> levelFactory;
+    levelFactory = std::make_unique<Level1Factory>(scene_);
+
+    auto *spawnObject = createSpawnObject(levelFactory);
+    spawnObject->init();
+}
+
+MovableObject *Game::createSpawnObject(std::unique_ptr<AbstractLevelFactory> &factory)
+{
+    return factory->enemy();
 }

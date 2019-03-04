@@ -8,6 +8,7 @@
         <file>images/Player.png</file>
         <file>images/Space.jpg</file>
         <file>images/Bullet.png</file>
-        <file>images/Enemy.png</file>
+        <file>images/Enemy1.png</file>
+        <file>images/Enemy2.png</file>
     </qresource>
 </RCC>

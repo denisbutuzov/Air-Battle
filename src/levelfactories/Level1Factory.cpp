@@ -1,26 +1,22 @@
-#include "Machinegun.h"
-#include "Enemy1.h"
-#include "Enemy2.h"
+#include <QGraphicsScene>
+
+#include "Enemy.h"
 
 #include "Level1Factory.h"
 
-Level1Factory::Level1Factory(QGraphicsScene *scene)
+Level1Factory::Level1Factory(const std::shared_ptr<QGraphicsScene> &scene)
     : AbstractLevelFactory(scene)
 {
 }
 
-Enemy *Level1Factory::enemy() const
+Enemy *Level1Factory::enemy()
 {
-    QVector<std::function<Enemy*()>> enemyCreatingVector
-    {
-         {[&](){return new Enemy1(scene());}},
-         {[&](){return new Enemy2(scene());}}
-    };
+    auto *enemy = new Enemy(scene());
+    enemy->setPixmap(QPixmap(":/images/images/Enemy1.png"));
+    enemy->setSpeed(6);
+    enemy->setHitpoint(1);
+    int randomNumber = rand() % static_cast<int>(scene()->width() - enemy->pixmap().width());
+    enemy->setPos(randomNumber, 0 - enemy->pixmap().height());
 
-    return enemyCreatingVector[rand() % enemyCreatingVector.size()]();
-}
-
-Weapon *Level1Factory::weapon() const
-{
-    return new Machinegun(scene());
+    return enemy;
 }

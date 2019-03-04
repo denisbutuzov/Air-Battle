@@ -1,20 +1,22 @@
-#include "Bazooka.h"
-#include "Enemy1.h"
+#include <QGraphicsScene>
+
+#include "Enemy.h"
 
 #include "Level2Factory.h"
 
-Level2Factory::Level2Factory(QGraphicsScene *scene)
+Level2Factory::Level2Factory(const std::shared_ptr<QGraphicsScene> &scene)
     : AbstractLevelFactory(scene)
 {
 }
 
-Enemy *Level2Factory::enemy() const
+Enemy *Level2Factory::enemy()
 {
-    return new Enemy1(scene());
-}
+    auto *enemy = new Enemy(scene());
+    enemy->setPixmap(QPixmap(":/images/images/Enemy2.png"));
+    enemy->setSpeed(6);
+    enemy->setHitpoint(1);
+    int randomNumber = rand() % static_cast<int>(scene()->width() - enemy->pixmap().width());
+    enemy->setPos(randomNumber, 0 - enemy->pixmap().height());
 
-Weapon *Level2Factory::weapon() const
-{
-    return new Bazooka(scene());
+    return enemy;
 }
-

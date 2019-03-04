@@ -5,6 +5,7 @@
 
 class PlayerObject;
 class MovableObject;
+class AbstractLevelFactory;
 
 class Game
         : public QGraphicsView
@@ -22,4 +23,5 @@ private:
     std::shared_ptr<QGraphicsScene> scene_;
     std::unique_ptr<PlayerObject> player_;
     std::unique_ptr<QTimer> spawnObjectTimer_;
+    MovableObject *createSpawnObject(std::unique_ptr<AbstractLevelFactory> &factory);
 };

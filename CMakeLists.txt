@@ -20,6 +20,8 @@ SET(HEADERS include/Game.h
             include/gameobjects/gunshells/Gunshell.h
             include/gameobjects/enemies/Enemy.h
             include/levelfactories/AbstractLevelFactory.h
+            include/levelfactories/Level1Factory.h
+            include/levelfactories/Level2Factory.h
 	    include/handweapons/HandWeapon.h
 )
 
@@ -34,6 +36,8 @@ SET(SOURCES src/Game.cpp
             src/gameobjects/gunshells/Gunshell.cpp
             src/gameobjects/enemies/Enemy.cpp
             src/levelfactories/AbstractLevelFactory.cpp
+            src/levelfactories/Level1Factory.cpp
+            src/levelfactories/Level2Factory.cpp
 	    src/handweapons/HandWeapon.cpp
 )
 
