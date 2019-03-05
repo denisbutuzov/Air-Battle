@@ -22,6 +22,7 @@ SET(HEADERS include/Game.h
             include/levelfactories/AbstractLevelFactory.h
             include/levelfactories/Level1Factory.h
             include/levelfactories/Level2Factory.h
+            include/gameobjectbuilders/GameObjectBuilder.h
 	    include/handweapons/HandWeapon.h
 )
 
@@ -38,6 +39,7 @@ SET(SOURCES src/Game.cpp
             src/levelfactories/AbstractLevelFactory.cpp
             src/levelfactories/Level1Factory.cpp
             src/levelfactories/Level2Factory.cpp
+            src/gameobjectbuilders/GameObjectBuilder.cpp
 	    src/handweapons/HandWeapon.cpp
 )
 
@@ -58,5 +60,6 @@ TARGET_INCLUDE_DIRECTORIES(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/in
                                                   ${CMAKE_CURRENT_SOURCE_DIR}/include/gameobjects/specialobjects/subjects
                                                   ${CMAKE_CURRENT_SOURCE_DIR}/include/gameobjects/gunshells
                                                   ${CMAKE_CURRENT_SOURCE_DIR}/include/gameobjects/enemies
+                                                  ${CMAKE_CURRENT_SOURCE_DIR}/include/gameobjectbuilders
                                                   ${CMAKE_CURRENT_SOURCE_DIR}/include/levelfactories
                                                   ${CMAKE_CURRENT_SOURCE_DIR}/include/handweapons)
