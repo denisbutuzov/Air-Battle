@@ -14,9 +14,10 @@ Enemy *GameObjectBuilder::buildEnemy(const std::shared_ptr<QGraphicsScene> &scen
     return enemy;
 }
 
-PlayerObject *GameObjectBuilder::buildPlayer(const std::shared_ptr<QGraphicsScene> &scene, const QString &pixmap, const QPointF &pos)
+std::unique_ptr<PlayerObject> GameObjectBuilder::buildPlayer(const std::shared_ptr<QGraphicsScene> &scene,
+                                                             const QString &pixmap, const QPointF &pos)
 {
-    auto *player = new PlayerObject(scene, std::make_unique<HandWeapon>(scene));
+    auto player = std::make_unique<PlayerObject>(scene, std::make_unique<HandWeapon>(scene));
     player->setPixmap(QPixmap(pixmap));
     player->setFlag(QGraphicsItem::ItemIsFocusable);
     player->setFocus();

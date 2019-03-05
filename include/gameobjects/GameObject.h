@@ -13,6 +13,8 @@ public:
 protected:
     GameObject(const std::shared_ptr<QGraphicsScene> &scene);
 
+    std::shared_ptr<QGraphicsScene> scene() const;
+
 private:
     std::shared_ptr<QGraphicsScene> scene_;
 };

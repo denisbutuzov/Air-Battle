@@ -12,6 +12,8 @@ public:
                  std::unique_ptr<HandWeapon> &&weapon);
     virtual ~PlayerObject() override;
 
+    void takeWeapon(std::unique_ptr<HandWeapon> &&weapon);
+
 private:
     virtual void keyPressEvent(QKeyEvent *event) override final;
 

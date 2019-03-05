@@ -19,10 +19,12 @@ SET(HEADERS include/Game.h
             include/gameobjects/movestrategies/MoveByRandom.h
             include/gameobjects/gunshells/Gunshell.h
             include/gameobjects/enemies/Enemy.h
+            include/gameobjects/weapons/Weapon.h
             include/levelfactories/AbstractLevelFactory.h
             include/levelfactories/Level1Factory.h
             include/levelfactories/Level2Factory.h
             include/gameobjectbuilders/GameObjectBuilder.h
+            include/gameobjectbuilders/PresetPositionBuilder.h
 	    include/handweapons/HandWeapon.h
 )
 
@@ -36,10 +38,12 @@ SET(SOURCES src/Game.cpp
             src/gameobjects/movestrategies/MoveByRandom.cpp
             src/gameobjects/gunshells/Gunshell.cpp
             src/gameobjects/enemies/Enemy.cpp
+            src/gameobjects/weapons/Weapon.cpp
             src/levelfactories/AbstractLevelFactory.cpp
             src/levelfactories/Level1Factory.cpp
             src/levelfactories/Level2Factory.cpp
             src/gameobjectbuilders/GameObjectBuilder.cpp
+            src/gameobjectbuilders/PresetPositionBuilder.cpp
 	    src/handweapons/HandWeapon.cpp
 )
 
@@ -60,6 +64,7 @@ TARGET_INCLUDE_DIRECTORIES(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/in
                                                   ${CMAKE_CURRENT_SOURCE_DIR}/include/gameobjects/specialobjects/subjects
                                                   ${CMAKE_CURRENT_SOURCE_DIR}/include/gameobjects/gunshells
                                                   ${CMAKE_CURRENT_SOURCE_DIR}/include/gameobjects/enemies
+                                                  ${CMAKE_CURRENT_SOURCE_DIR}/include/gameobjects/weapons
                                                   ${CMAKE_CURRENT_SOURCE_DIR}/include/gameobjectbuilders
                                                   ${CMAKE_CURRENT_SOURCE_DIR}/include/levelfactories
                                                   ${CMAKE_CURRENT_SOURCE_DIR}/include/handweapons)

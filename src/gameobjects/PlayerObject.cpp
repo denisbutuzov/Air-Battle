@@ -14,6 +14,11 @@ PlayerObject::PlayerObject(const std::shared_ptr<QGraphicsScene> &scene,
 
 PlayerObject::~PlayerObject() = default;
 
+void PlayerObject::takeWeapon(std::unique_ptr<HandWeapon> &&weapon)
+{
+    weapon_ = std::move(weapon);
+}
+
 void PlayerObject::keyPressEvent(QKeyEvent *event)
 {
     //press left key - move to left
