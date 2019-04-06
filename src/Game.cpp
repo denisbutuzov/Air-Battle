@@ -32,7 +32,7 @@ Game::Game(QWidget *parent)
 
     spawnObjectTimer_ = std::make_unique<QTimer>();
     connect(spawnObjectTimer_.get(), SIGNAL(timeout()),
-            this, SLOT(spawn()));
+            this, SLOT(getSpawnObjectFromFactory()));
     spawnObjectTimer_->start(2000);
 
     connect(player_.get(), SIGNAL(shoot_sig()),
@@ -41,7 +41,7 @@ Game::Game(QWidget *parent)
 
 Game::~Game() = default;
 
-void Game::spawn()
+void Game::getSpawnObjectFromFactory()
 {
     Level1Factory levelFactory(scene_);
 

@@ -18,7 +18,7 @@ public:
     ~Game();
 
 private slots:
-    void spawn();
+    void getSpawnObjectFromFactory();
     void getGunshellFromPlayer();
 
 private:
