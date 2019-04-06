@@ -1,6 +1,7 @@
 #include <QGraphicsScene>
 
 #include "PresetPositionBuilder.h"
+#include "Enemy.h"
 
 #include "Level1Factory.h"
 
@@ -9,9 +10,8 @@ Level1Factory::Level1Factory(const std::shared_ptr<QGraphicsScene> &scene)
 {
 }
 
-Enemy *Level1Factory::enemy()
+std::unique_ptr<Enemy> Level1Factory::enemy()
 {
     PresetPositionBuilder builder;
-    auto *enemy = builder.buildEnemy(scene(), 6, 1, ":/images/images/Enemy1.png");
-    return enemy;
+    return builder.buildEnemy(scene(), 6, 1, ":/images/images/Enemy1.png");
 }

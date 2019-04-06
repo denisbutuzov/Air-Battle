@@ -1,6 +1,3 @@
-#include "Gunshell.h"
-#include "PlayerObject.h"
-
 #include "Enemy.h"
 
 Enemy::Enemy(const std::shared_ptr<QGraphicsScene> &scene,

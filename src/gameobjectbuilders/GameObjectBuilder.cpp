@@ -4,10 +4,10 @@
 
 #include "GameObjectBuilder.h"
 
-Enemy *GameObjectBuilder::buildEnemy(const std::shared_ptr<QGraphicsScene> &scene, unsigned int speed,
-                                     unsigned int hitpoint, const QString &pixmap, const QPointF &pos)
+std::unique_ptr<Enemy> GameObjectBuilder::buildEnemy(const std::shared_ptr<QGraphicsScene> &scene, unsigned int speed,
+                                                     unsigned int hitpoint, const QString &pixmap, const QPointF &pos)
 {
-    auto *enemy = new Enemy(scene);
+    auto enemy = std::make_unique<Enemy>(scene);
     enemy->setPixmap(QPixmap(pixmap));
     enemy->setSpeed(speed);
     enemy->setHitpoint(hitpoint);

@@ -3,8 +3,6 @@
 #include "MoveByLine.h"
 #include "MovableObject.h"
 
-class Gunshell;
-
 class Enemy
         : public MovableObject
 {

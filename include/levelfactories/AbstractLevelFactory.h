@@ -9,7 +9,7 @@ class AbstractLevelFactory
 {
 public:
     virtual ~AbstractLevelFactory() = default;
-    virtual Enemy *enemy() = 0;
+    virtual std::unique_ptr<Enemy> enemy() = 0;
 
 protected:
     AbstractLevelFactory(const std::shared_ptr<QGraphicsScene> &scene);

@@ -1,5 +1,3 @@
-#include "Enemy.h"
-
 #include "Gunshell.h"
 
 Gunshell::Gunshell(const std::shared_ptr<QGraphicsScene> &scene,

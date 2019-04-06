@@ -3,6 +3,7 @@
 #include <QGraphicsView>
 #include <memory>
 
+class Gunshell;
 class PlayerObject;
 class MovableObject;
 class AbstractLevelFactory;
@@ -18,10 +19,17 @@ public:
 
 private slots:
     void spawn();
+    void getGunshellFromPlayer();
 
 private:
+    std::unique_ptr<MovableObject> createSpawnObject(AbstractLevelFactory &factory);
+
+private:
+    using listOfMovableObjects = std::list<std::unique_ptr<MovableObject>>;
+
     std::shared_ptr<QGraphicsScene> scene_;
     std::unique_ptr<PlayerObject> player_;
     std::unique_ptr<QTimer> spawnObjectTimer_;
-    MovableObject *createSpawnObject(std::unique_ptr<AbstractLevelFactory> &factory);
+    listOfMovableObjects enemies_;
+    listOfMovableObjects gunshells_;
 };

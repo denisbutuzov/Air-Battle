@@ -2,6 +2,7 @@
 #include <QKeyEvent>
 
 #include "HandWeapon.h"
+#include "Gunshell.h"
 
 #include "PlayerObject.h"
 
@@ -19,6 +20,11 @@ void PlayerObject::takeWeapon(std::unique_ptr<HandWeapon> &&weapon)
     weapon_ = std::move(weapon);
 }
 
+std::unique_ptr<Gunshell> PlayerObject::shoot() const
+{
+    return weapon_->shoot(x() + pixmap().width()/2, y());
+}
+
 void PlayerObject::keyPressEvent(QKeyEvent *event)
 {
     //press left key - move to left
@@ -34,13 +40,8 @@ void PlayerObject::keyPressEvent(QKeyEvent *event)
     //press space key - create a bullet
     else if(event->key() == Qt::Key_Space)
     {
-        shoot();
+        emit shoot_sig();
     }
-}
-
-void PlayerObject::shoot() const
-{
-    weapon_->shoot(x() + pixmap().width()/2, y());
 }
 
 void PlayerObject::stepToLeft()
