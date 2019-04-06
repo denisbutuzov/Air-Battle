@@ -37,6 +37,11 @@ Game::Game(QWidget *parent)
 
     connect(player_.get(), SIGNAL(shoot_sig()),
             this, SLOT(getGunshellFromPlayer()));
+
+    removeObjectTimer_ = std::make_unique<QTimer>();
+    connect(removeObjectTimer_.get(), SIGNAL(timeout()),
+            this, SLOT(removeObjectsFromScene()));
+    removeObjectTimer_->start(50);
 }
 
 Game::~Game() = default;
@@ -60,6 +65,12 @@ void Game::getGunshellFromPlayer()
     gunshell->init();
 
     gunshells_.push_back(std::move(gunshell));
+}
+
+void Game::removeObjectsFromScene()
+{
+    gunshells_.remove_if([](auto &obj){return obj->y() < 0;});
+    enemies_.remove_if([scene=scene_](auto &obj){return obj->y() > scene->height();});
 }
 
 std::unique_ptr<MovableObject> Game::createSpawnObject(AbstractLevelFactory &factory)

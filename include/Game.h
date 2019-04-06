@@ -20,16 +20,18 @@ public:
 private slots:
     void getSpawnObjectFromFactory();
     void getGunshellFromPlayer();
+    void removeObjectsFromScene();
 
 private:
     std::unique_ptr<MovableObject> createSpawnObject(AbstractLevelFactory &factory);
 
 private:
-    using listOfMovableObjects = std::list<std::unique_ptr<MovableObject>>;
+    using listOfMovableObjects = std::list<std::shared_ptr<MovableObject>>;
 
     std::shared_ptr<QGraphicsScene> scene_;
     std::unique_ptr<PlayerObject> player_;
     std::unique_ptr<QTimer> spawnObjectTimer_;
+    std::unique_ptr<QTimer> removeObjectTimer_;
     listOfMovableObjects enemies_;
     listOfMovableObjects gunshells_;
 };
