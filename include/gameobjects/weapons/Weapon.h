@@ -14,6 +14,5 @@ public:
     virtual ~Weapon() override = default;
 
 private:
-    virtual void onMeetOtherObject(GameObject *otherObject) override;
     virtual std::unique_ptr<HandWeapon> handWeapon();
 };

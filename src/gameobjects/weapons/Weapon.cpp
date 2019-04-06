@@ -9,15 +9,6 @@ Weapon::Weapon(const std::shared_ptr<QGraphicsScene> &scene,
 {
 }
 
-void Weapon::onMeetOtherObject(GameObject *otherObject)
-{
-    if(auto *player = dynamic_cast<PlayerObject *>(otherObject))
-    {
-        player->takeWeapon(handWeapon());
-        destroy();
-    }
-}
-
 std::unique_ptr<HandWeapon> Weapon::handWeapon()
 {
     return std::make_unique<HandWeapon>(scene());

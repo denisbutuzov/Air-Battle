@@ -17,10 +17,3 @@ unsigned int Gunshell::damage() const
 {
     return damage_;
 }
-
-void Gunshell::onMeetOtherObject(GameObject *otherObject)
-{
-    if(auto *enemy = dynamic_cast<Enemy *>(otherObject))
-    {
-    }
-}

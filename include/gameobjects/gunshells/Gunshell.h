@@ -15,8 +15,5 @@ public:
     unsigned int damage() const;
 
 private:
-    virtual void onMeetOtherObject(GameObject *otherObject) override;
-
-private:
     unsigned int damage_;
 };
