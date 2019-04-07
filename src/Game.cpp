@@ -9,7 +9,7 @@
 #include "Gunshell.h"
 
 #include "Game.h"
-
+#include <QDebug>
 Game::Game(QWidget *parent)
 {
     //create a scene
@@ -42,6 +42,11 @@ Game::Game(QWidget *parent)
     connect(removeObjectTimer_.get(), SIGNAL(timeout()),
             this, SLOT(removeObjectsFromScene()));
     removeObjectTimer_->start(50);
+
+    checkCollisionTimer_ = std::make_unique<QTimer>();
+    connect(checkCollisionTimer_.get(), SIGNAL(timeout()),
+            this, SLOT(checkCollisionBetweenGameObjects()));
+    checkCollisionTimer_->start(50);
 }
 
 Game::~Game() = default;
@@ -71,6 +76,25 @@ void Game::removeObjectsFromScene()
 {
     gunshells_.remove_if([](auto &obj){return obj->y() < 0;});
     enemies_.remove_if([scene=scene_](auto &obj){return obj->y() > scene->height();});
+}
+
+void Game::checkCollisionBetweenGameObjects()
+{
+    gunshells_.remove_if
+            (
+                [](auto &obj)
+                {
+                    auto collidingList = obj->collidingItems();
+                    for(auto *otherObj : collidingList)
+                    {
+                        if(dynamic_cast<Enemy *>(otherObj))
+                        {
+                            return true;
+                        }
+                    };
+                    return false;
+                }
+            );
 }
 
 std::unique_ptr<MovableObject> Game::createSpawnObject(AbstractLevelFactory &factory)

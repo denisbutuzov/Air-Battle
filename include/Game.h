@@ -21,6 +21,7 @@ private slots:
     void getSpawnObjectFromFactory();
     void getGunshellFromPlayer();
     void removeObjectsFromScene();
+    void checkCollisionBetweenGameObjects();
 
 private:
     std::unique_ptr<MovableObject> createSpawnObject(AbstractLevelFactory &factory);
@@ -32,6 +33,7 @@ private:
     std::unique_ptr<PlayerObject> player_;
     std::unique_ptr<QTimer> spawnObjectTimer_;
     std::unique_ptr<QTimer> removeObjectTimer_;
+    std::unique_ptr<QTimer> checkCollisionTimer_;
     listOfMovableObjects enemies_;
     listOfMovableObjects gunshells_;
 };
