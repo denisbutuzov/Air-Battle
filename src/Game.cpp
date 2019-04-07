@@ -9,7 +9,7 @@
 #include "Gunshell.h"
 
 #include "Game.h"
-#include <QDebug>
+
 Game::Game(QWidget *parent)
 {
     //create a scene
@@ -87,12 +87,23 @@ void Game::checkCollisionBetweenGameObjects()
                     auto collidingList = obj->collidingItems();
                     for(auto *otherObj : collidingList)
                     {
-                        if(dynamic_cast<Enemy *>(otherObj))
+                        if(auto *enemy = dynamic_cast<Enemy *>(otherObj))
                         {
+                            auto *gunshell = dynamic_cast<Gunshell *>(obj.get());
+                            enemy->setHitpoint(enemy->hitpoint() - gunshell->damage());
                             return true;
                         }
                     };
                     return false;
+                }
+            );
+
+    enemies_.remove_if
+            (
+                [](auto &obj)
+                {
+                    auto *enemy = dynamic_cast<Enemy *>(obj.get());
+                    return enemy->hitpoint() == 0;
                 }
             );
 }
