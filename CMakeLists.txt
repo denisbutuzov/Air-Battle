@@ -13,7 +13,6 @@ SET(HEADERS include/Game.h
             include/gameobjects/GameObject.h
             include/gameobjects/PlayerObject.h
             include/gameobjects/MovableObject.h
-            include/gameobjects/MovableObjectContainer.h
             include/gameobjects/movestrategies/MoveStrategy.h
             include/gameobjects/movestrategies/MoveByLine.h
             include/gameobjects/movestrategies/MoveByCurve.h

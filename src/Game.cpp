@@ -7,6 +7,7 @@
 #include "PlayerObject.h"
 #include "Enemy.h"
 #include "Gunshell.h"
+#include "MoveVisitor.h"
 
 #include "Game.h"
 
@@ -56,7 +57,16 @@ Game::Game(QWidget *parent)
 
 void Game::moveGameObjects()
 {
+    MoveVisitor visitor;
+    for(auto iter = std::begin(enemies_); iter != std::end(enemies_); ++iter)
+    {
+        (*iter)->accept(visitor);
+    }
 
+    for(auto iter = std::begin(gunshells_); iter != std::end(gunshells_); ++iter)
+    {
+        (*iter)->accept(visitor);
+    }
 }
 
 Game::~Game() = default;
