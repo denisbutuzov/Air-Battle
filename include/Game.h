@@ -18,6 +18,7 @@ public:
     ~Game();
 
 private slots:
+    void moveGameObjects();
     void getSpawnObjectFromFactory();
     void getGunshellFromPlayer();
     void removeObjectsFromScene();
@@ -34,6 +35,7 @@ private:
     std::unique_ptr<QTimer> spawnObjectTimer_;
     std::unique_ptr<QTimer> removeObjectTimer_;
     std::unique_ptr<QTimer> checkCollisionTimer_;
+    std::unique_ptr<QTimer> moveTimer_;
     listOfMovableObjects enemies_;
     listOfMovableObjects gunshells_;
 };

@@ -47,6 +47,16 @@ Game::Game(QWidget *parent)
     connect(checkCollisionTimer_.get(), SIGNAL(timeout()),
             this, SLOT(checkCollisionBetweenGameObjects()));
     checkCollisionTimer_->start(50);
+
+    moveTimer_ = std::make_unique<QTimer>();
+    connect(moveTimer_.get(), SIGNAL(timeout()),
+            this, SLOT(moveGameObjects()));
+    moveTimer_->start(50);
+}
+
+void Game::moveGameObjects()
+{
+
 }
 
 Game::~Game() = default;

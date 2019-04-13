@@ -13,10 +13,13 @@ SET(HEADERS include/Game.h
             include/gameobjects/GameObject.h
             include/gameobjects/PlayerObject.h
             include/gameobjects/MovableObject.h
+            include/gameobjects/MovableObjectContainer.h
             include/gameobjects/movestrategies/MoveStrategy.h
             include/gameobjects/movestrategies/MoveByLine.h
             include/gameobjects/movestrategies/MoveByCurve.h
             include/gameobjects/movestrategies/MoveByRandom.h
+            include/gameobjects/visitors/AbstractVisitor.h
+            include/gameobjects/visitors/MoveVisitor.h
             include/gameobjects/gunshells/Gunshell.h
             include/gameobjects/enemies/Enemy.h
             include/gameobjects/weapons/Weapon.h
@@ -36,6 +39,7 @@ SET(SOURCES src/Game.cpp
             src/gameobjects/movestrategies/MoveByLine.cpp
             src/gameobjects/movestrategies/MoveByCurve.cpp
             src/gameobjects/movestrategies/MoveByRandom.cpp
+            src/gameobjects/visitors/MoveVisitor.cpp
             src/gameobjects/gunshells/Gunshell.cpp
             src/gameobjects/enemies/Enemy.cpp
             src/gameobjects/weapons/Weapon.cpp
@@ -59,6 +63,7 @@ ADD_EXECUTABLE(${PROJECT_NAME} main.cpp ${SOURCES} ${HEADERS} ${RESOURCES})
 TARGET_LINK_LIBRARIES(${PROJECT_NAME}  PUBLIC ${LIBS})
 TARGET_INCLUDE_DIRECTORIES(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
                                                   ${CMAKE_CURRENT_SOURCE_DIR}/include/gameobjects
+                                                  ${CMAKE_CURRENT_SOURCE_DIR}/include/gameobjects/visitors
                                                   ${CMAKE_CURRENT_SOURCE_DIR}/include/gameobjects/movestrategies
                                                   ${CMAKE_CURRENT_SOURCE_DIR}/include/gameobjects/specialobjects/observers
                                                   ${CMAKE_CURRENT_SOURCE_DIR}/include/gameobjects/specialobjects/subjects

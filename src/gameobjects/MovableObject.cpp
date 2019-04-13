@@ -1,5 +1,4 @@
 #include <QGraphicsScene>
-#include <QTimer>
 
 #include "MovableObject.h"
 
@@ -12,16 +11,9 @@ MovableObject::MovableObject(const std::shared_ptr<QGraphicsScene> &scene,
 
 MovableObject::~MovableObject() = default;
 
-void MovableObject::init()
+void MovableObject::move()
 {
-    //call basic method init()
-    GameObject::init();
-
-    //connect
-    moveTimer_ = std::make_unique<QTimer>();
-    connect(moveTimer_.get(), SIGNAL(timeout()),
-            this, SLOT(move()));
-    moveTimer_->start(50);
+    moveStrategy_->move(*this);
 }
 
 void MovableObject::setSpeed(unsigned int speed)
@@ -32,9 +24,4 @@ void MovableObject::setSpeed(unsigned int speed)
 unsigned int MovableObject::speed() const
 {
     return speed_;
-}
-
-void MovableObject::move()
-{
-    moveStrategy_->move(*this);
 }
