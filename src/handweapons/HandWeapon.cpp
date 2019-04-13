@@ -1,6 +1,3 @@
-#include "PresetPositionBuilder.h"
-#include "Gunshell.h"
-
 #include "HandWeapon.h"
 
 HandWeapon::HandWeapon(const std::shared_ptr<QGraphicsScene> &scene)
@@ -8,8 +5,7 @@ HandWeapon::HandWeapon(const std::shared_ptr<QGraphicsScene> &scene)
 {
 }
 
-std::unique_ptr<Gunshell> HandWeapon::shoot(qreal x, qreal y)
+std::shared_ptr<QGraphicsScene> &HandWeapon::scene()
 {
-    PresetPositionBuilder builder;
-    return builder.buildGunshell(scene_, 10, 1, ":/images/images/Bullet.png", QPointF(x, y));
+    return scene_;
 }

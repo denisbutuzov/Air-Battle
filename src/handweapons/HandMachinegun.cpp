@@ -1,27 +1,28 @@
-#include "Bullet.h"
+#include "Gunshell.h"
+#include "PresetPositionBuilder.h"
 
 #include "HandMachinegun.h"
 
-HandMachinegun::HandMachinegun(QGraphicsScene *scene)
+HandMachinegun::HandMachinegun(const std::shared_ptr<QGraphicsScene> &scene)
     : HandWeapon(scene)
 {
 }
 
-void HandMachinegun::shoot(qreal x, qreal y)
+std::unique_ptr<Gunshell> HandMachinegun::shoot(qreal x, qreal y)
 {
     static enum class SIDE {LEFT, RIGHT} side;
-    Bullet *bullet = nullptr;
 
+    PresetPositionBuilder builder;
+    std::unique_ptr<Gunshell> gunshell;
     if(side == SIDE::LEFT)
     {
-        bullet = new Bullet(scene(), x - 30, y + 60);
         side = SIDE::RIGHT;
+        gunshell = builder.buildGunshell(scene(), 10, 1, ":/images/images/Bullet.png", QPointF(x - 30.0, y + 60.0));
     }
     else if(side == SIDE::RIGHT)
     {
-        bullet = new Bullet(scene(), x + 30, y + 60);
         side = SIDE::LEFT;
+        gunshell = builder.buildGunshell(scene(), 10, 1, ":/images/images/Bullet.png", QPointF(x + 30.0, y + 60.0));
     }
-
-    bullet->init();
+    return gunshell;
 }

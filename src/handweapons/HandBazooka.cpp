@@ -1,14 +1,15 @@
-#include "Rocket.h"
+#include "Gunshell.h"
+#include "PresetPositionBuilder.h"
 
 #include "HandBazooka.h"
 
-HandBazooka::HandBazooka(QGraphicsScene *scene)
+HandBazooka::HandBazooka(const std::shared_ptr<QGraphicsScene> &scene)
     : HandWeapon(scene)
 {
 }
 
-void HandBazooka::shoot(qreal x, qreal y)
+std::unique_ptr<Gunshell> HandBazooka::shoot(qreal x, qreal y)
 {
-    Rocket *rocket = new Rocket(scene(), x, y);
-    rocket->init();
+    PresetPositionBuilder builder;
+    return builder.buildGunshell(scene(), 10, 1, ":/images/images/rocket.png", QPointF(x, y));
 }

@@ -28,6 +28,9 @@ SET(HEADERS include/Game.h
             include/gameobjectbuilders/GameObjectBuilder.h
             include/gameobjectbuilders/PresetPositionBuilder.h
 	    include/handweapons/HandWeapon.h
+            include/handweapons/HandGun.h
+            include/handweapons/HandMachinegun.h
+            include/handweapons/HandBazooka.h
 )
 
 SET(SOURCES src/Game.cpp
@@ -48,6 +51,9 @@ SET(SOURCES src/Game.cpp
             src/gameobjectbuilders/GameObjectBuilder.cpp
             src/gameobjectbuilders/PresetPositionBuilder.cpp
 	    src/handweapons/HandWeapon.cpp
+            src/handweapons/HandGun.cpp
+            src/handweapons/HandMachinegun.cpp
+            src/handweapons/HandBazooka.cpp
 )
 
 SET(LIBS Qt5::Core

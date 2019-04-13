@@ -2,11 +2,11 @@
 
 #include "HandWeapon.h"
 
-class HandBazooka
+class HandGun
         : public HandWeapon
 {
 public:
-    HandBazooka(const std::shared_ptr<QGraphicsScene> &scene);
-    virtual ~HandBazooka() override = default;
+    HandGun(const std::shared_ptr<QGraphicsScene> &scene);
+    virtual ~HandGun() override = default;
     virtual std::unique_ptr<Gunshell> shoot(qreal x, qreal y) override final;
 };

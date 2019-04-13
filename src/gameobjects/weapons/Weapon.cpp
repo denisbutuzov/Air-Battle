@@ -1,6 +1,6 @@
 #include "AbstractVisitor.h"
 #include "PlayerObject.h"
-#include "HandWeapon.h"
+#include "HandGun.h"
 
 #include "Weapon.h"
 
@@ -17,5 +17,5 @@ void Weapon::accept(AbstractVisitor &visitor)
 
 std::unique_ptr<HandWeapon> Weapon::handWeapon()
 {
-    return std::make_unique<HandWeapon>(scene());
+    return std::make_unique<HandGun>(scene());
 }

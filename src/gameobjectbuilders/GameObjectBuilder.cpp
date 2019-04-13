@@ -1,7 +1,7 @@
 #include "Enemy.h"
 #include "Gunshell.h"
 #include "PlayerObject.h"
-#include "HandWeapon.h"
+#include "HandGun.h"
 
 #include "GameObjectBuilder.h"
 
@@ -18,7 +18,7 @@ std::unique_ptr<Enemy> GameObjectBuilder::buildEnemy(const std::shared_ptr<QGrap
 std::unique_ptr<PlayerObject> GameObjectBuilder::buildPlayer(const std::shared_ptr<QGraphicsScene> &scene,
                                                              const QString &pixmap, const QPointF &pos)
 {
-    auto player = std::make_unique<PlayerObject>(scene, std::make_unique<HandWeapon>(scene));
+    auto player = std::make_unique<PlayerObject>(scene, std::make_unique<HandGun>(scene));
     player->setPixmap(QPixmap(pixmap));
     player->setFlag(QGraphicsItem::ItemIsFocusable);
     player->setFocus();
