@@ -1,4 +1,5 @@
 #include "Enemy.h"
+#include "Gunshell.h"
 #include "PlayerObject.h"
 #include "HandWeapon.h"
 
@@ -22,4 +23,14 @@ std::unique_ptr<PlayerObject> GameObjectBuilder::buildPlayer(const std::shared_p
     player->setFlag(QGraphicsItem::ItemIsFocusable);
     player->setFocus();
     return player;
+}
+
+std::unique_ptr<Gunshell> GameObjectBuilder::buildGunshell(const std::shared_ptr<QGraphicsScene> &scene, unsigned int speed,
+                                                           unsigned int damage, const QString &pixmap, const QPointF &pos)
+{
+    auto gunshell = std::make_unique<Gunshell>(scene);
+    gunshell->setPixmap(QPixmap(pixmap));
+    gunshell->setSpeed(speed);
+    gunshell->setDamage(damage);
+    return gunshell;
 }

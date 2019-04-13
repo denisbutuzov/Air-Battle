@@ -1,6 +1,7 @@
 #include <QGraphicsScene>
 
 #include "Enemy.h"
+#include "Gunshell.h"
 #include "PlayerObject.h"
 
 #include "PresetPositionBuilder.h"
@@ -12,6 +13,14 @@ std::unique_ptr<Enemy> PresetPositionBuilder::buildEnemy(const std::shared_ptr<Q
     int randomNumber = rand() % static_cast<int>(scene->width() - enemy->pixmap().width());
     enemy->setPos(randomNumber, 0 - enemy->pixmap().height());
     return enemy;
+}
+
+std::unique_ptr<Gunshell> PresetPositionBuilder::buildGunshell(const std::shared_ptr<QGraphicsScene> &scene, unsigned int speed,
+                                                               unsigned int damage, const QString &pixmap, const QPointF &pos)
+{
+    auto gunshell = GameObjectBuilder::buildGunshell(scene, speed, damage, pixmap, pos);
+    gunshell->setPos(pos);
+    return gunshell;
 }
 
 std::unique_ptr<PlayerObject> PresetPositionBuilder::buildPlayer(const std::shared_ptr<QGraphicsScene> &scene,
