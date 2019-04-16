@@ -9,7 +9,5 @@ public:
     Bazooka(const std::shared_ptr<QGraphicsScene> &scene,
             std::unique_ptr<MoveStrategy> &&moveStrategy = std::make_unique<MoveByLine>(MoveStrategy::DIRECTION::DOWN));
     virtual ~Bazooka() override = default;
-
-private:
     virtual std::unique_ptr<HandWeapon> handWeapon() override final;
 };
