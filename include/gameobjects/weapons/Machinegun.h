@@ -6,11 +6,12 @@ class Machinegun
         : public Weapon
 {
 public:
-    Machinegun(QGraphicsScene *scene, MoveStrategy *moveStrategy = new MoveByLine(MoveStrategy::DIRECTION::DOWN));
+    Machinegun(const std::shared_ptr<QGraphicsScene> &scene,
+               std::unique_ptr<MoveStrategy> &&moveStrategy = std::make_unique<MoveByLine>(MoveStrategy::DIRECTION::DOWN));
+    virtual ~Machinegun() override = default;
 
 private:
-    virtual void setObjectImage() override final;
-    virtual HandWeapon *handWeapon() override final;
+    virtual std::unique_ptr<HandWeapon> handWeapon() override final;
 };
 
 

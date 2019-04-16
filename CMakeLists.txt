@@ -22,6 +22,8 @@ SET(HEADERS include/Game.h
             include/gameobjects/gunshells/Gunshell.h
             include/gameobjects/enemies/Enemy.h
             include/gameobjects/weapons/Weapon.h
+            include/gameobjects/weapons/Bazooka.h
+            include/gameobjects/weapons/Machinegun.h
             include/levelfactories/AbstractLevelFactory.h
             include/levelfactories/Level1Factory.h
             include/levelfactories/Level2Factory.h
@@ -45,6 +47,8 @@ SET(SOURCES src/Game.cpp
             src/gameobjects/gunshells/Gunshell.cpp
             src/gameobjects/enemies/Enemy.cpp
             src/gameobjects/weapons/Weapon.cpp
+            src/gameobjects/weapons/Bazooka.cpp
+            src/gameobjects/weapons/Machinegun.cpp
             src/levelfactories/AbstractLevelFactory.cpp
             src/levelfactories/Level1Factory.cpp
             src/levelfactories/Level2Factory.cpp

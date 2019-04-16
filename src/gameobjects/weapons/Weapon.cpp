@@ -1,6 +1,4 @@
 #include "AbstractVisitor.h"
-#include "PlayerObject.h"
-#include "HandGun.h"
 
 #include "Weapon.h"
 
@@ -13,9 +11,4 @@ Weapon::Weapon(const std::shared_ptr<QGraphicsScene> &scene,
 void Weapon::accept(AbstractVisitor &visitor)
 {
     visitor.visitWeapon(this);
-}
-
-std::unique_ptr<HandWeapon> Weapon::handWeapon()
-{
-    return std::make_unique<HandGun>(scene());
 }
