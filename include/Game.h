@@ -37,5 +37,6 @@ private:
     std::unique_ptr<QTimer> checkCollisionTimer_;
     std::unique_ptr<QTimer> moveTimer_;
     listOfMovableObjects enemies_;
+    listOfMovableObjects weapons_;
     listOfMovableObjects gunshells_;
 };

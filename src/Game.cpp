@@ -6,6 +6,8 @@
 #include "Level1Factory.h"
 #include "PlayerObject.h"
 #include "Enemy.h"
+#include "Weapon.h"
+#include "HandWeapon.h"
 #include "Gunshell.h"
 #include "MoveVisitor.h"
 
@@ -67,6 +69,11 @@ void Game::moveGameObjects()
     {
         (*iter)->accept(visitor);
     }
+
+    for(auto iter = std::begin(weapons_); iter != std::end(weapons_); ++iter)
+    {
+        (*iter)->accept(visitor);
+    }
 }
 
 Game::~Game() = default;
@@ -82,6 +89,10 @@ void Game::getSpawnObjectFromFactory()
     {
         enemies_.push_back(std::move(spawnObject));
     }
+    else if (dynamic_cast<Weapon *>(spawnObject.get()))
+    {
+        weapons_.push_back(std::move(spawnObject));
+    }
 }
 
 void Game::getGunshellFromPlayer()
@@ -96,6 +107,7 @@ void Game::removeObjectsFromScene()
 {
     gunshells_.remove_if([](auto &obj){return obj->y() < 0;});
     enemies_.remove_if([scene=scene_](auto &obj){return obj->y() > scene->height();});
+    weapons_.remove_if([scene=scene_](auto &obj){return obj->y() > scene->height();});
 }
 
 void Game::checkCollisionBetweenGameObjects()
@@ -126,9 +138,36 @@ void Game::checkCollisionBetweenGameObjects()
                     return enemy->hitpoint() == 0;
                 }
             );
+
+    weapons_.remove_if
+            (
+                [](auto &obj)
+                {
+                    auto collidingList = obj->collidingItems();
+                    for(auto *otherObj : collidingList)
+                    {
+                        if(auto *player = dynamic_cast<PlayerObject *>(otherObj))
+                        {
+                            auto *weapon = dynamic_cast<Weapon *>(obj.get());
+                            player->takeWeapon(weapon->handWeapon());
+                            return true;
+                        }
+                    };
+                    return false;
+                }
+            );
+
 }
 
 std::unique_ptr<MovableObject> Game::createSpawnObject(AbstractLevelFactory &factory)
 {
-    return factory.enemy();
+    int randomNumber = rand() % 10;
+    if(randomNumber > 6)
+    {
+        return factory.weapon();
+    }
+    else
+    {
+        return factory.enemy();
+    }
 }
