@@ -23,9 +23,10 @@ private slots:
     void getGunshellFromPlayer();
     void removeObjectsFromScene();
     void checkCollisionBetweenGameObjects();
+    void levelChange();
 
 private:
-    std::unique_ptr<MovableObject> createSpawnObject(AbstractLevelFactory &factory);
+    std::unique_ptr<MovableObject> createSpawnObject(std::unique_ptr<AbstractLevelFactory> &factory);
 
 private:
     using listOfMovableObjects = std::list<std::shared_ptr<MovableObject>>;
@@ -36,7 +37,9 @@ private:
     std::unique_ptr<QTimer> removeObjectTimer_;
     std::unique_ptr<QTimer> checkCollisionTimer_;
     std::unique_ptr<QTimer> moveTimer_;
+    std::unique_ptr<QTimer> levelChangeTimer_;
     listOfMovableObjects enemies_;
     listOfMovableObjects weapons_;
     listOfMovableObjects gunshells_;
+    unsigned int level_;
 };

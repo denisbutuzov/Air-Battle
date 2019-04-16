@@ -4,6 +4,7 @@
 
 #include "PresetPositionBuilder.h"
 #include "Level1Factory.h"
+#include "Level2Factory.h"
 #include "PlayerObject.h"
 #include "Enemy.h"
 #include "Weapon.h"
@@ -14,6 +15,7 @@
 #include "Game.h"
 
 Game::Game(QWidget *parent)
+    : level_(1)
 {
     //create a scene
     scene_ = std::make_shared<QGraphicsScene>();
@@ -55,6 +57,11 @@ Game::Game(QWidget *parent)
     connect(moveTimer_.get(), SIGNAL(timeout()),
             this, SLOT(moveGameObjects()));
     moveTimer_->start(50);
+
+    levelChangeTimer_ = std::make_unique<QTimer>();
+    connect(levelChangeTimer_.get(), SIGNAL(timeout()),
+            this, SLOT(levelChange()));
+    levelChangeTimer_->start(10000);
 }
 
 void Game::moveGameObjects()
@@ -80,7 +87,16 @@ Game::~Game() = default;
 
 void Game::getSpawnObjectFromFactory()
 {
-    Level1Factory levelFactory(scene_);
+    std::unique_ptr<AbstractLevelFactory> levelFactory;
+
+    if(level_ == 1)
+    {
+        levelFactory = std::make_unique<Level1Factory>(scene_);
+    }
+    else
+    {
+        levelFactory = std::make_unique<Level2Factory>(scene_);
+    }
 
     auto spawnObject = createSpawnObject(levelFactory);
     spawnObject->init();
@@ -159,15 +175,23 @@ void Game::checkCollisionBetweenGameObjects()
 
 }
 
-std::unique_ptr<MovableObject> Game::createSpawnObject(AbstractLevelFactory &factory)
+void Game::levelChange()
+{
+    if(level_ < 2)
+    {
+        ++level_;
+    }
+}
+
+std::unique_ptr<MovableObject> Game::createSpawnObject(std::unique_ptr<AbstractLevelFactory> &factory)
 {
     int randomNumber = rand() % 10;
     if(randomNumber > 6)
     {
-        return factory.weapon();
+        return factory->weapon();
     }
     else
     {
-        return factory.enemy();
+        return factory->enemy();
     }
 }
