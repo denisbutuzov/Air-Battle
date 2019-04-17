@@ -5,6 +5,7 @@
 #include "PresetPositionBuilder.h"
 #include "Level1Factory.h"
 #include "Level2Factory.h"
+#include "Level3Factory.h"
 #include "PlayerObject.h"
 #include "Enemy.h"
 #include "Weapon.h"
@@ -93,9 +94,13 @@ void Game::getSpawnObjectFromFactory()
     {
         levelFactory = std::make_unique<Level1Factory>(scene_);
     }
-    else
+    else if(level_ == 2)
     {
         levelFactory = std::make_unique<Level2Factory>(scene_);
+    }
+    else
+    {
+        levelFactory = std::make_unique<Level3Factory>(scene_);
     }
 
     auto spawnObject = createSpawnObject(levelFactory);
@@ -177,7 +182,7 @@ void Game::checkCollisionBetweenGameObjects()
 
 void Game::levelChange()
 {
-    if(level_ < 2)
+    if(level_ < 3)
     {
         ++level_;
     }

@@ -27,6 +27,7 @@ SET(HEADERS include/Game.h
             include/levelfactories/AbstractLevelFactory.h
             include/levelfactories/Level1Factory.h
             include/levelfactories/Level2Factory.h
+            include/levelfactories/Level3Factory.h
             include/gameobjectbuilders/GameObjectBuilder.h
             include/gameobjectbuilders/PresetPositionBuilder.h
 	    include/handweapons/HandWeapon.h
@@ -52,6 +53,7 @@ SET(SOURCES src/Game.cpp
             src/levelfactories/AbstractLevelFactory.cpp
             src/levelfactories/Level1Factory.cpp
             src/levelfactories/Level2Factory.cpp
+            src/levelfactories/Level3Factory.cpp
             src/gameobjectbuilders/GameObjectBuilder.cpp
             src/gameobjectbuilders/PresetPositionBuilder.cpp
 	    src/handweapons/HandWeapon.cpp
