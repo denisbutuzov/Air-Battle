@@ -5,7 +5,7 @@ AbstractEnemyDecorator::AbstractEnemyDecorator(std::unique_ptr<Enemy> enemy)
     , enemy_(std::move(enemy))
 {
     setSpeed(enemy_->speed());
-    setPos(enemy_->pos());
+    setPos(enemy_->pos() + QPointF(0.0, 20.0));
 }
 
 void AbstractEnemyDecorator::init()

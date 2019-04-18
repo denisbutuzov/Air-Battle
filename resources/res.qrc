@@ -13,5 +13,6 @@
         <file>images/bazooka.png</file>
         <file>images/machinegun.png</file>
         <file>images/rocket.png</file>
+        <file>images/EnemyShield.png</file>
     </qresource>
 </RCC>

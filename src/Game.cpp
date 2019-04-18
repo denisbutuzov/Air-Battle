@@ -7,7 +7,7 @@
 #include "Level2Factory.h"
 #include "Level3Factory.h"
 #include "PlayerObject.h"
-#include "Enemy.h"
+#include "ShieldDecorator.h"
 #include "Weapon.h"
 #include "HandWeapon.h"
 #include "Gunshell.h"
@@ -153,10 +153,18 @@ void Game::checkCollisionBetweenGameObjects()
 
     enemies_.remove_if
             (
-                [](auto &obj)
+                [&](auto &obj)
                 {
                     auto *enemy = dynamic_cast<Enemy *>(obj.get());
-                    return enemy->hitpoint() == 0;
+                    if (enemy->hitpoint() == 0)
+                    {
+                        if(auto *shield = dynamic_cast<ShieldDecorator *>(enemy))
+                        {
+                            enemies_.push_back(shield->enemy());
+                        }
+                        return true;
+                    }
+                    return false;
                 }
             );
 
