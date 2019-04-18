@@ -14,10 +14,11 @@ class MovableObject
 public:
     virtual ~MovableObject() override = default;
     virtual void accept(AbstractVisitor &visitor) = 0;
+    virtual void move();
 
-    void move();
     void setSpeed(unsigned int speed);
     unsigned int speed() const;
+    std::shared_ptr<MoveStrategy> &moveStrategy();
 
 protected:
     MovableObject(const std::shared_ptr<QGraphicsScene> &scene,

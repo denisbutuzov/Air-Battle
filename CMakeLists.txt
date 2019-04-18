@@ -21,6 +21,8 @@ SET(HEADERS include/Game.h
             include/gameobjects/visitors/MoveVisitor.h
             include/gameobjects/gunshells/Gunshell.h
             include/gameobjects/enemies/Enemy.h
+            include/gameobjects/enemies/enemydecorators/AbstractEnemyDecorator.h
+            include/gameobjects/enemies/enemydecorators/ShieldDecorator.h
             include/gameobjects/weapons/Weapon.h
             include/gameobjects/weapons/Bazooka.h
             include/gameobjects/weapons/Machinegun.h
@@ -47,6 +49,8 @@ SET(SOURCES src/Game.cpp
             src/gameobjects/visitors/MoveVisitor.cpp
             src/gameobjects/gunshells/Gunshell.cpp
             src/gameobjects/enemies/Enemy.cpp
+            src/gameobjects/enemies/enemydecorators/AbstractEnemyDecorator.cpp
+            src/gameobjects/enemies/enemydecorators/ShieldDecorator.cpp
             src/gameobjects/weapons/Weapon.cpp
             src/gameobjects/weapons/Bazooka.cpp
             src/gameobjects/weapons/Machinegun.cpp
@@ -80,6 +84,7 @@ TARGET_INCLUDE_DIRECTORIES(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/in
                                                   ${CMAKE_CURRENT_SOURCE_DIR}/include/gameobjects/specialobjects/subjects
                                                   ${CMAKE_CURRENT_SOURCE_DIR}/include/gameobjects/gunshells
                                                   ${CMAKE_CURRENT_SOURCE_DIR}/include/gameobjects/enemies
+                                                  ${CMAKE_CURRENT_SOURCE_DIR}/include/gameobjects/enemies/enemydecorators
                                                   ${CMAKE_CURRENT_SOURCE_DIR}/include/gameobjects/weapons
                                                   ${CMAKE_CURRENT_SOURCE_DIR}/include/gameobjectbuilders
                                                   ${CMAKE_CURRENT_SOURCE_DIR}/include/levelfactories

@@ -23,3 +23,8 @@ unsigned int MovableObject::speed() const
 {
     return speed_;
 }
+
+std::shared_ptr<MoveStrategy> &MovableObject::moveStrategy()
+{
+    return moveStrategy_;
+}

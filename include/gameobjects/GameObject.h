@@ -10,10 +10,10 @@ public:
     virtual ~GameObject() = default;
     virtual void init();
 
+    std::shared_ptr<QGraphicsScene> scene() const;
+
 protected:
     GameObject(const std::shared_ptr<QGraphicsScene> &scene);
-
-    std::shared_ptr<QGraphicsScene> scene() const;
 
 private:
     std::shared_ptr<QGraphicsScene> scene_;

@@ -1,17 +1,20 @@
 #include "AbstractEnemyDecorator.h"
 
-AbstractEnemyDecorator::AbstractEnemyDecorator(QGraphicsScene *scene, Enemy *enemy)
-    : Enemy(scene, enemy->moveStrategy())
-    , enemy_(enemy)
+AbstractEnemyDecorator::AbstractEnemyDecorator(std::unique_ptr<Enemy> enemy)
+    : Enemy(enemy->scene(), enemy->moveStrategy())
+    , enemy_(std::move(enemy))
 {
-}
-
-Enemy *AbstractEnemyDecorator::enemy() const
-{
-    return enemy_;
+    setSpeed(enemy_->speed());
+    setPos(enemy_->pos());
 }
 
 void AbstractEnemyDecorator::init()
 {
+    Enemy::init();
     enemy_->init();
+}
+
+std::shared_ptr<Enemy> AbstractEnemyDecorator::enemy()
+{
+    return enemy_;
 }

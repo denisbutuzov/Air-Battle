@@ -1,27 +1,12 @@
 #include "ShieldDecorator.h"
 
-ShieldDecorator::ShieldDecorator(QGraphicsScene *scene, Enemy *enemy)
-    : AbstractEnemyDecorator(scene, enemy)
+ShieldDecorator::ShieldDecorator(std::unique_ptr<Enemy> enemy)
+    : AbstractEnemyDecorator(std::move(enemy))
 {
 }
 
-void ShieldDecorator::init()
+void ShieldDecorator::move()
 {
-    AbstractEnemyDecorator::init();
-    Enemy::init();
-}
-
-void ShieldDecorator::setStartObjectPos()
-{
-    setPos(enemy()->pos());
-}
-
-void ShieldDecorator::setHitpoint()
-{
-    Enemy::setHitpoint(2);
-}
-
-void ShieldDecorator::setObjectImage()
-{
-    setPixmap(QPixmap(":/images/images/EnemyShield.png"));
+    Enemy::move();
+    enemy()->move();
 }
