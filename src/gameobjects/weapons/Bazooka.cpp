@@ -3,7 +3,7 @@
 #include "Bazooka.h"
 
 Bazooka::Bazooka(const std::shared_ptr<QGraphicsScene> &scene,
-                 std::unique_ptr<MoveStrategy> &&moveStrategy)
+                 const std::shared_ptr<MoveStrategy> &moveStrategy)
     : Weapon(scene, std::move(moveStrategy))
 {
 }

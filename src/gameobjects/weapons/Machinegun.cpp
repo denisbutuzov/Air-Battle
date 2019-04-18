@@ -3,8 +3,8 @@
 #include "Machinegun.h"
 
 Machinegun::Machinegun(const std::shared_ptr<QGraphicsScene> &scene,
-                       std::unique_ptr<MoveStrategy> &&moveStrategy)
-    : Weapon(scene, std::move(moveStrategy))
+                       const std::shared_ptr<MoveStrategy> &moveStrategy)
+    : Weapon(scene, moveStrategy)
 {
 }
 

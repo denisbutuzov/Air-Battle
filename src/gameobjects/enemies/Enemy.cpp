@@ -3,8 +3,8 @@
 #include "Enemy.h"
 
 Enemy::Enemy(const std::shared_ptr<QGraphicsScene> &scene,
-             std::unique_ptr<MoveStrategy> &&moveStrategy)
-    : MovableObject(scene, std::move(moveStrategy))
+             const std::shared_ptr<MoveStrategy> &moveStrategy)
+    : MovableObject(scene, moveStrategy)
 {
 }
 

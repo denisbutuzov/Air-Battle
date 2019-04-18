@@ -15,5 +15,5 @@ public:
 
 protected:
     Weapon(const std::shared_ptr<QGraphicsScene> &scene,
-           std::unique_ptr<MoveStrategy> &&moveStrategy); 
+           const std::shared_ptr<MoveStrategy> &moveStrategy);
 };

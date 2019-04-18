@@ -3,13 +3,11 @@
 #include "MovableObject.h"
 
 MovableObject::MovableObject(const std::shared_ptr<QGraphicsScene> &scene,
-                             std::unique_ptr<MoveStrategy> &&moveStrategy)
+                             const std::shared_ptr<MoveStrategy> &moveStrategy)
     : GameObject(scene)
-    , moveStrategy_(std::move(moveStrategy))
+    , moveStrategy_(moveStrategy)
 {
 }
-
-MovableObject::~MovableObject() = default;
 
 void MovableObject::move()
 {
