@@ -8,5 +8,9 @@ class ShieldDecorator
 public:
     ShieldDecorator(std::unique_ptr<Enemy> enemy);
     virtual ~ShieldDecorator() override = default;
+    virtual void init() override final;
     virtual void move() override final;
+
+private:
+    void resizeShield();
 };
