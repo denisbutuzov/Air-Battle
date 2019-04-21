@@ -13,12 +13,12 @@ void Gunshell::accept(AbstractVisitor &visitor)
     visitor.visitGunshell(this);
 }
 
-void Gunshell::setDamage(unsigned int damage)
+void Gunshell::setDamage(int damage)
 {
     damage_ = damage;
 }
 
-unsigned int Gunshell::damage() const
+int Gunshell::damage() const
 {
     return damage_;
 }

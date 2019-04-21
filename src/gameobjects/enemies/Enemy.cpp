@@ -13,12 +13,12 @@ void Enemy::accept(AbstractVisitor &visitor)
     visitor.visitEnemy(this);
 }
 
-void Enemy::setHitpoint(unsigned int hitpoint)
+void Enemy::setHitpoint(int hitpoint)
 {
     hitpoint_ = hitpoint;
 }
 
-unsigned int Enemy::hitpoint() const
+int Enemy::hitpoint() const
 {
     return hitpoint_;
 }

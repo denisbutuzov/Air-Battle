@@ -156,7 +156,7 @@ void Game::checkCollisionBetweenGameObjects()
                 [&](auto &obj)
                 {
                     auto *enemy = dynamic_cast<Enemy *>(obj.get());
-                    if (enemy->hitpoint() == 0)
+                    if (enemy->hitpoint() <= 0)
                     {
                         if(auto *shield = dynamic_cast<ShieldDecorator *>(enemy))
                         {

@@ -12,9 +12,9 @@ public:
     virtual ~Gunshell() override = default;
     virtual void accept(AbstractVisitor &visitor) override;
 
-    void setDamage(unsigned int damage);
-    unsigned int damage() const;
+    void setDamage(int damage);
+    int damage() const;
 
 private:
-    unsigned int damage_;
+    int damage_;
 };

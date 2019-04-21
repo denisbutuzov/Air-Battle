@@ -12,9 +12,9 @@ public:
     virtual ~Enemy() override = default;
     virtual void accept(AbstractVisitor &visitor) override;
 
-    void setHitpoint(unsigned int hitpoint);
-    unsigned int hitpoint() const;
+    void setHitpoint(int hitpoint);
+    int hitpoint() const;
 
 private:
-    unsigned int hitpoint_;
+    int hitpoint_;
 };
