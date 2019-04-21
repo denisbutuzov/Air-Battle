@@ -8,7 +8,9 @@ class PlayerObject;
 class MovableObject;
 class AbstractLevelFactory;
 class Score;
+class Level;
 class ScoreObserver;
+class LevelObserver;
 
 class Game
         : public QGraphicsView
@@ -43,7 +45,8 @@ private:
     listOfMovableObjects enemies_;
     listOfMovableObjects weapons_;
     listOfMovableObjects gunshells_;
-    unsigned int level_;
     Score *score_;
+    Level *level_;
     ScoreObserver *scoreObserver_;
+    LevelObserver *levelObserver_;
 };

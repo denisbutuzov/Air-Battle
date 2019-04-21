@@ -14,11 +14,12 @@
 #include "MoveVisitor.h"
 #include "Score.h"
 #include "ScoreObserver.h"
+#include "Level.h"
+#include "LevelObserver.h"
 
 #include "Game.h"
 
 Game::Game(QWidget *parent)
-    : level_(1)
 {
     //create a scene
     scene_ = std::make_shared<QGraphicsScene>();
@@ -70,6 +71,10 @@ Game::Game(QWidget *parent)
     score_ = Score::instance();
     scoreObserver_ = new ScoreObserver(score_);
     scoreObserver_->show(scene_);
+
+    level_ = Level::instance();
+    levelObserver_ = new LevelObserver(level_);
+    levelObserver_->show(scene_, QPointF(250.0, 0.0));
 }
 
 void Game::moveGameObjects()
@@ -97,11 +102,11 @@ void Game::getSpawnObjectFromFactory()
 {
     std::unique_ptr<AbstractLevelFactory> levelFactory;
 
-    if(level_ == 1)
+    if(level_->value() == 1)
     {
         levelFactory = std::make_unique<Level1Factory>(scene_);
     }
-    else if(level_ == 2)
+    else if(level_->value() == 2)
     {
         levelFactory = std::make_unique<Level2Factory>(scene_);
     }
@@ -201,10 +206,7 @@ void Game::checkCollisionBetweenGameObjects()
 
 void Game::levelChange()
 {
-    if(level_ < 3)
-    {
-        ++level_;
-    }
+    level_->increase();
 }
 
 std::unique_ptr<MovableObject> Game::createSpawnObject(std::unique_ptr<AbstractLevelFactory> &factory)

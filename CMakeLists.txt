@@ -19,8 +19,10 @@ SET(HEADERS include/Game.h
             include/gameobjects/movestrategies/MoveByRandom.h
             include/gameobjects/specialobjects/subjects/AbstractSubject.h
             include/gameobjects/specialobjects/subjects/Score.h
+            include/gameobjects/specialobjects/subjects/Level.h
             include/gameobjects/specialobjects/observers/AbstractObserver.h
             include/gameobjects/specialobjects/observers/ScoreObserver.h
+            include/gameobjects/specialobjects/observers/LevelObserver.h
             include/gameobjects/visitors/AbstractVisitor.h
             include/gameobjects/visitors/MoveVisitor.h
             include/gameobjects/gunshells/Gunshell.h
@@ -52,7 +54,9 @@ SET(SOURCES src/Game.cpp
             src/gameobjects/movestrategies/MoveByRandom.cpp
             src/gameobjects/specialobjects/subjects/AbstractSubject.cpp
             src/gameobjects/specialobjects/subjects/Score.cpp
+            src/gameobjects/specialobjects/subjects/Level.cpp
             src/gameobjects/specialobjects/observers/ScoreObserver.cpp
+            src/gameobjects/specialobjects/observers/LevelObserver.cpp
             src/gameobjects/visitors/MoveVisitor.cpp
             src/gameobjects/gunshells/Gunshell.cpp
             src/gameobjects/enemies/Enemy.cpp
