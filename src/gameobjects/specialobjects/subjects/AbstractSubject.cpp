@@ -16,6 +16,13 @@ void AbstractSubject::notify()
 {
     for(auto *observer : observers_)
     {
-        observer->update();
+        if (observer != nullptr)
+        {
+            observer->update();
+        }
+        else
+        {
+            observers_.remove(observer);
+        }
     }
 }

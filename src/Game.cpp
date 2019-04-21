@@ -12,6 +12,8 @@
 #include "HandWeapon.h"
 #include "Gunshell.h"
 #include "MoveVisitor.h"
+#include "Score.h"
+#include "ScoreObserver.h"
 
 #include "Game.h"
 
@@ -63,6 +65,11 @@ Game::Game(QWidget *parent)
     connect(levelChangeTimer_.get(), SIGNAL(timeout()),
             this, SLOT(levelChange()));
     levelChangeTimer_->start(10000);
+
+
+    score_ = Score::instance();
+    scoreObserver_ = new ScoreObserver(score_);
+    scoreObserver_->show(scene_);
 }
 
 void Game::moveGameObjects()
@@ -161,6 +168,10 @@ void Game::checkCollisionBetweenGameObjects()
                         if(auto *shield = dynamic_cast<ShieldDecorator *>(enemy))
                         {
                             enemies_.push_back(shield->enemy());
+                        }
+                        else
+                        {
+                            score_->increase();
                         }
                         return true;
                     }

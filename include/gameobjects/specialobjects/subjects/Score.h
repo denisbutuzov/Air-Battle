@@ -1,7 +1,5 @@
 #pragma once
 
-#include <cstdint>
-
 #include "AbstractSubject.h"
 
 class Score
@@ -10,7 +8,7 @@ class Score
 public:
     static Score *instance();
     void increase();
-    uint16_t score() const;
+    unsigned int value() const;
 
 protected:
     Score();
@@ -22,5 +20,5 @@ protected:
 
 private:
     static Score *instance_;
-    uint16_t score_;
+    unsigned int score_;
 };
