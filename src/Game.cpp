@@ -16,6 +16,8 @@
 #include "ScoreObserver.h"
 #include "Level.h"
 #include "LevelObserver.h"
+#include "Health.h"
+#include "HealthObserver.h"
 
 #include "Game.h"
 
@@ -75,6 +77,10 @@ Game::Game(QWidget *parent)
     level_ = Level::instance();
     levelObserver_ = new LevelObserver(level_);
     levelObserver_->show(scene_, QPointF(250.0, 0.0));
+
+    health_ = Health::instance();
+    healthObserver_ = new HealthObserver(health_);
+    healthObserver_->show(scene_, QPointF(470.0, 10.0));
 }
 
 void Game::moveGameObjects()
@@ -139,8 +145,19 @@ void Game::getGunshellFromPlayer()
 void Game::removeObjectsFromScene()
 {
     gunshells_.remove_if([](auto &obj){return obj->y() < 0;});
-    enemies_.remove_if([scene=scene_](auto &obj){return obj->y() > scene->height();});
     weapons_.remove_if([scene=scene_](auto &obj){return obj->y() > scene->height();});
+    enemies_.remove_if
+            (
+                [&](auto &obj)
+                {
+                    if(obj->y() > scene_->height())
+                    {
+                        health_->decrease();
+                        return true;
+                    }
+                    return false;
+                }
+            );
 }
 
 void Game::checkCollisionBetweenGameObjects()

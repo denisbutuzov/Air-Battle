@@ -14,5 +14,6 @@
         <file>images/machinegun.png</file>
         <file>images/rocket.png</file>
         <file>images/EnemyShield.png</file>
+        <file>images/Heart.png</file>
     </qresource>
 </RCC>

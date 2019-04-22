@@ -9,8 +9,10 @@ class MovableObject;
 class AbstractLevelFactory;
 class Score;
 class Level;
+class Health;
 class ScoreObserver;
 class LevelObserver;
+class HealthObserver;
 
 class Game
         : public QGraphicsView
@@ -47,6 +49,8 @@ private:
     listOfMovableObjects gunshells_;
     Score *score_;
     Level *level_;
+    Health *health_;
     ScoreObserver *scoreObserver_;
     LevelObserver *levelObserver_;
+    HealthObserver *healthObserver_;
 };

@@ -2,7 +2,7 @@
 
 Health *Health::instance_ = nullptr;
 
-Health::Health(uint16_t maxHealth)
+Health::Health(int maxHealth)
     : health_(maxHealth)
     , maxHealth_(maxHealth)
 {
@@ -35,7 +35,7 @@ void Health::decrease()
     }
 }
 
-uint16_t Health::health() const
+int Health::value() const
 {
     return health_;
 }
