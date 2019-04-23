@@ -2,17 +2,13 @@
 
 #include "Bazooka.h"
 
-Bazooka::Bazooka(QGraphicsScene *scene, MoveStrategy *moveStrategy)
-    : Weapon(scene, moveStrategy)
+Bazooka::Bazooka(const std::shared_ptr<QGraphicsScene> &scene,
+                 const std::shared_ptr<MoveStrategy> &moveStrategy)
+    : Weapon(scene, std::move(moveStrategy))
 {
 }
 
-void Bazooka::setObjectImage()
+std::unique_ptr<HandWeapon> Bazooka::handWeapon()
 {
-    setPixmap(QPixmap(":/images/images/bazooka.png"));
-}
-
-HandWeapon *Bazooka::handWeapon()
-{
-    return new HandBazooka(scene());
+    return std::make_unique<HandBazooka>(scene());
 }

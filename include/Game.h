@@ -1,13 +1,18 @@
 #pragma once
 
 #include <QGraphicsView>
+#include <memory>
 
-class SpawnObject;
+class Gunshell;
 class PlayerObject;
-class ScoreObserver;
-class HealthObserver;
-class LevelObserver;
+class MovableObject;
 class AbstractLevelFactory;
+class Score;
+class Level;
+class Health;
+class ScoreObserver;
+class LevelObserver;
+class HealthObserver;
 
 class Game
         : public QGraphicsView
@@ -16,17 +21,36 @@ class Game
 
 public:
     Game(QWidget *parent = nullptr);
-
-private:
-    SpawnObject *createSpawnObject(AbstractLevelFactory *factory);
+    ~Game();
 
 private slots:
-    void spawn();
+    void moveGameObjects();
+    void getSpawnObjectFromFactory();
+    void getGunshellFromPlayer();
+    void removeObjectsFromScene();
+    void checkCollisionBetweenGameObjects();
+    void levelChange();
 
 private:
-    QGraphicsScene *scene_;
-    PlayerObject *player_;
-    ScoreObserver *scoreObs_;
-    HealthObserver *healthObs_;
-    LevelObserver *levelObs_;
+    std::unique_ptr<MovableObject> createSpawnObject(std::unique_ptr<AbstractLevelFactory> &factory);
+
+private:
+    using listOfMovableObjects = std::list<std::shared_ptr<MovableObject>>;
+
+    std::shared_ptr<QGraphicsScene> scene_;
+    std::unique_ptr<PlayerObject> player_;
+    std::unique_ptr<QTimer> spawnObjectTimer_;
+    std::unique_ptr<QTimer> removeObjectTimer_;
+    std::unique_ptr<QTimer> checkCollisionTimer_;
+    std::unique_ptr<QTimer> moveTimer_;
+    std::unique_ptr<QTimer> levelChangeTimer_;
+    listOfMovableObjects enemies_;
+    listOfMovableObjects weapons_;
+    listOfMovableObjects gunshells_;
+    Score *score_;
+    Level *level_;
+    Health *health_;
+    ScoreObserver *scoreObserver_;
+    LevelObserver *levelObserver_;
+    HealthObserver *healthObserver_;
 };

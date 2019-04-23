@@ -6,12 +6,11 @@ class ShieldDecorator
         : public AbstractEnemyDecorator
 {
 public:
-    ShieldDecorator(QGraphicsScene *scene, Enemy *enemy);
+    ShieldDecorator(std::unique_ptr<Enemy> enemy);
     virtual ~ShieldDecorator() override = default;
     virtual void init() override final;
+    virtual void move() override final;
 
 private:
-    virtual void setStartObjectPos() override final;
-    virtual void setHitpoint() override final;
-    virtual void setObjectImage() override final;
+    void resizeShield();
 };

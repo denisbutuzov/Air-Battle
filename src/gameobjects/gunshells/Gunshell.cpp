@@ -1,60 +1,24 @@
-#include <QMediaPlayer>
+#include "AbstractVisitor.h"
 
 #include "Gunshell.h"
 
-Gunshell::Gunshell(QGraphicsScene *scene, qreal x, qreal y,
-                   MoveStrategy *moveStrategy)
+Gunshell::Gunshell(const std::shared_ptr<QGraphicsScene> &scene,
+                   const std::shared_ptr<MoveStrategy> &moveStrategy)
     : MovableObject(scene, moveStrategy)
-    , x_(x)
-    , y_(y)
 {
 }
 
-Gunshell::~Gunshell()
+void Gunshell::accept(AbstractVisitor &visitor)
 {
-    delete shotSound_;
+    visitor.visitGunshell(this);
 }
 
-void Gunshell::init()
-{
-    MovableObject::init();
-    playShotSound();
-    setDamage();
-}
-
-uint16_t Gunshell::damage() const
-{
-    return damage_;
-}
-
-void Gunshell::setDamage(uint16_t damage)
+void Gunshell::setDamage(int damage)
 {
     damage_ = damage;
 }
 
-void Gunshell::setDamage()
+int Gunshell::damage() const
 {
-    setDamage(1);
-}
-
-void Gunshell::setStartObjectPos()
-{
-    setPos(x_, y_);
-}
-
-void Gunshell::setSpeed()
-{
-    MovableObject::setSpeed(10);
-}
-
-void Gunshell::OnMeetOtherObject(GameObject *otherObject)
-{
-
-}
-
-void Gunshell::playShotSound()
-{
-    shotSound_ = new QMediaPlayer();
-    shotSound_->setMedia(QUrl(pathToShotSound()));
-    shotSound_->play();
+    return damage_;
 }

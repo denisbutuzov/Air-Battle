@@ -1,22 +1,14 @@
-#include "PlayerObject.h"
+#include "AbstractVisitor.h"
 
 #include "Weapon.h"
 
-Weapon::Weapon(QGraphicsScene *scene, MoveStrategy *moveStrategy)
-    : SpawnObject(scene, moveStrategy)
+Weapon::Weapon(const std::shared_ptr<QGraphicsScene> &scene,
+               const std::shared_ptr<MoveStrategy> &moveStrategy)
+    : MovableObject(scene, moveStrategy)
 {
 }
 
-void Weapon::setSpeed()
+void Weapon::accept(AbstractVisitor &visitor)
 {
-    MovableObject::setSpeed(4);
-}
-
-void Weapon::OnMeetOtherObject(GameObject *otherObject)
-{
-    if(auto *player = dynamic_cast<PlayerObject *>(otherObject))
-    {
-        player->takeWeapon(handWeapon());
-        destroy(this);
-    }
+    visitor.visitWeapon(this);
 }

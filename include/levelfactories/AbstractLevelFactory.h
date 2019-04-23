@@ -1,21 +1,23 @@
 #pragma once
 
+#include <memory>
+
 class QGraphicsScene;
-class Weapon;
 class Enemy;
+class Weapon;
 
 class AbstractLevelFactory
 {
 public:
     virtual ~AbstractLevelFactory() = default;
-    virtual Enemy *enemy() const = 0;
-    virtual Weapon *weapon() const = 0;
+    virtual std::unique_ptr<Enemy> enemy() = 0;
+    virtual std::unique_ptr<Weapon> weapon() = 0;
 
 protected:
-    AbstractLevelFactory(QGraphicsScene *scene);
+    AbstractLevelFactory(const std::shared_ptr<QGraphicsScene> &scene);
 
-    QGraphicsScene *scene() const;
+    std::shared_ptr<QGraphicsScene> &scene();
 
 private:
-    QGraphicsScene *scene_;
+    std::shared_ptr<QGraphicsScene> scene_;
 };

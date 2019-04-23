@@ -1,20 +1,21 @@
 #pragma once
 
 #include <QtGlobal>
+#include <memory>
 
 class QGraphicsScene;
+class Gunshell;
 
 class HandWeapon
 {
 public:
+    HandWeapon(const std::shared_ptr<QGraphicsScene> &scene);
     virtual ~HandWeapon() = default;
-    virtual void shoot(qreal x, qreal y) = 0;
+    virtual std::unique_ptr<Gunshell> shoot(qreal x, qreal y) = 0;
 
 protected:
-    HandWeapon(QGraphicsScene *scene);
-
-    QGraphicsScene *scene() const;
+    std::shared_ptr<QGraphicsScene> &scene();
 
 private:
-    QGraphicsScene *scene_;
+    std::shared_ptr<QGraphicsScene> scene_;
 };

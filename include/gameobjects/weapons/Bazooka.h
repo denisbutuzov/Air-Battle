@@ -6,9 +6,8 @@ class Bazooka
         : public Weapon
 {
 public:
-    Bazooka(QGraphicsScene *scene, MoveStrategy *moveStrategy = new MoveByLine(MoveStrategy::DIRECTION::DOWN));
-
-private:
-    virtual void setObjectImage() override final;
-    virtual HandWeapon *handWeapon() override final;
+    Bazooka(const std::shared_ptr<QGraphicsScene> &scene,
+            const std::shared_ptr<MoveStrategy> &moveStrategy = std::make_shared<MoveByLine>(MoveStrategy::DIRECTION::DOWN));
+    virtual ~Bazooka() override = default;
+    virtual std::unique_ptr<HandWeapon> handWeapon() override final;
 };

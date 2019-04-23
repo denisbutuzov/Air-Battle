@@ -14,10 +14,10 @@ LevelObserver::LevelObserver(Level *level)
 
 void LevelObserver::update()
 {
-    setPlainText(QString("Level: " + QString::number(subject_->level())));
+    setPlainText(QString("Level: " + QString::number(subject_->value())));
 }
 
-void LevelObserver::show(QGraphicsScene *scene, QPointF coordinate)
+void LevelObserver::show(std::shared_ptr<QGraphicsScene> &scene, QPointF coordinate)
 {
     scene->addItem(this);
     setPos(coordinate);

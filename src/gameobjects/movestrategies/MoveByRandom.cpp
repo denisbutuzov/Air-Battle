@@ -7,18 +7,18 @@ MoveByRandom::MoveByRandom(MoveStrategy::DIRECTION dir)
 {
 }
 
-void MoveByRandom::move(MovableObject *object)
+void MoveByRandom::move(MovableObject &object)
 {
-    auto tempX = object->x();
-    auto tempY = object->y();
+    auto tempX = object.x();
+    auto tempY = object.y();
     if(direction() == DIRECTION::UP)
     {
-        tempY -= object->speed();
+        tempY -= object.speed();
     }
     else
     {
-        tempY += object->speed();
+        tempY += object.speed();
     }
     tempX += 10 * (rand() % 3 - 1);
-    object->setPos(tempX, tempY);
+    object.setPos(tempX, tempY);
 }

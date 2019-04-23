@@ -2,17 +2,13 @@
 
 #include "Machinegun.h"
 
-Machinegun::Machinegun(QGraphicsScene *scene, MoveStrategy *moveStrategy)
+Machinegun::Machinegun(const std::shared_ptr<QGraphicsScene> &scene,
+                       const std::shared_ptr<MoveStrategy> &moveStrategy)
     : Weapon(scene, moveStrategy)
 {
 }
 
-void Machinegun::setObjectImage()
+std::unique_ptr<HandWeapon> Machinegun::handWeapon()
 {
-    setPixmap(QPixmap(":/images/images/machinegun.png"));
-}
-
-HandWeapon *Machinegun::handWeapon()
-{
-    return new HandMachinegun(scene());
+    return std::make_unique<HandMachinegun>(scene());
 }
