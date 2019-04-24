@@ -73,7 +73,6 @@ SET(SOURCES Game.cpp
             SpecialObjects/Observers/ScoreObserver.cpp
             SpecialObjects/Observers/LevelObserver.cpp
             SpecialObjects/Observers/HealthObserver.cpp
-            SpecialObjects/Observers/LabelObserver.cpp
             Visitors/MoveVisitor.cpp
             LevelFactories/AbstractLevelFactory.cpp
             LevelFactories/Level1Factory.cpp

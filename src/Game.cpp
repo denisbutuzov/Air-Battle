@@ -13,9 +13,7 @@
 #include "HandWeapons/HandWeapon.h"
 #include "Visitors/MoveVisitor.h"
 #include "SpecialObjects/Subjects/Score.h"
-#include "SpecialObjects/Observers/ScoreObserver.h"
 #include "SpecialObjects/Subjects/Level.h"
-#include "SpecialObjects/Observers/LevelObserver.h"
 #include "SpecialObjects/Subjects/Health.h"
 #include "SpecialObjects/Observers/HealthObserver.h"
 
@@ -69,13 +67,12 @@ Game::Game(QWidget *parent)
             this, SLOT(levelChange()));
     levelChangeTimer_->start(10000);
 
-
     score_ = Score::instance();
-    scoreObserver_ = new ScoreObserver(score_);
+    scoreObserver_ = new LabelObserver<Score>(score_, "Score: ");
     scoreObserver_->show(scene_);
 
     level_ = Level::instance();
-    levelObserver_ = new LevelObserver(level_);
+    levelObserver_ = new LabelObserver<Level>(level_, "Level: ");
     levelObserver_->show(scene_, QPointF(250.0, 0.0));
 
     health_ = Health::instance();

@@ -3,6 +3,8 @@
 #include <QGraphicsView>
 #include <memory>
 
+#include "SpecialObjects/Observers/LabelObserver.h"
+
 class Gunshell;
 class PlayerObject;
 class MovableObject;
@@ -50,7 +52,8 @@ private:
     Score *score_;
     Level *level_;
     Health *health_;
-    ScoreObserver *scoreObserver_;
-    LevelObserver *levelObserver_;
+    LabelObserver<Level> *levelObserver_;
+    LabelObserver<Score> *scoreObserver_;
     HealthObserver *healthObserver_;
+
 };
