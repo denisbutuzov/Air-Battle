@@ -1,7 +1,7 @@
 ﻿#pragma once
 
 #include "GameObject.h"
-#include "MoveStrategy.h"
+#include "MoveStrategies/MoveStrategy.h"
 
 class AbstractVisitor;
 

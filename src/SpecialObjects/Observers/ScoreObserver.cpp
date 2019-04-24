@@ -1,6 +1,6 @@
 #include <QGraphicsScene>
 
-#include "Score.h"
+#include "SpecialObjects/Subjects/Score.h"
 
 #include "ScoreObserver.h"
 

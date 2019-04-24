@@ -1,8 +1,8 @@
 #include <QGraphicsScene>
 
-#include "Enemy.h"
-#include "Gunshell.h"
-#include "PlayerObject.h"
+#include "GameObjects/Enemies/Enemy.h"
+#include "GameObjects/Gunshells/Gunshell.h"
+#include "GameObjects/PlayerObject.h"
 
 #include "PresetPositionBuilder.h"
 

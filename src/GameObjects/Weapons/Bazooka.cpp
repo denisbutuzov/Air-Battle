@@ -1,4 +1,4 @@
-#include "HandBazooka.h"
+#include "HandWeapons/HandBazooka.h"
 
 #include "Bazooka.h"
 

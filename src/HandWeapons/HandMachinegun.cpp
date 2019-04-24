@@ -1,5 +1,5 @@
-#include "Gunshell.h"
-#include "PresetPositionBuilder.h"
+#include "GameObjects/Gunshells/Gunshell.h"
+#include "GameObjectBuilders/PresetPositionBuilder.h"
 
 #include "HandMachinegun.h"
 

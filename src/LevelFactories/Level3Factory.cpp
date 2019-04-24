@@ -1,8 +1,8 @@
 #include <QGraphicsScene>
 
-#include "PresetPositionBuilder.h"
-#include "ShieldDecorator.h"
-#include "Bazooka.h"
+#include "GameObjectBuilders/PresetPositionBuilder.h"
+#include "GameObjects/Enemies/EnemyDecorators/ShieldDecorator.h"
+#include "GameObjects/Weapons/Bazooka.h"
 
 #include "Level3Factory.h"
 

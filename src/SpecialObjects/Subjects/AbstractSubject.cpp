@@ -1,4 +1,4 @@
-#include "AbstractObserver.h"
+#include "SpecialObjects/Observers/AbstractObserver.h"
 
 #include "AbstractSubject.h"
 

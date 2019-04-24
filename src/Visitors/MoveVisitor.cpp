@@ -1,6 +1,6 @@
-#include "Enemy.h"
-#include "Gunshell.h"
-#include "Weapon.h"
+#include "GameObjects/Enemies/Enemy.h"
+#include "GameObjects/Gunshells/Gunshell.h"
+#include "GameObjects/Weapons/Weapon.h"
 
 #include "MoveVisitor.h"
 

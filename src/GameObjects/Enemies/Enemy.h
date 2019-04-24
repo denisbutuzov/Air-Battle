@@ -1,7 +1,7 @@
 #pragma once
 
-#include "MoveByLine.h"
-#include "MovableObject.h"
+#include "MoveStrategies/MoveByLine.h"
+#include "GameObjects/MovableObject.h"
 
 class Enemy
         : public MovableObject

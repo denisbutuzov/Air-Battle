@@ -1,6 +1,6 @@
 #include <QGraphicsScene>
 
-#include "Level.h"
+#include "SpecialObjects/Subjects/Level.h"
 
 #include "LevelObserver.h"
 

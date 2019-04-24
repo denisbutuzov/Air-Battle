@@ -1,6 +1,6 @@
 #include <QGraphicsScene>
 
-#include "Health.h"
+#include "SpecialObjects/Subjects/Health.h"
 
 #include "HealthObserver.h"
 

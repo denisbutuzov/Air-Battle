@@ -1,6 +1,6 @@
 #include <cmath>
 
-#include "MovableObject.h"
+#include "GameObjects/MovableObject.h"
 
 #include "MoveByCurve.h"
 

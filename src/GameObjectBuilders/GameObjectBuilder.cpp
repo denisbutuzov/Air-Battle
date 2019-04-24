@@ -1,7 +1,7 @@
-#include "Enemy.h"
-#include "Gunshell.h"
-#include "PlayerObject.h"
-#include "HandGun.h"
+#include "GameObjects/Enemies/Enemy.h"
+#include "GameObjects/Gunshells/Gunshell.h"
+#include "GameObjects/PlayerObject.h"
+#include "HandWeapons/HandGun.h"
 
 #include "GameObjectBuilder.h"
 

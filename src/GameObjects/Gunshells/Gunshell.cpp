@@ -1,6 +1,6 @@
-#include "AbstractVisitor.h"
+#include "Visitors/AbstractVisitor.h"
 
-#include "Gunshell.h"
+#include "GameObjects/Gunshells/Gunshell.h"
 
 Gunshell::Gunshell(const std::shared_ptr<QGraphicsScene> &scene,
                    const std::shared_ptr<MoveStrategy> &moveStrategy)

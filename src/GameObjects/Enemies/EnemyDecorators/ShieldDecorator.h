@@ -1,6 +1,6 @@
 #pragma once
 
-#include "AbstractEnemyDecorator.h"
+#include "GameObjects/Enemies/EnemyDecorators/AbstractEnemyDecorator.h"
 
 class ShieldDecorator
         : public AbstractEnemyDecorator

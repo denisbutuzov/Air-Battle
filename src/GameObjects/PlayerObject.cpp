@@ -1,8 +1,8 @@
 #include <QGraphicsScene>
 #include <QKeyEvent>
 
-#include "HandWeapon.h"
-#include "Gunshell.h"
+#include "HandWeapons/HandWeapon.h"
+#include "GameObjects/Gunshells/Gunshell.h"
 
 #include "PlayerObject.h"
 

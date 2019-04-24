@@ -1,8 +1,8 @@
 #include <QGraphicsScene>
 
-#include "PresetPositionBuilder.h"
-#include "Enemy.h"
-#include "Machinegun.h"
+#include "GameObjectBuilders/PresetPositionBuilder.h"
+#include "GameObjects/Enemies/Enemy.h"
+#include "GameObjects/Weapons/Machinegun.h"
 
 #include "Level1Factory.h"
 
