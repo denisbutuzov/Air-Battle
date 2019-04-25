@@ -1,5 +1,4 @@
 #include "GameObjects/Gunshells/Gunshell.h"
-#include "GameObjectBuilders/PresetPositionBuilder.h"
 
 #include "HandMachinegun.h"
 
@@ -12,17 +11,18 @@ std::unique_ptr<Gunshell> HandMachinegun::shoot(qreal x, qreal y)
 {
     static enum class SIDE {LEFT, RIGHT} side;
 
-    PresetPositionBuilder builder;
     std::unique_ptr<Gunshell> gunshell;
     if(side == SIDE::LEFT)
     {
         side = SIDE::RIGHT;
-        gunshell = builder.buildGunshell(scene(), 10, 1, ":/images/images/Bullet.png", QPointF(x - 30.0, y + 60.0));
+        gunshell = std::make_unique<Gunshell>(scene(), ":/images/images/Bullet.png", 1);
+        gunshell->setPos(QPointF(x - 30.0, y + 60.0));
     }
     else if(side == SIDE::RIGHT)
     {
         side = SIDE::LEFT;
-        gunshell = builder.buildGunshell(scene(), 10, 1, ":/images/images/Bullet.png", QPointF(x + 30.0, y + 60.0));
+        gunshell = std::make_unique<Gunshell>(scene(), ":/images/images/Bullet.png", 1);
+        gunshell->setPos(QPointF(x + 30.0, y + 60.0));
     }
     return gunshell;
 }
