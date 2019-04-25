@@ -1,7 +1,9 @@
 #include "ShieldDecorator.h"
 
-ShieldDecorator::ShieldDecorator(std::unique_ptr<Enemy> enemy)
-    : AbstractEnemyDecorator(std::move(enemy))
+ShieldDecorator::ShieldDecorator(std::unique_ptr<Enemy> enemy,
+                                 const QString &pixmap,
+                                 int hitpoint)
+    : AbstractEnemyDecorator(std::move(enemy), pixmap, hitpoint)
 {
 }
 
