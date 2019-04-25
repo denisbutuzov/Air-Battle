@@ -3,8 +3,11 @@
 #include "Enemy.h"
 
 Enemy::Enemy(const std::shared_ptr<QGraphicsScene> &scene,
+             const QString &pixmap,
+             int hitpoint,
              const std::shared_ptr<MoveStrategy> &moveStrategy)
-    : MovableObject(scene, moveStrategy)
+    : MovableObject(scene, pixmap, moveStrategy)
+    , hitpoint_(hitpoint)
 {
 }
 
