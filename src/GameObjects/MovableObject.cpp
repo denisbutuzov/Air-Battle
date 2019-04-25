@@ -3,8 +3,9 @@
 #include "MovableObject.h"
 
 MovableObject::MovableObject(const std::shared_ptr<QGraphicsScene> &scene,
+                             const QString &pixmap,
                              const std::shared_ptr<MoveStrategy> &moveStrategy)
-    : GameObject(scene)
+    : GameObject(scene, pixmap)
     , moveStrategy_(moveStrategy)
 {
 }
