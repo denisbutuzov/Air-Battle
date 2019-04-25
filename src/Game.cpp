@@ -2,7 +2,6 @@
 
 #include <memory>
 
-#include "GameObjectBuilders/PresetPositionBuilder.h"
 #include "LevelFactories/Level1Factory.h"
 #include "LevelFactories/Level2Factory.h"
 #include "LevelFactories/Level3Factory.h"
@@ -11,6 +10,7 @@
 #include "GameObjects/Weapons/Weapon.h"
 #include "GameObjects/Gunshells/Gunshell.h"
 #include "HandWeapons/HandWeapon.h"
+#include "HandWeapons/HandGun.h"
 #include "Visitors/MoveVisitor.h"
 #include "SpecialObjects/Subjects/Score.h"
 #include "SpecialObjects/Subjects/Level.h"
@@ -32,8 +32,12 @@ Game::Game(QWidget *parent)
     setFixedSize(600, 800);
 
     //create an item to put unto the scene
-    PresetPositionBuilder gameObjectBuilder;
-    player_ = gameObjectBuilder.buildPlayer(scene_, ":/images/images/Player.png");
+    player_ = std::make_unique<PlayerObject>(scene_, ":/images/images/Player.png",
+                                             std::make_unique<HandGun>(scene_));
+    player_->setFlag(QGraphicsItem::ItemIsFocusable);
+    player_->setFocus();
+    player_->setPos((scene_->width() - player_->pixmap().width())/2,
+                    scene_->height() - player_->pixmap().height());
     player_->init();
 
     //set background image
