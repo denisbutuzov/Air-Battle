@@ -11,7 +11,7 @@ Level3Factory::Level3Factory(const std::shared_ptr<QGraphicsScene> &scene)
 std::unique_ptr<Enemy> Level3Factory::enemy()
 {
     auto enemy = std::make_unique<Enemy>(scene(), ":/images/images/Enemy2.png");
-    auto shield = std::make_unique<ShieldDecorator>(enemy, ":/images/images/EnemyShield.png", 2);
+    auto shield = std::make_unique<ShieldDecorator>(std::move(enemy), ":/images/images/EnemyShield.png", 2);
     shield->setPos(randomPos(shield->pixmap()));
     return enemy;
 }
