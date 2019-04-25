@@ -4,8 +4,9 @@
 
 #include "MoveByCurve.h"
 
-MoveByCurve::MoveByCurve(MoveStrategy::DIRECTION dir)
-    : MoveStrategy(dir)
+MoveByCurve::MoveByCurve(MoveStrategy::DIRECTION dir,
+                         unsigned int speed)
+    : MoveStrategy(dir, speed)
 {
 }
 
