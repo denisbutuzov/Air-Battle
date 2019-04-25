@@ -8,6 +8,8 @@ class Gunshell
 {
 public:
     Gunshell(const std::shared_ptr<QGraphicsScene> &scene,
+             const QString &pixmap,
+             int damage = 1,
              const std::shared_ptr<MoveStrategy> &moveStrategy = std::make_shared<MoveByLine>(MoveStrategy::DIRECTION::UP));
     virtual ~Gunshell() override = default;
     virtual void accept(AbstractVisitor &visitor) override;

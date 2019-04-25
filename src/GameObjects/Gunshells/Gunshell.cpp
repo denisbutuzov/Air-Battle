@@ -3,8 +3,11 @@
 #include "GameObjects/Gunshells/Gunshell.h"
 
 Gunshell::Gunshell(const std::shared_ptr<QGraphicsScene> &scene,
+                   const QString &pixmap,
+                   int damage,
                    const std::shared_ptr<MoveStrategy> &moveStrategy)
-    : MovableObject(scene, moveStrategy)
+    : MovableObject(scene, pixmap, moveStrategy)
+    , damage_(damage)
 {
 }
 
