@@ -1,6 +1,3 @@
-#include <QGraphicsScene>
-
-#include "GameObjectBuilders/PresetPositionBuilder.h"
 #include "GameObjects/Enemies/Enemy.h"
 #include "GameObjects/Weapons/Bazooka.h"
 
@@ -13,17 +10,14 @@ Level2Factory::Level2Factory(const std::shared_ptr<QGraphicsScene> &scene)
 
 std::unique_ptr<Enemy> Level2Factory::enemy()
 {
-    PresetPositionBuilder builder;
-    return builder.buildEnemy(scene(), 6, 1, ":/images/images/Enemy2.png");
+    auto enemy = std::make_unique<Enemy>(scene(), ":/images/images/Enemy2.png");
+    enemy->setPos(randomPos(enemy->pixmap()));
+    return enemy;
 }
 
 std::unique_ptr<Weapon> Level2Factory::weapon()
 {
-    auto weapon = std::make_unique<Bazooka>(scene());
-    weapon->setPixmap(QPixmap(":/images/images/bazooka.png"));
-    weapon->setSpeed(6);
-
-    int randomNumber = rand() % static_cast<int>(scene()->width() - weapon->pixmap().width());
-    weapon->setPos(randomNumber, 0 - weapon->pixmap().height());
+    auto weapon = std::make_unique<Bazooka>(scene(), ":/images/images/bazooka.png");
+    weapon->setPos(randomPos(weapon->pixmap()));
     return weapon;
 }
