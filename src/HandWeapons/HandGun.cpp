@@ -1,5 +1,4 @@
 #include "GameObjects/Gunshells/Gunshell.h"
-#include "GameObjectBuilders/PresetPositionBuilder.h"
 
 #include "HandGun.h"
 
@@ -10,6 +9,7 @@ HandGun::HandGun(const std::shared_ptr<QGraphicsScene> &scene)
 
 std::unique_ptr<Gunshell> HandGun::shoot(qreal x, qreal y)
 {
-    PresetPositionBuilder builder;
-    return builder.buildGunshell(scene(), 10, 1, ":/images/images/Bullet.png", QPointF(x, y));
+    auto gunshell = std::make_unique<Gunshell>(scene(), ":/images/images/Bullet.png", 1);
+    gunshell->setPos(QPointF(x, y));
+    return gunshell;
 }
