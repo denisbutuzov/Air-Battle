@@ -1,5 +1,4 @@
 #include "GameObjects/Gunshells/Gunshell.h"
-#include "GameObjectBuilders/PresetPositionBuilder.h"
 
 #include "HandBazooka.h"
 
@@ -9,7 +8,8 @@ HandBazooka::HandBazooka(const std::shared_ptr<QGraphicsScene> &scene)
 }
 
 std::unique_ptr<Gunshell> HandBazooka::shoot(qreal x, qreal y)
-{
-    PresetPositionBuilder builder;
-    return builder.buildGunshell(scene(), 10, 2, ":/images/images/rocket.png", QPointF(x, y));
+{    
+    auto gunshell = std::make_unique<Gunshell>(scene(), ":/images/images/Bullet.png", 2);
+    gunshell->setPos(QPointF(x, y));
+    return gunshell;
 }
