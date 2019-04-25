@@ -17,12 +17,12 @@ void MovableObject::move()
 
 void MovableObject::setSpeed(unsigned int speed)
 {
-    speed_ = speed;
+    moveStrategy_->setSpeed(speed);
 }
 
 unsigned int MovableObject::speed() const
 {
-    return speed_;
+    return moveStrategy_->speed();
 }
 
 std::shared_ptr<MoveStrategy> &MovableObject::moveStrategy()

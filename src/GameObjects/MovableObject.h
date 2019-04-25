@@ -27,5 +27,4 @@ protected:
 
 private:
     std::shared_ptr<MoveStrategy> moveStrategy_;
-    unsigned int speed_;
 };
