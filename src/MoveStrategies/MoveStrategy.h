@@ -15,10 +15,13 @@ public:
     virtual void move(MovableObject &object) = 0;
 
     DIRECTION direction() const;
+    void setSpeed(unsigned int speed);
+    unsigned int speed() const;
 
 protected:
-    MoveStrategy(DIRECTION dir);
+    MoveStrategy(DIRECTION dir, unsigned int speed);
 
 private:
     DIRECTION dir_;
+    unsigned int speed_;
 };
