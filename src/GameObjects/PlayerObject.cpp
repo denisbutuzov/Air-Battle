@@ -7,8 +7,9 @@
 #include "PlayerObject.h"
 
 PlayerObject::PlayerObject(const std::shared_ptr<QGraphicsScene> &scene,
+                           const QString &pixmap,
                            std::unique_ptr<HandWeapon> &&weapon)
-    : GameObject(scene)
+    : GameObject(scene, pixmap)
     , weapon_(std::move(weapon))
 {
 }

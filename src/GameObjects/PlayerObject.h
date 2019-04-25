@@ -13,6 +13,7 @@ class PlayerObject
 
 public:
     PlayerObject(const std::shared_ptr<QGraphicsScene> &scene,
+                 const QString &pixmap,
                  std::unique_ptr<HandWeapon> &&weapon);
     virtual ~PlayerObject() override;
 
