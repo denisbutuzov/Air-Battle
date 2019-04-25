@@ -40,8 +40,6 @@ SET(HEADERS Game.h
             LevelFactories/Level1Factory.h
             LevelFactories/Level2Factory.h
             LevelFactories/Level3Factory.h
-            GameObjectBuilders/GameObjectBuilder.h
-            GameObjectBuilders/PresetPositionBuilder.h
 )
 
 SET(SOURCES Game.cpp
@@ -72,8 +70,6 @@ SET(SOURCES Game.cpp
             LevelFactories/Level1Factory.cpp
             LevelFactories/Level2Factory.cpp
             LevelFactories/Level3Factory.cpp
-            GameObjectBuilders/GameObjectBuilder.cpp
-            GameObjectBuilders/PresetPositionBuilder.cpp
 )
 
 SET(LIBS Qt5::Core
