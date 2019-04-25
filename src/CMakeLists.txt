@@ -27,7 +27,6 @@ SET(HEADERS Game.h
             MoveStrategies/MoveStrategy.h
             MoveStrategies/MoveByLine.h
             MoveStrategies/MoveByCurve.h
-            MoveStrategies/MoveByRandom.h
             SpecialObjects/Subjects/AbstractSubject.h
             SpecialObjects/Subjects/Score.h
             SpecialObjects/Subjects/Level.h
@@ -63,7 +62,6 @@ SET(SOURCES Game.cpp
             MoveStrategies/MoveStrategy.cpp
             MoveStrategies/MoveByLine.cpp
             MoveStrategies/MoveByCurve.cpp
-            MoveStrategies/MoveByRandom.cpp
             SpecialObjects/Subjects/AbstractSubject.cpp
             SpecialObjects/Subjects/Score.cpp
             SpecialObjects/Subjects/Level.cpp
