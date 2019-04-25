@@ -2,8 +2,9 @@
 
 #include "MoveByLine.h"
 
-MoveByLine::MoveByLine(MoveStrategy::DIRECTION dir)
-    : MoveStrategy(dir)
+MoveByLine::MoveByLine(MoveStrategy::DIRECTION dir,
+                       unsigned int speed)
+    : MoveStrategy(dir, speed)
 {
 }
 
