@@ -12,7 +12,7 @@ public:
     std::shared_ptr<Enemy> enemy();
 
 protected:
-    AbstractEnemyDecorator(std::unique_ptr<Enemy> enemy);
+    AbstractEnemyDecorator(std::unique_ptr<Enemy> enemy, const QString &pixmap, int hitpoint);
 
 private:
     std::shared_ptr<Enemy> enemy_;

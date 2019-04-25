@@ -1,10 +1,11 @@
 #include "AbstractEnemyDecorator.h"
 
-AbstractEnemyDecorator::AbstractEnemyDecorator(std::unique_ptr<Enemy> enemy)
-    : Enemy(enemy->scene(), enemy->moveStrategy())
+AbstractEnemyDecorator::AbstractEnemyDecorator(std::unique_ptr<Enemy> enemy,
+                                               const QString &pixmap,
+                                               int hitpoint)
+    : Enemy(enemy->scene(), pixmap, hitpoint, enemy->moveStrategy())
     , enemy_(std::move(enemy))
 {
-    setSpeed(enemy_->speed());
 }
 
 void AbstractEnemyDecorator::init()
