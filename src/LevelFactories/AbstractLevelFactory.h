@@ -5,6 +5,9 @@
 class QGraphicsScene;
 class Enemy;
 class Weapon;
+class QPointF;
+class QPixmap;
+
 
 class AbstractLevelFactory
 {
@@ -17,6 +20,7 @@ protected:
     AbstractLevelFactory(const std::shared_ptr<QGraphicsScene> &scene);
 
     std::shared_ptr<QGraphicsScene> &scene();
+    QPointF randomPos(const QPixmap &pixmap);
 
 private:
     std::shared_ptr<QGraphicsScene> scene_;
