@@ -4,13 +4,10 @@
 #include <memory>
 
 #include "SpecialObjects/Observers/LabelObserver.h"
+#include "GameObjectKeeper.h"
 
 class Gunshell;
 class PlayerObject;
-class MovableObject;
-class Enemy;
-class Weapon;
-class Gunshell;
 class AbstractLevelFactory;
 class Score;
 class Level;
@@ -37,10 +34,6 @@ private slots:
     void levelChange();
 
 private:
-    using listOfEmemyObjects = std::list<std::shared_ptr<Enemy>>;
-    using listOfWeaponObjects = std::list<std::shared_ptr<Weapon>>;
-    using listOfGunshellObjects = std::list<std::shared_ptr<Gunshell>>;
-
     std::shared_ptr<QGraphicsScene> scene_;
     std::unique_ptr<PlayerObject> player_;
     std::unique_ptr<QTimer> spawnObjectTimer_;
@@ -48,9 +41,7 @@ private:
     std::unique_ptr<QTimer> checkCollisionTimer_;
     std::unique_ptr<QTimer> moveTimer_;
     std::unique_ptr<QTimer> levelChangeTimer_;
-    listOfEmemyObjects enemies_;
-    listOfWeaponObjects weapons_;
-    listOfGunshellObjects gunshells_;
+    GameObjectKeeper objectKeeper_;
     Score *score_;
     Level *level_;
     Health *health_;

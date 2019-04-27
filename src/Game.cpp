@@ -85,17 +85,17 @@ Game::Game(QWidget *parent)
 void Game::moveGameObjects()
 {
     MoveVisitor visitor;
-    for(auto iter = std::begin(enemies_); iter != std::end(enemies_); ++iter)
+    for(auto iter = std::begin(*objectKeeper_.enemies()); iter != std::end(*objectKeeper_.enemies()); ++iter)
     {
         (*iter)->accept(visitor);
     }
 
-    for(auto iter = std::begin(gunshells_); iter != std::end(gunshells_); ++iter)
+    for(auto iter = std::begin(*objectKeeper_.gunshells()); iter != std::end(*objectKeeper_.gunshells()); ++iter)
     {
         (*iter)->accept(visitor);
     }
 
-    for(auto iter = std::begin(weapons_); iter != std::end(weapons_); ++iter)
+    for(auto iter = std::begin(*objectKeeper_.weapons()); iter != std::end(*objectKeeper_.weapons()); ++iter)
     {
         (*iter)->accept(visitor);
     }
@@ -107,33 +107,21 @@ void Game::getSpawnObjectFromFactory()
 {
     auto spawnObject = Director::createSpawnObject(scene_, level_);
     spawnObject->init();
-
-    if (auto *enemy = dynamic_cast<Enemy *>(spawnObject.get()))
-    {
-        std::unique_ptr<Enemy> upEnemy(enemy);
-        spawnObject.release();
-        enemies_.push_back(std::move(upEnemy));
-    }
-    else if (auto *weapon = dynamic_cast<Weapon *>(spawnObject.get()))
-    {
-        std::unique_ptr<Weapon> upWeapon(weapon);
-        spawnObject.release();
-        weapons_.push_back(std::move(upWeapon));
-    }
+    objectKeeper_.pushMovableObject(spawnObject);
 }
 
 void Game::getGunshellFromPlayer()
 {
     auto gunshell = player_->shoot();
     gunshell->init();
-    gunshells_.push_back(std::move(gunshell));
+    objectKeeper_.pushGunshell(gunshell);
 }
 
 void Game::removeObjectsFromScene()
 {
-    gunshells_.remove_if([](auto &obj){return obj->y() < 0;});
-    weapons_.remove_if([scene=scene_](auto &obj){return obj->y() > scene->height();});
-    enemies_.remove_if
+    objectKeeper_.gunshells()->remove_if([](auto &obj){return obj->y() < 0;});
+    objectKeeper_.weapons()->remove_if([scene=scene_](auto &obj){return obj->y() > scene->height();});
+    objectKeeper_.enemies()->remove_if
             (
                 [&](auto &obj)
                 {
@@ -149,7 +137,7 @@ void Game::removeObjectsFromScene()
 
 void Game::checkCollisionBetweenGameObjects()
 {
-    gunshells_.remove_if
+    objectKeeper_.gunshells()->remove_if
             (
                 [](auto &gunshell)
                 {
@@ -166,7 +154,7 @@ void Game::checkCollisionBetweenGameObjects()
                 }
             );
 
-    enemies_.remove_if
+    objectKeeper_.enemies()->remove_if
             (
                 [&](auto &enemy)
                 {
@@ -174,7 +162,8 @@ void Game::checkCollisionBetweenGameObjects()
                     {
                         if(auto *shield = dynamic_cast<ShieldDecorator *>(enemy.get()))
                         {
-                            enemies_.push_back(shield->enemy());
+                            std::unique_ptr<Enemy> enemy(shield->enemy().release());
+                            objectKeeper_.pushEnemy(std::move(enemy));
                         }
                         else
                         {
@@ -186,7 +175,7 @@ void Game::checkCollisionBetweenGameObjects()
                 }
             );
 
-    weapons_.remove_if
+    objectKeeper_.weapons()->remove_if
             (
                 [](auto &weapon)
                 {

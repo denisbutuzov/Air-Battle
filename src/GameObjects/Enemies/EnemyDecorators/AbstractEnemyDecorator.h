@@ -9,11 +9,11 @@ public:
     virtual ~AbstractEnemyDecorator() override = default;
     virtual void init() override;
 
-    std::shared_ptr<Enemy> enemy();
+    std::unique_ptr<Enemy> &enemy();
 
 protected:
     AbstractEnemyDecorator(std::unique_ptr<Enemy> enemy, const QString &pixmap, int hitpoint);
 
 private:
-    std::shared_ptr<Enemy> enemy_;
+    std::unique_ptr<Enemy> enemy_;
 };

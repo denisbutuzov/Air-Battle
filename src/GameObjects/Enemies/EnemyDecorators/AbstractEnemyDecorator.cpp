@@ -14,7 +14,7 @@ void AbstractEnemyDecorator::init()
     enemy_->init();
 }
 
-std::shared_ptr<Enemy> AbstractEnemyDecorator::enemy()
+std::unique_ptr<Enemy> &AbstractEnemyDecorator::enemy()
 {
     return enemy_;
 }
