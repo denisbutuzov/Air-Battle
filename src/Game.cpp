@@ -2,9 +2,6 @@
 
 #include <memory>
 
-#include "LevelFactories/Level1Factory.h"
-#include "LevelFactories/Level2Factory.h"
-#include "LevelFactories/Level3Factory.h"
 #include "GameObjects/PlayerObject.h"
 #include "GameObjects/Enemies/EnemyDecorators/ShieldDecorator.h"
 #include "GameObjects/Weapons/Weapon.h"
@@ -16,6 +13,7 @@
 #include "SpecialObjects/Subjects/Level.h"
 #include "SpecialObjects/Subjects/Health.h"
 #include "SpecialObjects/Observers/HealthObserver.h"
+#include "Director.h"
 
 #include "Game.h"
 
@@ -107,22 +105,7 @@ Game::~Game() = default;
 
 void Game::getSpawnObjectFromFactory()
 {
-    std::unique_ptr<AbstractLevelFactory> levelFactory;
-
-    if(level_->value() == 1)
-    {
-        levelFactory = std::make_unique<Level1Factory>(scene_);
-    }
-    else if(level_->value() == 2)
-    {
-        levelFactory = std::make_unique<Level2Factory>(scene_);
-    }
-    else
-    {
-        levelFactory = std::make_unique<Level3Factory>(scene_);
-    }
-
-    auto spawnObject = createSpawnObject(levelFactory);
+    auto spawnObject = Director::createSpawnObject(scene_, level_);
     spawnObject->init();
 
     if (auto *enemy = dynamic_cast<Enemy *>(spawnObject.get()))
@@ -219,23 +202,9 @@ void Game::checkCollisionBetweenGameObjects()
                     return false;
                 }
             );
-
 }
 
 void Game::levelChange()
 {
     level_->increase();
-}
-
-std::unique_ptr<MovableObject> Game::createSpawnObject(std::unique_ptr<AbstractLevelFactory> &factory)
-{
-    int randomNumber = rand() % 10;
-    if(randomNumber > 6)
-    {
-        return factory->weapon();
-    }
-    else
-    {
-        return factory->enemy();
-    }
 }

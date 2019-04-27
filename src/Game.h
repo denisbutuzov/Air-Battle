@@ -37,9 +37,6 @@ private slots:
     void levelChange();
 
 private:
-    std::unique_ptr<MovableObject> createSpawnObject(std::unique_ptr<AbstractLevelFactory> &factory);
-
-private:
     using listOfEmemyObjects = std::list<std::shared_ptr<Enemy>>;
     using listOfWeaponObjects = std::list<std::shared_ptr<Weapon>>;
     using listOfGunshellObjects = std::list<std::shared_ptr<Gunshell>>;
