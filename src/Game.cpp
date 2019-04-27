@@ -125,13 +125,17 @@ void Game::getSpawnObjectFromFactory()
     auto spawnObject = createSpawnObject(levelFactory);
     spawnObject->init();
 
-    if (dynamic_cast<Enemy *>(spawnObject.get()))
+    if (auto *enemy = dynamic_cast<Enemy *>(spawnObject.get()))
     {
-        enemies_.push_back(std::move(spawnObject));
+        std::unique_ptr<Enemy> upEnemy(enemy);
+        spawnObject.release();
+        enemies_.push_back(std::move(upEnemy));
     }
-    else if (dynamic_cast<Weapon *>(spawnObject.get()))
+    else if (auto *weapon = dynamic_cast<Weapon *>(spawnObject.get()))
     {
-        weapons_.push_back(std::move(spawnObject));
+        std::unique_ptr<Weapon> upWeapon(weapon);
+        spawnObject.release();
+        weapons_.push_back(std::move(upWeapon));
     }
 }
 
@@ -139,7 +143,6 @@ void Game::getGunshellFromPlayer()
 {
     auto gunshell = player_->shoot();
     gunshell->init();
-
     gunshells_.push_back(std::move(gunshell));
 }
 
@@ -165,14 +168,13 @@ void Game::checkCollisionBetweenGameObjects()
 {
     gunshells_.remove_if
             (
-                [](auto &obj)
+                [](auto &gunshell)
                 {
-                    auto collidingList = obj->collidingItems();
+                    auto collidingList = gunshell->collidingItems();
                     for(auto *otherObj : collidingList)
                     {
                         if(auto *enemy = dynamic_cast<Enemy *>(otherObj))
                         {
-                            auto *gunshell = dynamic_cast<Gunshell *>(obj.get());
                             enemy->setHitpoint(enemy->hitpoint() - gunshell->damage());
                             return true;
                         }
@@ -183,12 +185,11 @@ void Game::checkCollisionBetweenGameObjects()
 
     enemies_.remove_if
             (
-                [&](auto &obj)
+                [&](auto &enemy)
                 {
-                    auto *enemy = dynamic_cast<Enemy *>(obj.get());
                     if (enemy->hitpoint() <= 0)
                     {
-                        if(auto *shield = dynamic_cast<ShieldDecorator *>(enemy))
+                        if(auto *shield = dynamic_cast<ShieldDecorator *>(enemy.get()))
                         {
                             enemies_.push_back(shield->enemy());
                         }
@@ -204,14 +205,13 @@ void Game::checkCollisionBetweenGameObjects()
 
     weapons_.remove_if
             (
-                [](auto &obj)
+                [](auto &weapon)
                 {
-                    auto collidingList = obj->collidingItems();
+                    auto collidingList = weapon->collidingItems();
                     for(auto *otherObj : collidingList)
                     {
                         if(auto *player = dynamic_cast<PlayerObject *>(otherObj))
                         {
-                            auto *weapon = dynamic_cast<Weapon *>(obj.get());
                             player->takeWeapon(weapon->handWeapon());
                             return true;
                         }

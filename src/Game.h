@@ -8,6 +8,9 @@
 class Gunshell;
 class PlayerObject;
 class MovableObject;
+class Enemy;
+class Weapon;
+class Gunshell;
 class AbstractLevelFactory;
 class Score;
 class Level;
@@ -37,7 +40,9 @@ private:
     std::unique_ptr<MovableObject> createSpawnObject(std::unique_ptr<AbstractLevelFactory> &factory);
 
 private:
-    using listOfMovableObjects = std::list<std::shared_ptr<MovableObject>>;
+    using listOfEmemyObjects = std::list<std::shared_ptr<Enemy>>;
+    using listOfWeaponObjects = std::list<std::shared_ptr<Weapon>>;
+    using listOfGunshellObjects = std::list<std::shared_ptr<Gunshell>>;
 
     std::shared_ptr<QGraphicsScene> scene_;
     std::unique_ptr<PlayerObject> player_;
@@ -46,9 +51,9 @@ private:
     std::unique_ptr<QTimer> checkCollisionTimer_;
     std::unique_ptr<QTimer> moveTimer_;
     std::unique_ptr<QTimer> levelChangeTimer_;
-    listOfMovableObjects enemies_;
-    listOfMovableObjects weapons_;
-    listOfMovableObjects gunshells_;
+    listOfEmemyObjects enemies_;
+    listOfWeaponObjects weapons_;
+    listOfGunshellObjects gunshells_;
     Score *score_;
     Level *level_;
     Health *health_;
