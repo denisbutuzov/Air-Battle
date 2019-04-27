@@ -10,6 +10,7 @@ SET(Qt5_COMPONENTS Core Gui Widgets Multimedia)
 FIND_PACKAGE(Qt5 COMPONENTS ${Qt5_COMPONENTS} REQUIRED)
 
 SET(HEADERS Game.h
+            Director.h
             GameObjects/GameObject.h
             GameObjects/PlayerObject.h
             GameObjects/MovableObject.h
@@ -43,6 +44,7 @@ SET(HEADERS Game.h
 )
 
 SET(SOURCES Game.cpp
+            Director.cpp
             GameObjects/GameObject.cpp
             GameObjects/PlayerObject.cpp
             GameObjects/MovableObject.cpp
