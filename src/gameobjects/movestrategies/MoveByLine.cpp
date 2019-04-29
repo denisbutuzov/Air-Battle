@@ -7,17 +7,17 @@ MoveByLine::MoveByLine(MoveStrategy::DIRECTION dir)
 {
 }
 
-void MoveByLine::move(MovableObject *object)
+void MoveByLine::move(MovableObject &object)
 {
-    auto tempX = object->x();
-    auto tempY = object->y();
+    auto tempX = object.x();
+    auto tempY = object.y();
     if(direction() == DIRECTION::UP)
     {
-        tempY -= object->speed();
+        tempY -= object.speed();
     }
     else
     {
-        tempY += object->speed();
+        tempY += object.speed();
     }
-    object->setPos(tempX, tempY);
+    object.setPos(tempX, tempY);
 }

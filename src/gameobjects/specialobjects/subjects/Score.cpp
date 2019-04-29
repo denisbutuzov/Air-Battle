@@ -22,7 +22,7 @@ void Score::increase()
     notify();
 }
 
-uint16_t Score::score() const
+unsigned int Score::value() const
 {
     return score_;
 }

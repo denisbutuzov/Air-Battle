@@ -12,7 +12,7 @@ public:
     };
 
     virtual ~MoveStrategy() = default;
-    virtual void move(MovableObject *object) = 0;
+    virtual void move(MovableObject &object) = 0;
 
     DIRECTION direction() const;
 

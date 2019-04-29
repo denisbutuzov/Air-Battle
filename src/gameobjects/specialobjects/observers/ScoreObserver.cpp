@@ -14,10 +14,10 @@ ScoreObserver::ScoreObserver(Score *score)
 
 void ScoreObserver::update()
 {
-    setPlainText(QString("Score: " + QString::number(subject_->score())));
+    setPlainText(QString("Score: " + QString::number(subject_->value())));
 }
 
-void ScoreObserver::show(QGraphicsScene *scene, QPointF coordinate)
+void ScoreObserver::show(std::shared_ptr<QGraphicsScene> &scene, QPointF coordinate)
 {
     scene->addItem(this);
     setPos(coordinate);

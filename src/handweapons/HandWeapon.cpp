@@ -1,11 +1,11 @@
 #include "HandWeapon.h"
 
-HandWeapon::HandWeapon(QGraphicsScene *scene)
+HandWeapon::HandWeapon(const std::shared_ptr<QGraphicsScene> &scene)
     : scene_(scene)
 {
 }
 
-QGraphicsScene *HandWeapon::scene() const
+std::shared_ptr<QGraphicsScene> &HandWeapon::scene()
 {
     return scene_;
 }

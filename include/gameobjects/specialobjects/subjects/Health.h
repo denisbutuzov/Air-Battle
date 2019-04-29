@@ -1,10 +1,8 @@
 #pragma once
 
-#include <cstdint>
-
 #include "AbstractSubject.h"
 
-const uint16_t MAX_HEALTH = 5;
+constexpr int MAX_HEALTH = 5;
 
 class Health
         : public AbstractSubject
@@ -13,10 +11,10 @@ public:
     static Health *instance();
     void increase();
     void decrease();
-    uint16_t health() const;
+    int value() const;
 
 protected:
-    Health(uint16_t maxHealth = MAX_HEALTH);
+    Health(int maxHealth = MAX_HEALTH);
     Health(const Health &other) = delete;
     Health(Health &&other) = delete;
 
@@ -25,6 +23,6 @@ protected:
 
 private:
     static Health *instance_;
-    uint16_t health_;
-    uint16_t maxHealth_;
+    int health_;
+    int maxHealth_;
 };

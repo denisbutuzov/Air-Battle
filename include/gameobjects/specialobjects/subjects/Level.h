@@ -4,7 +4,7 @@
 
 #include "AbstractSubject.h"
 
-const uint16_t MAX_LEVEL = 3;
+constexpr unsigned int MAX_LEVEL = 3;
 
 class Level
         : public QObject
@@ -14,13 +14,13 @@ class Level
 
 public:
     static Level *instance();
-    uint16_t level() const;
+    unsigned int value() const;
 
 public slots:
     void increase();
 
 protected:
-    Level(uint16_t maxLevel = MAX_LEVEL);
+    Level(unsigned int maxLevel = MAX_LEVEL);
     Level(const Level &other) = delete;
     Level(Level &&other) = delete;
 
@@ -29,6 +29,6 @@ protected:
 
 private:
     static Level *instance_;
-    uint16_t level_;
-    uint16_t maxLevel_;
+    unsigned int level_;
+    unsigned int maxLevel_;
 };

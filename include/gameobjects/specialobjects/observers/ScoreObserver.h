@@ -2,6 +2,8 @@
 
 #include <QGraphicsTextItem>
 
+#include <memory>
+
 #include "AbstractObserver.h"
 
 class Score;
@@ -14,7 +16,7 @@ public:
     ScoreObserver(Score *score);
     virtual void update() override;
 
-    void show(QGraphicsScene *scene, QPointF coordinate = QPointF(0.0, 0.0));
+    void show(std::shared_ptr<QGraphicsScene> &scene, QPointF coordinate = QPointF(0.0, 0.0));
 
 private:
     Score *subject_;

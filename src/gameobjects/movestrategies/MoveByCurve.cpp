@@ -9,18 +9,18 @@ MoveByCurve::MoveByCurve(MoveStrategy::DIRECTION dir)
 {
 }
 
-void MoveByCurve::move(MovableObject *object)
+void MoveByCurve::move(MovableObject &object)
 {
-    auto tempX = object->x();
-    auto tempY = object->y();
+    auto tempX = object.x();
+    auto tempY = object.y();
     if(direction() == DIRECTION::UP)
     {
-        tempY -= object->speed();
+        tempY -= object.speed();
     }
     else
     {
-        tempY += object->speed();
+        tempY += object.speed();
     }
     tempX += 5 * std::sin(0.02 * tempY);
-    object->setPos(tempX, tempY);
+    object.setPos(tempX, tempY);
 }

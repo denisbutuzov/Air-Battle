@@ -7,5 +7,5 @@ class MoveByLine
 {
 public:
     MoveByLine(DIRECTION dir);
-    virtual void move(MovableObject *object) override final;
+    virtual void move(MovableObject &object) override final;
 };

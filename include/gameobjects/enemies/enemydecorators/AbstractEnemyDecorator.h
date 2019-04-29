@@ -9,11 +9,11 @@ public:
     virtual ~AbstractEnemyDecorator() override = default;
     virtual void init() override;
 
-protected:
-    AbstractEnemyDecorator(QGraphicsScene *scene, Enemy *enemy);
+    std::shared_ptr<Enemy> enemy();
 
-    Enemy *enemy() const;
+protected:
+    AbstractEnemyDecorator(std::unique_ptr<Enemy> enemy);
 
 private:
-    Enemy *enemy_;
+    std::shared_ptr<Enemy> enemy_;
 };

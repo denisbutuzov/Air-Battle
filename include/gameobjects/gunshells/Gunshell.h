@@ -3,34 +3,18 @@
 #include "MoveByLine.h"
 #include "MovableObject.h"
 
-class QMediaPlayer;
-
 class Gunshell
         : public MovableObject
 {
 public:
-    virtual ~Gunshell() override;
-    virtual void init() override final;
+    Gunshell(const std::shared_ptr<QGraphicsScene> &scene,
+             const std::shared_ptr<MoveStrategy> &moveStrategy = std::make_shared<MoveByLine>(MoveStrategy::DIRECTION::UP));
+    virtual ~Gunshell() override = default;
+    virtual void accept(AbstractVisitor &visitor) override;
 
-    uint16_t damage() const;
-
-protected:
-    Gunshell(QGraphicsScene *scene, qreal x, qreal y, MoveStrategy *moveStrategy = new MoveByLine(MoveStrategy::DIRECTION::UP));
-
-    void setDamage(uint16_t damage);
+    void setDamage(int damage);
+    int damage() const;
 
 private:
-    virtual void setStartObjectPos() override final;
-    virtual void setSpeed() override;
-    virtual void OnMeetOtherObject(GameObject *otherObject) override;
-    virtual void setDamage();
-    virtual QString pathToShotSound() const = 0;
-
-    void playShotSound();
-
-private:
-    uint16_t damage_;
-    QMediaPlayer *shotSound_;
-    qreal x_;
-    qreal y_;
+    int damage_;
 };

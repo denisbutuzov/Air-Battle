@@ -1,7 +1,6 @@
 #include <QGraphicsScene>
 
 #include "Health.h"
-#include "HeartObject.h"
 
 #include "HealthObserver.h"
 
@@ -13,7 +12,7 @@ HealthObserver::HealthObserver(Health *health)
 
 void HealthObserver::update()
 {
-    if(static_cast<unsigned int>(hearts_.size()) < subject_->health())
+    if(hearts_.size() < subject_->value())
     {
         repeatWhileSizesAreNotEqual(std::bind(&HealthObserver::addHeart, this));
     }
@@ -23,31 +22,29 @@ void HealthObserver::update()
     }
 }
 
-void HealthObserver::show(QGraphicsScene *scene, QPointF coordinate)
+void HealthObserver::show(std::shared_ptr<QGraphicsScene> &scene, QPointF coordinate)
 {
     scene_ = scene;
     coordinate_ = coordinate;
 
-    for (unsigned int i = 0; i != subject_->health(); ++i)
+    for (int i = 0; i != subject_->value(); ++i)
     {
         addHeart();
     }
 }
 
-QPointF HealthObserver::coordinate() const
-{
-    return coordinate_;
-}
-
-const QQueue<HeartObject *> &HealthObserver::hearts() const
-{
-    return hearts_;
-}
-
 void HealthObserver::addHeart()
 {
-    auto *heart = new HeartObject(scene_, this);
-    heart->init();
+    auto *heart = new QGraphicsPixmapItem(QPixmap(":/images/images/Heart.png").scaled(20, 20));
+    if(!hearts_.empty())
+    {
+        heart->setPos(hearts_.back()->pos() + QPointF(hearts_.back()->pixmap().width() + 5.0, 0.0));
+    }
+    else
+    {
+        heart->setPos(coordinate_);
+    }
+    scene_->addItem(heart);
     hearts_.enqueue(heart);
 }
 
@@ -59,7 +56,7 @@ void HealthObserver::removeHeart()
 
 void HealthObserver::repeatWhileSizesAreNotEqual(std::function<void ()> &&callBack)
 {
-    while(static_cast<unsigned int>(hearts_.size()) != subject_->health())
+    while(hearts_.size() != subject_->value())
     {
         callBack();
     }
