@@ -16,7 +16,7 @@ std::unique_ptr<ToClass> dynamic_unique_cast(std::unique_ptr<FromClass> &&from)
     return std::unique_ptr<ToClass>(nullptr);
 }
 
-void GameObjectKeeper::pushMovableObject(std::unique_ptr<MovableObject> &object)
+void GameObjectKeeper::pushMovableObject(std::unique_ptr<MovableObject> &&object)
 {
     if(auto enemy = dynamic_unique_cast<Enemy>(std::move(object)))
     {
@@ -32,17 +32,17 @@ void GameObjectKeeper::pushMovableObject(std::unique_ptr<MovableObject> &object)
     }
 }
 
-void GameObjectKeeper::pushEnemy(std::unique_ptr<Enemy> &enemy)
+void GameObjectKeeper::pushEnemy(std::unique_ptr<Enemy> &&enemy)
 {
     enemies_.push_back(std::move(enemy));
 }
 
-void GameObjectKeeper::pushWeapon(std::unique_ptr<Weapon> &weapon)
+void GameObjectKeeper::pushWeapon(std::unique_ptr<Weapon> &&weapon)
 {
     weapons_.push_back(std::move(weapon));
 }
 
-void GameObjectKeeper::pushGunshell(std::unique_ptr<Gunshell> &gunshell)
+void GameObjectKeeper::pushGunshell(std::unique_ptr<Gunshell> &&gunshell)
 {
     gunshells_.push_back(std::move(gunshell));
 }

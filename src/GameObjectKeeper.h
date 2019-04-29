@@ -15,10 +15,10 @@ public:
     using listOfWeaponObjects = std::list<std::shared_ptr<Weapon>>;
     using listOfGunshellObjects = std::list<std::shared_ptr<Gunshell>>;
 
-    void pushMovableObject(std::unique_ptr<MovableObject> &object);
-    void pushEnemy(std::unique_ptr<Enemy> &enemy);
-    void pushWeapon(std::unique_ptr<Weapon> &weapon);
-    void pushGunshell(std::unique_ptr<Gunshell> &gunshell);
+    void pushMovableObject(std::unique_ptr<MovableObject> &&object);
+    void pushEnemy(std::unique_ptr<Enemy> &&enemy);
+    void pushWeapon(std::unique_ptr<Weapon> &&weapon);
+    void pushGunshell(std::unique_ptr<Gunshell> &&gunshell);
 
     listOfEmemyObjects *enemies();
     listOfWeaponObjects *weapons();

@@ -107,14 +107,14 @@ void Game::getSpawnObjectFromFactory()
 {
     auto spawnObject = Director::createSpawnObject(scene_, level_);
     spawnObject->init();
-    objectKeeper_.pushMovableObject(spawnObject);
+    objectKeeper_.pushMovableObject(std::move(spawnObject));
 }
 
 void Game::getGunshellFromPlayer()
 {
     auto gunshell = player_->shoot();
     gunshell->init();
-    objectKeeper_.pushGunshell(gunshell);
+    objectKeeper_.pushGunshell(std::move(gunshell));
 }
 
 void Game::removeObjectsFromScene()
