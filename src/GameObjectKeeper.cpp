@@ -4,25 +4,31 @@
 
 #include "GameObjectKeeper.h"
 
+template<typename ToClass, typename FromClass>
+std::unique_ptr<ToClass> dynamic_unique_cast(std::unique_ptr<FromClass> &&from)
+{
+    if(ToClass *to = dynamic_cast<ToClass *>(from.get()))
+    {
+        std::unique_ptr<ToClass> result(to);
+        from.release();
+        return result;
+    }
+    return std::unique_ptr<ToClass>(nullptr);
+}
+
 void GameObjectKeeper::pushMovableObject(std::unique_ptr<MovableObject> &object)
 {
-    if (auto *enemy = dynamic_cast<Enemy *>(object.get()))
+    if(auto enemy = dynamic_unique_cast<Enemy>(std::move(object)))
     {
-        std::unique_ptr<Enemy> upEnemy(enemy);
-        object.release();
-        enemies_.push_back(std::move(upEnemy));
+        enemies_.push_back(std::move(enemy));
     }
-    else if (auto *weapon = dynamic_cast<Weapon *>(object.get()))
+    else if(auto weapon = dynamic_unique_cast<Weapon>(std::move(object)))
     {
-        std::unique_ptr<Weapon> upWeapon(weapon);
-        object.release();
-        weapons_.push_back(std::move(upWeapon));
+        weapons_.push_back(std::move(weapon));
     }
-    else if (auto *gunshell = dynamic_cast<Gunshell *>(object.get()))
+    else if(auto gunshell = dynamic_unique_cast<Gunshell>(std::move(object)))
     {
-        std::unique_ptr<Gunshell> upGunshell(gunshell);
-        object.release();
-        gunshells_.push_back(std::move(upGunshell));
+        gunshells_.push_back(std::move(gunshell));
     }
 }
 
