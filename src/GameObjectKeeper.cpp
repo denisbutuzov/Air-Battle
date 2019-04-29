@@ -1,6 +1,7 @@
 #include "GameObjects/Enemies/Enemy.h"
 #include "GameObjects/Weapons/Weapon.h"
 #include "GameObjects/Gunshells/Gunshell.h"
+#include "Visitors/AbstractVisitor.h"
 
 #include "GameObjectKeeper.h"
 
@@ -45,6 +46,37 @@ void GameObjectKeeper::pushWeapon(std::unique_ptr<Weapon> &&weapon)
 void GameObjectKeeper::pushGunshell(std::unique_ptr<Gunshell> &&gunshell)
 {
     gunshells_.push_back(std::move(gunshell));
+}
+
+void GameObjectKeeper::acceptToAll(AbstractVisitor &visitor)
+{
+    acceptToEnemies(visitor);
+    acceptToWeapons(visitor);
+    acceptToGunshells(visitor);
+}
+
+void GameObjectKeeper::acceptToEnemies(AbstractVisitor &visitor)
+{
+    for(auto iter = std::begin(enemies_); iter != std::end(enemies_); ++iter)
+    {
+        (*iter)->accept(visitor);
+    }
+}
+
+void GameObjectKeeper::acceptToWeapons(AbstractVisitor &visitor)
+{
+    for(auto iter = std::begin(weapons_); iter != std::end(weapons_); ++iter)
+    {
+        (*iter)->accept(visitor);
+    }
+}
+
+void GameObjectKeeper::acceptToGunshells(AbstractVisitor &visitor)
+{
+    for(auto iter = std::begin(gunshells_); iter != std::end(gunshells_); ++iter)
+    {
+        (*iter)->accept(visitor);
+    }
 }
 
 GameObjectKeeper::listOfEmemyObjects *GameObjectKeeper::enemies()

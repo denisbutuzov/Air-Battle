@@ -7,6 +7,7 @@ class MovableObject;
 class Enemy;
 class Weapon;
 class Gunshell;
+class AbstractVisitor;
 
 class GameObjectKeeper
 {
@@ -19,6 +20,10 @@ public:
     void pushEnemy(std::unique_ptr<Enemy> &&enemy);
     void pushWeapon(std::unique_ptr<Weapon> &&weapon);
     void pushGunshell(std::unique_ptr<Gunshell> &&gunshell);
+    void acceptToAll(AbstractVisitor &visitor);
+    void acceptToEnemies(AbstractVisitor &visitor);
+    void acceptToWeapons(AbstractVisitor &visitor);
+    void acceptToGunshells(AbstractVisitor &visitor);
 
     listOfEmemyObjects *enemies();
     listOfWeaponObjects *weapons();

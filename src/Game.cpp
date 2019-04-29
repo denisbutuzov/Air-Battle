@@ -85,20 +85,7 @@ Game::Game(QWidget *parent)
 void Game::moveGameObjects()
 {
     MoveVisitor visitor;
-    for(auto iter = std::begin(*objectKeeper_.enemies()); iter != std::end(*objectKeeper_.enemies()); ++iter)
-    {
-        (*iter)->accept(visitor);
-    }
-
-    for(auto iter = std::begin(*objectKeeper_.gunshells()); iter != std::end(*objectKeeper_.gunshells()); ++iter)
-    {
-        (*iter)->accept(visitor);
-    }
-
-    for(auto iter = std::begin(*objectKeeper_.weapons()); iter != std::end(*objectKeeper_.weapons()); ++iter)
-    {
-        (*iter)->accept(visitor);
-    }
+    objectKeeper_.acceptToAll(visitor);
 }
 
 Game::~Game() = default;
