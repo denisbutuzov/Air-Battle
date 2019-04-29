@@ -2,22 +2,18 @@
 
 #include <memory>
 
-#include "PresetPositionBuilder.h"
-#include "Level1Factory.h"
-#include "Level2Factory.h"
-#include "Level3Factory.h"
-#include "PlayerObject.h"
-#include "ShieldDecorator.h"
-#include "Weapon.h"
-#include "HandWeapon.h"
-#include "Gunshell.h"
-#include "MoveVisitor.h"
-#include "Score.h"
-#include "ScoreObserver.h"
-#include "Level.h"
-#include "LevelObserver.h"
-#include "Health.h"
-#include "HealthObserver.h"
+#include "GameObjects/PlayerObject.h"
+#include "GameObjects/Enemies/EnemyDecorators/ShieldDecorator.h"
+#include "GameObjects/Weapons/Weapon.h"
+#include "GameObjects/Gunshells/Gunshell.h"
+#include "HandWeapons/HandWeapon.h"
+#include "HandWeapons/HandGun.h"
+#include "Visitors/MoveVisitor.h"
+#include "SpecialObjects/Subjects/Score.h"
+#include "SpecialObjects/Subjects/Level.h"
+#include "SpecialObjects/Subjects/Health.h"
+#include "SpecialObjects/Observers/HealthObserver.h"
+#include "Director.h"
 
 #include "Game.h"
 
@@ -34,8 +30,12 @@ Game::Game(QWidget *parent)
     setFixedSize(600, 800);
 
     //create an item to put unto the scene
-    PresetPositionBuilder gameObjectBuilder;
-    player_ = gameObjectBuilder.buildPlayer(scene_, ":/images/images/Player.png");
+    player_ = std::make_unique<PlayerObject>(scene_, ":/images/images/Player.png",
+                                             std::make_unique<HandGun>(scene_));
+    player_->setFlag(QGraphicsItem::ItemIsFocusable);
+    player_->setFocus();
+    player_->setPos((scene_->width() - player_->pixmap().width())/2,
+                    scene_->height() - player_->pixmap().height());
     player_->init();
 
     //set background image
@@ -69,13 +69,12 @@ Game::Game(QWidget *parent)
             this, SLOT(levelChange()));
     levelChangeTimer_->start(10000);
 
-
     score_ = Score::instance();
-    scoreObserver_ = new ScoreObserver(score_);
+    scoreObserver_ = new LabelObserver<Score>(score_, "Score: ");
     scoreObserver_->show(scene_);
 
     level_ = Level::instance();
-    levelObserver_ = new LevelObserver(level_);
+    levelObserver_ = new LabelObserver<Level>(level_, "Level: ");
     levelObserver_->show(scene_, QPointF(250.0, 0.0));
 
     health_ = Health::instance();
@@ -86,67 +85,30 @@ Game::Game(QWidget *parent)
 void Game::moveGameObjects()
 {
     MoveVisitor visitor;
-    for(auto iter = std::begin(enemies_); iter != std::end(enemies_); ++iter)
-    {
-        (*iter)->accept(visitor);
-    }
-
-    for(auto iter = std::begin(gunshells_); iter != std::end(gunshells_); ++iter)
-    {
-        (*iter)->accept(visitor);
-    }
-
-    for(auto iter = std::begin(weapons_); iter != std::end(weapons_); ++iter)
-    {
-        (*iter)->accept(visitor);
-    }
+    objectKeeper_.acceptToAll(visitor);
 }
 
 Game::~Game() = default;
 
 void Game::getSpawnObjectFromFactory()
 {
-    std::unique_ptr<AbstractLevelFactory> levelFactory;
-
-    if(level_->value() == 1)
-    {
-        levelFactory = std::make_unique<Level1Factory>(scene_);
-    }
-    else if(level_->value() == 2)
-    {
-        levelFactory = std::make_unique<Level2Factory>(scene_);
-    }
-    else
-    {
-        levelFactory = std::make_unique<Level3Factory>(scene_);
-    }
-
-    auto spawnObject = createSpawnObject(levelFactory);
+    auto spawnObject = Director::createSpawnObject(scene_, level_);
     spawnObject->init();
-
-    if (dynamic_cast<Enemy *>(spawnObject.get()))
-    {
-        enemies_.push_back(std::move(spawnObject));
-    }
-    else if (dynamic_cast<Weapon *>(spawnObject.get()))
-    {
-        weapons_.push_back(std::move(spawnObject));
-    }
+    objectKeeper_.pushMovableObject(std::move(spawnObject));
 }
 
 void Game::getGunshellFromPlayer()
 {
     auto gunshell = player_->shoot();
     gunshell->init();
-
-    gunshells_.push_back(std::move(gunshell));
+    objectKeeper_.pushGunshell(std::move(gunshell));
 }
 
 void Game::removeObjectsFromScene()
 {
-    gunshells_.remove_if([](auto &obj){return obj->y() < 0;});
-    weapons_.remove_if([scene=scene_](auto &obj){return obj->y() > scene->height();});
-    enemies_.remove_if
+    objectKeeper_.gunshells()->remove_if([](auto &obj){return obj->y() < 0;});
+    objectKeeper_.weapons()->remove_if([scene=scene_](auto &obj){return obj->y() > scene->height();});
+    objectKeeper_.enemies()->remove_if
             (
                 [&](auto &obj)
                 {
@@ -162,16 +124,15 @@ void Game::removeObjectsFromScene()
 
 void Game::checkCollisionBetweenGameObjects()
 {
-    gunshells_.remove_if
+    objectKeeper_.gunshells()->remove_if
             (
-                [](auto &obj)
+                [](auto &gunshell)
                 {
-                    auto collidingList = obj->collidingItems();
+                    auto collidingList = gunshell->collidingItems();
                     for(auto *otherObj : collidingList)
                     {
                         if(auto *enemy = dynamic_cast<Enemy *>(otherObj))
                         {
-                            auto *gunshell = dynamic_cast<Gunshell *>(obj.get());
                             enemy->setHitpoint(enemy->hitpoint() - gunshell->damage());
                             return true;
                         }
@@ -180,16 +141,16 @@ void Game::checkCollisionBetweenGameObjects()
                 }
             );
 
-    enemies_.remove_if
+    objectKeeper_.enemies()->remove_if
             (
-                [&](auto &obj)
+                [&](auto &enemy)
                 {
-                    auto *enemy = dynamic_cast<Enemy *>(obj.get());
                     if (enemy->hitpoint() <= 0)
                     {
-                        if(auto *shield = dynamic_cast<ShieldDecorator *>(enemy))
+                        if(auto *shield = dynamic_cast<ShieldDecorator *>(enemy.get()))
                         {
-                            enemies_.push_back(shield->enemy());
+                            std::unique_ptr<Enemy> enemy(shield->enemy().release());
+                            objectKeeper_.pushEnemy(std::move(enemy));
                         }
                         else
                         {
@@ -201,16 +162,15 @@ void Game::checkCollisionBetweenGameObjects()
                 }
             );
 
-    weapons_.remove_if
+    objectKeeper_.weapons()->remove_if
             (
-                [](auto &obj)
+                [](auto &weapon)
                 {
-                    auto collidingList = obj->collidingItems();
+                    auto collidingList = weapon->collidingItems();
                     for(auto *otherObj : collidingList)
                     {
                         if(auto *player = dynamic_cast<PlayerObject *>(otherObj))
                         {
-                            auto *weapon = dynamic_cast<Weapon *>(obj.get());
                             player->takeWeapon(weapon->handWeapon());
                             return true;
                         }
@@ -218,23 +178,9 @@ void Game::checkCollisionBetweenGameObjects()
                     return false;
                 }
             );
-
 }
 
 void Game::levelChange()
 {
     level_->increase();
-}
-
-std::unique_ptr<MovableObject> Game::createSpawnObject(std::unique_ptr<AbstractLevelFactory> &factory)
-{
-    int randomNumber = rand() % 10;
-    if(randomNumber > 6)
-    {
-        return factory->weapon();
-    }
-    else
-    {
-        return factory->enemy();
-    }
 }
