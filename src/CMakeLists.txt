@@ -9,9 +9,11 @@ set (CMAKE_CXX_STANDARD 14)
 SET(Qt5_COMPONENTS Core Gui Widgets Multimedia)
 FIND_PACKAGE(Qt5 COMPONENTS ${Qt5_COMPONENTS} REQUIRED)
 
-SET(HEADERS Game.h
+SET(HEADERS additionals.h
+            Game.h
             Director.h
             GameObjectKeeper.h
+            Magazine.h
             GameObjects/GameObject.h
             GameObjects/PlayerObject.h
             GameObjects/MovableObject.h
@@ -47,6 +49,7 @@ SET(HEADERS Game.h
 SET(SOURCES Game.cpp
             Director.cpp
             GameObjectKeeper.cpp
+            Magazine.cpp
             GameObjects/GameObject.cpp
             GameObjects/PlayerObject.cpp
             GameObjects/MovableObject.cpp
