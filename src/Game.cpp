@@ -30,8 +30,7 @@ Game::Game(QWidget *parent)
     setFixedSize(600, 800);
 
     //create an item to put unto the scene
-    player_ = std::make_unique<PlayerObject>(scene_, ":/images/images/Player.png",
-                                             std::make_unique<HandGun>(scene_));
+    player_ = std::make_unique<PlayerObject>(scene_, ":/images/images/Player.png");
     player_->setFlag(QGraphicsItem::ItemIsFocusable);
     player_->setFocus();
     player_->setPos((scene_->width() - player_->pixmap().width())/2,

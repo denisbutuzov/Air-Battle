@@ -3,27 +3,27 @@
 
 #include "HandWeapons/HandWeapon.h"
 #include "GameObjects/Gunshells/Gunshell.h"
+#include "Magazine.h"
 
 #include "PlayerObject.h"
 
 PlayerObject::PlayerObject(const std::shared_ptr<QGraphicsScene> &scene,
-                           const QString &pixmap,
-                           std::unique_ptr<HandWeapon> &&weapon)
+                           const QString &pixmap)
     : GameObject(scene, pixmap)
-    , weapon_(std::move(weapon))
 {
+    weapons_ = std::make_unique<Magazine>(scene);
 }
 
 PlayerObject::~PlayerObject() = default;
 
 void PlayerObject::takeWeapon(std::unique_ptr<HandWeapon> &&weapon)
 {
-    weapon_ = std::move(weapon);
+    weapons_->addWeapon(std::move(weapon));
 }
 
 std::unique_ptr<Gunshell> PlayerObject::shoot() const
 {
-    return weapon_->shoot(x() + pixmap().width()/2, y());
+    return weapons_->shoot(x() + pixmap().width()/2, y());
 }
 
 void PlayerObject::keyPressEvent(QKeyEvent *event)
