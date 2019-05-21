@@ -8,7 +8,7 @@
 
 Magazine::Magazine(const std::shared_ptr<QGraphicsScene> &scene)
 {
-    weapons_.insert({WEAPON::Gun, std::make_unique<HandGun>(scene)});
+    weapons_.insert({WEAPON::Gun, std::make_pair(std::make_unique<HandGun>(scene), 0)});
     currentWeapon_ = weapons_.begin();
 }
 
@@ -16,16 +16,26 @@ void Magazine::addWeapon(std::unique_ptr<HandWeapon> &&weapon)
 {
     if(auto gun = dynamic_unique_cast<HandMachinegun>(std::move(weapon)))
     {
-        if (weapons_.find(WEAPON::Machinegun) == weapons_.end())
+        auto iter = weapons_.find(WEAPON::Machinegun);
+        if (iter == weapons_.end())
         {
-            weapons_.insert({WEAPON::Machinegun, std::move(gun)});
+            weapons_.insert({WEAPON::Machinegun, std::make_pair(std::move(gun), 15)});
+        }
+        else
+        {
+            iter->second.second += 10;
         }
     }
     else if(auto gun = dynamic_unique_cast<HandBazooka>(std::move(weapon)))
     {
-        if (weapons_.find(WEAPON::Bazooka) == weapons_.end())
+        auto iter = weapons_.find(WEAPON::Bazooka);
+        if (iter == weapons_.end())
         {
-            weapons_.insert({WEAPON::Bazooka, std::move(gun)});
+            weapons_.insert({WEAPON::Bazooka, std::make_pair(std::move(gun), 15)});
+        }
+        else
+        {
+            iter->second.second += 10;
         }
     }
 }
@@ -40,5 +50,20 @@ void Magazine::changeWeapon()
 
 std::unique_ptr<Gunshell> Magazine::shoot(qreal x, qreal y)
 {
-    return currentWeapon_->second->shoot(x, y);
+    auto weapon = currentWeapon_->first;
+    auto gunshellNumber = currentWeapon_->second.second;
+    if(weapon == WEAPON::Gun)
+    {
+        return currentWeapon_->second.first->shoot(x, y);
+    }
+    else if(gunshellNumber != 0)
+    {
+        currentWeapon_->second.second--;
+        return currentWeapon_->second.first->shoot(x, y);
+    }
+    else
+    {
+        changeWeapon();
+        return shoot(x, y);
+    }
 }
