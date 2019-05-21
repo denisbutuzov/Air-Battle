@@ -26,4 +26,5 @@ private:
     };
 
     std::map<WEAPON, std::unique_ptr<HandWeapon>> weapons_;
+    WEAPON currentWeapon_;
 };

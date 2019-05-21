@@ -6,9 +6,8 @@
 
 #include "Magazine.h"
 
-#include <QDebug>
-
 Magazine::Magazine(const std::shared_ptr<QGraphicsScene> &scene)
+    : currentWeapon_(WEAPON::Gun)
 {
     weapons_.insert({WEAPON::Gun, std::make_unique<HandGun>(scene)});
 }
@@ -17,31 +16,31 @@ void Magazine::addWeapon(std::unique_ptr<HandWeapon> &&weapon)
 {
     if(auto gun = dynamic_unique_cast<HandMachinegun>(std::move(weapon)))
     {
-        if (weapons_.find(WEAPON::Machinegun) != weapons_.end())
+        if (weapons_.find(WEAPON::Machinegun) == weapons_.end())
         {
-            qDebug() << "Такое оружие уже есть";
-        }
-        else
-        {
-            weapons_.insert({WEAPON::Machinegun, std::move(weapon)});
-            qDebug() << "Такого оружия НЕТ. Добавляем";
+            weapons_.insert({WEAPON::Machinegun, std::move(gun)});
         }
     }
     else if(auto gun = dynamic_unique_cast<HandBazooka>(std::move(weapon)))
     {
-        if (weapons_.find(WEAPON::Bazooka) != weapons_.end())
+        if (weapons_.find(WEAPON::Bazooka) == weapons_.end())
         {
-            qDebug() << "Такое оружие уже есть";
-        }
-        else
-        {
-            qDebug() << "Такого оружия НЕТ. Добавляем";
-            weapons_.insert({WEAPON::Bazooka, std::move(weapon)});
+            weapons_.insert({WEAPON::Bazooka, std::move(gun)});
         }
     }
 }
 
+void Magazine::changeWeapon()
+{
+    static auto currentWeapon = weapons_.begin();
+    if(++currentWeapon == weapons_.end())
+    {
+        currentWeapon = weapons_.begin();
+    }
+    currentWeapon_ = currentWeapon->first;
+}
+
 std::unique_ptr<Gunshell> Magazine::shoot(qreal x, qreal y)
 {
-    return weapons_.find(WEAPON::Gun)->second->shoot(x, y);
+    return weapons_.find(currentWeapon_)->second->shoot(x, y);
 }
