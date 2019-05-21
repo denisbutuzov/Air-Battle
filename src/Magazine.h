@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <QtGlobal>
 
@@ -28,6 +28,10 @@ private:
     using armament = std::pair<std::unique_ptr<HandWeapon>, unsigned int>;
     using weaponsMap = std::map<WEAPON, armament>;
 
+private:
+    void addPatrons(WEAPON weaponType, std::unique_ptr<HandWeapon> &&weapon);
+
+private:
     weaponsMap weapons_;
     weaponsMap::iterator currentWeapon_;
 };

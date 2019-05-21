@@ -16,27 +16,11 @@ void Magazine::addWeapon(std::unique_ptr<HandWeapon> &&weapon)
 {
     if(auto gun = dynamic_unique_cast<HandMachinegun>(std::move(weapon)))
     {
-        auto iter = weapons_.find(WEAPON::Machinegun);
-        if (iter == weapons_.end())
-        {
-            weapons_.insert({WEAPON::Machinegun, std::make_pair(std::move(gun), 15)});
-        }
-        else
-        {
-            iter->second.second += 10;
-        }
+        addPatrons(WEAPON::Machinegun, std::move(gun));
     }
     else if(auto gun = dynamic_unique_cast<HandBazooka>(std::move(weapon)))
     {
-        auto iter = weapons_.find(WEAPON::Bazooka);
-        if (iter == weapons_.end())
-        {
-            weapons_.insert({WEAPON::Bazooka, std::make_pair(std::move(gun), 15)});
-        }
-        else
-        {
-            iter->second.second += 10;
-        }
+        addPatrons(WEAPON::Bazooka, std::move(gun));
     }
 }
 
@@ -65,5 +49,18 @@ std::unique_ptr<Gunshell> Magazine::shoot(qreal x, qreal y)
     {
         changeWeapon();
         return shoot(x, y);
+    }
+}
+
+void Magazine::addPatrons(Magazine::WEAPON weaponType, std::unique_ptr<HandWeapon> &&weapon)
+{
+    auto iter = weapons_.find(weaponType);
+    if (iter == weapons_.end())
+    {
+        weapons_.insert({weaponType, std::make_pair(std::move(weapon), 15)});
+    }
+    else
+    {
+        iter->second.second += 10;
     }
 }
