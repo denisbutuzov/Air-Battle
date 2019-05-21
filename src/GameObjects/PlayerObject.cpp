@@ -21,6 +21,11 @@ void PlayerObject::takeWeapon(std::unique_ptr<HandWeapon> &&weapon)
     weapons_->addWeapon(std::move(weapon));
 }
 
+void PlayerObject::changeWeapon()
+{
+    weapons_->changeWeapon();
+}
+
 std::unique_ptr<Gunshell> PlayerObject::shoot() const
 {
     return weapons_->shoot(x() + pixmap().width()/2, y());
@@ -37,6 +42,11 @@ void PlayerObject::keyPressEvent(QKeyEvent *event)
     else if(event->key() == Qt::Key_Right)
     {
         stepToRight();
+    }
+    //press shift key - change a weapon
+    else if(event->key() == Qt::Key_Shift)
+    {
+        changeWeapon();
     }
     //press space key - create a bullet
     else if(event->key() == Qt::Key_Space)

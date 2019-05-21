@@ -18,6 +18,7 @@ public:
     virtual ~PlayerObject() override;
 
     void takeWeapon(std::unique_ptr<HandWeapon> &&weapon);
+    void changeWeapon();
     std::unique_ptr<Gunshell> shoot() const;
 
 signals:
