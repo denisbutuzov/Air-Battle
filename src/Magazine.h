@@ -25,6 +25,8 @@ private:
         Bazooka
     };
 
-    std::map<WEAPON, std::unique_ptr<HandWeapon>> weapons_;
-    WEAPON currentWeapon_;
+    using weaponsMap = std::map<WEAPON, std::unique_ptr<HandWeapon>>;
+
+    weaponsMap weapons_;
+    weaponsMap::iterator currentWeapon_;
 };

@@ -7,9 +7,9 @@
 #include "Magazine.h"
 
 Magazine::Magazine(const std::shared_ptr<QGraphicsScene> &scene)
-    : currentWeapon_(WEAPON::Gun)
 {
     weapons_.insert({WEAPON::Gun, std::make_unique<HandGun>(scene)});
+    currentWeapon_ = weapons_.begin();
 }
 
 void Magazine::addWeapon(std::unique_ptr<HandWeapon> &&weapon)
@@ -32,15 +32,13 @@ void Magazine::addWeapon(std::unique_ptr<HandWeapon> &&weapon)
 
 void Magazine::changeWeapon()
 {
-    static auto currentWeapon = weapons_.begin();
-    if(++currentWeapon == weapons_.end())
+    if(++currentWeapon_ == weapons_.end())
     {
-        currentWeapon = weapons_.begin();
+        currentWeapon_ = weapons_.begin();
     }
-    currentWeapon_ = currentWeapon->first;
 }
 
 std::unique_ptr<Gunshell> Magazine::shoot(qreal x, qreal y)
 {
-    return weapons_.find(currentWeapon_)->second->shoot(x, y);
+    return currentWeapon_->second->shoot(x, y);
 }
