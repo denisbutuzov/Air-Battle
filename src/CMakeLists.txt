@@ -13,7 +13,6 @@ SET(HEADERS additionals.h
             Game.h
             Director.h
             GameObjectKeeper.h
-            Magazine.h
             GameObjects/GameObject.h
             GameObjects/PlayerObject.h
             GameObjects/MovableObject.h
@@ -32,6 +31,7 @@ SET(HEADERS additionals.h
             MoveStrategies/MoveByLine.h
             MoveStrategies/MoveByCurve.h
             SpecialObjects/Subjects/AbstractSubject.h
+            SpecialObjects/Subjects/Magazine.h
             SpecialObjects/Subjects/Score.h
             SpecialObjects/Subjects/Level.h
             SpecialObjects/Subjects/Health.h
@@ -49,7 +49,6 @@ SET(HEADERS additionals.h
 SET(SOURCES Game.cpp
             Director.cpp
             GameObjectKeeper.cpp
-            Magazine.cpp
             GameObjects/GameObject.cpp
             GameObjects/PlayerObject.cpp
             GameObjects/MovableObject.cpp
@@ -68,6 +67,7 @@ SET(SOURCES Game.cpp
             MoveStrategies/MoveByLine.cpp
             MoveStrategies/MoveByCurve.cpp
             SpecialObjects/Subjects/AbstractSubject.cpp
+            SpecialObjects/Subjects/Magazine.cpp
             SpecialObjects/Subjects/Score.cpp
             SpecialObjects/Subjects/Level.cpp
             SpecialObjects/Subjects/Health.cpp

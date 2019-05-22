@@ -3,7 +3,7 @@
 
 #include "HandWeapons/HandWeapon.h"
 #include "GameObjects/Gunshells/Gunshell.h"
-#include "Magazine.h"
+#include "SpecialObjects/Subjects/Magazine.h"
 
 #include "PlayerObject.h"
 
