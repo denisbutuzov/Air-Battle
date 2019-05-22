@@ -49,6 +49,7 @@ std::unique_ptr<Gunshell> Magazine::shoot(qreal x, qreal y)
     }
     else
     {
+        weapons_.erase(currentWeapon_->first);
         changeWeapon();
         return shoot(x, y);
     }
