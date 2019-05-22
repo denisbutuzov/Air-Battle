@@ -26,6 +26,11 @@ void PlayerObject::changeWeapon()
     weapons_->changeWeapon();
 }
 
+void PlayerObject::setMagazine(std::unique_ptr<Magazine> &&magazine)
+{
+    weapons_ = std::move(magazine);
+}
+
 std::unique_ptr<Gunshell> PlayerObject::shoot() const
 {
     return weapons_->shoot(x() + pixmap().width()/2, y());

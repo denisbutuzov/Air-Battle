@@ -19,6 +19,7 @@ public:
 
     void takeWeapon(std::unique_ptr<HandWeapon> &&weapon);
     void changeWeapon();
+    void setMagazine(std::unique_ptr<Magazine> &&magazine);
     std::unique_ptr<Gunshell> shoot() const;
 
 signals:

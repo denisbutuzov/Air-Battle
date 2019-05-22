@@ -12,6 +12,7 @@
 #include "SpecialObjects/Subjects/Score.h"
 #include "SpecialObjects/Subjects/Level.h"
 #include "SpecialObjects/Subjects/Health.h"
+#include "SpecialObjects/Subjects/Magazine.h"
 #include "SpecialObjects/Observers/HealthObserver.h"
 #include "Director.h"
 
@@ -35,6 +36,7 @@ Game::Game(QWidget *parent)
     player_->setFocus();
     player_->setPos((scene_->width() - player_->pixmap().width())/2,
                     scene_->height() - player_->pixmap().height());
+    player_->setMagazine(std::make_unique<Magazine>(scene_));
     player_->init();
 
     //set background image
