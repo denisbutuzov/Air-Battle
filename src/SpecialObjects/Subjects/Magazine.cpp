@@ -52,6 +52,11 @@ std::unique_ptr<Gunshell> Magazine::shoot(qreal x, qreal y)
     }
 }
 
+unsigned int Magazine::value() const
+{
+    return currentWeapon_->second.second;
+}
+
 void Magazine::addPatrons(Magazine::WEAPON weaponType, std::unique_ptr<HandWeapon> &&weapon)
 {
     auto iter = weapons_.find(weaponType);

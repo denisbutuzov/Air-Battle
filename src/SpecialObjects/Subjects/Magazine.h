@@ -16,6 +16,7 @@ public:
     void addWeapon(std::unique_ptr<HandWeapon> &&weapon);
     void changeWeapon();
     std::unique_ptr<Gunshell> shoot(qreal x, qreal y);
+    unsigned int value() const;
 
 private:
     enum class WEAPON
