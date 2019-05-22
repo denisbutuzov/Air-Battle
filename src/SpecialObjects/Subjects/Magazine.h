@@ -5,11 +5,14 @@
 #include <map>
 #include <memory>
 
+#include "AbstractSubject.h"
+
 class HandWeapon;
 class QGraphicsScene;
 class Gunshell;
 
 class Magazine
+        : public AbstractSubject
 {
 public:
     Magazine(const std::shared_ptr<QGraphicsScene> &scene);
