@@ -30,6 +30,7 @@ void Magazine::changeWeapon()
     {
         currentWeapon_ = weapons_.begin();
     }
+    notify();
 }
 
 std::unique_ptr<Gunshell> Magazine::shoot(qreal x, qreal y)
@@ -43,6 +44,7 @@ std::unique_ptr<Gunshell> Magazine::shoot(qreal x, qreal y)
     else if(gunshellNumber != 0)
     {
         currentWeapon_->second.second--;
+        notify();
         return currentWeapon_->second.first->shoot(x, y);
     }
     else
@@ -67,5 +69,6 @@ void Magazine::addPatrons(Magazine::WEAPON weaponType, std::unique_ptr<HandWeapo
     else
     {
         iter->second.second += 10;
+        notify();
     }
 }

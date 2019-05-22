@@ -36,8 +36,14 @@ Game::Game(QWidget *parent)
     player_->setFocus();
     player_->setPos((scene_->width() - player_->pixmap().width())/2,
                     scene_->height() - player_->pixmap().height());
-    player_->setMagazine(std::make_unique<Magazine>(scene_));
     player_->init();
+
+    //create a magazine for player
+    auto magazine = new Magazine(scene_);
+    auto magazineObserver = new LabelObserver<Magazine>(magazine, "Patrons: ");
+    magazineObserver->show(scene_, QPointF(0.0, 30.0));
+    player_->setMagazine(std::unique_ptr<Magazine>(magazine));
+
 
     //set background image
     setBackgroundBrush(QBrush(QImage(":/images/images/Space.jpg")));
