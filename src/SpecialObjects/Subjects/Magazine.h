@@ -29,7 +29,7 @@ private:
         Bazooka
     };
 
-    using armament = std::pair<std::unique_ptr<HandWeapon>, int>;
+    using armament = std::tuple<std::unique_ptr<HandWeapon>, int, int>;
     using weaponsMap = std::map<WEAPON, armament>;
 
 private:

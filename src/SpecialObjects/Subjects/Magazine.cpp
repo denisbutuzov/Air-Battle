@@ -8,7 +8,7 @@
 
 Magazine::Magazine(const std::shared_ptr<QGraphicsScene> &scene)
 {
-    weapons_.insert({WEAPON::Gun, std::make_pair(std::make_unique<HandGun>(scene), 0)});
+    weapons_.insert({WEAPON::Gun, std::make_tuple(std::make_unique<HandGun>(scene), 0, 0)});
     currentWeapon_ = weapons_.begin();
 }
 
@@ -36,16 +36,32 @@ void Magazine::changeWeapon()
 std::unique_ptr<Gunshell> Magazine::shoot(qreal x, qreal y)
 {
     auto weapon = currentWeapon_->first;
-    auto gunshellNumber = currentWeapon_->second.second;
+    auto &patronsInMagazine = std::get<1>(currentWeapon_->second);
+    auto &patronsInWeapon = std::get<2>(currentWeapon_->second);
     if(weapon == WEAPON::Gun)
     {
-        return currentWeapon_->second.first->shoot(x, y);
+        return std::get<0>(currentWeapon_->second)->shoot(x,y);
     }
-    else if(gunshellNumber != 0)
+    else if(patronsInWeapon != 0)
     {
-        currentWeapon_->second.second--;
+        patronsInWeapon--;
         notify();
-        return currentWeapon_->second.first->shoot(x, y);
+        return std::get<0>(currentWeapon_->second)->shoot(x,y);
+    }
+    else if(patronsInMagazine != 0)
+    {
+        if(patronsInMagazine > 15)
+        {
+            patronsInMagazine -= 15;
+            patronsInWeapon = 15;
+        }
+        else
+        {
+            patronsInWeapon = patronsInMagazine;
+            patronsInMagazine = 0;
+        }
+        notify();
+        return std::get<0>(currentWeapon_->second)->shoot(x,y);
     }
     else
     {
@@ -57,7 +73,7 @@ std::unique_ptr<Gunshell> Magazine::shoot(qreal x, qreal y)
 
 int Magazine::value() const
 {
-    return currentWeapon_->second.second;
+    return std::get<2>(currentWeapon_->second);
 }
 
 void Magazine::addPatrons(Magazine::WEAPON weaponType, std::unique_ptr<HandWeapon> &&weapon)
@@ -65,11 +81,11 @@ void Magazine::addPatrons(Magazine::WEAPON weaponType, std::unique_ptr<HandWeapo
     auto iter = weapons_.find(weaponType);
     if (iter == weapons_.end())
     {
-        weapons_.insert({weaponType, std::make_pair(std::move(weapon), 15)});
+        weapons_.insert({weaponType, std::make_tuple(std::move(weapon), 0, 15)});
     }
     else
     {
-        iter->second.second += 10;
+        std::get<1>(iter->second) += 10;
         notify();
     }
 }
