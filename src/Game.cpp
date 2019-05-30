@@ -14,6 +14,7 @@
 #include "SpecialObjects/Subjects/Health.h"
 #include "SpecialObjects/Subjects/Magazine.h"
 #include "SpecialObjects/Observers/HealthObserver.h"
+#include "SpecialObjects/Observers/MagazineObserver.h"
 #include "Director.h"
 
 #include "Game.h"
@@ -40,8 +41,11 @@ Game::Game(QWidget *parent)
 
     //create a magazine for player
     auto magazine = new Magazine(scene_);
-    auto magazineObserver = new LabelObserver<Magazine>(magazine, "Patrons: ");
-    magazineObserver->show(scene_, QPointF(0.0, 30.0));
+    auto *magazineObserver1 = new LabelObserver<Magazine>(magazine, "Patrons: ");
+    magazineObserver1->show(scene_, QPointF(0.0, 30.0));
+    auto *magazineObserver2 = new MagazineObserver(magazine);
+    magazineObserver2->show(scene_, QPointF(0.0, 500.0));
+
     player_->setMagazine(std::unique_ptr<Magazine>(magazine));
 
 

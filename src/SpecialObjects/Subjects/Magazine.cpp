@@ -55,7 +55,7 @@ std::unique_ptr<Gunshell> Magazine::shoot(qreal x, qreal y)
     }
 }
 
-unsigned int Magazine::value() const
+int Magazine::value() const
 {
     return currentWeapon_->second.second;
 }
