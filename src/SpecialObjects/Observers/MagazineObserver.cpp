@@ -38,11 +38,11 @@ void MagazineObserver::addPatron()
     auto *patron = new QGraphicsPixmapItem(QPixmap(":/images/images/Heart.png").scaled(20, 20));
     if(!patrons_.empty())
     {
-        patron->setPos(patrons_.top()->pos() + QPointF(0.0, -(patrons_.top()->pixmap().height() + 1.0)));
+        patron->setPos(patrons_.top()->pos() + QPointF(0.0, -(patron->pixmap().height() + 1.0)));
     }
     else
     {
-        patron->setPos(coordinate_);
+        patron->setPos(coordinate_ + QPointF(0.0, 14*(patron->pixmap().height() + 1.0)));
     }
     scene_->addItem(patron);
     patrons_.push(patron);
