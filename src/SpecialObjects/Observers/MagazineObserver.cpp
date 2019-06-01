@@ -16,8 +16,8 @@ MagazineObserver::MagazineObserver(Magazine *health)
 
 void MagazineObserver::update()
 {
-    text_.setPlainText("Patrons: " + QString::number(subject_->value()));
-    if(static_cast<int>(patrons_.size()) < subject_->value())
+    text_.setPlainText("Patrons: " + QString::number(subject_->patronInMagazine()) + "/" + QString::number(subject_->patronsInWeapon()));
+    if(static_cast<int>(patrons_.size()) < subject_->patronsInWeapon())
     {
         repeatWhileSizesAreNotEqual(std::bind(&MagazineObserver::addPatron, this));
     }
@@ -33,7 +33,7 @@ void MagazineObserver::show(std::shared_ptr<QGraphicsScene> &scene, QPointF coor
     coordinate_ = coordinate;
     scene_->addItem(&text_);
     text_.setPos(coordinate_);
-    for (int i = 0; i != subject_->value(); ++i)
+    for (int i = 0; i != subject_->patronsInWeapon(); ++i)
     {
         addPatron();
     }
@@ -63,7 +63,7 @@ void MagazineObserver::removePatron()
 
 void MagazineObserver::repeatWhileSizesAreNotEqual(std::function<void ()> &&callBack)
 {
-    while(static_cast<int>(patrons_.size()) != subject_->value())
+    while(static_cast<int>(patrons_.size()) != subject_->patronsInWeapon())
     {
         callBack();
     }

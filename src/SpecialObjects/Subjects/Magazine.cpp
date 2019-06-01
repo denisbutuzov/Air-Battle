@@ -71,9 +71,19 @@ std::unique_ptr<Gunshell> Magazine::shoot(qreal x, qreal y)
     }
 }
 
-int Magazine::value() const
+int Magazine::patronsInWeapon() const
 {
     return std::get<2>(currentWeapon_->second);
+}
+
+int Magazine::patronInMagazine() const
+{
+    return std::get<1>(currentWeapon_->second);
+}
+
+Magazine::WEAPON Magazine::currentWeapon() const
+{
+    return currentWeapon_->first;
 }
 
 void Magazine::addPatrons(Magazine::WEAPON weaponType, std::unique_ptr<HandWeapon> &&weapon)

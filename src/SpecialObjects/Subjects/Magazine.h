@@ -14,14 +14,6 @@ class Gunshell;
 class Magazine
         : public AbstractSubject
 {
-public:
-    Magazine(const std::shared_ptr<QGraphicsScene> &scene);
-    void addWeapon(std::unique_ptr<HandWeapon> &&weapon);
-    void changeWeapon();
-    std::unique_ptr<Gunshell> shoot(qreal x, qreal y);
-    int value() const;
-
-private:
     enum class WEAPON
     {
         Gun,
@@ -31,6 +23,16 @@ private:
 
     using armament = std::tuple<std::unique_ptr<HandWeapon>, int, int>;
     using weaponsMap = std::map<WEAPON, armament>;
+
+public:
+    Magazine(const std::shared_ptr<QGraphicsScene> &scene);
+
+    void addWeapon(std::unique_ptr<HandWeapon> &&weapon);
+    void changeWeapon();
+    std::unique_ptr<Gunshell> shoot(qreal x, qreal y);
+    int patronsInWeapon() const;
+    int patronInMagazine() const;
+    WEAPON currentWeapon() const;
 
 private:
     void addPatrons(WEAPON weaponType, std::unique_ptr<HandWeapon> &&weapon);
