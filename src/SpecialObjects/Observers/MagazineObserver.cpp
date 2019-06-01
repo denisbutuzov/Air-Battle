@@ -16,7 +16,7 @@ MagazineObserver::MagazineObserver(Magazine *health)
 
 void MagazineObserver::update()
 {
-    text_.setPlainText("Patrons: " + QString::number(subject_->patronInMagazine()) + "/" + QString::number(subject_->patronsInWeapon()));
+    setText(subject_->currentWeapon());
     if(static_cast<int>(patrons_.size()) < subject_->patronsInWeapon())
     {
         repeatWhileSizesAreNotEqual(std::bind(&MagazineObserver::addPatron, this));
@@ -29,10 +29,9 @@ void MagazineObserver::update()
 
 void MagazineObserver::show(std::shared_ptr<QGraphicsScene> &scene, QPointF coordinate)
 {
-    scene_ = scene;
-    coordinate_ = coordinate;
-    scene_->addItem(&text_);
-    text_.setPos(coordinate_);
+    (scene_ = scene)->addItem(&text_);
+    text_.setPos(coordinate_ = coordinate);
+    setText(subject_->currentWeapon());
     for (int i = 0; i != subject_->patronsInWeapon(); ++i)
     {
         addPatron();
@@ -67,4 +66,26 @@ void MagazineObserver::repeatWhileSizesAreNotEqual(std::function<void ()> &&call
     {
         callBack();
     }
+}
+
+void MagazineObserver::setText(Magazine::WEAPON weapon)
+{
+    static const std::map<Magazine::WEAPON, QString> WEAPON_TYPE
+    {
+        { Magazine::WEAPON::Gun, "Gun" },
+        { Magazine::WEAPON::Machinegun, "Machinegun" },
+        { Magazine::WEAPON::Bazooka, "Bazooka" }
+    };
+
+    QString text = WEAPON_TYPE.find(weapon)->second;
+    text.push_back(": ");
+    if(weapon == Magazine::WEAPON::Gun)
+    {
+        text.push_back("∞");
+    }
+    else
+    {
+        text.push_back(QString::number(subject_->patronInMagazine()) + "/" + QString::number(subject_->patronsInWeapon()));
+    }
+    text_.setPlainText(text);
 }

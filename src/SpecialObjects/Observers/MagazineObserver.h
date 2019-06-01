@@ -6,6 +6,7 @@
 #include <memory>
 #include <stack>
 
+#include "SpecialObjects/Subjects/Magazine.h"
 #include "AbstractObserver.h"
 
 class Magazine;
@@ -24,6 +25,7 @@ private:
     void addPatron();
     void removePatron();
     void repeatWhileSizesAreNotEqual(std::function<void()> &&callBack);
+    void setText(Magazine::WEAPON weapon);
 
 private:
     Magazine *subject_;
