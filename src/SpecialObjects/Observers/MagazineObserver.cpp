@@ -40,7 +40,7 @@ void MagazineObserver::show(std::shared_ptr<QGraphicsScene> &scene, QPointF coor
 
 void MagazineObserver::addPatron()
 {
-    auto *patron = new QGraphicsPixmapItem(QPixmap(":/images/images/Heart.png").scaled(20, 20));
+    auto *patron = new QGraphicsPixmapItem(QPixmap(":/images/images/Patron.png"));
     if(!patrons_.empty())
     {
         patron->setPos(patrons_.top()->pos() + QPointF(0.0, -(patron->pixmap().height() + 1.0)));
