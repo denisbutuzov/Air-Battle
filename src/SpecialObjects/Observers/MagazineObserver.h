@@ -30,4 +30,5 @@ private:
     QPointF coordinate_;
     std::shared_ptr<QGraphicsScene> scene_;
     std::stack<QGraphicsPixmapItem *> patrons_;
+    QGraphicsTextItem text_;
 };

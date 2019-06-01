@@ -41,10 +41,8 @@ Game::Game(QWidget *parent)
 
     //create a magazine for player
     auto magazine = new Magazine(scene_);
-    auto *magazineObserver1 = new LabelObserver<Magazine>(magazine, "Patrons: ");
-    magazineObserver1->show(scene_, QPointF(0.0, 30.0));
-    auto *magazineObserver2 = new MagazineObserver(magazine);
-    magazineObserver2->show(scene_, QPointF(0.0, 80.0));
+    auto *magazineObserver = new MagazineObserver(magazine);
+    magazineObserver->show(scene_, QPointF(0.0, 30.0));
 
     player_->setMagazine(std::unique_ptr<Magazine>(magazine));
 

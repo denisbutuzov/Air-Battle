@@ -2,16 +2,21 @@
 
 #include "SpecialObjects/Subjects/Magazine.h"
 
+#include <QTextDocument>
+
 #include "MagazineObserver.h"
 
 MagazineObserver::MagazineObserver(Magazine *health)
     : subject_(health)
 {
     subject_->attach(this);
+    text_.setDefaultTextColor(Qt::white);
+    text_.setFont(QFont("times", 20, QFont::Bold));
 }
 
 void MagazineObserver::update()
 {
+    text_.setPlainText("Patrons: " + QString::number(subject_->value()));
     if(static_cast<int>(patrons_.size()) < subject_->value())
     {
         repeatWhileSizesAreNotEqual(std::bind(&MagazineObserver::addPatron, this));
@@ -26,7 +31,8 @@ void MagazineObserver::show(std::shared_ptr<QGraphicsScene> &scene, QPointF coor
 {
     scene_ = scene;
     coordinate_ = coordinate;
-
+    scene_->addItem(&text_);
+    text_.setPos(coordinate_);
     for (int i = 0; i != subject_->value(); ++i)
     {
         addPatron();
@@ -42,7 +48,7 @@ void MagazineObserver::addPatron()
     }
     else
     {
-        patron->setPos(coordinate_ + QPointF(0.0, 14*(patron->pixmap().height() + 1.0)));
+        patron->setPos(coordinate_ + QPointF(0.0, text_.document()->size().height() + 14*(patron->pixmap().height() + 1.0)));
     }
     scene_->addItem(patron);
     patrons_.push(patron);
