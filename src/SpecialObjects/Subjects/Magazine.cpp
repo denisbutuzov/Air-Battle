@@ -50,10 +50,10 @@ std::unique_ptr<Gunshell> Magazine::shoot(qreal x, qreal y)
     }
     else if(patronsInMagazine != 0)
     {
-        if(patronsInMagazine > 15)
+        if(patronsInMagazine > countPatronsInWeapon)
         {
-            patronsInMagazine -= 15;
-            patronsInWeapon = 15;
+            patronsInMagazine -= countPatronsInWeapon;
+            patronsInWeapon = countPatronsInWeapon;
         }
         else
         {
@@ -81,6 +81,11 @@ int Magazine::patronInMagazine() const
     return std::get<1>(currentWeapon_->second);
 }
 
+int Magazine::maxPatronsInWeapon() const
+{
+    return countPatronsInWeapon;
+}
+
 Magazine::WEAPON Magazine::currentWeapon() const
 {
     return currentWeapon_->first;
@@ -91,11 +96,11 @@ void Magazine::addPatrons(Magazine::WEAPON weaponType, std::unique_ptr<HandWeapo
     auto iter = weapons_.find(weaponType);
     if (iter == weapons_.end())
     {
-        weapons_.insert({weaponType, std::make_tuple(std::move(weapon), 0, 15)});
+        weapons_.insert({weaponType, std::make_tuple(std::move(weapon), 0, countPatronsInWeapon)});
     }
     else
     {
-        std::get<1>(iter->second) += 10;
+        std::get<1>(iter->second) += countAddingPatrons;
         notify();
     }
 }

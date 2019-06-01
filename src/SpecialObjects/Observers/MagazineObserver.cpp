@@ -47,7 +47,7 @@ void MagazineObserver::addPatron()
     }
     else
     {
-        patron->setPos(coordinate_ + QPointF(0.0, text_.document()->size().height() + 14*(patron->pixmap().height() + 1.0)));
+        patron->setPos(coordinate_ + QPointF(0.0, text_.document()->size().height() + (subject_->maxPatronsInWeapon()-1)*(patron->pixmap().height() + 1.0)));
     }
     scene_->addItem(patron);
     patrons_.push(patron);

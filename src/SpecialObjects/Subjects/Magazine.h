@@ -11,6 +11,9 @@ class HandWeapon;
 class QGraphicsScene;
 class Gunshell;
 
+const int countPatronsInWeapon = 6;
+const int countAddingPatrons = 2;
+
 class Magazine
         : public AbstractSubject
 {
@@ -30,6 +33,7 @@ public:
     std::unique_ptr<Gunshell> shoot(qreal x, qreal y);
     int patronsInWeapon() const;
     int patronInMagazine() const;
+    int maxPatronsInWeapon() const;
     WEAPON currentWeapon() const;
 
 private:
