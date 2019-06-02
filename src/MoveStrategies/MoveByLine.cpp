@@ -14,11 +14,11 @@ void MoveByLine::move(MovableObject &object)
     auto tempY = object.y();
     if(direction() == Direction::Up)
     {
-        tempY -= object.speed();
+        tempY -= speed();
     }
     else
     {
-        tempY += object.speed();
+        tempY += speed();
     }
     object.setPos(tempX, tempY);
 }

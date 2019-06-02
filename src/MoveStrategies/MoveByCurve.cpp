@@ -16,11 +16,11 @@ void MoveByCurve::move(MovableObject &object)
     auto tempY = object.y();
     if(direction() == Direction::Up)
     {
-        tempY -= object.speed();
+        tempY -= speed();
     }
     else
     {
-        tempY += object.speed();
+        tempY += speed();
     }
     tempX += 5 * std::sin(0.02 * tempY);
     object.setPos(tempX, tempY);
