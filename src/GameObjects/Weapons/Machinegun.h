@@ -1,5 +1,6 @@
 #pragma once
 
+#include "MoveStrategies/MoveByLine.h"
 #include "Weapon.h"
 
 class Machinegun

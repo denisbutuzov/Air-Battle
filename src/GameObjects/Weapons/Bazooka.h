@@ -1,6 +1,7 @@
 #pragma once
 
-#include "GameObjects/Weapons/Weapon.h"
+#include "MoveStrategies/MoveByLine.h"
+#include "Weapon.h"
 
 class Bazooka
         : public Weapon

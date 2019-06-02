@@ -1,6 +1,5 @@
 #pragma once
 
-#include "MoveStrategies/MoveByLine.h"
 #include "GameObjects/MovableObject.h"
 
 class HandWeapon;
