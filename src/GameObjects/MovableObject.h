@@ -18,7 +18,7 @@ public:
 
     void setSpeed(unsigned int speed);
     unsigned int speed() const;
-    std::shared_ptr<MoveStrategy> moveStrategy();
+    std::shared_ptr<MoveStrategy> moveStrategy() const;
 
 protected:
     MovableObject(std::shared_ptr<QGraphicsScene> scene,

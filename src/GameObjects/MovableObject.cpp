@@ -25,7 +25,7 @@ unsigned int MovableObject::speed() const
     return moveStrategy_->speed();
 }
 
-std::shared_ptr<MoveStrategy> MovableObject::moveStrategy()
+std::shared_ptr<MoveStrategy> MovableObject::moveStrategy() const
 {
     return moveStrategy_;
 }
