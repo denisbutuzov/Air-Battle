@@ -2,6 +2,7 @@
 
 #include "GameObject.h"
 
+class Magazine;
 class HandWeapon;
 class Gunshell;
 
@@ -13,11 +14,12 @@ class PlayerObject
 
 public:
     PlayerObject(const std::shared_ptr<QGraphicsScene> &scene,
-                 const QString &pixmap,
-                 std::unique_ptr<HandWeapon> &&weapon);
+                 const QString &pixmap);
     virtual ~PlayerObject() override;
 
     void takeWeapon(std::unique_ptr<HandWeapon> &&weapon);
+    void changeWeapon();
+    void setMagazine(std::unique_ptr<Magazine> &&magazine);
     std::unique_ptr<Gunshell> shoot() const;
 
 signals:
@@ -30,5 +32,5 @@ private:
     void stepToRight();
 
 private:
-    std::unique_ptr<HandWeapon> weapon_;
+    std::unique_ptr<Magazine> weapons_;
 };

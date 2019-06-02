@@ -9,7 +9,8 @@ set (CMAKE_CXX_STANDARD 14)
 SET(Qt5_COMPONENTS Core Gui Widgets Multimedia)
 FIND_PACKAGE(Qt5 COMPONENTS ${Qt5_COMPONENTS} REQUIRED)
 
-SET(HEADERS Game.h
+SET(HEADERS additionals.h
+            Game.h
             Director.h
             GameObjectKeeper.h
             GameObjects/GameObject.h
@@ -30,11 +31,13 @@ SET(HEADERS Game.h
             MoveStrategies/MoveByLine.h
             MoveStrategies/MoveByCurve.h
             SpecialObjects/Subjects/AbstractSubject.h
+            SpecialObjects/Subjects/Magazine.h
             SpecialObjects/Subjects/Score.h
             SpecialObjects/Subjects/Level.h
             SpecialObjects/Subjects/Health.h
             SpecialObjects/Observers/AbstractObserver.h
             SpecialObjects/Observers/HealthObserver.h
+            SpecialObjects/Observers/MagazineObserver.h
             SpecialObjects/Observers/LabelObserver.h
             Visitors/AbstractVisitor.h
             Visitors/MoveVisitor.h
@@ -65,10 +68,12 @@ SET(SOURCES Game.cpp
             MoveStrategies/MoveByLine.cpp
             MoveStrategies/MoveByCurve.cpp
             SpecialObjects/Subjects/AbstractSubject.cpp
+            SpecialObjects/Subjects/Magazine.cpp
             SpecialObjects/Subjects/Score.cpp
             SpecialObjects/Subjects/Level.cpp
             SpecialObjects/Subjects/Health.cpp
             SpecialObjects/Observers/HealthObserver.cpp
+            SpecialObjects/Observers/MagazineObserver.cpp
             Visitors/MoveVisitor.cpp
             LevelFactories/AbstractLevelFactory.cpp
             LevelFactories/Level1Factory.cpp

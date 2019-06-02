@@ -12,7 +12,9 @@
 #include "SpecialObjects/Subjects/Score.h"
 #include "SpecialObjects/Subjects/Level.h"
 #include "SpecialObjects/Subjects/Health.h"
+#include "SpecialObjects/Subjects/Magazine.h"
 #include "SpecialObjects/Observers/HealthObserver.h"
+#include "SpecialObjects/Observers/MagazineObserver.h"
 #include "Director.h"
 
 #include "Game.h"
@@ -30,13 +32,20 @@ Game::Game(QWidget *parent)
     setFixedSize(600, 800);
 
     //create an item to put unto the scene
-    player_ = std::make_unique<PlayerObject>(scene_, ":/images/images/Player.png",
-                                             std::make_unique<HandGun>(scene_));
+    player_ = std::make_unique<PlayerObject>(scene_, ":/images/images/Player.png");
     player_->setFlag(QGraphicsItem::ItemIsFocusable);
     player_->setFocus();
     player_->setPos((scene_->width() - player_->pixmap().width())/2,
                     scene_->height() - player_->pixmap().height());
     player_->init();
+
+    //create a magazine for player
+    auto magazine = new Magazine(scene_);
+    auto *magazineObserver = new MagazineObserver(magazine);
+    magazineObserver->show(scene_, QPointF(0.0, 30.0));
+
+    player_->setMagazine(std::unique_ptr<Magazine>(magazine));
+
 
     //set background image
     setBackgroundBrush(QBrush(QImage(":/images/images/Space.jpg")));

@@ -9,7 +9,7 @@ HandGun::HandGun(const std::shared_ptr<QGraphicsScene> &scene)
 
 std::unique_ptr<Gunshell> HandGun::shoot(qreal x, qreal y)
 {
-    auto gunshell = std::make_unique<Gunshell>(scene(), ":/images/images/Bullet.png", 1);
+    auto gunshell = std::make_unique<Gunshell>(scene(), ":/images/images/Gun_gunshell.png", 1);
     gunshell->setPos(QPointF(x, y));
     return gunshell;
 }

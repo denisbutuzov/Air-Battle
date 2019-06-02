@@ -18,7 +18,7 @@ std::unique_ptr<Enemy> Level3Factory::enemy()
 
 std::unique_ptr<Weapon> Level3Factory::weapon()
 {
-    auto weapon = std::make_unique<Bazooka>(scene(), ":/images/images/bazooka.png");
+    auto weapon = std::make_unique<Bazooka>(scene(), ":/images/images/Bazooka.png");
     weapon->setPos(randomPos(weapon->pixmap()));
     return weapon;
 }

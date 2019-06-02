@@ -2,20 +2,9 @@
 #include "GameObjects/Weapons/Weapon.h"
 #include "GameObjects/Gunshells/Gunshell.h"
 #include "Visitors/AbstractVisitor.h"
+#include "additionals.h"
 
 #include "GameObjectKeeper.h"
-
-template<typename ToClass, typename FromClass>
-std::unique_ptr<ToClass> dynamic_unique_cast(std::unique_ptr<FromClass> &&from)
-{
-    if(ToClass *to = dynamic_cast<ToClass *>(from.get()))
-    {
-        std::unique_ptr<ToClass> result(to);
-        from.release();
-        return result;
-    }
-    return std::unique_ptr<ToClass>(nullptr);
-}
 
 void GameObjectKeeper::pushMovableObject(std::unique_ptr<MovableObject> &&object)
 {
@@ -57,26 +46,17 @@ void GameObjectKeeper::acceptToAll(AbstractVisitor &visitor)
 
 void GameObjectKeeper::acceptToEnemies(AbstractVisitor &visitor)
 {
-    for(auto iter = std::begin(enemies_); iter != std::end(enemies_); ++iter)
-    {
-        (*iter)->accept(visitor);
-    }
+    std::for_each(std::begin(enemies_), std::end(enemies_), [&visitor](auto &obj){obj->accept(visitor);});
 }
 
 void GameObjectKeeper::acceptToWeapons(AbstractVisitor &visitor)
 {
-    for(auto iter = std::begin(weapons_); iter != std::end(weapons_); ++iter)
-    {
-        (*iter)->accept(visitor);
-    }
+    std::for_each(std::begin(weapons_), std::end(weapons_), [&visitor](auto &obj){obj->accept(visitor);});
 }
 
 void GameObjectKeeper::acceptToGunshells(AbstractVisitor &visitor)
 {
-    for(auto iter = std::begin(gunshells_); iter != std::end(gunshells_); ++iter)
-    {
-        (*iter)->accept(visitor);
-    }
+    std::for_each(std::begin(gunshells_), std::end(gunshells_), [&visitor](auto &obj){obj->accept(visitor);});
 }
 
 GameObjectKeeper::listOfEmemyObjects *GameObjectKeeper::enemies()
