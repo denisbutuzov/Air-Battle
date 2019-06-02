@@ -1,4 +1,5 @@
 #include <QGraphicsScene>
+#include <QGraphicsPixmapItem>
 
 #include "SpecialObjects/Subjects/Health.h"
 
