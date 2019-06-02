@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QGraphicsPixmapItem>
+
 #include <memory>
 
 class GameObject
