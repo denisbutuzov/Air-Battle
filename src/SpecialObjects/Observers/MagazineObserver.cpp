@@ -8,6 +8,7 @@
 
 MagazineObserver::MagazineObserver(Magazine *health)
     : subject_(health)
+    , currentWeapontType_(Magazine::WEAPON::Gun)
 {
     subject_->attach(this);
     text_.setDefaultTextColor(Qt::white);
@@ -16,6 +17,10 @@ MagazineObserver::MagazineObserver(Magazine *health)
 
 void MagazineObserver::update()
 {
+    if(currentWeapontType_ != subject_->currentWeapon())
+    {
+        clearMagazine();
+    }
     setText(subject_->currentWeapon());
     if(static_cast<int>(patrons_.size()) < subject_->patronsInWeapon())
     {
@@ -97,4 +102,12 @@ void MagazineObserver::setText(Magazine::WEAPON weapon)
         text.push_back(QString::number(subject_->patronInMagazine()) + "/" + QString::number(subject_->patronsInWeapon()));
     }
     text_.setPlainText(text);
+}
+
+void MagazineObserver::clearMagazine()
+{
+    while(!patrons_.empty())
+    {
+        removePatron();
+    }
 }

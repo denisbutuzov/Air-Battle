@@ -26,6 +26,7 @@ private:
     void removePatron();
     void repeatWhileSizesAreNotEqual(std::function<void()> &&callBack);
     void setText(Magazine::WEAPON weapon);
+    void clearMagazine();
 
 private:
     Magazine *subject_;
@@ -33,4 +34,5 @@ private:
     std::shared_ptr<QGraphicsScene> scene_;
     std::stack<QGraphicsPixmapItem *> patrons_;
     QGraphicsTextItem text_;
+    Magazine::WEAPON currentWeapontType_;
 };
