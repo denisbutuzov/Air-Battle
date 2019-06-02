@@ -6,6 +6,6 @@ class MoveByCurve
         : public MoveStrategy
 {
 public:
-    MoveByCurve(DIRECTION dir, unsigned int);
+    MoveByCurve(Direction dir, unsigned int);
     virtual void move(MovableObject &object) override final;
 };

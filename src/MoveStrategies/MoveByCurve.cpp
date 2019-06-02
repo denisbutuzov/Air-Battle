@@ -4,7 +4,7 @@
 
 #include "MoveByCurve.h"
 
-MoveByCurve::MoveByCurve(MoveStrategy::DIRECTION dir,
+MoveByCurve::MoveByCurve(MoveStrategy::Direction dir,
                          unsigned int speed)
     : MoveStrategy(dir, speed)
 {
@@ -14,7 +14,7 @@ void MoveByCurve::move(MovableObject &object)
 {
     auto tempX = object.x();
     auto tempY = object.y();
-    if(direction() == DIRECTION::UP)
+    if(direction() == Direction::Up)
     {
         tempY -= object.speed();
     }

@@ -10,7 +10,7 @@ public:
     Enemy(std::shared_ptr<QGraphicsScene> scene,
           const QString &pixmap,
           int hitpoint = 1,
-          std::shared_ptr<MoveStrategy> moveStrategy = std::make_shared<MoveByLine>(MoveStrategy::DIRECTION::DOWN, 6));
+          std::shared_ptr<MoveStrategy> moveStrategy = std::make_shared<MoveByLine>(MoveStrategy::Direction::Down, 6));
     virtual ~Enemy() override = default;
     virtual void accept(AbstractVisitor &visitor) override;
 

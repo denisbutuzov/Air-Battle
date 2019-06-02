@@ -5,23 +5,24 @@ class MovableObject;
 class MoveStrategy
 {
 public:
-    enum class DIRECTION
+    enum class Direction
     {
-        UP,
-        DOWN
+        Up,
+        Down
     };
 
+public:
     virtual ~MoveStrategy() = default;
     virtual void move(MovableObject &object) = 0;
 
-    DIRECTION direction() const;
+    Direction direction() const;
     void setSpeed(unsigned int speed);
     unsigned int speed() const;
 
 protected:
-    MoveStrategy(DIRECTION dir, unsigned int speed);
+    MoveStrategy(Direction dir, unsigned int speed);
 
 private:
-    DIRECTION dir_;
+    Direction dir_;
     unsigned int speed_;
 };
