@@ -40,7 +40,16 @@ void MagazineObserver::show(std::shared_ptr<QGraphicsScene> &scene, QPointF coor
 
 void MagazineObserver::addPatron()
 {
-    auto *patron = new QGraphicsPixmapItem(QPixmap(":/images/images/Machinegun_patron.png"));
+    static const std::map<Magazine::WEAPON, QString> PATRON_TYPE
+    {
+        { Magazine::WEAPON::Machinegun, "Machinegun_patron" },
+        { Magazine::WEAPON::Bazooka, "Bazooka_patron" }
+    };
+
+    QString patronString(":/images/images/");
+    QString currentPatronType = PATRON_TYPE.find(subject_->currentWeapon())->second;
+    patronString.push_back(currentPatronType + ".png");
+    auto *patron = new QGraphicsPixmapItem(QPixmap(patronString));
     if(!patrons_.empty())
     {
         patron->setPos(patrons_.top()->pos() + QPointF(0.0, -(patron->pixmap().height() + 1.0)));
