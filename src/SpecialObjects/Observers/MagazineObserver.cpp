@@ -8,7 +8,7 @@
 
 MagazineObserver::MagazineObserver(Magazine *health)
     : subject_(health)
-    , currentWeapontType_(Magazine::WEAPON::Gun)
+    , currentWeapontType_(Magazine::Weapon::Gun)
 {
     subject_->attach(this);
     text_.setDefaultTextColor(Qt::white);
@@ -45,10 +45,10 @@ void MagazineObserver::show(std::shared_ptr<QGraphicsScene> &scene, QPointF coor
 
 void MagazineObserver::addPatron()
 {
-    static const std::map<Magazine::WEAPON, QString> PATRON_TYPE
+    static const std::map<Magazine::Weapon, QString> PATRON_TYPE
     {
-        { Magazine::WEAPON::Machinegun, "Machinegun_patron" },
-        { Magazine::WEAPON::Bazooka, "Bazooka_patron" }
+        { Magazine::Weapon::Machinegun, "Machinegun_patron" },
+        { Magazine::Weapon::Bazooka, "Bazooka_patron" }
     };
 
     QString patronString(":/images/images/");
@@ -82,18 +82,18 @@ void MagazineObserver::repeatWhileSizesAreNotEqual(std::function<void ()> &&call
     }
 }
 
-void MagazineObserver::setText(Magazine::WEAPON weapon)
+void MagazineObserver::setText(Magazine::Weapon weapon)
 {
-    static const std::map<Magazine::WEAPON, QString> WEAPON_TYPE
+    static const std::map<Magazine::Weapon, QString> WEAPON_TYPE
     {
-        { Magazine::WEAPON::Gun, "Gun" },
-        { Magazine::WEAPON::Machinegun, "Machinegun" },
-        { Magazine::WEAPON::Bazooka, "Bazooka" }
+        { Magazine::Weapon::Gun, "Gun" },
+        { Magazine::Weapon::Machinegun, "Machinegun" },
+        { Magazine::Weapon::Bazooka, "Bazooka" }
     };
 
     QString text = WEAPON_TYPE.find(weapon)->second;
     text.push_back(": ");
-    if(weapon == Magazine::WEAPON::Gun)
+    if(weapon == Magazine::Weapon::Gun)
     {
         text.push_back("∞");
     }

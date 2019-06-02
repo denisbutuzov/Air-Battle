@@ -8,7 +8,7 @@
 
 Magazine::Magazine(const std::shared_ptr<QGraphicsScene> &scene)
 {
-    weapons_.insert({WEAPON::Gun, std::make_tuple(std::make_unique<HandGun>(scene), 0, 0)});
+    weapons_.insert({Weapon::Gun, std::make_tuple(std::make_unique<HandGun>(scene), 0, 0)});
     currentWeapon_ = weapons_.begin();
 }
 
@@ -16,11 +16,11 @@ void Magazine::addWeapon(std::unique_ptr<HandWeapon> &&weapon)
 {
     if(auto gun = dynamic_unique_cast<HandMachinegun>(std::move(weapon)))
     {
-        addPatrons(WEAPON::Machinegun, std::move(gun));
+        addPatrons(Weapon::Machinegun, std::move(gun));
     }
     else if(auto gun = dynamic_unique_cast<HandBazooka>(std::move(weapon)))
     {
-        addPatrons(WEAPON::Bazooka, std::move(gun));
+        addPatrons(Weapon::Bazooka, std::move(gun));
     }
 }
 
@@ -38,7 +38,7 @@ std::unique_ptr<Gunshell> Magazine::shoot(qreal x, qreal y)
     auto weapon = currentWeapon_->first;
     auto &patronsInMagazine = std::get<1>(currentWeapon_->second);
     auto &patronsInWeapon = std::get<2>(currentWeapon_->second);
-    if(weapon == WEAPON::Gun)
+    if(weapon == Weapon::Gun)
     {
         return std::get<0>(currentWeapon_->second)->shoot(x,y);
     }
@@ -86,12 +86,12 @@ int Magazine::maxPatronsInWeapon() const
     return countPatronsInWeapon;
 }
 
-Magazine::WEAPON Magazine::currentWeapon() const
+Magazine::Weapon Magazine::currentWeapon() const
 {
     return currentWeapon_->first;
 }
 
-void Magazine::addPatrons(Magazine::WEAPON weaponType, std::unique_ptr<HandWeapon> &&weapon)
+void Magazine::addPatrons(Magazine::Weapon weaponType, std::unique_ptr<HandWeapon> &&weapon)
 {
     auto iter = weapons_.find(weaponType);
     if (iter == weapons_.end())
