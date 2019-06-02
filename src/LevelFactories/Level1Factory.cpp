@@ -3,7 +3,7 @@
 
 #include "Level1Factory.h"
 
-Level1Factory::Level1Factory(const std::shared_ptr<QGraphicsScene> &scene)
+Level1Factory::Level1Factory(std::shared_ptr<QGraphicsScene> scene)
     : AbstractLevelFactory(scene)
 {
 }
