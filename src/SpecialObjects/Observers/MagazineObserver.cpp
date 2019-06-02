@@ -1,8 +1,7 @@
 #include <QGraphicsScene>
+#include <QTextDocument>
 
 #include "SpecialObjects/Subjects/Magazine.h"
-
-#include <QTextDocument>
 
 #include "MagazineObserver.h"
 

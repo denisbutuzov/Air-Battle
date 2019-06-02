@@ -1,6 +1,6 @@
 #pragma once
 
-#include <QGraphicsPixmapItem>
+#include <QGraphicsTextItem>
 
 #include <functional>
 #include <memory>
@@ -11,6 +11,7 @@
 
 class Magazine;
 class QGraphicsScene;
+class QGraphicsPixmapItem;
 
 class MagazineObserver
         : public AbstractObserver
