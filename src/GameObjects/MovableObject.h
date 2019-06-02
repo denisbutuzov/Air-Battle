@@ -18,12 +18,12 @@ public:
 
     void setSpeed(unsigned int speed);
     unsigned int speed() const;
-    std::shared_ptr<MoveStrategy> &moveStrategy();
+    std::shared_ptr<MoveStrategy> moveStrategy();
 
 protected:
     MovableObject(std::shared_ptr<QGraphicsScene> scene,
                   const QString &pixmap,
-                  const std::shared_ptr<MoveStrategy> &moveStrategy);
+                  std::shared_ptr<MoveStrategy> moveStrategy);
 
 private:
     std::shared_ptr<MoveStrategy> moveStrategy_;
