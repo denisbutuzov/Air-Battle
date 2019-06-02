@@ -7,14 +7,15 @@
     <qresource prefix="/images">
         <file>images/Player.png</file>
         <file>images/Space.jpg</file>
-        <file>images/Bullet.png</file>
         <file>images/Enemy1.png</file>
         <file>images/Enemy2.png</file>
-        <file>images/bazooka.png</file>
-        <file>images/machinegun.png</file>
-        <file>images/rocket.png</file>
         <file>images/EnemyShield.png</file>
         <file>images/Heart.png</file>
-        <file>images/Patron.png</file>
+        <file>images/Bazooka.png</file>
+        <file>images/Bazooka_gunshell.png</file>
+        <file>images/Gun_gunshell.png</file>
+        <file>images/Machinegun.png</file>
+        <file>images/Machinegun_gunshell.png</file>
+        <file>images/Machinegun_patron.png</file>
     </qresource>
 </RCC>

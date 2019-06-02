@@ -17,7 +17,7 @@ std::unique_ptr<Enemy> Level1Factory::enemy()
 
 std::unique_ptr<Weapon> Level1Factory::weapon()
 {
-    auto weapon = std::make_unique<Machinegun>(scene(), ":/images/images/machinegun.png");
+    auto weapon = std::make_unique<Machinegun>(scene(), ":/images/images/Machinegun.png");
     weapon->setPos(randomPos(weapon->pixmap()));
     return weapon;
 }

@@ -15,13 +15,13 @@ std::unique_ptr<Gunshell> HandMachinegun::shoot(qreal x, qreal y)
     if(side == SIDE::LEFT)
     {
         side = SIDE::RIGHT;
-        gunshell = std::make_unique<Gunshell>(scene(), ":/images/images/Bullet.png", 1);
+        gunshell = std::make_unique<Gunshell>(scene(), ":/images/images/Machinegun_gunshell.png", 1);
         gunshell->setPos(QPointF(x - 30.0, y + 60.0));
     }
     else if(side == SIDE::RIGHT)
     {
         side = SIDE::LEFT;
-        gunshell = std::make_unique<Gunshell>(scene(), ":/images/images/Bullet.png", 1);
+        gunshell = std::make_unique<Gunshell>(scene(), ":/images/images/Machinegun_gunshell.png", 1);
         gunshell->setPos(QPointF(x + 30.0, y + 60.0));
     }
     return gunshell;
