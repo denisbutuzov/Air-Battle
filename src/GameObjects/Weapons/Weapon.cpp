@@ -2,7 +2,7 @@
 
 #include "Weapon.h"
 
-Weapon::Weapon(const std::shared_ptr<QGraphicsScene> &scene,
+Weapon::Weapon(std::shared_ptr<QGraphicsScene> scene,
                const QString &pixmap,
                const std::shared_ptr<MoveStrategy> &moveStrategy)
     : MovableObject(scene, pixmap, moveStrategy)

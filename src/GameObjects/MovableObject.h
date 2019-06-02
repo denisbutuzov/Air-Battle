@@ -21,7 +21,7 @@ public:
     std::shared_ptr<MoveStrategy> &moveStrategy();
 
 protected:
-    MovableObject(const std::shared_ptr<QGraphicsScene> &scene,
+    MovableObject(std::shared_ptr<QGraphicsScene> scene,
                   const QString &pixmap,
                   const std::shared_ptr<MoveStrategy> &moveStrategy);
 

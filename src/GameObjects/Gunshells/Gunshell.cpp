@@ -2,7 +2,7 @@
 
 #include "GameObjects/Gunshells/Gunshell.h"
 
-Gunshell::Gunshell(const std::shared_ptr<QGraphicsScene> &scene,
+Gunshell::Gunshell(std::shared_ptr<QGraphicsScene> scene,
                    const QString &pixmap,
                    int damage,
                    const std::shared_ptr<MoveStrategy> &moveStrategy)

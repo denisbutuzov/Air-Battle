@@ -2,7 +2,7 @@
 
 #include "GameObject.h"
 
-GameObject::GameObject(const std::shared_ptr<QGraphicsScene> &scene,
+GameObject::GameObject(std::shared_ptr<QGraphicsScene> scene,
                        const QString &pixmap)
     :  scene_(scene)
 {

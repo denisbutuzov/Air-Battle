@@ -13,7 +13,7 @@ class PlayerObject
     Q_OBJECT
 
 public:
-    PlayerObject(const std::shared_ptr<QGraphicsScene> &scene,
+    PlayerObject(std::shared_ptr<QGraphicsScene> scene,
                  const QString &pixmap);
     virtual ~PlayerObject() override;
 
