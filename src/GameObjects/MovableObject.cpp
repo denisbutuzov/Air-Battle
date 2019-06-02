@@ -1,5 +1,7 @@
 #include <QGraphicsScene>
 
+#include "MoveStrategies/MoveStrategy.h"
+
 #include "MovableObject.h"
 
 MovableObject::MovableObject(std::shared_ptr<QGraphicsScene> scene,

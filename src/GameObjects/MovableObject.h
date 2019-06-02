@@ -1,9 +1,9 @@
 ﻿#pragma once
 
 #include "GameObject.h"
-#include "MoveStrategies/MoveStrategy.h"
 
 class AbstractVisitor;
+class MoveStrategy;
 
 class MovableObject
         : public QObject
