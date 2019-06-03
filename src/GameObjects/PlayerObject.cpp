@@ -38,15 +38,15 @@ std::unique_ptr<Gunshell> PlayerObject::shoot() const
 
 void PlayerObject::keyPressEvent(QKeyEvent *event)
 {
-    //press left key - move to left
+    //press left key - move left
     if(event->key() == Qt::Key_Left)
     {
-        stepToLeft();
+        stepLeft();
     }
-    //press right key - move to right
+    //press right key - move right
     else if(event->key() == Qt::Key_Right)
     {
-        stepToRight();
+        stepRight();
     }
     //press up key - move up
     else if(event->key() == Qt::Key_Up)
@@ -70,7 +70,7 @@ void PlayerObject::keyPressEvent(QKeyEvent *event)
     }
 }
 
-void PlayerObject::stepToLeft()
+void PlayerObject::stepLeft()
 {
     if(x() > 0)
     {
@@ -78,7 +78,7 @@ void PlayerObject::stepToLeft()
     }
 }
 
-void PlayerObject::stepToRight()
+void PlayerObject::stepRight()
 {
     if(x() + pixmap().width() < scene()->width())
     {

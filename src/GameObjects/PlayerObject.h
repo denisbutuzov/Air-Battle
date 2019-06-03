@@ -30,8 +30,8 @@ signals:
 private:
     virtual void keyPressEvent(QKeyEvent *event) override final;
 
-    void stepToLeft();
-    void stepToRight();
+    void stepLeft();
+    void stepRight();
     void stepUp();
     void stepDown();
 
