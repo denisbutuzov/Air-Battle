@@ -9,7 +9,6 @@
 #include "SpecialObjects/Subjects/Magazine.h"
 #include "AbstractObserver.h"
 
-class Magazine;
 class QGraphicsScene;
 class QGraphicsPixmapItem;
 
