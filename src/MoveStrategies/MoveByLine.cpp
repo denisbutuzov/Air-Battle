@@ -2,7 +2,7 @@
 
 #include "MoveByLine.h"
 
-MoveByLine::MoveByLine(MoveStrategy::DIRECTION dir,
+MoveByLine::MoveByLine(MoveStrategy::Direction dir,
                        unsigned int speed)
     : MoveStrategy(dir, speed)
 {
@@ -12,13 +12,13 @@ void MoveByLine::move(MovableObject &object)
 {
     auto tempX = object.x();
     auto tempY = object.y();
-    if(direction() == DIRECTION::UP)
+    if(direction() == Direction::Up)
     {
-        tempY -= object.speed();
+        tempY -= speed();
     }
     else
     {
-        tempY += object.speed();
+        tempY += speed();
     }
     object.setPos(tempX, tempY);
 }

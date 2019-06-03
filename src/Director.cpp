@@ -7,7 +7,7 @@
 
 #include "Director.h"
 
-std::unique_ptr<MovableObject> Director::createSpawnObject(std::shared_ptr<QGraphicsScene> &scene, Level *level)
+std::unique_ptr<MovableObject> Director::createSpawnObject(std::shared_ptr<QGraphicsScene> scene, Level *level)
 {
     std::unique_ptr<AbstractLevelFactory> levelFactory;
     if(level->value() == 1)
@@ -23,10 +23,10 @@ std::unique_ptr<MovableObject> Director::createSpawnObject(std::shared_ptr<QGrap
         levelFactory = std::make_unique<Level3Factory>(scene);
     }
 
-    return callFactory(levelFactory);
+    return callFactory(std::move(levelFactory));
 }
 
-std::unique_ptr<MovableObject> Director::callFactory(std::unique_ptr<AbstractLevelFactory> &factory)
+std::unique_ptr<MovableObject> Director::callFactory(std::unique_ptr<AbstractLevelFactory> &&factory)
 {
     int randomNumber = rand() % 10;
     if(randomNumber > 6)

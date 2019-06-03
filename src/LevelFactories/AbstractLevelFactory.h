@@ -8,7 +8,6 @@ class Weapon;
 class QPointF;
 class QPixmap;
 
-
 class AbstractLevelFactory
 {
 public:
@@ -17,9 +16,9 @@ public:
     virtual std::unique_ptr<Weapon> weapon() = 0;
 
 protected:
-    AbstractLevelFactory(const std::shared_ptr<QGraphicsScene> &scene);
+    AbstractLevelFactory(std::shared_ptr<QGraphicsScene> scene);
 
-    std::shared_ptr<QGraphicsScene> &scene();
+    std::shared_ptr<QGraphicsScene> scene();
     QPointF randomPos(const QPixmap &pixmap);
 
 private:

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <QGraphicsPixmapItem>
+#include <QGraphicsTextItem>
 
 #include <functional>
 #include <memory>
@@ -9,8 +9,8 @@
 #include "SpecialObjects/Subjects/Magazine.h"
 #include "AbstractObserver.h"
 
-class Magazine;
 class QGraphicsScene;
+class QGraphicsPixmapItem;
 
 class MagazineObserver
         : public AbstractObserver
@@ -25,7 +25,7 @@ private:
     void addPatron();
     void removePatron();
     void repeatWhileSizesAreNotEqual(std::function<void()> &&callBack);
-    void setText(Magazine::WEAPON weapon);
+    void setText(Magazine::Weapon weapon);
     void clearMagazine();
 
 private:
@@ -34,5 +34,5 @@ private:
     std::shared_ptr<QGraphicsScene> scene_;
     std::stack<QGraphicsPixmapItem *> patrons_;
     QGraphicsTextItem text_;
-    Magazine::WEAPON currentWeapontType_;
+    Magazine::Weapon currentWeapontType_;
 };

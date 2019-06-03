@@ -2,9 +2,9 @@
 
 #include "Machinegun.h"
 
-Machinegun::Machinegun(const std::shared_ptr<QGraphicsScene> &scene,
+Machinegun::Machinegun(std::shared_ptr<QGraphicsScene> scene,
                        const QString &pixmap,
-                       const std::shared_ptr<MoveStrategy> &moveStrategy)
+                       std::shared_ptr<MoveStrategy> moveStrategy)
     : Weapon(scene, pixmap, moveStrategy)
 {
 }

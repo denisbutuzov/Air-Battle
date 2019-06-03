@@ -1,11 +1,11 @@
 #include "Visitors/AbstractVisitor.h"
 
-#include "GameObjects/Gunshells/Gunshell.h"
+#include "Gunshell.h"
 
-Gunshell::Gunshell(const std::shared_ptr<QGraphicsScene> &scene,
+Gunshell::Gunshell(std::shared_ptr<QGraphicsScene> scene,
                    const QString &pixmap,
                    int damage,
-                   const std::shared_ptr<MoveStrategy> &moveStrategy)
+                   std::shared_ptr<MoveStrategy> moveStrategy)
     : MovableObject(scene, pixmap, moveStrategy)
     , damage_(damage)
 {

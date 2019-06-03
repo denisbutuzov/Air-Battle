@@ -2,7 +2,7 @@
 
 #include "HandMachinegun.h"
 
-HandMachinegun::HandMachinegun(const std::shared_ptr<QGraphicsScene> &scene)
+HandMachinegun::HandMachinegun(std::shared_ptr<QGraphicsScene> scene)
     : HandWeapon(scene)
 {
 }

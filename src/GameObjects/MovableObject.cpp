@@ -1,10 +1,12 @@
 #include <QGraphicsScene>
 
+#include "MoveStrategies/MoveStrategy.h"
+
 #include "MovableObject.h"
 
-MovableObject::MovableObject(const std::shared_ptr<QGraphicsScene> &scene,
+MovableObject::MovableObject(std::shared_ptr<QGraphicsScene> scene,
                              const QString &pixmap,
-                             const std::shared_ptr<MoveStrategy> &moveStrategy)
+                             std::shared_ptr<MoveStrategy> moveStrategy)
     : GameObject(scene, pixmap)
     , moveStrategy_(moveStrategy)
 {
@@ -25,7 +27,7 @@ unsigned int MovableObject::speed() const
     return moveStrategy_->speed();
 }
 
-std::shared_ptr<MoveStrategy> &MovableObject::moveStrategy()
+std::shared_ptr<MoveStrategy> MovableObject::moveStrategy() const
 {
     return moveStrategy_;
 }

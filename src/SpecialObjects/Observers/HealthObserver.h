@@ -1,7 +1,7 @@
 #pragma once
 
 #include <QQueue>
-#include <QGraphicsPixmapItem>
+#include <QPointF>
 
 #include <functional>
 #include <memory>
@@ -10,6 +10,7 @@
 
 class Health;
 class QGraphicsScene;
+class QGraphicsPixmapItem;
 
 class HealthObserver
         : public AbstractObserver

@@ -18,7 +18,7 @@ class Magazine
         : public AbstractSubject
 {
 public:
-    enum class WEAPON
+    enum class Weapon
     {
         Gun,
         Machinegun,
@@ -34,14 +34,14 @@ public:
     int patronsInWeapon() const;
     int patronInMagazine() const;
     int maxPatronsInWeapon() const;
-    WEAPON currentWeapon() const;
+    Weapon currentWeapon() const;
 
 private:
     using armament = std::tuple<std::unique_ptr<HandWeapon>, int, int>;
-    using weaponsMap = std::map<WEAPON, armament>;
+    using weaponsMap = std::map<Weapon, armament>;
 
 private:
-    void addPatrons(WEAPON weaponType, std::unique_ptr<HandWeapon> &&weapon);
+    void addPatrons(Weapon weaponType, std::unique_ptr<HandWeapon> &&weapon);
 
 private:
     weaponsMap weapons_;

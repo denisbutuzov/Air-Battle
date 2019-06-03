@@ -2,7 +2,7 @@
 
 #include "HandBazooka.h"
 
-HandBazooka::HandBazooka(const std::shared_ptr<QGraphicsScene> &scene)
+HandBazooka::HandBazooka(std::shared_ptr<QGraphicsScene> scene)
     : HandWeapon(scene)
 {
 }

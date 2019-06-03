@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QGraphicsPixmapItem>
+
 #include <memory>
 
 class GameObject
@@ -13,7 +14,7 @@ public:
     std::shared_ptr<QGraphicsScene> scene() const;
 
 protected:
-    GameObject(const std::shared_ptr<QGraphicsScene> &scene,
+    GameObject(std::shared_ptr<QGraphicsScene> scene,
                const QString &pixmap);
 
 private:
