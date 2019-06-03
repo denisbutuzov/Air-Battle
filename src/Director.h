@@ -1,17 +1,16 @@
 #pragma once
 
-#include <QGraphicsScene>
-
 #include <memory>
 
 class Level;
 class MovableObject;
 class AbstractLevelFactory;
+class QGraphicsScene;
 
 class Director
 {
 public:
-    static std::unique_ptr<MovableObject> createSpawnObject(std::shared_ptr<QGraphicsScene> &scene,
+    static std::unique_ptr<MovableObject> createSpawnObject(std::shared_ptr<QGraphicsScene> scene,
                                                             Level *level);
 private:
     Director() = default;

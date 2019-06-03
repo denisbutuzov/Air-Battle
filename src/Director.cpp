@@ -7,7 +7,7 @@
 
 #include "Director.h"
 
-std::unique_ptr<MovableObject> Director::createSpawnObject(std::shared_ptr<QGraphicsScene> &scene, Level *level)
+std::unique_ptr<MovableObject> Director::createSpawnObject(std::shared_ptr<QGraphicsScene> scene, Level *level)
 {
     std::unique_ptr<AbstractLevelFactory> levelFactory;
     if(level->value() == 1)
