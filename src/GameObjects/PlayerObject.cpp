@@ -48,6 +48,16 @@ void PlayerObject::keyPressEvent(QKeyEvent *event)
     {
         stepToRight();
     }
+    //press up key - move up
+    else if(event->key() == Qt::Key_Up)
+    {
+        stepUp();
+    }
+    //press down key - move down
+    else if(event->key() == Qt::Key_Down)
+    {
+        stepDown();
+    }
     //press shift key - change a weapon
     else if(event->key() == Qt::Key_Shift)
     {
@@ -73,5 +83,21 @@ void PlayerObject::stepToRight()
     if(x() + pixmap().width() < scene()->width())
     {
         setPos(x() + 10, y());
+    }
+}
+
+void PlayerObject::stepUp()
+{
+    if(y() > SCENE_PART_TO_NOT_MOVE * scene()->height())
+    {
+        setPos(x(), y() - 10);
+    }
+}
+
+void PlayerObject::stepDown()
+{
+    if(y() < scene()->height() - pixmap().height())
+    {
+        setPos(x(), y() + 10);
     }
 }

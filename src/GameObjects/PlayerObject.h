@@ -6,6 +6,8 @@ class Magazine;
 class HandWeapon;
 class Gunshell;
 
+constexpr double SCENE_PART_TO_NOT_MOVE = 0.66;
+
 class PlayerObject
         : public QObject
         , public GameObject
@@ -30,6 +32,8 @@ private:
 
     void stepToLeft();
     void stepToRight();
+    void stepUp();
+    void stepDown();
 
 private:
     std::unique_ptr<Magazine> weapons_;
