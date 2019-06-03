@@ -30,6 +30,7 @@ public:
 
     void addWeapon(std::unique_ptr<HandWeapon> &&weapon);
     void changeWeapon();
+    void reloadWeapon();
     std::unique_ptr<Gunshell> shoot(qreal x, qreal y);
     int patronsInWeapon() const;
     int patronInMagazine() const;

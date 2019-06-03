@@ -33,6 +33,27 @@ void Magazine::changeWeapon()
     notify();
 }
 
+void Magazine::reloadWeapon()
+{
+    auto &patronsInMagazine = std::get<1>(currentWeapon_->second);
+    auto &patronsInWeapon = std::get<2>(currentWeapon_->second);
+    if(patronsInMagazine != 0)
+    {
+        auto lackPatronsInWeapon = countPatronsInWeapon - patronsInWeapon;
+        if(patronsInMagazine >= lackPatronsInWeapon)
+        {
+            patronsInWeapon += lackPatronsInWeapon;
+            patronsInMagazine -= lackPatronsInWeapon;
+        }
+        else
+        {
+            patronsInWeapon += patronsInMagazine;
+            patronsInMagazine = 0;
+        }
+        notify();
+    }
+}
+
 std::unique_ptr<Gunshell> Magazine::shoot(qreal x, qreal y)
 {
     auto weapon = currentWeapon_->first;

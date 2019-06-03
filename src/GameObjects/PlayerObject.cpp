@@ -1,6 +1,8 @@
 #include <QGraphicsScene>
 #include <QKeyEvent>
 
+#include <unordered_map>
+
 #include "HandWeapons/HandWeapon.h"
 #include "GameObjects/Gunshells/Gunshell.h"
 #include "SpecialObjects/Subjects/Magazine.h"
@@ -26,6 +28,11 @@ void PlayerObject::changeWeapon()
     weapons_->changeWeapon();
 }
 
+void PlayerObject::reloadWeapon()
+{
+    weapons_->reloadWeapon();
+}
+
 void PlayerObject::setMagazine(std::unique_ptr<Magazine> &&magazine)
 {
     weapons_ = std::move(magazine);
@@ -38,35 +45,21 @@ std::unique_ptr<Gunshell> PlayerObject::shoot() const
 
 void PlayerObject::keyPressEvent(QKeyEvent *event)
 {
-    //press left key - move left
-    if(event->key() == Qt::Key_Left)
+    static const std::unordered_map<int, void(PlayerObject::*)(void)> FUNCTION_MAP
     {
-        stepLeft();
-    }
-    //press right key - move right
-    else if(event->key() == Qt::Key_Right)
+        { Qt::Key_Left, &PlayerObject::stepLeft },
+        { Qt::Key_Right, &PlayerObject::stepRight },
+        { Qt::Key_Up, &PlayerObject::stepUp },
+        { Qt::Key_Down, &PlayerObject::stepDown },
+        { Qt::Key_Shift, &PlayerObject::changeWeapon },
+        { Qt::Key_R, &PlayerObject::reloadWeapon },
+        { Qt::Key_Space, &PlayerObject::shoot_sig }
+    };
+    auto it = FUNCTION_MAP.find(event->key());
+    if(it != FUNCTION_MAP.end())
     {
-        stepRight();
-    }
-    //press up key - move up
-    else if(event->key() == Qt::Key_Up)
-    {
-        stepUp();
-    }
-    //press down key - move down
-    else if(event->key() == Qt::Key_Down)
-    {
-        stepDown();
-    }
-    //press shift key - change a weapon
-    else if(event->key() == Qt::Key_Shift)
-    {
-        changeWeapon();
-    }
-    //press space key - create a bullet
-    else if(event->key() == Qt::Key_Space)
-    {
-        emit shoot_sig();
+        auto function = it->second;
+        (this->*function)();
     }
 }
 
