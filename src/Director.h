@@ -15,5 +15,5 @@ public:
 private:
     Director() = default;
 
-    static std::unique_ptr<MovableObject> callFactory(std::unique_ptr<AbstractLevelFactory> &factory);
+    static std::unique_ptr<MovableObject> callFactory(std::unique_ptr<AbstractLevelFactory> &&factory);
 };
