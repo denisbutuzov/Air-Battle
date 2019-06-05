@@ -1,3 +1,5 @@
+#include <unordered_map>
+
 #include "LevelFactories/Level1Factory.h"
 #include "LevelFactories/Level2Factory.h"
 #include "LevelFactories/Level3Factory.h"
@@ -11,26 +13,24 @@
 
 std::unique_ptr<MovableObject> Director::createSpawnObject(std::shared_ptr<QGraphicsScene> scene, Level *level)
 {
+    static const std::unordered_map<unsigned int, std::function<std::unique_ptr<AbstractLevelFactory>()>> FUNCTION_MAP
+    {
+        { 1, [scene](){ return std::make_unique<Level1Factory>(scene); } },
+        { 2, [scene](){ return std::make_unique<Level2Factory>(scene); } },
+        { 3, [scene](){ return std::make_unique<Level3Factory>(scene); } },
+        { 4, [scene](){ return std::make_unique<Level4Factory>(scene); } },
+        { 5, [scene](){ return std::make_unique<Level5Factory>(scene); } }
+    };
+
     std::unique_ptr<AbstractLevelFactory> levelFactory;
-    if(level->value() == 1)
+    auto it = FUNCTION_MAP.find(level->value());
+    if(it != FUNCTION_MAP.end())
     {
-        levelFactory = std::make_unique<Level1Factory>(scene);
-    }
-    else if(level->value() == 2)
-    {
-        levelFactory = std::make_unique<Level2Factory>(scene);
-    }
-    else if(level->value() == 3)
-    {
-        levelFactory = std::make_unique<Level3Factory>(scene);
-    }
-    else if(level->value() == 4)
-    {
-        levelFactory = std::make_unique<Level4Factory>(scene);
+        levelFactory = it->second();
     }
     else
     {
-        levelFactory = std::make_unique<Level5Factory>(scene);
+        levelFactory = std::make_unique<Level1Factory>(scene);
     }
 
     return callFactory(std::move(levelFactory));
