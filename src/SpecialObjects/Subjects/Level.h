@@ -4,7 +4,7 @@
 
 #include "AbstractSubject.h"
 
-constexpr unsigned int MAX_LEVEL = 4;
+constexpr unsigned int MAX_LEVEL = 5;
 
 class Level
         : public QObject

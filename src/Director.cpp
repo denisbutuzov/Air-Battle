@@ -2,6 +2,7 @@
 #include "LevelFactories/Level2Factory.h"
 #include "LevelFactories/Level3Factory.h"
 #include "LevelFactories/Level4Factory.h"
+#include "LevelFactories/Level5Factory.h"
 #include "SpecialObjects/Subjects/Level.h"
 #include "GameObjects/Weapons/Weapon.h"
 #include "GameObjects/Enemies/Enemy.h"
@@ -23,9 +24,13 @@ std::unique_ptr<MovableObject> Director::createSpawnObject(std::shared_ptr<QGrap
     {
         levelFactory = std::make_unique<Level3Factory>(scene);
     }
-    else
+    else if(level->value() == 4)
     {
         levelFactory = std::make_unique<Level4Factory>(scene);
+    }
+    else
+    {
+        levelFactory = std::make_unique<Level5Factory>(scene);
     }
 
     return callFactory(std::move(levelFactory));
