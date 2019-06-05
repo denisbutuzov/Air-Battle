@@ -45,6 +45,7 @@ SET(HEADERS additionals.h
             LevelFactories/Level1Factory.h
             LevelFactories/Level2Factory.h
             LevelFactories/Level3Factory.h
+            LevelFactories/Level4Factory.h
 )
 
 SET(SOURCES Game.cpp
@@ -79,6 +80,7 @@ SET(SOURCES Game.cpp
             LevelFactories/Level1Factory.cpp
             LevelFactories/Level2Factory.cpp
             LevelFactories/Level3Factory.cpp
+            LevelFactories/Level4Factory.cpp
 )
 
 SET(LIBS Qt5::Core
