@@ -1,5 +1,7 @@
 #pragma once
 
+#include <set>
+
 #include "GameObject.h"
 
 class Magazine;
@@ -30,6 +32,7 @@ signals:
 
 private:
     virtual void keyPressEvent(QKeyEvent *event) override final;
+    virtual void keyReleaseEvent(QKeyEvent *event) override final;
 
     void stepLeft();
     void stepRight();
@@ -38,4 +41,5 @@ private:
 
 private:
     std::unique_ptr<Magazine> weapons_;
+    std::set<int> pressedKeys_;
 };

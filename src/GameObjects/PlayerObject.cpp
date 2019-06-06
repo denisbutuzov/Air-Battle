@@ -55,11 +55,24 @@ void PlayerObject::keyPressEvent(QKeyEvent *event)
         { Qt::Key_R, &PlayerObject::reloadWeapon },
         { Qt::Key_Space, &PlayerObject::shoot_sig }
     };
-    auto it = FUNCTION_MAP.find(event->key());
-    if(it != FUNCTION_MAP.end())
+
+    pressedKeys_.insert(event->key());
+    for(auto key : pressedKeys_)
     {
-        auto function = it->second;
-        (this->*function)();
+        auto it = FUNCTION_MAP.find(key);
+        if(it != FUNCTION_MAP.end())
+        {
+            auto function = it->second;
+            (this->*function)();
+        }
+    }
+}
+
+void PlayerObject::keyReleaseEvent(QKeyEvent *event)
+{
+    if(!event->isAutoRepeat())
+    {
+        pressedKeys_.erase(event->key());
     }
 }
 
