@@ -12,6 +12,7 @@
 PlayerObject::PlayerObject(std::shared_ptr<QGraphicsScene> scene,
                            const QString &pixmap)
     : GameObject(scene, pixmap)
+    , timerAtWork_(false)
 {
     weapons_ = std::make_unique<Magazine>(scene);
 }
@@ -45,6 +46,27 @@ std::unique_ptr<Gunshell> PlayerObject::shoot() const
 
 void PlayerObject::keyPressEvent(QKeyEvent *event)
 {
+    if(!event->isAutoRepeat())
+    {
+        pressedKeys_.insert(event->key());
+        if(!timerAtWork_)
+        {
+            startTimer(std::chrono::milliseconds(33));
+            timerAtWork_ = true;
+        }
+    }
+}
+
+void PlayerObject::keyReleaseEvent(QKeyEvent *event)
+{
+    if(!event->isAutoRepeat())
+    {
+        pressedKeys_.erase(event->key());
+    }
+}
+
+void PlayerObject::timerEvent(QTimerEvent *event)
+{
     static const std::unordered_map<int, void(PlayerObject::*)(void)> FUNCTION_MAP
     {
         { Qt::Key_Left, &PlayerObject::stepLeft },
@@ -56,7 +78,13 @@ void PlayerObject::keyPressEvent(QKeyEvent *event)
         { Qt::Key_Space, &PlayerObject::shoot_sig }
     };
 
-    pressedKeys_.insert(event->key());
+    if(pressedKeys_.empty())
+    {
+        killTimer(event->timerId());
+        timerAtWork_ = false;
+        return;
+    }
+
     for(auto key : pressedKeys_)
     {
         auto it = FUNCTION_MAP.find(key);
@@ -65,14 +93,6 @@ void PlayerObject::keyPressEvent(QKeyEvent *event)
             auto function = it->second;
             (this->*function)();
         }
-    }
-}
-
-void PlayerObject::keyReleaseEvent(QKeyEvent *event)
-{
-    if(!event->isAutoRepeat())
-    {
-        pressedKeys_.erase(event->key());
     }
 }
 
