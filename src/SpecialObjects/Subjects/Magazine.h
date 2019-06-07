@@ -36,6 +36,7 @@ public:
     int patronInMagazine() const;
     int maxPatronsInWeapon() const;
     Weapon currentWeapon() const;
+    bool isReadyToShoot() const;
 
 private:
     using armament = std::tuple<std::unique_ptr<HandWeapon>, int, int>;

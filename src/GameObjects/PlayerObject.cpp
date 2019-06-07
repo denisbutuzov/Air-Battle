@@ -17,6 +17,11 @@ PlayerObject::PlayerObject(std::shared_ptr<QGraphicsScene> scene,
     weapons_ = std::make_unique<Magazine>(scene);
 }
 
+bool PlayerObject::isReadyToShoot() const
+{
+    return weapons_->isReadyToShoot();
+}
+
 PlayerObject::~PlayerObject() = default;
 
 void PlayerObject::takeWeapon(std::unique_ptr<HandWeapon> &&weapon)

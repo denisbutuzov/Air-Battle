@@ -112,6 +112,11 @@ Magazine::Weapon Magazine::currentWeapon() const
     return currentWeapon_->first;
 }
 
+bool Magazine::isReadyToShoot() const
+{
+    return std::get<0>(currentWeapon_->second)->isReadyToShoot();
+}
+
 void Magazine::addPatrons(Magazine::Weapon weaponType, std::unique_ptr<HandWeapon> &&weapon)
 {
     auto iter = weapons_.find(weaponType);

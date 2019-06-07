@@ -21,6 +21,7 @@ public:
                  const QString &pixmap);
     virtual ~PlayerObject() override;
 
+    bool isReadyToShoot() const;
     void takeWeapon(std::unique_ptr<HandWeapon> &&weapon);
     void changeWeapon();
     void reloadWeapon();
