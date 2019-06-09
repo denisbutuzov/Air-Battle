@@ -10,13 +10,34 @@ SET(Qt5_COMPONENTS Core Gui Widgets Multimedia)
 FIND_PACKAGE(Qt5 COMPONENTS ${Qt5_COMPONENTS} REQUIRED)
 
 SET(HEADERS Game.h
+            FactoryManager.h
             GameObjects/GameObject.h
             GameObjects/PlayerObject.h
+            GameObjects/MovableObject.h
+            GameObjects/Enemies/Enemy.h
+            MoveStrategies/MoveStrategy.h
+            MoveStrategies/MoveByLine.h
+            LevelFactories/AbstractLevelFactory.h
+            LevelFactories/Level1Factory.h
+            SpecialObjects/Subjects/AbstractSubject.h
+            SpecialObjects/Subjects/Level.h
+            Visitors/AbstractVisitor.h
+            Visitors/MoveVisitor.h
 )
 
 SET(SOURCES Game.cpp
+            FactoryManager.cpp
             GameObjects/GameObject.cpp
             GameObjects/PlayerObject.cpp
+            GameObjects/MovableObject.cpp
+            GameObjects/Enemies/Enemy.cpp
+            MoveStrategies/MoveStrategy.cpp
+            MoveStrategies/MoveByLine.cpp
+            LevelFactories/AbstractLevelFactory.cpp
+            LevelFactories/Level1Factory.cpp
+            SpecialObjects/Subjects/AbstractSubject.cpp
+            SpecialObjects/Subjects/Level.cpp
+            Visitors/MoveVisitor.cpp
 )
 
 SET(LIBS Qt5::Core
