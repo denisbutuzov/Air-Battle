@@ -1,188 +1,29 @@
 #include "GameObjects/PlayerObject.h"
-#include "GameObjects/Enemies/EnemyDecorators/ShieldDecorator.h"
-#include "GameObjects/Weapons/Weapon.h"
-#include "GameObjects/Gunshells/Gunshell.h"
-#include "HandWeapons/HandGun.h"
-#include "Visitors/MoveVisitor.h"
-#include "SpecialObjects/Subjects/Score.h"
-#include "SpecialObjects/Subjects/Level.h"
-#include "SpecialObjects/Subjects/Health.h"
-#include "SpecialObjects/Subjects/Magazine.h"
-#include "SpecialObjects/Observers/HealthObserver.h"
-#include "SpecialObjects/Observers/MagazineObserver.h"
-#include "Director.h"
 
 #include "Game.h"
 
-Game::Game(QWidget *parent)
-{
-    //create a scene
-    scene_ = std::make_shared<QGraphicsScene>();
-    scene_->setSceneRect(0, 0, 600, 800);
+constexpr int WINDOW_WIDTH = 600;
+constexpr int WINDOW_HEIGHT = 800;
+constexpr const char *BACKGROUND_IMAGE = ":/images/images/Space.jpg";
+constexpr const char *PLAYER_IMAGE = ":/images/images/Player.png";
 
-    //add a view
+Game::Game()
+{
+    scene_ = std::make_shared<QGraphicsScene>();
+    scene_->setSceneRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
     setScene(scene_.get());
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    setFixedSize(600, 800);
+    setFixedSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+    setBackgroundBrush(QBrush(QImage(BACKGROUND_IMAGE)));
 
-    //create an item to put unto the scene
-    player_ = std::make_unique<PlayerObject>(scene_, ":/images/images/Player.png");
+    player_ = std::make_unique<PlayerObject>(scene_);
+    player_->setPixmap(QPixmap(PLAYER_IMAGE));
     player_->setFlag(QGraphicsItem::ItemIsFocusable);
     player_->setFocus();
     player_->setPos((scene_->width() - player_->pixmap().width())/2,
                     scene_->height() - player_->pixmap().height());
     player_->init();
-
-    //create a magazine for player
-    auto magazine = new Magazine(scene_);
-    auto *magazineObserver = new MagazineObserver(magazine);
-    magazineObserver->show(scene_, QPointF(0.0, 30.0));
-
-    player_->setMagazine(std::unique_ptr<Magazine>(magazine));
-
-
-    //set background image
-    setBackgroundBrush(QBrush(QImage(":/images/images/Space.jpg")));
-
-    connect(&spawnObjectTimer_, SIGNAL(timeout()),
-            this, SLOT(getSpawnObjectFromFactory()));
-    spawnObjectTimer_.start(2000);
-
-    connect(player_.get(), SIGNAL(shoot_sig()),
-            this, SLOT(getGunshellFromPlayer()));
-
-    connect(&removeObjectTimer_, SIGNAL(timeout()),
-            this, SLOT(removeObjectsFromScene()));
-    removeObjectTimer_.start(50);
-
-    connect(&checkCollisionTimer_, SIGNAL(timeout()),
-            this, SLOT(checkCollisionBetweenGameObjects()));
-    checkCollisionTimer_.start(50);
-
-    connect(&moveTimer_, SIGNAL(timeout()),
-            this, SLOT(moveGameObjects()));
-    moveTimer_.start(50);
-
-    connect(&levelChangeTimer_, SIGNAL(timeout()),
-            this, SLOT(levelChange()));
-    levelChangeTimer_.start(10000);
-
-    score_ = Score::instance();
-    scoreObserver_ = new LabelObserver<Score>(score_, "Score: ");
-    scoreObserver_->show(scene_);
-
-    level_ = Level::instance();
-    levelObserver_ = new LabelObserver<Level>(level_, "Level: ");
-    levelObserver_->show(scene_, QPointF(250.0, 0.0));
-
-    health_ = Health::instance();
-    healthObserver_ = new HealthObserver(health_);
-    healthObserver_->show(scene_, QPointF(470.0, 10.0));
-}
-
-void Game::moveGameObjects()
-{
-    MoveVisitor visitor;
-    objectKeeper_.acceptToAll(visitor);
 }
 
 Game::~Game() = default;
-
-void Game::getSpawnObjectFromFactory()
-{
-    auto spawnObject = Director::createSpawnObject(scene_, level_);
-    spawnObject->init();
-    objectKeeper_.pushMovableObject(std::move(spawnObject));
-}
-
-void Game::getGunshellFromPlayer()
-{
-    if(player_->isReadyToShoot())
-    {
-        auto gunshell = player_->shoot();
-        gunshell->init();
-        objectKeeper_.pushGunshell(std::move(gunshell));
-    }
-}
-
-void Game::removeObjectsFromScene()
-{
-    objectKeeper_.gunshells()->remove_if([](auto &obj){return obj->y() < 0;});
-    objectKeeper_.weapons()->remove_if([scene=scene_](auto &obj){return obj->y() > scene->height();});
-    objectKeeper_.enemies()->remove_if
-            (
-                [&](auto &obj)
-                {
-                    if(obj->y() > scene_->height())
-                    {
-                        health_->decrease();
-                        return true;
-                    }
-                    return false;
-                }
-            );
-}
-
-void Game::checkCollisionBetweenGameObjects()
-{
-    objectKeeper_.gunshells()->remove_if
-            (
-                [](auto &gunshell)
-                {
-                    auto collidingList = gunshell->collidingItems();
-                    for(auto *otherObj : collidingList)
-                    {
-                        if(auto *enemy = dynamic_cast<Enemy *>(otherObj))
-                        {
-                            enemy->setHitpoint(enemy->hitpoint() - gunshell->damage());
-                            return true;
-                        }
-                    };
-                    return false;
-                }
-            );
-
-    objectKeeper_.enemies()->remove_if
-            (
-                [&](auto &enemy)
-                {
-                    if (enemy->hitpoint() <= 0)
-                    {
-                        if(auto *shield = dynamic_cast<ShieldDecorator *>(enemy.get()))
-                        {
-                            std::unique_ptr<Enemy> enemy(shield->enemy().release());
-                            objectKeeper_.pushEnemy(std::move(enemy));
-                        }
-                        else
-                        {
-                            score_->increase();
-                        }
-                        return true;
-                    }
-                    return false;
-                }
-            );
-
-    objectKeeper_.weapons()->remove_if
-            (
-                [](auto &weapon)
-                {
-                    auto collidingList = weapon->collidingItems();
-                    for(auto *otherObj : collidingList)
-                    {
-                        if(auto *player = dynamic_cast<PlayerObject *>(otherObj))
-                        {
-                            player->takeWeapon(weapon->handWeapon());
-                            return true;
-                        }
-                    };
-                    return false;
-                }
-            );
-}
-
-void Game::levelChange()
-{
-    level_->increase();
-}

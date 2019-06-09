@@ -10,13 +10,9 @@ class GameObject
 public:
     virtual ~GameObject() = default;
     virtual void init();
-
-    std::shared_ptr<QGraphicsScene> scene() const;
-
+    std::weak_ptr<QGraphicsScene> scene() const;
 protected:
-    GameObject(std::shared_ptr<QGraphicsScene> scene,
-               const QString &pixmap);
-
+    GameObject(std::weak_ptr<QGraphicsScene> scene);
 private:
-    std::shared_ptr<QGraphicsScene> scene_;
+    std::weak_ptr<QGraphicsScene> scene_;
 };

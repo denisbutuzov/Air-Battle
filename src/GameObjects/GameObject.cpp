@@ -2,19 +2,24 @@
 
 #include "GameObject.h"
 
-GameObject::GameObject(std::shared_ptr<QGraphicsScene> scene,
-                       const QString &pixmap)
+GameObject::GameObject(std::weak_ptr<QGraphicsScene> scene)
     :  scene_(scene)
 {
-    setPixmap(QPixmap(pixmap));
 }
 
-std::shared_ptr<QGraphicsScene> GameObject::scene() const
+std::weak_ptr<QGraphicsScene> GameObject::scene() const
 {
     return scene_;
 }
 
 void GameObject::init()
 {
-    scene_->addItem(this);
+    if(pixmap().isNull())
+    {
+        qFatal("You must to set a picture");
+    }
+    if(auto wp = scene_.lock())
+    {
+        wp->addItem(this);
+    }
 }

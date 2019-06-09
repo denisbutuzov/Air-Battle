@@ -9,80 +9,14 @@ set (CMAKE_CXX_STANDARD 14)
 SET(Qt5_COMPONENTS Core Gui Widgets Multimedia)
 FIND_PACKAGE(Qt5 COMPONENTS ${Qt5_COMPONENTS} REQUIRED)
 
-SET(HEADERS additionals.h
-            Game.h
-            Director.h
-            GameObjectKeeper.h
+SET(HEADERS Game.h
             GameObjects/GameObject.h
             GameObjects/PlayerObject.h
-            GameObjects/MovableObject.h
-            GameObjects/Gunshells/Gunshell.h
-            GameObjects/Weapons/Weapon.h
-            GameObjects/Weapons/Bazooka.h
-            GameObjects/Weapons/Machinegun.h
-            GameObjects/Enemies/Enemy.h
-            GameObjects/Enemies/EnemyDecorators/AbstractEnemyDecorator.h
-            GameObjects/Enemies/EnemyDecorators/ShieldDecorator.h
-            HandWeapons/HandWeapon.h
-            HandWeapons/HandGun.h
-            HandWeapons/HandMachinegun.h
-            HandWeapons/HandBazooka.h
-            MoveStrategies/MoveStrategy.h
-            MoveStrategies/MoveByLine.h
-            MoveStrategies/MoveByCurve.h
-            SpecialObjects/Subjects/AbstractSubject.h
-            SpecialObjects/Subjects/Magazine.h
-            SpecialObjects/Subjects/Score.h
-            SpecialObjects/Subjects/Level.h
-            SpecialObjects/Subjects/Health.h
-            SpecialObjects/Observers/AbstractObserver.h
-            SpecialObjects/Observers/HealthObserver.h
-            SpecialObjects/Observers/MagazineObserver.h
-            SpecialObjects/Observers/LabelObserver.h
-            Visitors/AbstractVisitor.h
-            Visitors/MoveVisitor.h
-            LevelFactories/AbstractLevelFactory.h
-            LevelFactories/Level1Factory.h
-            LevelFactories/Level2Factory.h
-            LevelFactories/Level3Factory.h
-            LevelFactories/Level4Factory.h
-            LevelFactories/Level5Factory.h
 )
 
 SET(SOURCES Game.cpp
-            Director.cpp
-            GameObjectKeeper.cpp
             GameObjects/GameObject.cpp
             GameObjects/PlayerObject.cpp
-            GameObjects/MovableObject.cpp
-            GameObjects/Gunshells/Gunshell.cpp
-            GameObjects/Weapons/Weapon.cpp
-            GameObjects/Weapons/Bazooka.cpp
-            GameObjects/Weapons/Machinegun.cpp
-            GameObjects/Enemies/Enemy.cpp
-            GameObjects/Enemies/EnemyDecorators/AbstractEnemyDecorator.cpp
-            GameObjects/Enemies/EnemyDecorators/ShieldDecorator.cpp
-	    HandWeapons/HandWeapon.cpp
-            HandWeapons/HandGun.cpp
-            HandWeapons/HandMachinegun.cpp
-            HandWeapons/HandBazooka.cpp
-            MoveStrategies/MoveStrategy.cpp
-            MoveStrategies/MoveByLine.cpp
-            MoveStrategies/MoveByCurve.cpp
-            SpecialObjects/Subjects/AbstractSubject.cpp
-            SpecialObjects/Subjects/Magazine.cpp
-            SpecialObjects/Subjects/Score.cpp
-            SpecialObjects/Subjects/Level.cpp
-            SpecialObjects/Subjects/Health.cpp
-            SpecialObjects/Observers/HealthObserver.cpp
-            SpecialObjects/Observers/MagazineObserver.cpp
-            Visitors/MoveVisitor.cpp
-            LevelFactories/AbstractLevelFactory.cpp
-            LevelFactories/Level1Factory.cpp
-            LevelFactories/Level2Factory.cpp
-            LevelFactories/Level3Factory.cpp
-            LevelFactories/Level4Factory.cpp
-            LevelFactories/Level5Factory.cpp
 )
 
 SET(LIBS Qt5::Core
