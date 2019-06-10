@@ -10,7 +10,6 @@ public:
         Up,
         Down
     };
-
 public:
     virtual ~MoveStrategy() = default;
     virtual void move(MovableObject &object) = 0;

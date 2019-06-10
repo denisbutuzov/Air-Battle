@@ -10,15 +10,12 @@ MoveByLine::MoveByLine(MoveStrategy::Direction dir,
 
 void MoveByLine::move(MovableObject &object)
 {
-    auto tempX = object.x();
-    auto tempY = object.y();
     if(direction() == Direction::Up)
     {
-        tempY -= speed();
+        object.setY(object.y() - speed());
     }
     else
     {
-        tempY += speed();
+        object.setY(object.y() + speed());
     }
-    object.setPos(tempX, tempY);
 }
