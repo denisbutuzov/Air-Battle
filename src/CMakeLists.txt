@@ -19,6 +19,10 @@ SET(HEADERS Game.h
             MoveStrategies/MoveByLine.h
             LevelFactories/AbstractLevelFactory.h
             LevelFactories/Level1Factory.h
+            LevelFactories/Level2Factory.h
+            LevelFactories/Level3Factory.h
+            LevelFactories/Level4Factory.h
+            LevelFactories/Level5Factory.h
             SpecialObjects/Subjects/AbstractSubject.h
             SpecialObjects/Subjects/Level.h
             Visitors/AbstractVisitor.h
@@ -35,6 +39,10 @@ SET(SOURCES Game.cpp
             MoveStrategies/MoveByLine.cpp
             LevelFactories/AbstractLevelFactory.cpp
             LevelFactories/Level1Factory.cpp
+            LevelFactories/Level2Factory.cpp
+            LevelFactories/Level3Factory.cpp
+            LevelFactories/Level4Factory.cpp
+            LevelFactories/Level5Factory.cpp
             SpecialObjects/Subjects/AbstractSubject.cpp
             SpecialObjects/Subjects/Level.cpp
             Visitors/MoveVisitor.cpp
