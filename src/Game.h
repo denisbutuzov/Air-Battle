@@ -5,6 +5,8 @@
 
 #include <memory>
 
+#include "SpecialObjects/Observers/LabelObserver.h"
+
 class PlayerObject;
 class MovableObject;
 class Level;
@@ -26,6 +28,7 @@ private:
     std::shared_ptr<QGraphicsScene> scene_;
     std::unique_ptr<PlayerObject> player_;
     std::shared_ptr<Level> level_;
+    std::shared_ptr<LabelObserver<Level>> levelObserver_;
     std::list<std::shared_ptr<MovableObject>> objects_;
     QTimer spawnObjectTimer_;
     QTimer removeObjectTimer_;

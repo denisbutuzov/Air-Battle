@@ -25,6 +25,8 @@ SET(HEADERS Game.h
             LevelFactories/Level5Factory.h
             SpecialObjects/Subjects/AbstractSubject.h
             SpecialObjects/Subjects/Level.h
+            SpecialObjects/Observers/AbstractObserver.h
+            SpecialObjects/Observers/LabelObserver.h
             Visitors/AbstractVisitor.h
             Visitors/MoveVisitor.h
 )

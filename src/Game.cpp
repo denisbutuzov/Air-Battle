@@ -36,6 +36,8 @@ Game::Game()
     player_->init();
 
     level_ = std::make_shared<Level>();
+    levelObserver_ = std::make_shared<LabelObserver<Level>>(level_, "Level: ");
+    levelObserver_->show(scene_, QPointF(250.0, 0.0));
 
     connect(&levelChangeTimer_, SIGNAL(timeout()),
             this, SLOT(levelChange()));
@@ -77,7 +79,10 @@ void Game::removeObjectsFromScene()
 
 void Game::levelChange()
 {
-    level_->increase();
+    if(level_.use_count() != 0)
+    {
+        level_->increase();
+    }
 }
 
 Game::~Game() = default;
