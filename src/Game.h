@@ -8,7 +8,9 @@
 #include "SpecialObjects/Observers/LabelObserver.h"
 
 class PlayerObject;
-class MovableObject;
+class Gunshell;
+class Weapon;
+class Enemy;
 class Level;
 
 class Game
@@ -22,6 +24,7 @@ public:
 private slots:
     void moveGameObjects();
     void getSpawnObjectFromFactory();
+    void getGunshellFromPlayer();
     void removeObjectsFromScene();
     void levelChange();
 private:
@@ -29,7 +32,9 @@ private:
     std::unique_ptr<PlayerObject> player_;
     std::shared_ptr<Level> level_;
     std::shared_ptr<LabelObserver<Level>> levelObserver_;
-    std::list<std::shared_ptr<MovableObject>> objects_;
+    std::list<std::shared_ptr<Enemy>> enemies_;
+    std::list<std::shared_ptr<Gunshell>> gunshells_;
+    std::list<std::shared_ptr<Weapon>> weapons_;
     QTimer spawnObjectTimer_;
     QTimer removeObjectTimer_;
     QTimer levelChangeTimer_;

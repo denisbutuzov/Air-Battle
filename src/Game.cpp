@@ -1,10 +1,12 @@
 #include "GameObjects/PlayerObject.h"
 #include "GameObjects/MovableObject.h"
 #include "GameObjects/Enemies/Enemy.h"
+#include "GameObjects/Gunshells/Gunshell.h"
 #include "GameObjects/Weapons/Weapon.h"
 #include "SpecialObjects/Subjects/Level.h"
 #include "Visitors/MoveVisitor.h"
 #include "FactoryManager.h"
+#include "additionals.h"
 
 #include "Game.h"
 
@@ -55,21 +57,25 @@ Game::Game()
     connect(&moveTimer_, SIGNAL(timeout()),
             this, SLOT(moveGameObjects()));
     moveTimer_.start(MOVE_OBJECT_PERIOD_MS);
+
+    connect(player_.get(), SIGNAL(shot_sig()),
+            this, SLOT(getGunshellFromPlayer()));
 }
 
 void Game::moveGameObjects()
 {
     MoveVisitor visitor;
-    for(auto &obj : objects_)
+    for(auto &enemy : enemies_)
     {
-        if(auto enemy = dynamic_cast<Enemy *>(obj.get()))
-        {
-            visitor.visitEnemy(enemy);
-        }
-        else if(auto weapon = dynamic_cast<Weapon *>(obj.get()))
-        {
-            visitor.visitWeapon(weapon);
-        }
+        visitor.visitEnemy(enemy.get());
+    }
+    for(auto &gunshell : gunshells_)
+    {
+        visitor.visitGunshell(gunshell.get());
+    }
+    for(auto &weapon : weapons_)
+    {
+        visitor.visitWeapon(weapon.get());
     }
 }
 
@@ -77,12 +83,28 @@ void Game::getSpawnObjectFromFactory()
 {
     auto spawnObject = FactoryManager::createSpawnObject(scene_, level_);
     spawnObject->init();
-    objects_.push_back(std::move(spawnObject));
+    if(auto enemy = dynamic_unique_cast<Enemy>(std::move(spawnObject)))
+    {
+        enemies_.push_back(std::move(enemy));
+    }
+    else if(auto weapon = dynamic_unique_cast<Weapon>(std::move(spawnObject)))
+    {
+        weapons_.push_back(std::move(weapon));
+    }
+}
+
+void Game::getGunshellFromPlayer()
+{
+    auto gunshell = player_->shoot();
+    gunshell->init();
+    gunshells_.push_back(std::move(gunshell));
 }
 
 void Game::removeObjectsFromScene()
 {
-    objects_.remove_if([&](auto &obj){ return obj->y() > scene_->height(); });
+    enemies_.remove_if([&](auto &obj){ return obj->y() > scene_->height(); });
+    weapons_.remove_if([&](auto &obj){ return obj->y() > scene_->height(); });
+    gunshells_.remove_if([](auto &obj){ return obj->y() < 0; });
 }
 
 void Game::levelChange()

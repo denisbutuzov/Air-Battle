@@ -3,6 +3,9 @@
 
 #include <unordered_map>
 
+#include "HandWeapons/HandGun.h"
+#include "GameObjects/Gunshells/Gunshell.h"
+
 #include "PlayerObject.h"
 
 constexpr double INACTION_SCENE_PART = 0.66;
@@ -11,6 +14,19 @@ PlayerObject::PlayerObject(std::weak_ptr<QGraphicsScene> scene)
     : GameObject(scene)
     , timerAtWork_(false)
 {
+    weapon_ = std::make_unique<HandGun>(scene);
+}
+
+PlayerObject::~PlayerObject() = default;
+
+void PlayerObject::takeWeapon(std::unique_ptr<HandWeapon> &&weapon)
+{
+    weapon_ = std::move(weapon);
+}
+
+std::unique_ptr<Gunshell> PlayerObject::shoot() const
+{
+    return weapon_->shoot(x() + pixmap().width()/2, y());
 }
 
 void PlayerObject::keyPressEvent(QKeyEvent *event)
@@ -41,7 +57,8 @@ void PlayerObject::timerEvent(QTimerEvent *event)
         { Qt::Key_Left, &PlayerObject::stepLeft },
         { Qt::Key_Right, &PlayerObject::stepRight },
         { Qt::Key_Up, &PlayerObject::stepUp },
-        { Qt::Key_Down, &PlayerObject::stepDown }
+        { Qt::Key_Down, &PlayerObject::stepDown },
+        { Qt::Key_Space, &PlayerObject::shot_sig }
     };
 
     if(pressedKeys_.empty())
