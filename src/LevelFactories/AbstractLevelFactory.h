@@ -13,6 +13,7 @@ class AbstractLevelFactory
 public:
     virtual ~AbstractLevelFactory() = default;
     virtual std::unique_ptr<Enemy> enemy() = 0;
+    virtual std::unique_ptr<Weapon> weapon() = 0;
 protected:
     AbstractLevelFactory(std::weak_ptr<QGraphicsScene> scene);
     std::weak_ptr<QGraphicsScene> scene() const;

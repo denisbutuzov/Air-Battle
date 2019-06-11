@@ -7,6 +7,7 @@
 #include "LevelFactories/Level5Factory.h"
 #include "SpecialObjects/Subjects/Level.h"
 #include "GameObjects/Enemies/Enemy.h"
+#include "GameObjects/Weapons/Weapon.h"
 
 #include "FactoryManager.h"
 
@@ -38,5 +39,15 @@ std::unique_ptr<MovableObject> FactoryManager::createSpawnObject(std::weak_ptr<Q
 
 std::unique_ptr<MovableObject> FactoryManager::callFactory(std::unique_ptr<AbstractLevelFactory> &&factory)
 {
-    return factory->enemy();
+    static unsigned int queue = 0;
+
+    if(++queue <= 5)
+    {
+        return factory->enemy();
+    }
+    else
+    {
+        queue = 0;
+        return factory->weapon();
+    }
 }

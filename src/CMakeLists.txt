@@ -15,6 +15,9 @@ SET(HEADERS Game.h
             GameObjects/PlayerObject.h
             GameObjects/MovableObject.h
             GameObjects/Enemies/Enemy.h
+            GameObjects/Weapons/Weapon.h
+            GameObjects/Weapons/Machinegun.h
+            GameObjects/Weapons/Bazooka.h
             MoveStrategies/MoveStrategy.h
             MoveStrategies/MoveByLine.h
             LevelFactories/AbstractLevelFactory.h
@@ -37,6 +40,9 @@ SET(SOURCES Game.cpp
             GameObjects/PlayerObject.cpp
             GameObjects/MovableObject.cpp
             GameObjects/Enemies/Enemy.cpp
+            GameObjects/Weapons/Weapon.cpp
+            GameObjects/Weapons/Machinegun.cpp
+            GameObjects/Weapons/Bazooka.cpp
             MoveStrategies/MoveStrategy.cpp
             MoveStrategies/MoveByLine.cpp
             LevelFactories/AbstractLevelFactory.cpp

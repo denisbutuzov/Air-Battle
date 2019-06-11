@@ -1,6 +1,7 @@
 #include "GameObjects/PlayerObject.h"
 #include "GameObjects/MovableObject.h"
 #include "GameObjects/Enemies/Enemy.h"
+#include "GameObjects/Weapons/Weapon.h"
 #include "SpecialObjects/Subjects/Level.h"
 #include "Visitors/MoveVisitor.h"
 #include "FactoryManager.h"
@@ -61,7 +62,14 @@ void Game::moveGameObjects()
     MoveVisitor visitor;
     for(auto &obj : objects_)
     {
-        visitor.visitEnemy(dynamic_cast<Enemy *>(obj.get()));
+        if(auto enemy = dynamic_cast<Enemy *>(obj.get()))
+        {
+            visitor.visitEnemy(enemy);
+        }
+        else if(auto weapon = dynamic_cast<Weapon *>(obj.get()))
+        {
+            visitor.visitWeapon(weapon);
+        }
     }
 }
 

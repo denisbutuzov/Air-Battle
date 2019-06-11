@@ -19,5 +19,5 @@ QPointF AbstractLevelFactory::randomPos(const QPixmap &pixmap)
         int randomNumber = rand() % static_cast<int>(wp->width() - pixmap.width());
         return QPointF(randomNumber, 0 - pixmap.height());
     }
-    return QPointF(0, 0);
+    return QPointF(0.0, 0.0);
 }

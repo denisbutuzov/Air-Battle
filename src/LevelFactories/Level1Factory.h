@@ -9,4 +9,5 @@ public:
     Level1Factory(std::weak_ptr<QGraphicsScene> scene);
     virtual ~Level1Factory() override = default;
     virtual std::unique_ptr<Enemy> enemy() override final;
+    virtual std::unique_ptr<Weapon> weapon() override final;
 };
