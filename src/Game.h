@@ -12,6 +12,7 @@ class Gunshell;
 class Weapon;
 class Enemy;
 class Level;
+class Score;
 
 class Game
         : public QGraphicsView
@@ -26,12 +27,15 @@ private slots:
     void getSpawnObjectFromFactory();
     void getGunshellFromPlayer();
     void removeObjectsFromScene();
+    void checkCollisionBetweenGameObjects();
     void levelChange();
 private:
     std::shared_ptr<QGraphicsScene> scene_;
     std::unique_ptr<PlayerObject> player_;
     std::shared_ptr<Level> level_;
+    std::shared_ptr<Score> score_;
     std::shared_ptr<LabelObserver<Level>> levelObserver_;
+    std::shared_ptr<LabelObserver<Score>> scoreObserver_;
     std::list<std::shared_ptr<Enemy>> enemies_;
     std::list<std::shared_ptr<Gunshell>> gunshells_;
     std::list<std::shared_ptr<Weapon>> weapons_;
@@ -39,4 +43,5 @@ private:
     QTimer removeObjectTimer_;
     QTimer levelChangeTimer_;
     QTimer moveTimer_;
+    QTimer checkCollisionTimer_;
 };

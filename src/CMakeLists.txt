@@ -34,6 +34,7 @@ SET(HEADERS additionals.h
             LevelFactories/Level5Factory.h
             SpecialObjects/Subjects/AbstractSubject.h
             SpecialObjects/Subjects/Level.h
+            SpecialObjects/Subjects/Score.h
             SpecialObjects/Observers/AbstractObserver.h
             SpecialObjects/Observers/LabelObserver.h
             Visitors/AbstractVisitor.h
@@ -64,6 +65,7 @@ SET(SOURCES Game.cpp
             LevelFactories/Level5Factory.cpp
             SpecialObjects/Subjects/AbstractSubject.cpp
             SpecialObjects/Subjects/Level.cpp
+            SpecialObjects/Subjects/Score.cpp
             Visitors/MoveVisitor.cpp
 )
 

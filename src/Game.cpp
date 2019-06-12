@@ -4,6 +4,7 @@
 #include "GameObjects/Gunshells/Gunshell.h"
 #include "GameObjects/Weapons/Weapon.h"
 #include "SpecialObjects/Subjects/Level.h"
+#include "SpecialObjects/Subjects/Score.h"
 #include "Visitors/MoveVisitor.h"
 #include "FactoryManager.h"
 #include "additionals.h"
@@ -15,6 +16,7 @@ constexpr int WINDOW_HEIGHT = 800;
 constexpr int SPAWN_OBJECT_PERIOD_MS = 2000;
 constexpr int REMOVE_OBJECT_PERIOD_MS = 50;
 constexpr int MOVE_OBJECT_PERIOD_MS = 50;
+constexpr int CHECK_COLLISION_PERIOD_MS = 50;
 constexpr int LEVEL_CHANGE_PERIOD_MS = 10000;
 
 constexpr const char *BACKGROUND_IMAGE = ":/images/images/Space.jpg";
@@ -42,6 +44,10 @@ Game::Game()
     levelObserver_ = std::make_shared<LabelObserver<Level>>(level_, "Level: ");
     levelObserver_->show(scene_, QPointF(250.0, 0.0));
 
+    score_ = std::make_shared<Score>();
+    scoreObserver_ = std::make_shared<LabelObserver<Score>>(score_, "Score: ");
+    scoreObserver_->show(scene_);
+
     connect(&levelChangeTimer_, SIGNAL(timeout()),
             this, SLOT(levelChange()));
     levelChangeTimer_.start(LEVEL_CHANGE_PERIOD_MS);
@@ -57,6 +63,10 @@ Game::Game()
     connect(&moveTimer_, SIGNAL(timeout()),
             this, SLOT(moveGameObjects()));
     moveTimer_.start(MOVE_OBJECT_PERIOD_MS);
+
+    connect(&checkCollisionTimer_, SIGNAL(timeout()),
+            this, SLOT(checkCollisionBetweenGameObjects()));
+    checkCollisionTimer_.start(CHECK_COLLISION_PERIOD_MS);
 
     connect(player_.get(), SIGNAL(shot_sig()),
             this, SLOT(getGunshellFromPlayer()));
@@ -105,6 +115,65 @@ void Game::removeObjectsFromScene()
     enemies_.remove_if([&](auto &obj){ return obj->y() > scene_->height(); });
     weapons_.remove_if([&](auto &obj){ return obj->y() > scene_->height(); });
     gunshells_.remove_if([](auto &obj){ return obj->y() < 0; });
+}
+
+void Game::checkCollisionBetweenGameObjects()
+{
+    gunshells_.remove_if
+            (
+                [](auto &gunshell)
+                {
+                    auto collidingList = gunshell->collidingItems();
+                    for(auto *otherObj : collidingList)
+                    {
+                        if(auto *enemy = dynamic_cast<Enemy *>(otherObj))
+                        {
+                            enemy->setHitpoint(enemy->hitpoint() - gunshell->damage());
+                            return true;
+                        }
+                    };
+                    return false;
+                }
+            );
+
+    enemies_.remove_if
+            (
+                [&](auto &enemy)
+                {
+                    if (enemy->hitpoint() <= 0)
+                    {
+//                        if(auto *shield = dynamic_cast<ShieldDecorator *>(enemy.get()))
+//                        {
+//                            std::unique_ptr<Enemy> enemy(shield->enemy().release());
+//                            objectKeeper_.pushEnemy(std::move(enemy));
+//                        }
+//                        else
+//                        {
+//                            score_->increase();
+//                        }
+                        score_->increase();
+                        return true;
+                    }
+                    return false;
+                }
+            );
+
+//    objectKeeper_.weapons()->remove_if
+//            (
+//                [](auto &weapon)
+//                {
+//                    auto collidingList = weapon->collidingItems();
+//                    for(auto *otherObj : collidingList)
+//                    {
+//                        if(auto *player = dynamic_cast<PlayerObject *>(otherObj))
+//                        {
+//                            player->takeWeapon(weapon->handWeapon());
+//                            return true;
+//                        }
+//                    };
+//                    return false;
+//                }
+//            );
 }
 
 void Game::levelChange()
