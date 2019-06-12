@@ -1,6 +1,6 @@
 #include "GameObjects/Enemies/Enemy.h"
 #include "GameObjects/Weapons/Bazooka.h"
-//#include "MoveStrategies/MoveByCurve.h"
+#include "MoveStrategies/MoveByCurve.h"
 
 #include "Level4Factory.h"
 
@@ -14,8 +14,7 @@ Level4Factory::Level4Factory(std::weak_ptr<QGraphicsScene> scene)
 
 std::unique_ptr<Enemy> Level4Factory::enemy()
 {
-    auto enemy = std::make_unique<Enemy>(scene(), 2);
-//                                         std::make_shared<MoveByCurve>(MoveStrategy::Direction::Down, 7));
+    auto enemy = std::make_unique<Enemy>(scene(), 2, std::make_shared<MoveByCurve>(MoveStrategy::Direction::Down, 7));
     enemy->setPixmap(QPixmap(ENEMY_IMAGE));
     enemy->setPos(randomPos(enemy->pixmap()));
     return enemy;

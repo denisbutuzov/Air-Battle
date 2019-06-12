@@ -28,6 +28,7 @@ SET(HEADERS additionals.h
             HandWeapons/HandBazooka.h
             MoveStrategies/MoveStrategy.h
             MoveStrategies/MoveByLine.h
+            MoveStrategies/MoveByCurve.h
             LevelFactories/AbstractLevelFactory.h
             LevelFactories/Level1Factory.h
             LevelFactories/Level2Factory.h
@@ -63,6 +64,7 @@ SET(SOURCES Game.cpp
             HandWeapons/HandBazooka.cpp
             MoveStrategies/MoveStrategy.cpp
             MoveStrategies/MoveByLine.cpp
+            MoveStrategies/MoveByCurve.cpp
             LevelFactories/AbstractLevelFactory.cpp
             LevelFactories/Level1Factory.cpp
             LevelFactories/Level2Factory.cpp
