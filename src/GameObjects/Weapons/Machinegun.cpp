@@ -1,4 +1,4 @@
-//#include "HandWeapons/HandMachinegun.h"
+#include "HandWeapons/HandMachinegun.h"
 
 #include "Machinegun.h"
 
@@ -8,7 +8,7 @@ Machinegun::Machinegun(std::weak_ptr<QGraphicsScene> scene,
 {
 }
 
-//std::unique_ptr<HandWeapon> Machinegun::handWeapon()
-//{
-//    return std::make_unique<HandMachinegun>(scene());
-//}
+std::unique_ptr<HandWeapon> Machinegun::handWeapon()
+{
+    return std::make_unique<HandMachinegun>(scene());
+}

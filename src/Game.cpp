@@ -3,6 +3,7 @@
 #include "GameObjects/Enemies/Enemy.h"
 #include "GameObjects/Gunshells/Gunshell.h"
 #include "GameObjects/Weapons/Weapon.h"
+#include "HandWeapons/HandWeapon.h"
 #include "SpecialObjects/Subjects/Level.h"
 #include "SpecialObjects/Subjects/Score.h"
 #include "Visitors/MoveVisitor.h"
@@ -158,22 +159,22 @@ void Game::checkCollisionBetweenGameObjects()
                 }
             );
 
-//    objectKeeper_.weapons()->remove_if
-//            (
-//                [](auto &weapon)
-//                {
-//                    auto collidingList = weapon->collidingItems();
-//                    for(auto *otherObj : collidingList)
-//                    {
-//                        if(auto *player = dynamic_cast<PlayerObject *>(otherObj))
-//                        {
-//                            player->takeWeapon(weapon->handWeapon());
-//                            return true;
-//                        }
-//                    };
-//                    return false;
-//                }
-//            );
+    weapons_.remove_if
+            (
+                [](auto &weapon)
+                {
+                    auto collidingList = weapon->collidingItems();
+                    for(auto *otherObj : collidingList)
+                    {
+                        if(auto *player = dynamic_cast<PlayerObject *>(otherObj))
+                        {
+                            player->takeWeapon(weapon->handWeapon());
+                            return true;
+                        }
+                    };
+                    return false;
+                }
+            );
 }
 
 void Game::levelChange()
