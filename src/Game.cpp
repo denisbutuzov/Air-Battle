@@ -1,6 +1,6 @@
 #include "GameObjects/PlayerObject.h"
 #include "GameObjects/MovableObject.h"
-#include "GameObjects/Enemies/Enemy.h"
+#include "GameObjects/Enemies/EnemyDecorators/ShieldDecorator.h"
 #include "GameObjects/Gunshells/Gunshell.h"
 #include "GameObjects/Weapons/Weapon.h"
 #include "HandWeapons/HandWeapon.h"
@@ -160,16 +160,15 @@ void Game::checkCollisionBetweenGameObjects()
                 {
                     if (enemy->hitpoint() <= 0)
                     {
-//                        if(auto *shield = dynamic_cast<ShieldDecorator *>(enemy.get()))
-//                        {
-//                            std::unique_ptr<Enemy> enemy(shield->enemy().release());
-//                            objectKeeper_.pushEnemy(std::move(enemy));
-//                        }
-//                        else
-//                        {
-//                            score_->increase();
-//                        }
-                        score_->increase();
+                        if(auto *shield = dynamic_cast<ShieldDecorator *>(enemy.get()))
+                        {
+                            std::unique_ptr<Enemy> enemy(shield->enemy().release());
+                            enemies_.push_back(std::move(enemy));
+                        }
+                        else
+                        {
+                            score_->increase();
+                        }
                         return true;
                     }
                     return false;

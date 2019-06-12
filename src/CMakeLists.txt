@@ -16,6 +16,8 @@ SET(HEADERS additionals.h
             GameObjects/PlayerObject.h
             GameObjects/MovableObject.h
             GameObjects/Enemies/Enemy.h
+            GameObjects/Enemies/EnemyDecorators/AbstractEnemyDecorator.h
+            GameObjects/Enemies/EnemyDecorators/ShieldDecorator.h
             GameObjects/Weapons/Weapon.h
             GameObjects/Weapons/Machinegun.h
             GameObjects/Weapons/Bazooka.h
@@ -49,6 +51,8 @@ SET(SOURCES Game.cpp
             GameObjects/PlayerObject.cpp
             GameObjects/MovableObject.cpp
             GameObjects/Enemies/Enemy.cpp
+            GameObjects/Enemies/EnemyDecorators/AbstractEnemyDecorator.cpp
+            GameObjects/Enemies/EnemyDecorators/ShieldDecorator.cpp
             GameObjects/Weapons/Weapon.cpp
             GameObjects/Weapons/Machinegun.cpp
             GameObjects/Weapons/Bazooka.cpp

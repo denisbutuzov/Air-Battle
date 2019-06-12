@@ -1,10 +1,11 @@
-#include "GameObjects/Enemies/Enemy.h"
+#include "GameObjects/Enemies/EnemyDecorators/ShieldDecorator.h"
 #include "GameObjects/Weapons/Bazooka.h"
 #include "GameObjects/Weapons/Machinegun.h"
 
 #include "Level3Factory.h"
 
 constexpr const char *ENEMY_IMAGE = ":/images/images/Enemy2.png";
+constexpr const char *SHIELD_IMAGE = ":/images/images/EnemyShield.png";
 constexpr const char *MACHINEGUN_IMAGE = ":/images/images/Machinegun.png";
 constexpr const char *BAZOOKA_IMAGE = ":/images/images/Bazooka.png";
 
@@ -18,9 +19,9 @@ std::unique_ptr<Enemy> Level3Factory::enemy()
     auto enemy = std::make_unique<Enemy>(scene());
     enemy->setPixmap(QPixmap(ENEMY_IMAGE));
     enemy->setPos(randomPos(enemy->pixmap()));
-    return enemy;
-//    auto shieldEnemy = std::make_unique<ShieldDecorator>(std::move(enemy), ":/images/images/EnemyShield.png", 2);
-//    return shieldEnemy;
+    auto shieldEnemy = std::make_unique<ShieldDecorator>(std::move(enemy), 2);
+    shieldEnemy->setPixmap(QPixmap(SHIELD_IMAGE));
+    return shieldEnemy;
 }
 
 std::unique_ptr<Weapon> Level3Factory::weapon()
