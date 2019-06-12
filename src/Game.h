@@ -13,6 +13,8 @@ class Weapon;
 class Enemy;
 class Level;
 class Score;
+class Health;
+class HealthObserver;
 
 class Game
         : public QGraphicsView
@@ -34,8 +36,10 @@ private:
     std::unique_ptr<PlayerObject> player_;
     std::shared_ptr<Level> level_;
     std::shared_ptr<Score> score_;
+    std::shared_ptr<Health> health_;
     std::shared_ptr<LabelObserver<Level>> levelObserver_;
     std::shared_ptr<LabelObserver<Score>> scoreObserver_;
+    std::shared_ptr<HealthObserver> healthObserver_;
     std::list<std::shared_ptr<Enemy>> enemies_;
     std::list<std::shared_ptr<Gunshell>> gunshells_;
     std::list<std::shared_ptr<Weapon>> weapons_;

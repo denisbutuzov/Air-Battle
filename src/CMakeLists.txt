@@ -35,8 +35,10 @@ SET(HEADERS additionals.h
             SpecialObjects/Subjects/AbstractSubject.h
             SpecialObjects/Subjects/Level.h
             SpecialObjects/Subjects/Score.h
+            SpecialObjects/Subjects/Health.h
             SpecialObjects/Observers/AbstractObserver.h
             SpecialObjects/Observers/LabelObserver.h
+            SpecialObjects/Observers/HealthObserver.h
             Visitors/AbstractVisitor.h
             Visitors/MoveVisitor.h
 )
@@ -66,6 +68,8 @@ SET(SOURCES Game.cpp
             SpecialObjects/Subjects/AbstractSubject.cpp
             SpecialObjects/Subjects/Level.cpp
             SpecialObjects/Subjects/Score.cpp
+            SpecialObjects/Subjects/Health.cpp
+            SpecialObjects/Observers/HealthObserver.cpp
             Visitors/MoveVisitor.cpp
 )
 

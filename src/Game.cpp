@@ -6,6 +6,8 @@
 #include "HandWeapons/HandWeapon.h"
 #include "SpecialObjects/Subjects/Level.h"
 #include "SpecialObjects/Subjects/Score.h"
+#include "SpecialObjects/Subjects/Health.h"
+#include "SpecialObjects/Observers/HealthObserver.h"
 #include "Visitors/MoveVisitor.h"
 #include "FactoryManager.h"
 #include "additionals.h"
@@ -48,6 +50,10 @@ Game::Game()
     score_ = std::make_shared<Score>();
     scoreObserver_ = std::make_shared<LabelObserver<Score>>(score_, "Score: ");
     scoreObserver_->show(scene_);
+
+    health_ = std::make_shared<Health>();
+    healthObserver_ = std::make_shared<HealthObserver>(health_);
+    healthObserver_->show(scene_, QPointF(470.0, 10.0));
 
     connect(&levelChangeTimer_, SIGNAL(timeout()),
             this, SLOT(levelChange()));
@@ -113,9 +119,20 @@ void Game::getGunshellFromPlayer()
 
 void Game::removeObjectsFromScene()
 {
-    enemies_.remove_if([&](auto &obj){ return obj->y() > scene_->height(); });
     weapons_.remove_if([&](auto &obj){ return obj->y() > scene_->height(); });
     gunshells_.remove_if([](auto &obj){ return obj->y() < 0; });
+    enemies_.remove_if
+            (
+                [&](auto &obj)
+                {
+                    if(obj->y() > scene_->height())
+                    {
+                        health_->decrease();
+                        return true;
+                    }
+                    return false;
+                }
+            );
 }
 
 void Game::checkCollisionBetweenGameObjects()
