@@ -6,7 +6,7 @@
 
 #include "Equipment.h"
 
-constexpr int COUNT_ADDING_PATRONS = 10;
+constexpr unsigned int COUNT_ADDING_PATRONS = 10;
 
 Equipment::Equipment(std::weak_ptr<QGraphicsScene> scene)
 {
@@ -18,12 +18,19 @@ void Equipment::addWeapon(std::unique_ptr<HandWeapon> &&weapon)
 {
     if(auto gun = dynamic_unique_cast<HandMachinegun>(std::move(weapon)))
     {
-        addWeaponAndPatrons(WeaponType::Machinegun, std::move(gun));
+        addWeaponOrPatrons(WeaponType::Machinegun, std::move(gun));
     }
     else if(auto gun = dynamic_unique_cast<HandBazooka>(std::move(weapon)))
     {
-        addWeaponAndPatrons(WeaponType::Bazooka, std::move(gun));
+        addWeaponOrPatrons(WeaponType::Bazooka, std::move(gun));
     }
+}
+
+void Equipment::removeWeapon(WeaponType weapon)
+{
+    weapons_.erase(weapon);
+    changeWeapon();
+    notify();
 }
 
 void Equipment::changeWeapon()
@@ -38,11 +45,24 @@ void Equipment::changeWeapon()
 void Equipment::reloadWeapon()
 {
     currentWeapon_->second->reload();
+    notify();
 }
 
 std::unique_ptr<Gunshell> Equipment::shoot(qreal x, qreal y)
 {
-    auto gunshell = currentWeapon_->second->shoot(x, y);
+    auto &handWeapon = currentWeapon_->second;
+    auto gunshell = handWeapon->shoot(x, y);
+    if(!handWeapon->unlimitedPatrons())
+    {
+        if((handWeapon->patronsInMagazine() == 0) && (handWeapon->patronsInStorage() > 0))
+        {
+            reloadWeapon();
+        }
+        else if((handWeapon->patronsInMagazine() == 0) && (handWeapon->patronsInStorage() == 0))
+        {
+            removeWeapon(currentWeapon_->first);
+        }
+    }
     notify();
     return gunshell;
 }
@@ -52,7 +72,7 @@ Equipment::WeaponsMap::value_type &Equipment::currentWeapon() const
     return *currentWeapon_;
 }
 
-void Equipment::addWeaponAndPatrons(Equipment::WeaponType weaponType, std::unique_ptr<HandWeapon> &&weapon)
+void Equipment::addWeaponOrPatrons(WeaponType weaponType, std::unique_ptr<HandWeapon> &&weapon)
 {
     auto iter = weapons_.find(weaponType);
     if (iter == weapons_.end())

@@ -2,9 +2,9 @@
 
 #include "HandMachinegun.h"
 
-constexpr int MACHINEGUN_CAPACITY = 12;
-constexpr int MACHINEGUN_BEGING_PATRONS = 24;
-constexpr int MACHINEGUN_SHOT_DELAY = 50;
+constexpr unsigned int MACHINEGUN_CAPACITY = 12;
+constexpr unsigned int MACHINEGUN_BEGING_PATRONS = 24;
+constexpr unsigned int MACHINEGUN_SHOT_DELAY = 50;
 constexpr const char *MACHINEGUN_SHOT_SOUND = "qrc:/sounds/sounds/bullet.wav";
 constexpr const char *MACHINEGUN_GUNSHELL_IMAGE = ":/images/images/Machinegun_gunshell.png";
 

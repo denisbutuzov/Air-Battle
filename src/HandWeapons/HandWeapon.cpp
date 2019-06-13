@@ -4,32 +4,49 @@
 
 #include "HandWeapon.h"
 
-HandWeapon::HandWeapon(std::weak_ptr<QGraphicsScene> scene, int capacity,
-                       int patrons, int shotDelay, const char *shotSound)
+HandWeapon::HandWeapon(std::weak_ptr<QGraphicsScene> scene, unsigned int capacity,
+                       unsigned int patrons, unsigned int shotDelay, const char *shotSound)
     : scene_(scene)
     , capacity_(capacity)
-    , shotDelay_(shotDelay)
     , shotSound_(shotSound)
+    , shotDelay_(shotDelay)    
+    , shotDelayIsActive_(false)
 {
     addPatrons(patrons);
     reload();
     shotSoundPlayer_.setMedia(QUrl(shotSound_));
 }
 
-HandWeapon::Cartridge HandWeapon::patrons() const
+bool HandWeapon::unlimitedPatrons() const
 {
-    return patrons_;
+    return false;
+}
+
+unsigned int HandWeapon::patronsInMagazine() const
+{
+    return patrons_.inMagazine;
+}
+
+unsigned int HandWeapon::patronsInStorage() const
+{
+    return patrons_.inStorage;
+}
+
+unsigned int HandWeapon::capacity() const
+{
+    return capacity_;
 }
 
 std::unique_ptr<Gunshell> HandWeapon::shoot(qreal x, qreal y)
 {
-    static int shotDelayIsActive = false;
-
-    if(patronsExist() && !shotDelayIsActive)
+    if((unlimitedPatrons() || (patronsInMagazine() > 0) ) && !shotDelayIsActive_)
     {
-        QTimer::singleShot(shotDelay_, this, [](){ shotDelayIsActive = false ;});
-        shotDelayIsActive = true;
-        --patrons_.second;
+        QTimer::singleShot(shotDelay_, [&](){ shotDelayIsActive_ = false; });
+        shotDelayIsActive_ = true;
+        if(patrons_.inMagazine > 0)
+        {
+            --patrons_.inMagazine;
+        }
         playShotSound();
         return createGunshell(x, y);
     }
@@ -39,11 +56,6 @@ std::unique_ptr<Gunshell> HandWeapon::shoot(qreal x, qreal y)
 std::weak_ptr<QGraphicsScene> HandWeapon::scene() const
 {
     return scene_;
-}
-
-bool HandWeapon::patronsExist() const
-{
-    return patrons_.second;
 }
 
 void HandWeapon::playShotSound()
@@ -60,23 +72,23 @@ void HandWeapon::playShotSound()
 
 void HandWeapon::reload()
 {
-    if(patrons_.first > 0 && patrons_.second < capacity_)
+    if(patrons_.inStorage > 0 && patrons_.inMagazine < capacity_)
     {
-        auto requiredPatrons = capacity_ - patrons_.second;
-        if(patrons_.first >= requiredPatrons)
+        auto requiredPatrons = capacity_ - patrons_.inMagazine;
+        if(patrons_.inStorage >= requiredPatrons)
         {
-            patrons_.first -= requiredPatrons;
-            patrons_.second += requiredPatrons;
+            patrons_.inStorage -= requiredPatrons;
+            patrons_.inMagazine += requiredPatrons;
         }
         else
         {
-            patrons_.second += patrons_.first;
-            patrons_.first = 0;
+            patrons_.inMagazine += patrons_.inStorage;
+            patrons_.inStorage = 0;
         }
     }
 }
 
-void HandWeapon::addPatrons(int patrons)
+void HandWeapon::addPatrons(unsigned int patrons)
 {
-    patrons_.first += patrons;
+    patrons_.inStorage += patrons;
 }

@@ -2,7 +2,7 @@
 
 #include "HandGun.h"
 
-constexpr int GUN_SHOT_DELAY = 100;
+constexpr unsigned int GUN_SHOT_DELAY = 100;
 constexpr const char *GUN_SHOT_SOUND = "qrc:/sounds/sounds/bullet.wav";
 constexpr const char *GUN_GUNSHELL_IMAGE = ":/images/images/Gun_gunshell.png";
 
@@ -19,7 +19,7 @@ std::unique_ptr<Gunshell> HandGun::createGunshell(qreal x, qreal y)
     return gunshell;
 }
 
-bool HandGun::patronsExist() const
+bool HandGun::unlimitedPatrons() const
 {
     return true;
 }

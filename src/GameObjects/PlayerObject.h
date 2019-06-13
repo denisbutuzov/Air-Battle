@@ -17,7 +17,7 @@ class PlayerObject
 public:
     PlayerObject(std::weak_ptr<QGraphicsScene> scene);
     virtual ~PlayerObject() override;
-    void setEquipment(std::unique_ptr<Equipment> &&equipment);
+    void setEquipment(std::shared_ptr<Equipment> equipment);
     void takeWeapon(std::unique_ptr<HandWeapon> &&weapon);
     std::unique_ptr<Gunshell> shoot() const;
     void reloadWeapon();
@@ -34,6 +34,6 @@ private:
     virtual void timerEvent(QTimerEvent *event) override final;
 private:
     std::set<Qt::Key> pressedKeys_;
-    std::unique_ptr<Equipment> equipment_;
-    bool timerAtWork_;
+    std::shared_ptr<Equipment> equipment_;
+    bool pressKeysTimerAtWork_;
 };

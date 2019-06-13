@@ -13,21 +13,21 @@ constexpr double INACTION_SCENE_PART = 0.66;
 
 PlayerObject::PlayerObject(std::weak_ptr<QGraphicsScene> scene)
     : GameObject(scene)
-    , timerAtWork_(false)
+    , pressKeysTimerAtWork_(false)
 {
     equipment_ = std::make_unique<Equipment>(scene);
 }
 
 PlayerObject::~PlayerObject() = default;
 
-void PlayerObject::setEquipment(std::unique_ptr<Equipment> &&equipment)
-{
-    equipment_ = std::move(equipment);
-}
-
 void PlayerObject::takeWeapon(std::unique_ptr<HandWeapon> &&weapon)
 {
     equipment_->addWeapon(std::move(weapon));
+}
+
+void PlayerObject::setEquipment(std::shared_ptr<Equipment> equipment)
+{
+    equipment_ = equipment;
 }
 
 std::unique_ptr<Gunshell> PlayerObject::shoot() const
@@ -40,10 +40,10 @@ void PlayerObject::keyPressEvent(QKeyEvent *event)
     if(!event->isAutoRepeat())
     {
         pressedKeys_.insert(static_cast<Qt::Key>(event->key()));
-        if(!timerAtWork_)
+        if(!pressKeysTimerAtWork_)
         {
             startTimer(std::chrono::milliseconds(33));
-            timerAtWork_ = true;
+            pressKeysTimerAtWork_ = true;
         }
     }
 }
@@ -72,7 +72,7 @@ void PlayerObject::timerEvent(QTimerEvent *event)
     if(pressedKeys_.empty())
     {
         killTimer(event->timerId());
-        timerAtWork_ = false;
+        pressKeysTimerAtWork_ = false;
         return;
     }
 
