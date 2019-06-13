@@ -31,13 +31,13 @@ private slots:
     void levelChange();
 private:
     std::shared_ptr<QGraphicsScene> scene_;
-    std::unique_ptr<PlayerObject> player_;
     std::shared_ptr<Level> level_;
     std::shared_ptr<Score> score_;
     std::shared_ptr<Health> health_;
-    std::shared_ptr<LabelObserver<Level>> levelObserver_;
-    std::shared_ptr<LabelObserver<Score>> scoreObserver_;
-    std::shared_ptr<HealthObserver> healthObserver_;
+    std::unique_ptr<LabelObserver<Level>> levelObserver_;
+    std::unique_ptr<LabelObserver<Score>> scoreObserver_;
+    std::unique_ptr<HealthObserver> healthObserver_;
+    std::unique_ptr<PlayerObject> player_;
     GameObjectStorage objectsStorage_;
     QTimer spawnObjectTimer_;
     QTimer removeObjectTimer_;

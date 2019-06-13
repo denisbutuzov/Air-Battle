@@ -43,15 +43,15 @@ Game::Game()
     player_->init();
 
     level_ = std::make_shared<Level>();
-    levelObserver_ = std::make_shared<LabelObserver<Level>>(level_, "Level: ");
+    levelObserver_ = std::make_unique<LabelObserver<Level>>(level_, "Level: ");
     levelObserver_->show(scene_, QPointF(250.0, 0.0));
 
     score_ = std::make_shared<Score>();
-    scoreObserver_ = std::make_shared<LabelObserver<Score>>(score_, "Score: ");
+    scoreObserver_ = std::make_unique<LabelObserver<Score>>(score_, "Score: ");
     scoreObserver_->show(scene_);
 
     health_ = std::make_shared<Health>();
-    healthObserver_ = std::make_shared<HealthObserver>(health_);
+    healthObserver_ = std::make_unique<HealthObserver>(health_);
     healthObserver_->show(scene_, QPointF(470.0, 10.0));
 
     connect(&levelChangeTimer_, SIGNAL(timeout()),

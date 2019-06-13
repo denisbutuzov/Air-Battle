@@ -20,11 +20,11 @@ public:
     void acceptToEnemies(AbstractVisitor &visitor);
     void acceptToWeapons(AbstractVisitor &visitor);
     void acceptToGunshells(AbstractVisitor &visitor);
-    std::list<std::shared_ptr<Enemy>> &enemies();
-    std::list<std::shared_ptr<Weapon>> &weapons();
-    std::list<std::shared_ptr<Gunshell>> &gunshells();
+    std::list<std::unique_ptr<Enemy>> &enemies();
+    std::list<std::unique_ptr<Weapon>> &weapons();
+    std::list<std::unique_ptr<Gunshell>> &gunshells();
 private:
-    std::list<std::shared_ptr<Enemy>> enemies_;
-    std::list<std::shared_ptr<Weapon>> weapons_;
-    std::list<std::shared_ptr<Gunshell>> gunshells_;
+    std::list<std::unique_ptr<Enemy>> enemies_;
+    std::list<std::unique_ptr<Weapon>> weapons_;
+    std::list<std::unique_ptr<Gunshell>> gunshells_;
 };

@@ -59,17 +59,17 @@ void GameObjectStorage::acceptToGunshells(AbstractVisitor &visitor)
     std::for_each(std::begin(gunshells_), std::end(gunshells_), [&visitor](auto &obj){ obj->accept(visitor); });
 }
 
-std::list<std::shared_ptr<Enemy>> &GameObjectStorage::enemies()
+std::list<std::unique_ptr<Enemy>> &GameObjectStorage::enemies()
 {
     return enemies_;
 }
 
-std::list<std::shared_ptr<Weapon> > &GameObjectStorage::weapons()
+std::list<std::unique_ptr<Weapon> > &GameObjectStorage::weapons()
 {
     return weapons_;
 }
 
-std::list<std::shared_ptr<Gunshell> > &GameObjectStorage::gunshells()
+std::list<std::unique_ptr<Gunshell> > &GameObjectStorage::gunshells()
 {
     return gunshells_;
 }
