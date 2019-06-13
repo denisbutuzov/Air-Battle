@@ -3,8 +3,9 @@
 
 #include <unordered_map>
 
-#include "HandWeapons/HandGun.h"
+#include "HandWeapons/HandWeapon.h"
 #include "GameObjects/Gunshells/Gunshell.h"
+#include "SpecialObjects/Subjects/Equipment.h"
 
 #include "PlayerObject.h"
 
@@ -14,19 +15,39 @@ PlayerObject::PlayerObject(std::weak_ptr<QGraphicsScene> scene)
     : GameObject(scene)
     , timerAtWork_(false)
 {
-    weapon_ = std::make_unique<HandGun>(scene);
+    equipment_ = std::make_unique<Equipment>(scene);
+}
+
+bool PlayerObject::isReadyToShot() const
+{
+    return equipment_->isReadyToShoot();
 }
 
 PlayerObject::~PlayerObject() = default;
 
 void PlayerObject::takeWeapon(std::unique_ptr<HandWeapon> &&weapon)
 {
-    weapon_ = std::move(weapon);
+    equipment_->addWeapon(std::move(weapon));
+}
+
+void PlayerObject::changeWeapon()
+{
+    equipment_->changeWeapon();
+}
+
+void PlayerObject::reloadWeapon()
+{
+    equipment_->reloadWeapon();
+}
+
+void PlayerObject::setEquipment(std::unique_ptr<Equipment> &&equipment)
+{
+    equipment_ = std::move(equipment);
 }
 
 std::unique_ptr<Gunshell> PlayerObject::shoot() const
 {
-    return weapon_->shoot(x() + pixmap().width()/2, y());
+    return equipment_->shoot(x() + pixmap().width()/2, y());
 }
 
 void PlayerObject::keyPressEvent(QKeyEvent *event)
@@ -58,6 +79,8 @@ void PlayerObject::timerEvent(QTimerEvent *event)
         { Qt::Key_Right, &PlayerObject::stepRight },
         { Qt::Key_Up, &PlayerObject::stepUp },
         { Qt::Key_Down, &PlayerObject::stepDown },
+        { Qt::Key_Shift, &PlayerObject::changeWeapon },
+        { Qt::Key_R, &PlayerObject::reloadWeapon },
         { Qt::Key_Space, &PlayerObject::shot_sig }
     };
 

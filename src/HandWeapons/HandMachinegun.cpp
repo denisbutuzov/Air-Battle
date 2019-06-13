@@ -4,10 +4,8 @@
 
 constexpr const char *MACHINEGUN_GUNSHELL_IMAGE = ":/images/images/Machinegun_gunshell.png";
 
-HandMachinegun::HandMachinegun(std::weak_ptr<QGraphicsScene> scene)
-//, int delayBetweenShots)
-    : HandWeapon(scene)
-//                 , delayBetweenShots)
+HandMachinegun::HandMachinegun(std::weak_ptr<QGraphicsScene> scene, int delayBetweenShots)
+    : HandWeapon(scene, delayBetweenShots)
 {
 }
 
@@ -15,7 +13,7 @@ std::unique_ptr<Gunshell> HandMachinegun::shoot(qreal x, qreal y)
 {
     static enum class SIDE {LEFT, RIGHT} side;
 
-//    HandWeapon::startDelayBetweenShotsTimer();
+    HandWeapon::startDelayBetweenShotsTimer();
     std::unique_ptr<Gunshell> gunshell;
     if(side == SIDE::LEFT)
     {
