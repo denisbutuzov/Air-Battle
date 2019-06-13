@@ -9,6 +9,7 @@
 
 template<typename T> class LabelObserver;
 class HealthObserver;
+class EquipmentObserver;
 class PlayerObject;
 class Level;
 class Score;
@@ -37,6 +38,7 @@ private:
     std::unique_ptr<LabelObserver<Level>> levelObserver_;
     std::unique_ptr<LabelObserver<Score>> scoreObserver_;
     std::unique_ptr<HealthObserver> healthObserver_;
+    std::unique_ptr<EquipmentObserver> equipmentObserver_;
     std::unique_ptr<PlayerObject> player_;
     GameObjectStorage objectsStorage_;
     QTimer spawnObjectTimer_;

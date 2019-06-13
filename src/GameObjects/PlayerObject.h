@@ -21,7 +21,7 @@ public:
     void takeWeapon(std::unique_ptr<HandWeapon> &&weapon);
     void changeWeapon();
     void reloadWeapon();
-    void setEquipment(std::unique_ptr<Equipment> &&equipment);
+    void setEquipment(std::shared_ptr<Equipment> equipment);
     std::unique_ptr<Gunshell> shoot() const;
 signals:
     void shot_sig();
@@ -35,6 +35,6 @@ private:
     void stepDown();
 private:
     std::set<Qt::Key> pressedKeys_;
-    std::unique_ptr<Equipment> equipment_;
+    std::shared_ptr<Equipment> equipment_;
     bool timerAtWork_;
 };

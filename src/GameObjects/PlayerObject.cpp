@@ -40,9 +40,9 @@ void PlayerObject::reloadWeapon()
     equipment_->reloadWeapon();
 }
 
-void PlayerObject::setEquipment(std::unique_ptr<Equipment> &&equipment)
+void PlayerObject::setEquipment(std::shared_ptr<Equipment> equipment)
 {
-    equipment_ = std::move(equipment);
+    equipment_ = equipment;
 }
 
 std::unique_ptr<Gunshell> PlayerObject::shoot() const

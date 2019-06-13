@@ -9,6 +9,7 @@
 #include "SpecialObjects/Subjects/Equipment.h"
 #include "SpecialObjects/Observers/HealthObserver.h"
 #include "SpecialObjects/Observers/LabelObserver.h"
+#include "SpecialObjects/Observers/EquipmentObserver.h"
 #include "Visitors/MoveVisitor.h"
 #include "FactoryManager.h"
 #include "additionals.h"
@@ -42,10 +43,11 @@ Game::Game()
     player_->setFocus();
     player_->setPos((scene_->width() - player_->pixmap().width())/2,
                     scene_->height() - player_->pixmap().height());
-    player_->setEquipment(std::make_unique<Equipment>(scene_));
+    auto equipment = std::make_shared<Equipment>(scene_);
+    equipmentObserver_ = std::make_unique<EquipmentObserver>(equipment);
+    equipmentObserver_->show(scene_, QPointF(0.0, 30.0));
+    player_->setEquipment(equipment);
     player_->init();
-
-
 
     level_ = std::make_shared<Level>();
     levelObserver_ = std::make_unique<LabelObserver<Level>>(level_, "Level: ");
