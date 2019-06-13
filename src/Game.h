@@ -5,14 +5,14 @@
 
 #include <memory>
 
-#include "SpecialObjects/Observers/LabelObserver.h"
 #include "GameObjectStorage.h"
 
+template<typename T> class LabelObserver;
+class HealthObserver;
 class PlayerObject;
 class Level;
 class Score;
 class Health;
-class HealthObserver;
 
 class Game
         : public QGraphicsView

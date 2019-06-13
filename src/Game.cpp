@@ -7,6 +7,7 @@
 #include "SpecialObjects/Subjects/Score.h"
 #include "SpecialObjects/Subjects/Health.h"
 #include "SpecialObjects/Observers/HealthObserver.h"
+#include "SpecialObjects/Observers/LabelObserver.h"
 #include "Visitors/MoveVisitor.h"
 #include "FactoryManager.h"
 #include "additionals.h"
