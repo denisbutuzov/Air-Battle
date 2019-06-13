@@ -12,6 +12,7 @@ FIND_PACKAGE(Qt5 COMPONENTS ${Qt5_COMPONENTS} REQUIRED)
 SET(HEADERS additionals.h
             Game.h
             FactoryManager.h
+            GameObjectStorage.h
             GameObjects/GameObject.h
             GameObjects/PlayerObject.h
             GameObjects/MovableObject.h
@@ -48,6 +49,7 @@ SET(HEADERS additionals.h
 
 SET(SOURCES Game.cpp
             FactoryManager.cpp
+            GameObjectStorage.cpp
             GameObjects/GameObject.cpp
             GameObjects/PlayerObject.cpp
             GameObjects/MovableObject.cpp

@@ -6,11 +6,9 @@
 #include <memory>
 
 #include "SpecialObjects/Observers/LabelObserver.h"
+#include "GameObjectStorage.h"
 
 class PlayerObject;
-class Gunshell;
-class Weapon;
-class Enemy;
 class Level;
 class Score;
 class Health;
@@ -40,9 +38,7 @@ private:
     std::shared_ptr<LabelObserver<Level>> levelObserver_;
     std::shared_ptr<LabelObserver<Score>> scoreObserver_;
     std::shared_ptr<HealthObserver> healthObserver_;
-    std::list<std::shared_ptr<Enemy>> enemies_;
-    std::list<std::shared_ptr<Gunshell>> gunshells_;
-    std::list<std::shared_ptr<Weapon>> weapons_;
+    GameObjectStorage objectsStorage_;
     QTimer spawnObjectTimer_;
     QTimer removeObjectTimer_;
     QTimer levelChangeTimer_;

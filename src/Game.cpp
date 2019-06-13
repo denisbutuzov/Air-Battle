@@ -1,5 +1,4 @@
 #include "GameObjects/PlayerObject.h"
-#include "GameObjects/MovableObject.h"
 #include "GameObjects/Enemies/EnemyDecorators/ShieldDecorator.h"
 #include "GameObjects/Gunshells/Gunshell.h"
 #include "GameObjects/Weapons/Weapon.h"
@@ -82,46 +81,28 @@ Game::Game()
 void Game::moveGameObjects()
 {
     MoveVisitor visitor;
-    for(auto &enemy : enemies_)
-    {
-        visitor.visitEnemy(enemy.get());
-    }
-    for(auto &gunshell : gunshells_)
-    {
-        visitor.visitGunshell(gunshell.get());
-    }
-    for(auto &weapon : weapons_)
-    {
-        visitor.visitWeapon(weapon.get());
-    }
+    objectsStorage_.accept(visitor);
 }
 
 void Game::getSpawnObjectFromFactory()
 {
     auto spawnObject = FactoryManager::createSpawnObject(scene_, level_);
     spawnObject->init();
-    if(auto enemy = dynamic_unique_cast<Enemy>(std::move(spawnObject)))
-    {
-        enemies_.push_back(std::move(enemy));
-    }
-    else if(auto weapon = dynamic_unique_cast<Weapon>(std::move(spawnObject)))
-    {
-        weapons_.push_back(std::move(weapon));
-    }
+    objectsStorage_.pushMovableObject(std::move(spawnObject));
 }
 
 void Game::getGunshellFromPlayer()
 {
     auto gunshell = player_->shoot();
     gunshell->init();
-    gunshells_.push_back(std::move(gunshell));
+    objectsStorage_.pushGunshell(std::move(gunshell));
 }
 
 void Game::removeObjectsFromScene()
 {
-    weapons_.remove_if([&](auto &obj){ return obj->y() > scene_->height(); });
-    gunshells_.remove_if([](auto &obj){ return obj->y() < 0; });
-    enemies_.remove_if
+    objectsStorage_.weapons().remove_if([&](auto &obj){ return obj->y() > scene_->height(); });
+    objectsStorage_.gunshells().remove_if([](auto &obj){ return obj->y() < 0; });
+    objectsStorage_.enemies().remove_if
             (
                 [&](auto &obj)
                 {
@@ -137,7 +118,7 @@ void Game::removeObjectsFromScene()
 
 void Game::checkCollisionBetweenGameObjects()
 {
-    gunshells_.remove_if
+    objectsStorage_.gunshells().remove_if
             (
                 [](auto &gunshell)
                 {
@@ -154,7 +135,7 @@ void Game::checkCollisionBetweenGameObjects()
                 }
             );
 
-    enemies_.remove_if
+    objectsStorage_.enemies().remove_if
             (
                 [&](auto &enemy)
                 {
@@ -163,7 +144,7 @@ void Game::checkCollisionBetweenGameObjects()
                         if(auto *shield = dynamic_cast<ShieldDecorator *>(enemy.get()))
                         {
                             std::unique_ptr<Enemy> enemy(shield->enemy().release());
-                            enemies_.push_back(std::move(enemy));
+                            objectsStorage_.pushEnemy(std::move(enemy));
                         }
                         else
                         {
@@ -175,7 +156,7 @@ void Game::checkCollisionBetweenGameObjects()
                 }
             );
 
-    weapons_.remove_if
+    objectsStorage_.weapons().remove_if
             (
                 [](auto &weapon)
                 {
