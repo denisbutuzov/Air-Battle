@@ -16,6 +16,11 @@ HandWeapon::HandWeapon(std::weak_ptr<QGraphicsScene> scene, int capacity,
     shotSoundPlayer_.setMedia(QUrl(shotSound_));
 }
 
+HandWeapon::Cartridge HandWeapon::patrons() const
+{
+    return patrons_;
+}
+
 std::unique_ptr<Gunshell> HandWeapon::shoot(qreal x, qreal y)
 {
     static int shotDelayIsActive = false;

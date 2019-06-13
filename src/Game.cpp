@@ -6,6 +6,7 @@
 #include "SpecialObjects/Subjects/Level.h"
 #include "SpecialObjects/Subjects/Score.h"
 #include "SpecialObjects/Subjects/Health.h"
+#include "SpecialObjects/Subjects/Equipment.h"
 #include "SpecialObjects/Observers/HealthObserver.h"
 #include "SpecialObjects/Observers/LabelObserver.h"
 #include "Visitors/MoveVisitor.h"
@@ -41,6 +42,7 @@ Game::Game()
     player_->setFocus();
     player_->setPos((scene_->width() - player_->pixmap().width())/2,
                     scene_->height() - player_->pixmap().height());
+    player_->setEquipment(std::make_unique<Equipment>(scene_));
     player_->init();
 
     level_ = std::make_shared<Level>();

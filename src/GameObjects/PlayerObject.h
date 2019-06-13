@@ -6,6 +6,7 @@
 
 class HandWeapon;
 class Gunshell;
+class Equipment;
 
 class PlayerObject
         : public QObject
@@ -16,21 +17,23 @@ class PlayerObject
 public:
     PlayerObject(std::weak_ptr<QGraphicsScene> scene);
     virtual ~PlayerObject() override;
+    void setEquipment(std::unique_ptr<Equipment> &&equipment);
     void takeWeapon(std::unique_ptr<HandWeapon> &&weapon);
     std::unique_ptr<Gunshell> shoot() const;
+    void reloadWeapon();
+    void changeWeapon();
+    void stepLeft();
+    void stepRight();
+    void stepUp();
+    void stepDown();
 signals:
     void shot_sig();
 private:
     virtual void keyPressEvent(QKeyEvent *event) override final;
     virtual void keyReleaseEvent(QKeyEvent *event) override final;
     virtual void timerEvent(QTimerEvent *event) override final;
-    void stepLeft();
-    void stepRight();
-    void stepUp();
-    void stepDown();
-    void reloadWeapon();
 private:
     std::set<Qt::Key> pressedKeys_;
-    std::unique_ptr<HandWeapon> weapon_;
+    std::unique_ptr<Equipment> equipment_;
     bool timerAtWork_;
 };
