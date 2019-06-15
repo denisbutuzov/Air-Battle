@@ -4,10 +4,11 @@
 
 constexpr int MACHINEGUN_CAPACITY = 12;
 constexpr int MACHINEGUN_BEGING_PATRONS = 24;
+constexpr int MACHINEGUN_SHOT_DELAY = 50;
 constexpr const char *MACHINEGUN_GUNSHELL_IMAGE = ":/images/images/Machinegun_gunshell.png";
 
 HandMachinegun::HandMachinegun(std::weak_ptr<QGraphicsScene> scene)
-    : HandWeapon(scene, MACHINEGUN_CAPACITY, MACHINEGUN_BEGING_PATRONS)
+    : HandWeapon(scene, MACHINEGUN_CAPACITY, MACHINEGUN_BEGING_PATRONS, MACHINEGUN_SHOT_DELAY)
 {
 }
 

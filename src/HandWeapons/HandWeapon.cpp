@@ -1,10 +1,14 @@
+#include <QTimer>
+
 #include "GameObjects/Gunshells/Gunshell.h"
 
 #include "HandWeapon.h"
 
-HandWeapon::HandWeapon(std::weak_ptr<QGraphicsScene> scene, int capacity, int patrons)
+HandWeapon::HandWeapon(std::weak_ptr<QGraphicsScene> scene, int capacity,
+                       int patrons, int shotDelay)
     : scene_(scene)
     , capacity_(capacity)
+    , shotDelay_(shotDelay)
 {
     addPatrons(patrons);
     reload();
@@ -12,8 +16,12 @@ HandWeapon::HandWeapon(std::weak_ptr<QGraphicsScene> scene, int capacity, int pa
 
 std::unique_ptr<Gunshell> HandWeapon::shoot(qreal x, qreal y)
 {
-    if(patronsExist())
+    static int shotDelayIsActive = false;
+
+    if(patronsExist() && !shotDelayIsActive)
     {
+        QTimer::singleShot(shotDelay_, this, [](){ shotDelayIsActive = false ;});
+        shotDelayIsActive = true;
         --patrons_.second;
         return createGunshell(x, y);
     }

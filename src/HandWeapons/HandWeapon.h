@@ -12,8 +12,11 @@ class HandWeapon
 {
     Q_OBJECT
 
+    using Cartridge = std::pair<int, int>;
+
 public:
-    HandWeapon(std::weak_ptr<QGraphicsScene> scene, int capacity, int patrons);
+    HandWeapon(std::weak_ptr<QGraphicsScene> scene, int capacity,
+               int patrons, int shotDelay);
     virtual ~HandWeapon() = default;
     std::unique_ptr<Gunshell> shoot(qreal x, qreal y);
     void reload();
@@ -25,6 +28,7 @@ private:
     virtual bool patronsExist() const;
 private:
     std::weak_ptr<QGraphicsScene> scene_;
-    std::pair<int, int> patrons_;
+    Cartridge patrons_;
     const int capacity_;
+    const int shotDelay_;
 };
