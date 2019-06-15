@@ -5,10 +5,12 @@
 constexpr int BAZOOKA_CAPACITY = 5;
 constexpr int BAZOOKA_PATRONS = 5;
 constexpr int BAZOOKA_SHOT_DELAY = 500;
+constexpr const char *BAZOOKA_SHOT_SOUND = "qrc:/sounds/sounds/boom.wav";
 constexpr const char *BAZOOKA_GUNSHELL_IMAGE = ":/images/images/Bazooka_gunshell.png";
 
 HandBazooka::HandBazooka(std::weak_ptr<QGraphicsScene> scene)
-    : HandWeapon(scene, BAZOOKA_CAPACITY, BAZOOKA_PATRONS, BAZOOKA_SHOT_DELAY)
+    : HandWeapon(scene, BAZOOKA_CAPACITY, BAZOOKA_PATRONS,
+                 BAZOOKA_SHOT_DELAY, BAZOOKA_SHOT_SOUND)
 {
 }
 

@@ -5,13 +5,15 @@
 #include "HandWeapon.h"
 
 HandWeapon::HandWeapon(std::weak_ptr<QGraphicsScene> scene, int capacity,
-                       int patrons, int shotDelay)
+                       int patrons, int shotDelay, const char *shotSound)
     : scene_(scene)
     , capacity_(capacity)
     , shotDelay_(shotDelay)
+    , shotSound_(shotSound)
 {
     addPatrons(patrons);
     reload();
+    shotSoundPlayer_.setMedia(QUrl(shotSound_));
 }
 
 std::unique_ptr<Gunshell> HandWeapon::shoot(qreal x, qreal y)
@@ -23,6 +25,7 @@ std::unique_ptr<Gunshell> HandWeapon::shoot(qreal x, qreal y)
         QTimer::singleShot(shotDelay_, this, [](){ shotDelayIsActive = false ;});
         shotDelayIsActive = true;
         --patrons_.second;
+        playShotSound();
         return createGunshell(x, y);
     }
     return std::unique_ptr<Gunshell>();
@@ -36,6 +39,18 @@ std::weak_ptr<QGraphicsScene> HandWeapon::scene() const
 bool HandWeapon::patronsExist() const
 {
     return patrons_.second;
+}
+
+void HandWeapon::playShotSound()
+{
+    if(shotSoundPlayer_.state() == QMediaPlayer::PlayingState)
+    {
+        shotSoundPlayer_.setPosition(0);
+    }
+    else
+    {
+        shotSoundPlayer_.play();
+    }
 }
 
 void HandWeapon::reload()
