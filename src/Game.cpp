@@ -172,7 +172,7 @@ void Game::checkCollisionBetweenGameObjects()
                     {
                         if(auto *player = dynamic_cast<PlayerObject *>(otherObj))
                         {
-                            player->takeWeapon(weapon->handWeapon());
+                            player->equipment()->addWeapon(weapon->handWeapon());
                             return true;
                         }
                     };

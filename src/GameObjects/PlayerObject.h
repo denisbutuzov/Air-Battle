@@ -17,12 +17,9 @@ class PlayerObject
 public:
     PlayerObject(std::weak_ptr<QGraphicsScene> scene);
     virtual ~PlayerObject() override;
-    bool isReadyToShot() const;
-    void takeWeapon(std::unique_ptr<HandWeapon> &&weapon);
-    void changeWeapon();
-    void reloadWeapon();
     void setEquipment(std::shared_ptr<Equipment> equipment);
     std::unique_ptr<Gunshell> shoot() const;
+    std::shared_ptr<Equipment> equipment() const;
 signals:
     void shot_sig();
 private:

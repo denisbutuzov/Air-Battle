@@ -18,27 +18,7 @@ PlayerObject::PlayerObject(std::weak_ptr<QGraphicsScene> scene)
     equipment_ = std::make_unique<Equipment>(scene);
 }
 
-bool PlayerObject::isReadyToShot() const
-{
-    return equipment_->isReadyToShoot();
-}
-
 PlayerObject::~PlayerObject() = default;
-
-void PlayerObject::takeWeapon(std::unique_ptr<HandWeapon> &&weapon)
-{
-    equipment_->addWeapon(std::move(weapon));
-}
-
-void PlayerObject::changeWeapon()
-{
-    equipment_->changeWeapon();
-}
-
-void PlayerObject::reloadWeapon()
-{
-    equipment_->reloadWeapon();
-}
 
 void PlayerObject::setEquipment(std::shared_ptr<Equipment> equipment)
 {
@@ -48,6 +28,11 @@ void PlayerObject::setEquipment(std::shared_ptr<Equipment> equipment)
 std::unique_ptr<Gunshell> PlayerObject::shoot() const
 {
     return equipment_->shoot(x() + pixmap().width()/2, y());
+}
+
+std::shared_ptr<Equipment> PlayerObject::equipment() const
+{
+    return equipment_;
 }
 
 void PlayerObject::keyPressEvent(QKeyEvent *event)
@@ -73,15 +58,15 @@ void PlayerObject::keyReleaseEvent(QKeyEvent *event)
 
 void PlayerObject::timerEvent(QTimerEvent *event)
 {
-    static const std::unordered_map<Qt::Key, void(PlayerObject::*)(void)> FUNCTION_MAP
+    static const std::unordered_map<Qt::Key, std::function<void(void)>> FUNCTION_MAP
     {
-        { Qt::Key_Left, &PlayerObject::stepLeft },
-        { Qt::Key_Right, &PlayerObject::stepRight },
-        { Qt::Key_Up, &PlayerObject::stepUp },
-        { Qt::Key_Down, &PlayerObject::stepDown },
-        { Qt::Key_Shift, &PlayerObject::changeWeapon },
-        { Qt::Key_R, &PlayerObject::reloadWeapon },
-        { Qt::Key_Space, &PlayerObject::shot_sig }
+        { Qt::Key_Left, [&]() -> void { stepLeft(); } },
+        { Qt::Key_Right, [&]() -> void { stepRight(); } },
+        { Qt::Key_Up, [&]() -> void { stepUp(); } },
+        { Qt::Key_Down, [&]() -> void { stepDown(); } },
+        { Qt::Key_Shift, [&]() -> void { equipment()->changeWeapon(); } },
+        { Qt::Key_R, [&]() -> void { equipment()->reloadWeapon(); } },
+        { Qt::Key_Space, [&]() -> void { emit shot_sig(); } }
     };
 
     if(pressedKeys_.empty())
@@ -97,7 +82,7 @@ void PlayerObject::timerEvent(QTimerEvent *event)
         if(it != FUNCTION_MAP.end())
         {
             auto function = it->second;
-            (this->*function)();
+            function();
         }
     }
 }

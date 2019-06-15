@@ -112,7 +112,7 @@ Equipment::Weapon Equipment::currentWeapon() const
     return currentWeapon_->first;
 }
 
-bool Equipment::isReadyToShoot() const
+bool Equipment::isReadyToShot() const
 {
     return std::get<0>(currentWeapon_->second)->isReadyToShoot();
 }
