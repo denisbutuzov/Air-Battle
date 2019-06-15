@@ -1,6 +1,5 @@
 #pragma once
 
-//#include <QTimer>
 #include <QObject>
 
 #include <memory>
@@ -14,19 +13,18 @@ class HandWeapon
     Q_OBJECT
 
 public:
-    HandWeapon(std::weak_ptr<QGraphicsScene> scene);
-//    , int delayBetweenShots);
+    HandWeapon(std::weak_ptr<QGraphicsScene> scene, int capacity, int patrons);
     virtual ~HandWeapon() = default;
-    virtual std::unique_ptr<Gunshell> shoot(qreal x, qreal y) = 0;
-//    bool isReadyToShoot() const;
+    std::unique_ptr<Gunshell> shoot(qreal x, qreal y);
+    void reload();
+    void addPatrons(int patrons);
 protected:
     std::weak_ptr<QGraphicsScene> scene() const;
-//    void startDelayBetweenShotsTimer();
-//private slots:
-//    void setReadyToShoot();
+private:
+    virtual std::unique_ptr<Gunshell> createGunshell(qreal x, qreal y) = 0;
+    virtual bool patronsExist() const;
 private:
     std::weak_ptr<QGraphicsScene> scene_;
-//    std::unique_ptr<QTimer> delayBetweenShotsTimer_;
-//    const int delayBetweenShots_;
-//    bool readyToShoot_;
+    std::pair<int, int> patrons_;
+    const int capacity_;
 };

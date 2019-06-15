@@ -95,8 +95,11 @@ void Game::getSpawnObjectFromFactory()
 void Game::getGunshellFromPlayer()
 {
     auto gunshell = player_->shoot();
-    gunshell->init();
-    objectsStorage_.pushGunshell(std::move(gunshell));
+    if(gunshell)
+    {
+        gunshell->init();
+        objectsStorage_.pushGunshell(std::move(gunshell));
+    }
 }
 
 void Game::removeObjectsFromScene()

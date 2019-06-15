@@ -28,6 +28,7 @@ private:
     void stepRight();
     void stepUp();
     void stepDown();
+    void reloadWeapon();
 private:
     std::set<Qt::Key> pressedKeys_;
     std::unique_ptr<HandWeapon> weapon_;

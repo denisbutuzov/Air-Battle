@@ -2,18 +2,17 @@
 
 #include "HandBazooka.h"
 
+constexpr int BAZOOKA_CAPACITY = 5;
+constexpr int BAZOOKA_PATRONS = 5;
 constexpr const char *BAZOOKA_GUNSHELL_IMAGE = ":/images/images/Bazooka_gunshell.png";
 
 HandBazooka::HandBazooka(std::weak_ptr<QGraphicsScene> scene)
-//, int delayBetweenShots)
-    : HandWeapon(scene)
-//    , delayBetweenShots)
+    : HandWeapon(scene, BAZOOKA_CAPACITY, BAZOOKA_PATRONS)
 {
 }
 
-std::unique_ptr<Gunshell> HandBazooka::shoot(qreal x, qreal y)
+std::unique_ptr<Gunshell> HandBazooka::createGunshell(qreal x, qreal y)
 {    
-//    HandWeapon::startDelayBetweenShotsTimer();
     auto gunshell = std::make_unique<Gunshell>(scene(), 2);
     gunshell->setPixmap(QPixmap(BAZOOKA_GUNSHELL_IMAGE));
     gunshell->setPos(QPointF(x, y));

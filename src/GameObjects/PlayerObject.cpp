@@ -58,7 +58,8 @@ void PlayerObject::timerEvent(QTimerEvent *event)
         { Qt::Key_Right, &PlayerObject::stepRight },
         { Qt::Key_Up, &PlayerObject::stepUp },
         { Qt::Key_Down, &PlayerObject::stepDown },
-        { Qt::Key_Space, &PlayerObject::shot_sig }
+        { Qt::Key_Space, &PlayerObject::shot_sig },
+        { Qt::Key_R, &PlayerObject::reloadWeapon }
     };
 
     if(pressedKeys_.empty())
@@ -121,4 +122,9 @@ void PlayerObject::stepDown()
     {
         setPos(x(), y() + 10);
     }
+}
+
+void PlayerObject::reloadWeapon()
+{
+    weapon_->reload();
 }

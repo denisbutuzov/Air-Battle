@@ -7,7 +7,7 @@ class HandBazooka
 {
 public:
     HandBazooka(std::weak_ptr<QGraphicsScene> scene);
-//    , int delayBetweenShots = 600);
     virtual ~HandBazooka() override = default;
-    virtual std::unique_ptr<Gunshell> shoot(qreal x, qreal y) override final;
+private:
+    virtual std::unique_ptr<Gunshell> createGunshell(qreal x, qreal y) override final;
 };

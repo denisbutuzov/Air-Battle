@@ -1,33 +1,54 @@
+#include "GameObjects/Gunshells/Gunshell.h"
+
 #include "HandWeapon.h"
 
-HandWeapon::HandWeapon(std::weak_ptr<QGraphicsScene> scene)
-//, int delayBetweenShots)
+HandWeapon::HandWeapon(std::weak_ptr<QGraphicsScene> scene, int capacity, int patrons)
     : scene_(scene)
-//    , delayBetweenShots_(delayBetweenShots)
-//    , readyToShoot_(true)
+    , capacity_(capacity)
 {
-//    delayBetweenShotsTimer_ = std::make_unique<QTimer>();
-//    connect(delayBetweenShotsTimer_.get(), SIGNAL(timeout()),
-//            this, SLOT(setReadyToShoot()));
+    addPatrons(patrons);
+    reload();
 }
 
-//bool HandWeapon::isReadyToShoot() const
-//{
-//    return readyToShoot_;
-//}
+std::unique_ptr<Gunshell> HandWeapon::shoot(qreal x, qreal y)
+{
+    if(patronsExist())
+    {
+        --patrons_.second;
+        return createGunshell(x, y);
+    }
+    return std::unique_ptr<Gunshell>();
+}
 
 std::weak_ptr<QGraphicsScene> HandWeapon::scene() const
 {
     return scene_;
 }
 
-//void HandWeapon::startDelayBetweenShotsTimer()
-//{
-//    delayBetweenShotsTimer_->start(delayBetweenShots_);
-//    readyToShoot_ = false;
-//}
+bool HandWeapon::patronsExist() const
+{
+    return patrons_.second;
+}
 
-//void HandWeapon::setReadyToShoot()
-//{
-//    readyToShoot_ = true;
-//}
+void HandWeapon::reload()
+{
+    if(patrons_.first > 0 && patrons_.second < capacity_)
+    {
+        auto requiredPatrons = capacity_ - patrons_.second;
+        if(patrons_.first >= requiredPatrons)
+        {
+            patrons_.first -= requiredPatrons;
+            patrons_.second += requiredPatrons;
+        }
+        else
+        {
+            patrons_.second += patrons_.first;
+            patrons_.first = 0;
+        }
+    }
+}
+
+void HandWeapon::addPatrons(int patrons)
+{
+    patrons_.first += patrons;
+}

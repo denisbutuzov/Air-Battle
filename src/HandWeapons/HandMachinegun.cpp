@@ -2,20 +2,19 @@
 
 #include "HandMachinegun.h"
 
+constexpr int MACHINEGUN_CAPACITY = 12;
+constexpr int MACHINEGUN_BEGING_PATRONS = 24;
 constexpr const char *MACHINEGUN_GUNSHELL_IMAGE = ":/images/images/Machinegun_gunshell.png";
 
 HandMachinegun::HandMachinegun(std::weak_ptr<QGraphicsScene> scene)
-//, int delayBetweenShots)
-    : HandWeapon(scene)
-//                 , delayBetweenShots)
+    : HandWeapon(scene, MACHINEGUN_CAPACITY, MACHINEGUN_BEGING_PATRONS)
 {
 }
 
-std::unique_ptr<Gunshell> HandMachinegun::shoot(qreal x, qreal y)
+std::unique_ptr<Gunshell> HandMachinegun::createGunshell(qreal x, qreal y)
 {
     static enum class SIDE {LEFT, RIGHT} side;
 
-//    HandWeapon::startDelayBetweenShotsTimer();
     std::unique_ptr<Gunshell> gunshell;
     if(side == SIDE::LEFT)
     {
