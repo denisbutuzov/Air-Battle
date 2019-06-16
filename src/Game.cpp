@@ -101,8 +101,11 @@ void Game::getSpawnObjectFromFactory()
 void Game::getGunshellFromPlayer()
 {
     auto gunshell = player_->shoot();
-    gunshell->init();
-    objectsStorage_.pushGunshell(std::move(gunshell));
+    if(gunshell)
+    {
+        gunshell->init();
+        objectsStorage_.pushGunshell(std::move(gunshell));
+    }
 }
 
 void Game::removeObjectsFromScene()
@@ -172,7 +175,7 @@ void Game::checkCollisionBetweenGameObjects()
                     {
                         if(auto *player = dynamic_cast<PlayerObject *>(otherObj))
                         {
-                            player->equipment()->addWeapon(weapon->handWeapon());
+                            player->takeWeapon(weapon->handWeapon());
                             return true;
                         }
                     };

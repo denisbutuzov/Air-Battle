@@ -8,11 +8,8 @@
 #include "AbstractSubject.h"
 
 class HandWeapon;
-class QGraphicsScene;
 class Gunshell;
-
-constexpr int countPatronsInWeapon = 6;
-constexpr int countAddingPatrons = 2;
+class QGraphicsScene;
 
 class Equipment
         : public AbstractSubject
@@ -20,29 +17,24 @@ class Equipment
     friend class PlayerObject;
 
 public:
-    enum class Weapon
+    enum class WeaponType
     {
         Gun,
         Machinegun,
         Bazooka
     };
+    using WeaponsMap = std::map<WeaponType, std::unique_ptr<HandWeapon>>;
 public:
     Equipment(std::weak_ptr<QGraphicsScene> scene);
     void addWeapon(std::unique_ptr<HandWeapon> &&weapon);
+    void removeWeapon(WeaponType weaponType);
     void changeWeapon();
     void reloadWeapon();
-    int patronsInWeapon() const;
-    int patronInMagazine() const;
-    int maxPatronsInWeapon() const;
-    Weapon currentWeapon() const;
-    bool isReadyToShot() const;
-private:
-    using armament = std::tuple<std::unique_ptr<HandWeapon>, int, int>;
-    using weaponsMap = std::map<Weapon, armament>;
+    WeaponsMap::value_type &currentWeapon() const;
 private:
     std::unique_ptr<Gunshell> shoot(qreal x, qreal y);
-    void addPatrons(Weapon weaponType, std::unique_ptr<HandWeapon> &&weapon);
+    void addWeaponOrPatrons(WeaponType weaponType, std::unique_ptr<HandWeapon> &&weapon);
 private:
-    weaponsMap weapons_;
-    weaponsMap::iterator currentWeapon_;
+    WeaponsMap weapons_;
+    WeaponsMap::iterator currentWeapon_;
 };

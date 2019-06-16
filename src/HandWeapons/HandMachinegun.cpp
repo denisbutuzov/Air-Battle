@@ -2,18 +2,22 @@
 
 #include "HandMachinegun.h"
 
+constexpr unsigned int MACHINEGUN_CAPACITY = 12;
+constexpr unsigned int MACHINEGUN_BEGING_PATRONS = 24;
+constexpr unsigned int MACHINEGUN_SHOT_DELAY = 50;
+constexpr const char *MACHINEGUN_SHOT_SOUND = "qrc:/sounds/sounds/bullet.wav";
 constexpr const char *MACHINEGUN_GUNSHELL_IMAGE = ":/images/images/Machinegun_gunshell.png";
 
-HandMachinegun::HandMachinegun(std::weak_ptr<QGraphicsScene> scene, int delayBetweenShots)
-    : HandWeapon(scene, delayBetweenShots)
+HandMachinegun::HandMachinegun(std::weak_ptr<QGraphicsScene> scene)
+    : HandWeapon(scene, MACHINEGUN_CAPACITY, MACHINEGUN_BEGING_PATRONS,
+                 MACHINEGUN_SHOT_DELAY, MACHINEGUN_SHOT_SOUND)
 {
 }
 
-std::unique_ptr<Gunshell> HandMachinegun::shoot(qreal x, qreal y)
+std::unique_ptr<Gunshell> HandMachinegun::createGunshell(qreal x, qreal y)
 {
     static enum class SIDE {LEFT, RIGHT} side;
 
-    HandWeapon::startDelayBetweenShotsTimer();
     std::unique_ptr<Gunshell> gunshell;
     if(side == SIDE::LEFT)
     {

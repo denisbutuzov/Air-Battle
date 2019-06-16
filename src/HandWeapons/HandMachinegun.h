@@ -6,7 +6,8 @@ class HandMachinegun
         : public HandWeapon
 {
 public:
-    HandMachinegun(std::weak_ptr<QGraphicsScene> scene, int delayBetweenShots = 100);
+    HandMachinegun(std::weak_ptr<QGraphicsScene> scene);
     virtual ~HandMachinegun() override = default;
-    virtual std::unique_ptr<Gunshell> shoot(qreal x, qreal y) override final;
+private:
+    virtual std::unique_ptr<Gunshell> createGunshell(qreal x, qreal y) override final;
 };

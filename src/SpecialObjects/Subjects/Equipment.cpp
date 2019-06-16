@@ -6,9 +6,11 @@
 
 #include "Equipment.h"
 
+constexpr unsigned int COUNT_ADDING_PATRONS = 10;
+
 Equipment::Equipment(std::weak_ptr<QGraphicsScene> scene)
 {
-    weapons_.insert({Weapon::Gun, std::make_tuple(std::make_unique<HandGun>(scene), 0, 0)});
+    weapons_.insert({WeaponType::Gun, std::make_unique<HandGun>(scene)});
     currentWeapon_ = weapons_.begin();
 }
 
@@ -16,12 +18,19 @@ void Equipment::addWeapon(std::unique_ptr<HandWeapon> &&weapon)
 {
     if(auto gun = dynamic_unique_cast<HandMachinegun>(std::move(weapon)))
     {
-        addPatrons(Weapon::Machinegun, std::move(gun));
+        addWeaponOrPatrons(WeaponType::Machinegun, std::move(gun));
     }
     else if(auto gun = dynamic_unique_cast<HandBazooka>(std::move(weapon)))
     {
-        addPatrons(Weapon::Bazooka, std::move(gun));
+        addWeaponOrPatrons(WeaponType::Bazooka, std::move(gun));
     }
+}
+
+void Equipment::removeWeapon(WeaponType weapon)
+{
+    weapons_.erase(weapon);
+    changeWeapon();
+    notify();
 }
 
 void Equipment::changeWeapon()
@@ -35,98 +44,44 @@ void Equipment::changeWeapon()
 
 void Equipment::reloadWeapon()
 {
-    auto &patronsInMagazine = std::get<1>(currentWeapon_->second);
-    auto &patronsInWeapon = std::get<2>(currentWeapon_->second);
-    if(patronsInMagazine != 0)
-    {
-        auto lackPatronsInWeapon = countPatronsInWeapon - patronsInWeapon;
-        if(patronsInMagazine >= lackPatronsInWeapon)
-        {
-            patronsInWeapon += lackPatronsInWeapon;
-            patronsInMagazine -= lackPatronsInWeapon;
-        }
-        else
-        {
-            patronsInWeapon += patronsInMagazine;
-            patronsInMagazine = 0;
-        }
-        notify();
-    }
+    currentWeapon_->second->reload();
+    notify();
 }
 
 std::unique_ptr<Gunshell> Equipment::shoot(qreal x, qreal y)
 {
-    auto weapon = currentWeapon_->first;
-    auto &patronsInMagazine = std::get<1>(currentWeapon_->second);
-    auto &patronsInWeapon = std::get<2>(currentWeapon_->second);
-    if(weapon == Weapon::Gun)
+    auto &handWeapon = currentWeapon_->second;
+    auto gunshell = handWeapon->shoot(x, y);
+    if(!handWeapon->unlimitedPatrons())
     {
-        return std::get<0>(currentWeapon_->second)->shoot(x,y);
-    }
-    else if(patronsInWeapon != 0)
-    {
-        patronsInWeapon--;
-        notify();
-        return std::get<0>(currentWeapon_->second)->shoot(x,y);
-    }
-    else if(patronsInMagazine != 0)
-    {
-        if(patronsInMagazine > countPatronsInWeapon)
+        if((handWeapon->patronsInMagazine() == 0) && (handWeapon->patronsInStorage() > 0))
         {
-            patronsInMagazine -= countPatronsInWeapon;
-            patronsInWeapon = countPatronsInWeapon;
+            reloadWeapon();
         }
-        else
+        else if((handWeapon->patronsInMagazine() == 0) && (handWeapon->patronsInStorage() == 0))
         {
-            patronsInWeapon = patronsInMagazine;
-            patronsInMagazine = 0;
+            removeWeapon(currentWeapon_->first);
         }
-        notify();
-        return std::get<0>(currentWeapon_->second)->shoot(x,y);
     }
-    else
-    {
-        weapons_.erase(currentWeapon_->first);
-        changeWeapon();
-        return shoot(x, y);
-    }
+    notify();
+    return gunshell;
 }
 
-int Equipment::patronsInWeapon() const
+Equipment::WeaponsMap::value_type &Equipment::currentWeapon() const
 {
-    return std::get<2>(currentWeapon_->second);
+    return *currentWeapon_;
 }
 
-int Equipment::patronInMagazine() const
-{
-    return std::get<1>(currentWeapon_->second);
-}
-
-int Equipment::maxPatronsInWeapon() const
-{
-    return countPatronsInWeapon;
-}
-
-Equipment::Weapon Equipment::currentWeapon() const
-{
-    return currentWeapon_->first;
-}
-
-bool Equipment::isReadyToShot() const
-{
-    return std::get<0>(currentWeapon_->second)->isReadyToShoot();
-}
-
-void Equipment::addPatrons(Equipment::Weapon weaponType, std::unique_ptr<HandWeapon> &&weapon)
+void Equipment::addWeaponOrPatrons(WeaponType weaponType, std::unique_ptr<HandWeapon> &&weapon)
 {
     auto iter = weapons_.find(weaponType);
     if (iter == weapons_.end())
     {
-        weapons_.insert({weaponType, std::make_tuple(std::move(weapon), 0, countPatronsInWeapon)});
+        weapons_.insert({weaponType, std::move(weapon)});
     }
     else
     {
-        std::get<1>(iter->second) += countAddingPatrons;
+        currentWeapon_->second->addPatrons(COUNT_ADDING_PATRONS);
         notify();
     }
 }

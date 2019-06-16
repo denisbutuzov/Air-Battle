@@ -13,7 +13,7 @@ constexpr double INACTION_SCENE_PART = 0.66;
 
 PlayerObject::PlayerObject(std::weak_ptr<QGraphicsScene> scene)
     : GameObject(scene)
-    , timerAtWork_(false)
+    , pressKeysTimerAtWork_(false)
 {
     equipment_ = std::make_unique<Equipment>(scene);
 }
@@ -25,14 +25,14 @@ void PlayerObject::setEquipment(std::shared_ptr<Equipment> equipment)
     equipment_ = equipment;
 }
 
+void PlayerObject::takeWeapon(std::unique_ptr<HandWeapon> &&weapon)
+{
+    equipment_->addWeapon(std::move(weapon));
+}
+
 std::unique_ptr<Gunshell> PlayerObject::shoot() const
 {
     return equipment_->shoot(x() + pixmap().width()/2, y());
-}
-
-std::shared_ptr<Equipment> PlayerObject::equipment() const
-{
-    return equipment_;
 }
 
 void PlayerObject::keyPressEvent(QKeyEvent *event)
@@ -40,10 +40,10 @@ void PlayerObject::keyPressEvent(QKeyEvent *event)
     if(!event->isAutoRepeat())
     {
         pressedKeys_.insert(static_cast<Qt::Key>(event->key()));
-        if(!timerAtWork_)
+        if(!pressKeysTimerAtWork_)
         {
             startTimer(std::chrono::milliseconds(33));
-            timerAtWork_ = true;
+            pressKeysTimerAtWork_ = true;
         }
     }
 }
@@ -58,21 +58,21 @@ void PlayerObject::keyReleaseEvent(QKeyEvent *event)
 
 void PlayerObject::timerEvent(QTimerEvent *event)
 {
-    static const std::unordered_map<Qt::Key, std::function<void(void)>> FUNCTION_MAP
+    static const std::unordered_map<Qt::Key, void(PlayerObject::*)(void)> FUNCTION_MAP
     {
-        { Qt::Key_Left, [&]() -> void { stepLeft(); } },
-        { Qt::Key_Right, [&]() -> void { stepRight(); } },
-        { Qt::Key_Up, [&]() -> void { stepUp(); } },
-        { Qt::Key_Down, [&]() -> void { stepDown(); } },
-        { Qt::Key_Shift, [&]() -> void { equipment()->changeWeapon(); } },
-        { Qt::Key_R, [&]() -> void { equipment()->reloadWeapon(); } },
-        { Qt::Key_Space, [&]() -> void { emit shot_sig(); } }
+        { Qt::Key_Left, &PlayerObject::stepLeft },
+        { Qt::Key_Right, &PlayerObject::stepRight },
+        { Qt::Key_Up, &PlayerObject::stepUp },
+        { Qt::Key_Down, &PlayerObject::stepDown },
+        { Qt::Key_Space, &PlayerObject::shot_sig },
+        { Qt::Key_R, &PlayerObject::reloadWeapon },
+        { Qt::Key_Shift, &PlayerObject::changeWeapon }
     };
 
     if(pressedKeys_.empty())
     {
         killTimer(event->timerId());
-        timerAtWork_ = false;
+        pressKeysTimerAtWork_ = false;
         return;
     }
 
@@ -82,7 +82,7 @@ void PlayerObject::timerEvent(QTimerEvent *event)
         if(it != FUNCTION_MAP.end())
         {
             auto function = it->second;
-            function();
+            (this->*function)();
         }
     }
 }
@@ -129,4 +129,14 @@ void PlayerObject::stepDown()
     {
         setPos(x(), y() + 10);
     }
+}
+
+void PlayerObject::reloadWeapon()
+{
+    equipment_->reloadWeapon();
+}
+
+void PlayerObject::changeWeapon()
+{
+    equipment_->changeWeapon();
 }

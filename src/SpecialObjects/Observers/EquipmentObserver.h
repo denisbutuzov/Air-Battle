@@ -23,13 +23,13 @@ private:
     void addPatron();
     void removePatron();
     void repeatWhileSizesAreNotEqual(std::function<void()> &&callBack);
-    void setText(Equipment::Weapon weapon);
+    void setText(Equipment::WeaponType weapon);
     void clearMagazine();
 private:
     std::weak_ptr<Equipment> subject_;
-    QPointF coordinate_;
     std::weak_ptr<QGraphicsScene> scene_;
+    QPointF coordinate_;
+    QGraphicsTextItem weaponType_;
     std::stack<std::unique_ptr<QGraphicsPixmapItem>> patrons_;
-    QGraphicsTextItem text_;
-    Equipment::Weapon currentWeapontType_;
+    Equipment::WeaponType currentWeaponType_;
 };

@@ -2,18 +2,22 @@
 #include <QTextDocument>
 
 #include "SpecialObjects/Subjects/Equipment.h"
+#include "HandWeapons/HandWeapon.h"
 
 #include "EquipmentObserver.h"
 
+constexpr const char *MACHINEGUN_PATRON_IMAGE = ":/images/images/Machinegun_patron.png";
+constexpr const char *BAZOOKA_PATRON_IMAGE = ":/images/images/Bazooka_patron.png";
+
 EquipmentObserver::EquipmentObserver(std::weak_ptr<Equipment> equipment)
     : subject_(equipment)
-    , currentWeapontType_(Equipment::Weapon::Gun)
 {
-    text_.setDefaultTextColor(Qt::white);
-    text_.setFont(QFont("times", 20, QFont::Bold));
+    weaponType_.setDefaultTextColor(Qt::white);
+    weaponType_.setFont(QFont("times", 20, QFont::Bold));
     if(auto wp = subject_.lock())
     {
         wp->attach(this);
+        currentWeaponType_ = wp->currentWeapon().first;
     }
 }
 
@@ -21,12 +25,14 @@ void EquipmentObserver::update()
 {
     if(auto wp = subject_.lock())
     {
-        if(currentWeapontType_ != wp->currentWeapon())
+        auto &weapon = wp->currentWeapon();
+        if(currentWeaponType_ != weapon.first)
         {
             clearMagazine();
+            currentWeaponType_ = weapon.first;
         }
-        setText(wp->currentWeapon());
-        if(static_cast<int>(patrons_.size()) < wp->patronsInWeapon())
+        setText(weapon.first);
+        if(static_cast<unsigned int>(patrons_.size()) < weapon.second->patronsInMagazine())
         {
             repeatWhileSizesAreNotEqual(std::bind(&EquipmentObserver::addPatron, this));
         }
@@ -44,12 +50,12 @@ void EquipmentObserver::show(std::weak_ptr<QGraphicsScene> scene, QPointF coordi
 
     if(!scene_.expired() && !subject_.expired())
     {
-        scene_.lock()->addItem(&text_);
-        text_.setPos(coordinate_);
-        setText(subject_.lock()->currentWeapon());
+        scene_.lock()->addItem(&weaponType_);
+        weaponType_.setPos(coordinate_);
+        setText(subject_.lock()->currentWeapon().first);
 
-        auto tempVal = subject_.lock()->patronInMagazine();
-        for (int i = 0; i != tempVal; ++i)
+        auto tempVal = subject_.lock()->currentWeapon().second->patronsInMagazine();
+        for (unsigned int i = 0; i != tempVal; ++i)
         {
             addPatron();
         }
@@ -58,23 +64,23 @@ void EquipmentObserver::show(std::weak_ptr<QGraphicsScene> scene, QPointF coordi
 
 void EquipmentObserver::addPatron()
 {
-    static const std::map<Equipment::Weapon, QString> PATRON_TYPE
+    static const std::map<Equipment::WeaponType, const char *> PATRON_TYPE
     {
-        { Equipment::Weapon::Machinegun, "Machinegun_patron" },
-        { Equipment::Weapon::Bazooka, "Bazooka_patron" }
+        { Equipment::WeaponType::Machinegun, MACHINEGUN_PATRON_IMAGE },
+        { Equipment::WeaponType::Bazooka, BAZOOKA_PATRON_IMAGE }
     };
 
-    QString patronString(":/images/images/");
-    QString currentPatronType = PATRON_TYPE.find(subject_.lock()->currentWeapon())->second;
-    patronString.push_back(currentPatronType + ".png");
-    auto patron = std::make_unique<QGraphicsPixmapItem>(QPixmap(patronString));
+    auto currentPatronType = PATRON_TYPE.find(subject_.lock()->currentWeapon().first)->second;
+    auto patron = std::make_unique<QGraphicsPixmapItem>(QPixmap(currentPatronType));
     if(!patrons_.empty())
     {
         patron->setPos(patrons_.top()->pos() + QPointF(0.0, -(patron->pixmap().height() + 1.0)));
     }
     else
     {
-        patron->setPos(coordinate_ + QPointF(0.0, text_.document()->size().height() + (subject_.lock()->maxPatronsInWeapon()-1)*(patron->pixmap().height() + 1.0)));
+        patron->setPos(coordinate_ + QPointF(0.0, weaponType_.document()->size().height() +
+                                                  (subject_.lock()->currentWeapon().second->capacity() - 1) *
+                                                  (patron->pixmap().height() + 1.0)));
     }
     scene_.lock()->addItem(patron.get());
     patrons_.push(std::move(patron));
@@ -87,32 +93,34 @@ void EquipmentObserver::removePatron()
 
 void EquipmentObserver::repeatWhileSizesAreNotEqual(std::function<void ()> &&callBack)
 {
-    while(static_cast<int>(patrons_.size()) != subject_.lock()->patronsInWeapon())
+    unsigned int patronsInMagazine = subject_.lock()->currentWeapon().second->patronsInMagazine();
+    while(static_cast<unsigned int>(patrons_.size()) != patronsInMagazine)
     {
         callBack();
     }
 }
 
-void EquipmentObserver::setText(Equipment::Weapon weapon)
+void EquipmentObserver::setText(Equipment::WeaponType weapon)
 {
-    static const std::map<Equipment::Weapon, QString> WEAPON_TYPE
+    static const std::map<Equipment::WeaponType, const char *> WEAPON_TYPE
     {
-        { Equipment::Weapon::Gun, "Gun" },
-        { Equipment::Weapon::Machinegun, "Machinegun" },
-        { Equipment::Weapon::Bazooka, "Bazooka" }
+        { Equipment::WeaponType::Gun, "Gun" },
+        { Equipment::WeaponType::Machinegun, "Machinegun" },
+        { Equipment::WeaponType::Bazooka, "Bazooka" }
     };
 
     QString text = WEAPON_TYPE.find(weapon)->second;
     text.push_back(": ");
-    if(weapon == Equipment::Weapon::Gun)
+    if(weapon == Equipment::WeaponType::Gun)
     {
         text.push_back("∞");
     }
     else
     {
-        text.push_back(QString::number(subject_.lock()->patronInMagazine()) + "/" + QString::number(subject_.lock()->patronsInWeapon()));
+        text.push_back(QString::number(subject_.lock()->currentWeapon().second->patronsInStorage()) +
+                       "/" + QString::number(subject_.lock()->currentWeapon().second->patronsInMagazine()));
     }
-    text_.setPlainText(text);
+    weaponType_.setPlainText(text);
 }
 
 void EquipmentObserver::clearMagazine()
