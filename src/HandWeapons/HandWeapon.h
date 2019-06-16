@@ -15,11 +15,12 @@ class HandWeapon
 
     friend class Equipment;
 
-    struct Patrons
+    struct Magazine
     {
-        Patrons(): inMagazine(0), inStorage(0) {}
-        unsigned int inMagazine;
-        unsigned int inStorage;
+        Magazine(unsigned int capacity, unsigned int patrons)
+            : capacity(capacity), patrons(patrons) {}
+        const unsigned int capacity;
+        unsigned int patrons;
     };
 public:
     HandWeapon(std::weak_ptr<QGraphicsScene> scene, unsigned int capacity,
@@ -39,8 +40,8 @@ private:
     void playShotSound();
 private:
     std::weak_ptr<QGraphicsScene> scene_;
-    Patrons patrons_;
-    const unsigned int capacity_;
+    Magazine magazine_;
+    unsigned int patrons_;
     const char *shotSound_;
     const unsigned int shotDelay_;
     bool shotDelayIsActive_;

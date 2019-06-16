@@ -7,12 +7,12 @@
 HandWeapon::HandWeapon(std::weak_ptr<QGraphicsScene> scene, unsigned int capacity,
                        unsigned int patrons, unsigned int shotDelay, const char *shotSound)
     : scene_(scene)
-    , capacity_(capacity)
+    , magazine_(capacity, 0)
+    , patrons_(patrons)
     , shotSound_(shotSound)
     , shotDelay_(shotDelay)    
     , shotDelayIsActive_(false)
 {
-    addPatrons(patrons);
     reload();
     shotSoundPlayer_.setMedia(QUrl(shotSound_));
 }
@@ -24,17 +24,17 @@ bool HandWeapon::unlimitedPatrons() const
 
 unsigned int HandWeapon::patronsInMagazine() const
 {
-    return patrons_.inMagazine;
+    return magazine_.patrons;
 }
 
 unsigned int HandWeapon::patronsInStorage() const
 {
-    return patrons_.inStorage;
+    return patrons_;
 }
 
 unsigned int HandWeapon::capacity() const
 {
-    return capacity_;
+    return magazine_.capacity;
 }
 
 std::unique_ptr<Gunshell> HandWeapon::shoot(qreal x, qreal y)
@@ -43,9 +43,9 @@ std::unique_ptr<Gunshell> HandWeapon::shoot(qreal x, qreal y)
     {
         QTimer::singleShot(shotDelay_, [&](){ shotDelayIsActive_ = false; });
         shotDelayIsActive_ = true;
-        if(patrons_.inMagazine > 0)
+        if(magazine_.patrons > 0)
         {
-            --patrons_.inMagazine;
+            --magazine_.patrons;
         }
         playShotSound();
         return createGunshell(x, y);
@@ -72,23 +72,23 @@ void HandWeapon::playShotSound()
 
 void HandWeapon::reload()
 {
-    if(patrons_.inStorage > 0 && patrons_.inMagazine < capacity_)
+    if(patrons_ > 0 && magazine_.patrons < magazine_.capacity)
     {
-        auto requiredPatrons = capacity_ - patrons_.inMagazine;
-        if(patrons_.inStorage >= requiredPatrons)
+        auto requiredPatrons = magazine_.capacity - magazine_.patrons;
+        if(patrons_ >= requiredPatrons)
         {
-            patrons_.inStorage -= requiredPatrons;
-            patrons_.inMagazine += requiredPatrons;
+            patrons_ -= requiredPatrons;
+            magazine_.patrons += requiredPatrons;
         }
         else
         {
-            patrons_.inMagazine += patrons_.inStorage;
-            patrons_.inStorage = 0;
+            magazine_.patrons += patrons_;
+            patrons_ = 0;
         }
     }
 }
 
 void HandWeapon::addPatrons(unsigned int patrons)
 {
-    patrons_.inStorage += patrons;
+    patrons_ += patrons;
 }
