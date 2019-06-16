@@ -3,6 +3,7 @@
         <file>sounds/boom.wav</file>
         <file>sounds/bullet.wav</file>
         <file>sounds/plane.wav</file>
+        <file>sounds/reload.aiff</file>
     </qresource>
     <qresource prefix="/images">
         <file>images/Player.png</file>
