@@ -83,6 +83,11 @@ void PlayerObject::timerEvent(QTimerEvent *event)
         {
             auto function = it->second;
             (this->*function)();
+
+            if(key == Qt::Key_Shift)
+            {
+                pressedKeys_.erase(key);
+            }
         }
     }
 }
