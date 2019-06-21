@@ -3,13 +3,15 @@ PROJECT(Space-Battle)
 
 SET(CMAKE_AUTOMOC ON)
 SET(CMAKE_AUTORCC ON)
+SET(CMAKE_AUTOUIC ON)
 
-set (CMAKE_CXX_STANDARD 14)
+SET(CMAKE_CXX_STANDARD 14)
 
 SET(Qt5_COMPONENTS Core Gui Widgets Multimedia)
 FIND_PACKAGE(Qt5 COMPONENTS ${Qt5_COMPONENTS} REQUIRED)
 
 SET(HEADERS additionals.h
+            GameWindow.h
             Game.h
             FactoryManager.h
             GameObjectStorage.h
@@ -49,7 +51,8 @@ SET(HEADERS additionals.h
             Visitors/MoveVisitor.h
 )
 
-SET(SOURCES Game.cpp
+SET(SOURCES GameWindow.cpp
+            Game.cpp
             FactoryManager.cpp
             GameObjectStorage.cpp
             GameObjects/GameObject.cpp
@@ -91,8 +94,10 @@ SET(LIBS Qt5::Core
          Qt5::Multimedia
 )
 
+SET(UI GameWindow.ui)
+
 SET(RESOURCES ../resources/res.qrc)
 
-ADD_EXECUTABLE(${PROJECT_NAME} ../main.cpp ${SOURCES} ${HEADERS} ${RESOURCES})
+ADD_EXECUTABLE(${PROJECT_NAME} ../main.cpp ${SOURCES} ${HEADERS} ${RESOURCES} ${UI})
 TARGET_LINK_LIBRARIES(${PROJECT_NAME} PUBLIC ${LIBS})
 TARGET_INCLUDE_DIRECTORIES(${PROJECT_NAME} PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
