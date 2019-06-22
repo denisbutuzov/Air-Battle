@@ -89,6 +89,7 @@ Game::Game()
 void Game::start()
 {
     this->show();
+
     levelChangeTimer_.start();
     spawnObjectTimer_.start();
     removeObjectTimer_.start();
@@ -99,11 +100,14 @@ void Game::start()
 void Game::pause()
 {
     this->hide();
+    emit pause_sig();
+
     levelChangeTimer_.stop();
     spawnObjectTimer_.stop();
     removeObjectTimer_.stop();
     moveTimer_.stop();
     checkCollisionTimer_.stop();
+
 }
 
 void Game::moveGameObjects()
@@ -145,6 +149,11 @@ void Game::removeObjectsFromScene()
                     return false;
                 }
             );
+
+    if(health_->value() == 0)
+    {
+        emit end_sig();
+    }
 }
 
 void Game::checkCollisionBetweenGameObjects()
@@ -207,10 +216,7 @@ void Game::checkCollisionBetweenGameObjects()
 
 void Game::levelChange()
 {
-    if(level_.use_count() != 0)
-    {
-        level_->increase();
-    }
+    level_->increase();
 }
 
 void Game::keyPressEvent(QKeyEvent *event)

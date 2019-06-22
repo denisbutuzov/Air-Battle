@@ -26,6 +26,9 @@ public:
 public:
     void start();
     void pause();
+signals:
+    void pause_sig();
+    void end_sig();
 private slots:
     void moveGameObjects();
     void getSpawnObjectFromFactory();

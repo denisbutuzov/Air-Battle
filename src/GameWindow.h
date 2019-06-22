@@ -20,6 +20,11 @@ public:
     ~GameWindow();
 private slots:
     void on_startButton_clicked();
+    void gamePause();
+    void gameOver();
+private:
+    void gameStart();
+    void showMsg(const char *msg);
 private:
     Ui::GameWindow *ui;
     std::unique_ptr<Game> game_;
