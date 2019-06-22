@@ -88,8 +88,7 @@ Game::Game()
 
 void Game::start()
 {
-    this->show();
-
+    show();
     levelChangeTimer_.start();
     spawnObjectTimer_.start();
     removeObjectTimer_.start();
@@ -99,15 +98,13 @@ void Game::start()
 
 void Game::pause()
 {
-    this->hide();
+    hide();
     emit pause_sig();
-
     levelChangeTimer_.stop();
     spawnObjectTimer_.stop();
     removeObjectTimer_.stop();
     moveTimer_.stop();
     checkCollisionTimer_.stop();
-
 }
 
 void Game::moveGameObjects()
@@ -235,6 +232,11 @@ void Game::keyPressEvent(QKeyEvent *event)
 void Game::keyReleaseEvent(QKeyEvent *event)
 {
     player_->keyReleaseEvent(event);
+}
+
+void Game::closeEvent(QCloseEvent *event)
+{
+    emit close_sig();
 }
 
 Game::~Game() = default;

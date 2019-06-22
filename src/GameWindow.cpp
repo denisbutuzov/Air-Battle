@@ -31,8 +31,14 @@ void GameWindow::gamePause()
 void GameWindow::gameOver()
 {
     showMsg("GAME OVER");
-    auto *temp = game_.release();
-    delete temp;
+    deleteGame();
+}
+
+void GameWindow::gameClose()
+{
+    ui->gameLabel->hide();
+    show();
+    deleteGame();
 }
 
 void GameWindow::gameStart()
@@ -45,6 +51,8 @@ void GameWindow::gameStart()
                 this, SLOT(gamePause()));
         connect(game_.get(), SIGNAL(end_sig()),
                 this, SLOT(gameOver()));
+        connect(game_.get(), SIGNAL(close_sig()),
+                this, SLOT(gameClose()));
     }
     hide();
     game_->start();
@@ -55,4 +63,10 @@ void GameWindow::showMsg(const char *msg)
     show();
     ui->gameLabel->setText(msg);
     ui->gameLabel->show();
+}
+
+void GameWindow::deleteGame()
+{
+    auto *temp = game_.release();
+    delete temp;
 }
