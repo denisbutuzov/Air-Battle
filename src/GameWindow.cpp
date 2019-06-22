@@ -8,6 +8,7 @@ GameWindow::GameWindow(QWidget *parent)
     , ui(new Ui::GameWindow)
 {
     ui->setupUi(this);
+    game_ = std::make_unique<Game>();
 }
 
 GameWindow::~GameWindow()
@@ -17,6 +18,5 @@ GameWindow::~GameWindow()
 
 void GameWindow::on_startButton_clicked()
 {
-    game_ = std::make_unique<Game>();
-    game_->show();
+    game_->start();
 }

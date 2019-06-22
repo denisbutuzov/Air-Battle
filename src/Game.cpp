@@ -1,3 +1,5 @@
+#include <QKeyEvent>
+
 #include "GameObjects/PlayerObject.h"
 #include "GameObjects/Enemies/EnemyDecorators/ShieldDecorator.h"
 #include "GameObjects/Gunshells/Gunshell.h"
@@ -39,8 +41,6 @@ Game::Game()
 
     player_ = std::make_unique<PlayerObject>(scene_);
     player_->setPixmap(QPixmap(PLAYER_IMAGE));
-    player_->setFlag(QGraphicsItem::ItemIsFocusable);
-    player_->setFocus();
     player_->setPos((scene_->width() - player_->pixmap().width())/2,
                     scene_->height() - player_->pixmap().height());
     auto equipment = std::make_shared<Equipment>(scene_);
@@ -63,26 +63,47 @@ Game::Game()
 
     connect(&levelChangeTimer_, SIGNAL(timeout()),
             this, SLOT(levelChange()));
-    levelChangeTimer_.start(LEVEL_CHANGE_PERIOD_MS);
+    levelChangeTimer_.setInterval(LEVEL_CHANGE_PERIOD_MS);
 
     connect(&spawnObjectTimer_, SIGNAL(timeout()),
             this, SLOT(getSpawnObjectFromFactory()));
-    spawnObjectTimer_.start(SPAWN_OBJECT_PERIOD_MS);
+    spawnObjectTimer_.setInterval(SPAWN_OBJECT_PERIOD_MS);
+
 
     connect(&removeObjectTimer_, SIGNAL(timeout()),
             this, SLOT(removeObjectsFromScene()));
-    removeObjectTimer_.start(REMOVE_OBJECT_PERIOD_MS);
+    removeObjectTimer_.setInterval(REMOVE_OBJECT_PERIOD_MS);
 
     connect(&moveTimer_, SIGNAL(timeout()),
             this, SLOT(moveGameObjects()));
-    moveTimer_.start(MOVE_OBJECT_PERIOD_MS);
+    moveTimer_.setInterval(MOVE_OBJECT_PERIOD_MS);
 
     connect(&checkCollisionTimer_, SIGNAL(timeout()),
             this, SLOT(checkCollisionBetweenGameObjects()));
-    checkCollisionTimer_.start(CHECK_COLLISION_PERIOD_MS);
+    checkCollisionTimer_.setInterval(CHECK_COLLISION_PERIOD_MS);
 
     connect(player_.get(), SIGNAL(shot_sig()),
             this, SLOT(getGunshellFromPlayer()));
+}
+
+void Game::start()
+{
+    this->show();
+    levelChangeTimer_.start();
+    spawnObjectTimer_.start();
+    removeObjectTimer_.start();
+    moveTimer_.start();
+    checkCollisionTimer_.start();
+}
+
+void Game::pause()
+{
+    this->hide();
+    levelChangeTimer_.stop();
+    spawnObjectTimer_.stop();
+    removeObjectTimer_.stop();
+    moveTimer_.stop();
+    checkCollisionTimer_.stop();
 }
 
 void Game::moveGameObjects()
@@ -190,6 +211,24 @@ void Game::levelChange()
     {
         level_->increase();
     }
+}
+
+void Game::keyPressEvent(QKeyEvent *event)
+{
+    if(event->key() == Qt::Key_Escape)
+    {
+        hide();
+        pause();
+    }
+    else
+    {
+        player_->keyPressEvent(event);
+    }
+}
+
+void Game::keyReleaseEvent(QKeyEvent *event)
+{
+    player_->keyReleaseEvent(event);
 }
 
 Game::~Game() = default;

@@ -22,7 +22,10 @@ class Game
 
 public:
     Game();
-    ~Game();
+    ~Game() override;
+public:
+    void start();
+    void pause();
 private slots:
     void moveGameObjects();
     void getSpawnObjectFromFactory();
@@ -30,6 +33,8 @@ private slots:
     void removeObjectsFromScene();
     void checkCollisionBetweenGameObjects();
     void levelChange();
+    virtual void keyPressEvent(QKeyEvent *event) override;
+    virtual void keyReleaseEvent(QKeyEvent *event) override;
 private:
     std::shared_ptr<QGraphicsScene> scene_;
     std::shared_ptr<Level> level_;

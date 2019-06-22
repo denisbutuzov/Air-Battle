@@ -26,11 +26,11 @@ public:
     void stepRight();
     void stepUp();
     void stepDown();
+    virtual void keyPressEvent(QKeyEvent *event) override final;
+    virtual void keyReleaseEvent(QKeyEvent *event) override final;
 signals:
     void shot_sig();
 private:
-    virtual void keyPressEvent(QKeyEvent *event) override final;
-    virtual void keyReleaseEvent(QKeyEvent *event) override final;
     virtual void timerEvent(QTimerEvent *event) override final;
 private:
     std::set<Qt::Key> pressedKeys_;
