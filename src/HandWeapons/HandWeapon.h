@@ -24,7 +24,7 @@ class HandWeapon
     };
 public:
     HandWeapon(std::weak_ptr<QGraphicsScene> scene, unsigned int capacity,
-               unsigned int patrons, unsigned int shotDelay, const char *shotSound);
+               unsigned int patrons, unsigned int shotDelay, const QString &shotSound);
     virtual ~HandWeapon() = default;
     virtual bool unlimitedPatrons() const;
     unsigned int patronsInMagazine() const;
@@ -45,7 +45,7 @@ private:
     Magazine magazine_;
     QMediaPlayer soundPlayer_;
     unsigned int patrons_;
-    const char *shotSound_;
+    QString shotSound_;
     const unsigned int shotDelay_;
     bool shotDelayIsActive_;
     const unsigned int reloadDelay_;

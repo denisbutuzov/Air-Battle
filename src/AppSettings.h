@@ -1,11 +1,13 @@
 #pragma once
 
+#include <QString>
+
 class AppSettings
 {
 public:
     struct Scene
     {
-        const char *backGround_;
+        QString backGround_;
         int width_;
         int height_;
     };
@@ -19,17 +21,17 @@ public:
     };
     struct Objects
     {
-        const char *player_;
-        const char *enemy1_;
-        const char *enemy2_;
-        const char *shield_;
+        QString player_;
+        QString enemy1_;
+        QString enemy2_;
+        QString shield_;
         struct Weapon
         {
-            const char *weapon_;
-            const char *gunshell_;
-            const char *patron_;
-            const char *shotSound_;
-            const char *reloadSound_;
+            QString weapon_;
+            QString gunshell_;
+            QString patron_;
+            QString shotSound_;
+            QString reloadSound_;
             unsigned int capacity_;
             unsigned int startPatrons_;
             unsigned int shotDelay_;
@@ -46,6 +48,7 @@ private:
     ~AppSettings() = default;
     AppSettings(const AppSettings &other) = delete;
     AppSettings &operator=(const AppSettings &other) = delete;
+    void load();
 private:
     Scene scene_;
     Time time_;

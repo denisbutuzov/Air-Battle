@@ -1,4 +1,9 @@
+#include <QFile>
+#include <QJsonDocument>
+
 #include "AppSettings.h"
+
+constexpr const char *SETTINGS_FILE = ":/settings/settings.json";
 
 AppSettings &AppSettings::instance()
 {
@@ -23,48 +28,68 @@ const AppSettings::Objects &AppSettings::objects() const
 
 AppSettings::AppSettings()
 {
-    scene_.backGround_ = ":/images/images/Space.jpg";
-    scene_.height_ = 800;
-    scene_.width_ = 600;
+    load();
+}
 
-    time_.spawnObjectPeriod_ = 2000;
-    time_.removeObjectPeriod_ = 50;
-    time_.moveObjectPeriod_ = 50;
-    time_.checkCollisionPeriod_ = 50;
-    time_.levelChangePeriod_ = 10000;
+void AppSettings::load()
+{
+    QFile settingsFile(SETTINGS_FILE);
+    if(!settingsFile.open(QIODevice::ReadOnly|QIODevice::Text))
+    {
+        qFatal("Can't load file with settings");
+    }
 
-    objects_.player_ = ":/images/images/Player.png";
-    objects_.enemy1_ = ":/images/images/Enemy1.png";
-    objects_.enemy2_ = ":/images/images/Enemy2.png";
-    objects_.shield_ = ":/images/images/EnemyShield.png";
+    auto jsonData = settingsFile.readAll();
+    QJsonDocument settingsDoc(QJsonDocument::fromJson(jsonData));
 
-    objects_.gun_.weapon_ = nullptr;
-    objects_.gun_.gunshell_ = ":/images/images/Gun_gunshell.png";
-    objects_.gun_.patron_ = nullptr;
-    objects_.gun_.shotSound_ = "qrc:/sounds/sounds/bullet.wav";
-    objects_.gun_.reloadSound_ = "qrc:/sounds/sounds/reload.aiff";
-    objects_.gun_.capacity_ = 0;
-    objects_.gun_.startPatrons_ = 0;
-    objects_.gun_.shotDelay_ = 100;
-    objects_.gun_.reloadDelay_ = 800;
+    auto &sceneData = settingsDoc["scene"];
+    scene_.backGround_ = sceneData["background_image"].toString();
+    scene_.height_ = sceneData["height"].toInt();
+    scene_.width_ = sceneData["width"].toInt();
 
-    objects_.machinegun_.weapon_ = ":/images/images/Machinegun.png";
-    objects_.machinegun_.gunshell_ = ":/images/images/Machinegun_gunshell.png";
-    objects_.machinegun_.patron_ = ":/images/images/Machinegun_patron.png";
-    objects_.machinegun_.shotSound_ = "qrc:/sounds/sounds/bullet.wav";
-    objects_.machinegun_.reloadSound_ = "qrc:/sounds/sounds/reload.aiff";
-    objects_.machinegun_.capacity_ = 12;
-    objects_.machinegun_.startPatrons_ = 24;
-    objects_.machinegun_.shotDelay_ = 50;
-    objects_.machinegun_.reloadDelay_ = 800;
+    auto &timeData = settingsDoc["time"];
+    time_.spawnObjectPeriod_ = timeData["spawn_object_period"].toInt();
+    time_.removeObjectPeriod_ = timeData["remove_object_period"].toInt();
+    time_.moveObjectPeriod_ = timeData["move_object_period"].toInt();
+    time_.checkCollisionPeriod_ = timeData["check_collision_period"].toInt();
+    time_.levelChangePeriod_ = timeData["level_change_period"].toInt();
 
-    objects_.bazooka_.weapon_ = ":/images/images/Bazooka.png";
-    objects_.bazooka_.gunshell_ = ":/images/images/Bazooka_gunshell.png";
-    objects_.bazooka_.patron_ = ":/images/images/Bazooka_patron.png";
-    objects_.bazooka_.shotSound_ = "qrc:/sounds/sounds/boom.wav";
-    objects_.bazooka_.reloadSound_ = "qrc:/sounds/sounds/reload.aiff";
-    objects_.bazooka_.capacity_ = 5;
-    objects_.bazooka_.startPatrons_ = 5;
-    objects_.bazooka_.shotDelay_ = 500;
-    objects_.bazooka_.reloadDelay_ = 800;
+    auto &objectsData = settingsDoc["objects"];
+    objects_.player_ = objectsData["player"].toString();
+    objects_.enemy1_ = objectsData["enemy1"].toString();
+    objects_.enemy2_ = objectsData["enemy2"].toString();
+    objects_.shield_ = objectsData["shield"].toString();
+
+    auto &gunData = objectsData["weapons"]["gun"];
+    objects_.gun_.weapon_ = gunData["weapon_image"].toString();
+    objects_.gun_.gunshell_ = gunData["gunshell_image"].toString();
+    objects_.gun_.patron_ = gunData["patron_image"].toString();
+    objects_.gun_.shotSound_ = gunData["shot_sound"].toString();
+    objects_.gun_.reloadSound_ = gunData["reload_sound"].toString();
+    objects_.gun_.capacity_ = static_cast<unsigned int>(gunData["capacity_image"].toInt());
+    objects_.gun_.startPatrons_ = static_cast<unsigned int>(gunData["start_patrons"].toInt());
+    objects_.gun_.shotDelay_ = static_cast<unsigned int>(gunData["shot_delay"].toInt());
+    objects_.gun_.reloadDelay_ = static_cast<unsigned int>(gunData["reload_delay"].toInt());
+
+    auto &machinegunData = objectsData["weapons"]["machinegun"];
+    objects_.machinegun_.weapon_ = machinegunData["weapon_image"].toString();
+    objects_.machinegun_.gunshell_ = machinegunData["gunshell_image"].toString();
+    objects_.machinegun_.patron_ = machinegunData["patron_image"].toString();
+    objects_.machinegun_.shotSound_ = machinegunData["shot_sound"].toString();
+    objects_.machinegun_.reloadSound_ = machinegunData["reload_sound"].toString();
+    objects_.machinegun_.capacity_ = static_cast<unsigned int>(machinegunData["capacity_image"].toInt());
+    objects_.machinegun_.startPatrons_ = static_cast<unsigned int>(machinegunData["start_patrons"].toInt());
+    objects_.machinegun_.shotDelay_ = static_cast<unsigned int>(machinegunData["shot_delay"].toInt());
+    objects_.machinegun_.reloadDelay_ = static_cast<unsigned int>(machinegunData["reload_delay"].toInt());
+
+    auto &bazookaData = objectsData["weapons"]["bazooka"];
+    objects_.bazooka_.weapon_ = bazookaData["weapon_image"].toString();
+    objects_.bazooka_.gunshell_ = bazookaData["gunshell_image"].toString();
+    objects_.bazooka_.patron_ = bazookaData["patron_image"].toString();
+    objects_.bazooka_.shotSound_ = bazookaData["shot_sound"].toString();
+    objects_.bazooka_.reloadSound_ = bazookaData["reload_sound"].toString();
+    objects_.bazooka_.capacity_ = static_cast<unsigned int>(bazookaData["capacity_image"].toInt());
+    objects_.bazooka_.startPatrons_ = static_cast<unsigned int>(bazookaData["start_patrons"].toInt());
+    objects_.bazooka_.shotDelay_ = static_cast<unsigned int>(bazookaData["shot_delay"].toInt());
+    objects_.bazooka_.reloadDelay_ = static_cast<unsigned int>(bazookaData["reload_delay"].toInt());
 }

@@ -62,7 +62,7 @@ void EquipmentObserver::show(std::weak_ptr<QGraphicsScene> scene, QPointF coordi
 
 void EquipmentObserver::addPatron()
 {
-    static const std::map<Equipment::WeaponType, const char *> PATRON_TYPE
+    static const std::map<Equipment::WeaponType, QString> PATRON_TYPE
     {
         { Equipment::WeaponType::Machinegun, AppSettings::instance().objects().machinegun_.patron_},
         { Equipment::WeaponType::Bazooka, AppSettings::instance().objects().bazooka_.patron_}
@@ -100,7 +100,7 @@ void EquipmentObserver::repeatWhileSizesAreNotEqual(std::function<void ()> &&cal
 
 void EquipmentObserver::setText(Equipment::WeaponType weapon)
 {
-    static const std::map<Equipment::WeaponType, const char *> WEAPON_TYPE
+    static const std::map<Equipment::WeaponType, QString> WEAPON_TYPE
     {
         { Equipment::WeaponType::Gun, "Gun" },
         { Equipment::WeaponType::Machinegun, "Machinegun" },

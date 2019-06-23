@@ -6,7 +6,7 @@
 #include "HandWeapon.h"
 
 HandWeapon::HandWeapon(std::weak_ptr<QGraphicsScene> scene, unsigned int capacity,
-                       unsigned int patrons, unsigned int shotDelay, const char *shotSound)
+                       unsigned int patrons, unsigned int shotDelay, const QString &shotSound)
     : scene_(scene)
     , magazine_(capacity, 0)
     , patrons_(patrons)

@@ -20,4 +20,7 @@
         <file>images/Machinegun_patron.png</file>
         <file>images/Bazooka_patron.png</file>
     </qresource>
+    <qresource prefix="/settings">
+        <file>settings.json</file>
+    </qresource>
 </RCC>
