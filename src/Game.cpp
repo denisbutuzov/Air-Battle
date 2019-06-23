@@ -13,32 +13,26 @@
 #include "Visitors/MoveVisitor.h"
 #include "FactoryManager.h"
 #include "additionals.h"
+#include "AppSettings.h"
 
 #include "Game.h"
 
-constexpr int WINDOW_WIDTH = 600;
-constexpr int WINDOW_HEIGHT = 800;
-constexpr int SPAWN_OBJECT_PERIOD_MS = 2000;
-constexpr int REMOVE_OBJECT_PERIOD_MS = 50;
-constexpr int MOVE_OBJECT_PERIOD_MS = 50;
-constexpr int CHECK_COLLISION_PERIOD_MS = 50;
-constexpr int LEVEL_CHANGE_PERIOD_MS = 10000;
-
-constexpr const char *BACKGROUND_IMAGE = ":/images/images/Space.jpg";
-constexpr const char *PLAYER_IMAGE = ":/images/images/Player.png";
-
 Game::Game()
 {
+    const auto &sceneSettings = AppSettings::instance().scene();
+    const auto &timeSettings = AppSettings::instance().time();
+    const auto &playerImage = AppSettings::instance().objects().player_;
+
     scene_ = std::make_shared<QGraphicsScene>();
-    scene_->setSceneRect(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
+    scene_->setSceneRect(0, 0, sceneSettings.width_, sceneSettings.height_);
     setScene(scene_.get());
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    setFixedSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-    setBackgroundBrush(QBrush(QImage(BACKGROUND_IMAGE)));
+    setFixedSize(sceneSettings.width_, sceneSettings.height_);
+    setBackgroundBrush(QBrush(QImage(sceneSettings.backGround_)));
 
     player_ = std::make_unique<PlayerObject>(scene_);
-    player_->setPixmap(QPixmap(PLAYER_IMAGE));
+    player_->setPixmap(QPixmap(playerImage));
     player_->setFlag(QGraphicsItem::ItemIsFocusable);
     player_->setFocus();
     player_->setPos((scene_->width() - player_->pixmap().width())/2,
@@ -63,23 +57,23 @@ Game::Game()
 
     connect(&levelChangeTimer_, SIGNAL(timeout()),
             this, SLOT(levelChange()));
-    levelChangeTimer_.start(LEVEL_CHANGE_PERIOD_MS);
+    levelChangeTimer_.start(timeSettings.levelChangePeriod_);
 
     connect(&spawnObjectTimer_, SIGNAL(timeout()),
             this, SLOT(getSpawnObjectFromFactory()));
-    spawnObjectTimer_.start(SPAWN_OBJECT_PERIOD_MS);
+    spawnObjectTimer_.start(timeSettings.spawnObjectPeriod_);
 
     connect(&removeObjectTimer_, SIGNAL(timeout()),
             this, SLOT(removeObjectsFromScene()));
-    removeObjectTimer_.start(REMOVE_OBJECT_PERIOD_MS);
+    removeObjectTimer_.start(timeSettings.removeObjectPeriod_);
 
     connect(&moveTimer_, SIGNAL(timeout()),
             this, SLOT(moveGameObjects()));
-    moveTimer_.start(MOVE_OBJECT_PERIOD_MS);
+    moveTimer_.start(timeSettings.moveObjectPeriod_);
 
     connect(&checkCollisionTimer_, SIGNAL(timeout()),
             this, SLOT(checkCollisionBetweenGameObjects()));
-    checkCollisionTimer_.start(CHECK_COLLISION_PERIOD_MS);
+    checkCollisionTimer_.start(timeSettings.checkCollisionPeriod_);
 
     connect(player_.get(), SIGNAL(shot_sig()),
             this, SLOT(getGunshellFromPlayer()));

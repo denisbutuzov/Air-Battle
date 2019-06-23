@@ -3,11 +3,9 @@
 
 #include "SpecialObjects/Subjects/Equipment.h"
 #include "HandWeapons/HandWeapon.h"
+#include "AppSettings.h"
 
 #include "EquipmentObserver.h"
-
-constexpr const char *MACHINEGUN_PATRON_IMAGE = ":/images/images/Machinegun_patron.png";
-constexpr const char *BAZOOKA_PATRON_IMAGE = ":/images/images/Bazooka_patron.png";
 
 EquipmentObserver::EquipmentObserver(std::weak_ptr<Equipment> equipment)
     : subject_(equipment)
@@ -66,8 +64,8 @@ void EquipmentObserver::addPatron()
 {
     static const std::map<Equipment::WeaponType, const char *> PATRON_TYPE
     {
-        { Equipment::WeaponType::Machinegun, MACHINEGUN_PATRON_IMAGE },
-        { Equipment::WeaponType::Bazooka, BAZOOKA_PATRON_IMAGE }
+        { Equipment::WeaponType::Machinegun, AppSettings::instance().objects().machinegun_.patron_},
+        { Equipment::WeaponType::Bazooka, AppSettings::instance().objects().bazooka_.patron_}
     };
 
     auto currentPatronType = PATRON_TYPE.find(subject_.lock()->currentWeapon().first)->second;

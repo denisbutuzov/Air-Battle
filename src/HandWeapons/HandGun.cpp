@@ -1,20 +1,20 @@
 #include "GameObjects/Gunshells/Gunshell.h"
+#include "AppSettings.h"
 
 #include "HandGun.h"
 
-constexpr unsigned int GUN_SHOT_DELAY = 100;
-constexpr const char *GUN_SHOT_SOUND = "qrc:/sounds/sounds/bullet.wav";
-constexpr const char *GUN_GUNSHELL_IMAGE = ":/images/images/Gun_gunshell.png";
-
 HandGun::HandGun(std::weak_ptr<QGraphicsScene> scene)
-    : HandWeapon(scene, 0, 0, GUN_SHOT_DELAY, GUN_SHOT_SOUND)
+    : HandWeapon(scene, AppSettings::instance().objects().gun_.capacity_,
+                 AppSettings::instance().objects().gun_.startPatrons_,
+                 AppSettings::instance().objects().gun_.shotDelay_,
+                 AppSettings::instance().objects().gun_.shotSound_)
 {
 }
 
 std::unique_ptr<Gunshell> HandGun::createGunshell(qreal x, qreal y)
 {
     auto gunshell = std::make_unique<Gunshell>(scene(), 1);
-    gunshell->setPixmap(QPixmap(GUN_GUNSHELL_IMAGE));
+    gunshell->setPixmap(QPixmap(AppSettings::instance().objects().gun_.gunshell_));
     gunshell->setPos(QPointF(x, y));
     return gunshell;
 }
