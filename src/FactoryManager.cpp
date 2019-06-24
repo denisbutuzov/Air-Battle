@@ -8,6 +8,7 @@
 #include "SpecialObjects/Subjects/Level.h"
 #include "GameObjects/Enemies/Enemy.h"
 #include "GameObjects/Weapons/Weapon.h"
+#include "GameObjects/Bonuses/Bonus.h"
 
 #include "FactoryManager.h"
 
@@ -45,9 +46,14 @@ std::unique_ptr<MovableObject> FactoryManager::callFactory(std::unique_ptr<Abstr
     {
         return factory->enemy();
     }
+    else if(queue == 6)
+    {
+        ++queue;
+        return factory->weapon();
+    }
     else
     {
         queue = 0;
-        return factory->weapon();
+        return factory->bonus();
     }
 }

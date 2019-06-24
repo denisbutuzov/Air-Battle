@@ -5,6 +5,7 @@
 #include "GameObject.h"
 
 class HandWeapon;
+class HandBonus;
 class Gunshell;
 class Equipment;
 
@@ -19,7 +20,9 @@ public:
     virtual ~PlayerObject() override;
     void setEquipment(std::shared_ptr<Equipment> equipment);
     void takeWeapon(std::unique_ptr<HandWeapon> &&weapon);
+    void takeBonus(std::unique_ptr<HandBonus> &&bonus);
     std::unique_ptr<Gunshell> shoot() const;
+    void execute();
     void reloadWeapon();
     void changeWeapon();
     void stepLeft();
@@ -36,4 +39,5 @@ private:
     std::set<Qt::Key> pressedKeys_;
     std::shared_ptr<Equipment> equipment_;
     bool pressKeysTimerAtWork_;
+    std::unique_ptr<HandBonus> bonus_;
 };
