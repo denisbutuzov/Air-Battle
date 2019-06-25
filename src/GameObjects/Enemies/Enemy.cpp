@@ -1,5 +1,6 @@
 #include <QGraphicsScene>
 #include <QMediaPlayer>
+#include <QTimer>
 
 #include "Visitors/AbstractVisitor.h"
 
@@ -25,6 +26,8 @@ Enemy::~Enemy()
             sound->setMedia(QMediaContent(QUrl(EXPLOSION_SOUND)));
             sound->setVolume(40);
             sound->play();
+
+            QTimer::singleShot(std::chrono::seconds(2), [sound = sound](){ delete sound; });
         }
     }
 }
