@@ -10,7 +10,7 @@ constexpr unsigned int COUNT_ADDING_PATRONS = 10;
 
 Equipment::Equipment(std::weak_ptr<QGraphicsScene> scene)
 {
-    weapons_.insert({WeaponType::Gun, std::make_unique<HandGun>(scene)});
+    weapons_.emplace(WeaponType::Gun, std::make_unique<HandGun>(scene));
     currentWeapon_ = weapons_.begin();
 }
 
@@ -77,7 +77,7 @@ void Equipment::addWeaponOrPatrons(WeaponType weaponType, std::unique_ptr<HandWe
     auto iter = weapons_.find(weaponType);
     if (iter == weapons_.end())
     {
-        weapons_.insert({weaponType, std::move(weapon)});
+        weapons_.emplace(weaponType, std::move(weapon));
     }
     else
     {
