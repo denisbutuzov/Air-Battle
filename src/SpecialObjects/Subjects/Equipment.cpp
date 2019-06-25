@@ -81,7 +81,7 @@ void Equipment::addWeaponOrPatrons(WeaponType weaponType, std::unique_ptr<HandWe
     }
     else
     {
-        currentWeapon_->second->addPatrons(COUNT_ADDING_PATRONS);
+        iter->second->addPatrons(COUNT_ADDING_PATRONS);
         notify();
     }
 }
