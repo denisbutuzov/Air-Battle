@@ -25,6 +25,6 @@ void ShieldDecorator::initShield()
     auto newPixmapWidth = enemy()->pixmap().width() * 1.2;
     setPixmap(pixmap().scaledToWidth(static_cast<int>(newPixmapWidth)));
     auto x = enemy()->pos().x() - newPixmapWidth * 0.1;
-    auto y = enemy()->pos().y() + enemy()->pixmap().height() * 0.8;
+    auto y = enemy()->pos().y();
     setPos(x, y);
 }
