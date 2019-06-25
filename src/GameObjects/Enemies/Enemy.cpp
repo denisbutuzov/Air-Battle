@@ -1,8 +1,11 @@
 #include <QGraphicsScene>
+#include <QMediaPlayer>
 
 #include "Visitors/AbstractVisitor.h"
 
 #include "Enemy.h"
+
+constexpr const char *EXPLOSION_SOUND = "qrc:/sounds/sounds/explosion.wav";
 
 Enemy::Enemy(std::weak_ptr<QGraphicsScene> scene,
              int hitpoint,
@@ -18,7 +21,10 @@ Enemy::~Enemy()
     {
         if(pos().y() < wp->sceneRect().height())
         {
-            qDebug("Enemy was destroyed by Player");
+            QMediaPlayer *sound = new QMediaPlayer;
+            sound->setMedia(QMediaContent(QUrl(EXPLOSION_SOUND)));
+            sound->setVolume(40);
+            sound->play();
         }
     }
 }
