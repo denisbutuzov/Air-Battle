@@ -1,3 +1,5 @@
+#include <QGraphicsScene>
+
 #include "Visitors/AbstractVisitor.h"
 
 #include "Enemy.h"
@@ -8,6 +10,17 @@ Enemy::Enemy(std::weak_ptr<QGraphicsScene> scene,
     : MovableObject(scene, moveStrategy)
     , hitpoint_(hitpoint)
 {
+}
+
+Enemy::~Enemy()
+{
+    if(auto wp = scene().lock())
+    {
+        if(pos().y() < wp->sceneRect().height())
+        {
+            qDebug("Enemy was destroyed by Player");
+        }
+    }
 }
 
 void Enemy::accept(AbstractVisitor &visitor)
