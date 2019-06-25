@@ -11,5 +11,5 @@ public:
     virtual void init() override final;
     virtual void move() override final;
 private:
-    void resize();
+    void initShield();
 };

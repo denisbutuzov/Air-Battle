@@ -8,7 +8,7 @@ ShieldDecorator::ShieldDecorator(std::unique_ptr<Enemy> enemy,
 
 void ShieldDecorator::init()
 {
-    resize();
+    initShield();
     AbstractEnemyDecorator::init();
 }
 
@@ -20,9 +20,11 @@ void ShieldDecorator::move()
     setPos(pos() + deltaPos);
 }
 
-void ShieldDecorator::resize()
+void ShieldDecorator::initShield()
 {
     auto newPixmapWidth = enemy()->pixmap().width() * 1.2;
     setPixmap(pixmap().scaledToWidth(static_cast<int>(newPixmapWidth)));
-    setPos(QPointF(enemy()->pos() + QPointF(static_cast<int>(-newPixmapWidth * 0.1), 20.0)));
+    auto x = enemy()->pos().x() - newPixmapWidth * 0.1;
+    auto y = enemy()->pos().y() + enemy()->pixmap().height() * 0.8;
+    setPos(x, y);
 }
