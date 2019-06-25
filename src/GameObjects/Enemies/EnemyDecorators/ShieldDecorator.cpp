@@ -14,8 +14,10 @@ void ShieldDecorator::init()
 
 void ShieldDecorator::move()
 {
-    Enemy::move();
+    auto pos1 = enemy()->pos();
     enemy()->move();
+    auto deltaPos = enemy()->pos() - pos1;
+    setPos(pos() + deltaPos);
 }
 
 void ShieldDecorator::resize()
