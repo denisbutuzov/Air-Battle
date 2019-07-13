@@ -4,6 +4,7 @@
         <file>sounds/bullet.wav</file>
         <file>sounds/plane.wav</file>
         <file>sounds/explosion.wav</file>
+        <file>sounds/Bullet_boom.wav</file>
     </qresource>
     <qresource prefix="/images">
         <file>images/Player.png</file>
