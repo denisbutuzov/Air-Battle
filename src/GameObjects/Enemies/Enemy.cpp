@@ -7,6 +7,7 @@
 #include "Enemy.h"
 
 constexpr const char *EXPLOSION_SOUND = "qrc:/sounds/sounds/explosion.wav";
+constexpr const char *EXPLOSION_IMAGE = ":/images/images/Enemy_boom.png";
 
 Enemy::Enemy(std::weak_ptr<QGraphicsScene> scene,
              int hitpoint,
@@ -27,11 +28,12 @@ Enemy::~Enemy()
             sound->setVolume(40);
             sound->play();
 
-            QGraphicsRectItem *item = new QGraphicsRectItem(x(), y(), 100, 100);
-            item->setPen(QPen(Qt::red));
-            wp->addItem(item);
+            QGraphicsPixmapItem *pixmap = new QGraphicsPixmapItem(QPixmap(EXPLOSION_IMAGE));
+            pixmap->setPos(pos());
+            wp->addItem(pixmap);
 
-            QTimer::singleShot(std::chrono::seconds(2), [sound = sound, item = item](){ delete sound; delete item; });
+            QTimer::singleShot(std::chrono::seconds(2), [sound = sound](){ delete sound; });
+            QTimer::singleShot(std::chrono::milliseconds(150), [pixmap = pixmap](){ delete pixmap; });
         }
     }
 }
