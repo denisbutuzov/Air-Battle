@@ -20,5 +20,6 @@
         <file>images/Machinegun_patron.png</file>
         <file>images/Bazooka_patron.png</file>
         <file>images/Enemy_boom.png</file>
+        <file>images/Gunshell_boom.png</file>
     </qresource>
 </RCC>
