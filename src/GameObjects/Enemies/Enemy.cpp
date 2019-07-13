@@ -14,6 +14,7 @@ Enemy::Enemy(std::weak_ptr<QGraphicsScene> scene,
              std::shared_ptr<MoveStrategy> moveStrategy)
     : MovableObject(scene, moveStrategy)
     , hitpoint_(hitpoint)
+    , type_(EnemyType::Enemy)
 {
 }
 
@@ -23,17 +24,19 @@ Enemy::~Enemy()
     {
         if(pos().y() < wp->sceneRect().height())
         {
-            QMediaPlayer *sound = new QMediaPlayer;
-            sound->setMedia(QMediaContent(QUrl(EXPLOSION_SOUND)));
-            sound->setVolume(40);
-            sound->play();
+            if(enemyType() == EnemyType::Enemy)
+            {
+                QMediaPlayer *sound = new QMediaPlayer;
+                sound->setMedia(QMediaContent(QUrl(EXPLOSION_SOUND)));
+                sound->setVolume(40);
+                sound->play();
+                QTimer::singleShot(std::chrono::seconds(2), [sound = sound](){ delete sound; });
 
-            QGraphicsPixmapItem *pixmap = new QGraphicsPixmapItem(QPixmap(EXPLOSION_IMAGE));
-            pixmap->setPos(pos());
-            wp->addItem(pixmap);
-
-            QTimer::singleShot(std::chrono::seconds(2), [sound = sound](){ delete sound; });
-            QTimer::singleShot(std::chrono::milliseconds(150), [pixmap = pixmap](){ delete pixmap; });
+                QGraphicsPixmapItem *pixmap = new QGraphicsPixmapItem(QPixmap(EXPLOSION_IMAGE));
+                pixmap->setPos(pos());
+                wp->addItem(pixmap);
+                QTimer::singleShot(std::chrono::milliseconds(150), [pixmap = pixmap](){ delete pixmap; });
+            }
         }
     }
 }
@@ -51,4 +54,14 @@ void Enemy::setHitpoint(int hitpoint)
 int Enemy::hitpoint() const
 {
     return hitpoint_;
+}
+
+void Enemy::setEnemyType(Enemy::EnemyType type)
+{
+    type_ = type;
+}
+
+Enemy::EnemyType Enemy::enemyType() const
+{
+    return type_;
 }

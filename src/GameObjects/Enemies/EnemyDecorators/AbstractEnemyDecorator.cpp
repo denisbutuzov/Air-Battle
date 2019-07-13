@@ -5,6 +5,7 @@ AbstractEnemyDecorator::AbstractEnemyDecorator(std::unique_ptr<Enemy> enemy,
     : Enemy(enemy->scene(), hitpoint, enemy->moveStrategy())
     , enemy_(std::move(enemy))
 {
+    setEnemyType(EnemyType::Decorator);
 }
 
 void AbstractEnemyDecorator::init()
