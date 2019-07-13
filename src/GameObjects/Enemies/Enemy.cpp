@@ -27,7 +27,11 @@ Enemy::~Enemy()
             sound->setVolume(40);
             sound->play();
 
-            QTimer::singleShot(std::chrono::seconds(2), [sound = sound](){ delete sound; });
+            QGraphicsRectItem *item = new QGraphicsRectItem(x(), y(), 100, 100);
+            item->setPen(QPen(Qt::red));
+            wp->addItem(item);
+
+            QTimer::singleShot(std::chrono::seconds(2), [sound = sound, item = item](){ delete sound; delete item; });
         }
     }
 }
