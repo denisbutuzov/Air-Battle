@@ -16,6 +16,7 @@
       "enemy1" : ":/images/images/Enemy1.png",
       "enemy2" : ":/images/images/Enemy2.png",
       "shield" : ":/images/images/EnemyShield.png",
+      "heart" : ":/images/images/Heart.png",
       "weapons" : {
          "gun" : {
             "weapon_image" : null,

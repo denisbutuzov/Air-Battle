@@ -59,6 +59,7 @@ void AppSettings::load()
     objects_.enemy1_ = objectsData["enemy1"].toString();
     objects_.enemy2_ = objectsData["enemy2"].toString();
     objects_.shield_ = objectsData["shield"].toString();
+    objects_.heart_ = objectsData["heart"].toString();
 
     auto &gunData = objectsData["weapons"]["gun"];
     objects_.gun_.weapon_ = gunData["weapon_image"].toString();

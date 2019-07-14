@@ -21,7 +21,7 @@ Game::Game()
 {
     const auto &sceneSettings = AppSettings::instance().scene();
     const auto &timeSettings = AppSettings::instance().time();
-    const auto &playerImage = AppSettings::instance().objects().player_;
+    const auto &objectsSettings = AppSettings::instance().objects();
 
     scene_ = std::make_shared<QGraphicsScene>();
     scene_->setSceneRect(0, 0, sceneSettings.width_, sceneSettings.height_);
@@ -32,7 +32,7 @@ Game::Game()
     setBackgroundBrush(QBrush(QImage(sceneSettings.backGround_)));
 
     player_ = std::make_unique<PlayerObject>(scene_);
-    player_->setPixmap(QPixmap(playerImage));
+    player_->setPixmap(QPixmap(objectsSettings.player_));
     player_->setFlag(QGraphicsItem::ItemIsFocusable);
     player_->setFocus();
     player_->setPos((scene_->width() - player_->pixmap().width())/2,
@@ -52,7 +52,7 @@ Game::Game()
     scoreObserver_->show(scene_);
 
     health_ = std::make_shared<Health>();
-    healthObserver_ = std::make_unique<HealthObserver>(health_);
+    healthObserver_ = std::make_unique<HealthObserver>(health_, objectsSettings.heart_);
     healthObserver_->show(scene_, QPointF(470.0, 10.0));
 
     connect(&levelChangeTimer_, SIGNAL(timeout()),

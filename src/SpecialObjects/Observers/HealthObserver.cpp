@@ -5,12 +5,9 @@
 
 #include "HealthObserver.h"
 
-constexpr const char *HEART_IMAGE = ":/images/images/Heart.png";
-constexpr const int WIDTH_HEART_IMAGE = 20;
-constexpr const int HEIGHT_HEART_IMAGE = 20;
-
-HealthObserver::HealthObserver(std::weak_ptr<Health> health)
+HealthObserver::HealthObserver(std::weak_ptr<Health> health, const QString &pixmap)
     : subject_(health)
+    , pixmap_(pixmap)
 {
     if(auto wp = subject_.lock())
     {
@@ -51,7 +48,7 @@ void HealthObserver::show(std::weak_ptr<QGraphicsScene> scene, QPointF coordinat
 
 void HealthObserver::addHeart()
 {
-    auto heart = std::make_unique<QGraphicsPixmapItem>(QPixmap(HEART_IMAGE).scaled(WIDTH_HEART_IMAGE, HEIGHT_HEART_IMAGE));
+    auto heart = std::make_unique<QGraphicsPixmapItem>(pixmap_);
     if(!hearts_.empty())
     {
         heart->setPos(hearts_.back()->pos() + QPointF(hearts_.back()->pixmap().width() + 5.0, 0.0));

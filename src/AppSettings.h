@@ -25,6 +25,7 @@ public:
         QString enemy1_;
         QString enemy2_;
         QString shield_;
+        QString heart_;
         struct Weapon
         {
             QString weapon_;

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QPointF>
+#include <QString>
 
 #include <functional>
 #include <memory>
@@ -16,7 +17,7 @@ class HealthObserver
         : public AbstractObserver
 {
 public:
-    HealthObserver(std::weak_ptr<Health> health);
+    HealthObserver(std::weak_ptr<Health> health, const QString &pixmap);
     virtual void update() override;
     void show(std::weak_ptr<QGraphicsScene> scene, QPointF coordinate = QPointF(0.0, 0.0));
 private:
@@ -28,4 +29,5 @@ private:
     QPointF coordinate_;
     std::weak_ptr<QGraphicsScene> scene_;
     std::queue<std::unique_ptr<QGraphicsPixmapItem>> hearts_;
+    QString pixmap_;
 };
