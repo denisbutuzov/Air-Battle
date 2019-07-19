@@ -1,21 +1,19 @@
 #include <QTimer>
 
 #include "GameObjects/Gunshells/Gunshell.h"
+#include "AppSettings.h"
 
 #include "HandWeapon.h"
 
-constexpr unsigned int HANDWEAPON_RELOAD_DELAY_MS = 800;
-constexpr const char *HANDWEAPON_RELOAD_SOUND = "qrc:/sounds/sounds/reload.aiff";
-
 HandWeapon::HandWeapon(std::weak_ptr<QGraphicsScene> scene, unsigned int capacity,
-                       unsigned int patrons, unsigned int shotDelay, const char *shotSound)
+                       unsigned int patrons, unsigned int shotDelay, const QString &shotSound)
     : scene_(scene)
     , magazine_(capacity, 0)
     , patrons_(patrons)
     , shotSound_(shotSound)
     , shotDelay_(shotDelay)
     , shotDelayIsActive_(false)
-    , reloadDelay_(HANDWEAPON_RELOAD_DELAY_MS)
+    , reloadDelay_(AppSettings::instance().objects().gun_.reloadDelay_)
     , reloadDelayIsActive_(false)
 {
     loadMagazine();
@@ -84,7 +82,7 @@ void HandWeapon::playShotSound()
 
 void HandWeapon::playReloadSound()
 {
-    soundPlayer_.setMedia(QUrl(HANDWEAPON_RELOAD_SOUND));
+    soundPlayer_.setMedia(QUrl(AppSettings::instance().objects().gun_.reloadSound_));
     soundPlayer_.play();
 }
 

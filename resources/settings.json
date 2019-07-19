@@ -1,0 +1,56 @@
+{
+   "scene" : {
+      "background_image" : ":/images/images/Space.jpg",
+      "height" : 800,
+      "width" : 600
+   },
+   "time" : {
+      "spawn_object_period" : 2000,
+      "remove_object_period" : 50,
+      "move_object_period" : 50,
+      "check_collision_period" : 50,
+      "level_change_period" : 10000
+   },
+   "objects" : {
+      "player" : ":/images/images/Player.png",
+      "enemy1" : ":/images/images/Enemy1.png",
+      "enemy2" : ":/images/images/Enemy2.png",
+      "shield" : ":/images/images/EnemyShield.png",
+      "heart" : ":/images/images/Heart.png",
+      "weapons" : {
+         "gun" : {
+            "weapon_image" : null,
+            "gunshell_image" : ":/images/images/Gun_gunshell.png",
+            "patron_image " : null,
+            "shot_sound" : "qrc:/sounds/sounds/bullet.wav",
+            "reload_sound" : "qrc:/sounds/sounds/reload.aiff",
+            "capacity" : 0,
+            "start_patrons" : 0,
+            "shot_delay" : 100,
+            "reload_delay" : 800
+         },
+         "machinegun" : {
+            "weapon_image" : ":/images/images/Machinegun.png",
+            "gunshell_image" : ":/images/images/Machinegun_gunshell.png",
+            "patron_image" : ":/images/images/Machinegun_patron.png",
+            "shot_sound" : "qrc:/sounds/sounds/bullet.wav",
+            "reload_sound" : "qrc:/sounds/sounds/reload.aiff",
+            "capacity" : 12,
+            "start_patrons" : 24,
+            "shot_delay" : 50,
+            "reload_delay" : 800
+         },
+         "bazooka" : {
+            "weapon_image" : ":/images/images/Bazooka.png",
+            "gunshell_image" : ":/images/images/Bazooka_gunshell.png",
+            "patron_image" : ":/images/images/Bazooka_patron.png",
+            "shot_sound" : "qrc:/sounds/sounds/boom.wav",
+            "reload_sound" : "qrc:/sounds/sounds/reload.aiff",
+            "capacity" : 5,
+            "start_patrons" : 5,
+            "shot_delay" : 500,
+            "reload_delay" : 800
+         }
+      }
+   }
+}

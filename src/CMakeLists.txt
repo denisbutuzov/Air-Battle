@@ -11,6 +11,7 @@ SET(Qt5_COMPONENTS Core Gui Widgets Multimedia)
 FIND_PACKAGE(Qt5 COMPONENTS ${Qt5_COMPONENTS} REQUIRED)
 
 SET(HEADERS additionals.h
+            AppSettings.h
             GameWindow.h
             Game.h
             FactoryManager.h
@@ -55,7 +56,8 @@ SET(HEADERS additionals.h
             Visitors/MoveVisitor.h
 )
 
-SET(SOURCES GameWindow.cpp
+SET(SOURCES AppSettings.cpp
+            GameWindow.cpp
             Game.cpp
             FactoryManager.cpp
             GameObjectStorage.cpp

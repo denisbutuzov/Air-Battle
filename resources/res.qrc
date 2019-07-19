@@ -21,4 +21,7 @@
         <file>images/Bazooka_patron.png</file>
         <file>images/Detonation.png</file>
     </qresource>
+    <qresource prefix="/settings">
+        <file>settings.json</file>
+    </qresource>
 </RCC>
