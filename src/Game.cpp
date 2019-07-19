@@ -2,7 +2,9 @@
 #include "GameObjects/Enemies/EnemyDecorators/ShieldDecorator.h"
 #include "GameObjects/Gunshells/Gunshell.h"
 #include "GameObjects/Weapons/Weapon.h"
+#include "GameObjects/Bonuses/Bonus.h"
 #include "HandWeapons/HandWeapon.h"
+#include "HandBonuses/HandBonus.h"
 #include "SpecialObjects/Subjects/Level.h"
 #include "SpecialObjects/Subjects/Score.h"
 #include "SpecialObjects/Subjects/Health.h"
@@ -111,6 +113,7 @@ void Game::getGunshellFromPlayer()
 void Game::removeObjectsFromScene()
 {
     objectsStorage_.weapons().remove_if([&](auto &obj){ return obj->y() > scene_->height(); });
+    objectsStorage_.bonuses().remove_if([&](auto &obj){ return obj->y() > scene_->height(); });
     objectsStorage_.gunshells().remove_if([](auto &obj){ return obj->y() < 0; });
     objectsStorage_.enemies().remove_if
             (
@@ -176,6 +179,23 @@ void Game::checkCollisionBetweenGameObjects()
                         if(auto *player = dynamic_cast<PlayerObject *>(otherObj))
                         {
                             player->takeWeapon(weapon->handWeapon());
+                            return true;
+                        }
+                    };
+                    return false;
+                }
+            );
+
+    objectsStorage_.bonuses().remove_if
+            (
+                [&](auto &bonus)
+                {
+                    auto collidingList = bonus->collidingItems();
+                    for(auto *otherObj : collidingList)
+                    {
+                        if(auto *player = dynamic_cast<PlayerObject *>(otherObj))
+                        {
+                            player->takeBonus(bonus->handBonus(player, &objectsStorage_));
                             return true;
                         }
                     };

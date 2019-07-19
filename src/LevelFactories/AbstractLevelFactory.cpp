@@ -1,6 +1,10 @@
 #include <QGraphicsScene>
 
+#include "GameObjects/Bonuses/Detonation.h"
+
 #include "AbstractLevelFactory.h"
+
+constexpr const char *DETONATION_IMAGE = ":/images/images/Detonation.png";
 
 AbstractLevelFactory::AbstractLevelFactory(std::weak_ptr<QGraphicsScene> scene)
     : scene_(scene)
@@ -20,4 +24,12 @@ QPointF AbstractLevelFactory::randomPos(const QPixmap &pixmap)
         return QPointF(randomNumber, 0 - pixmap.height());
     }
     return QPointF(0.0, 0.0);
+}
+
+std::unique_ptr<Bonus> AbstractLevelFactory::bonus()
+{
+    auto bonus = std::make_unique<Detonation>(scene());
+    bonus->setPixmap(QPixmap(DETONATION_IMAGE));
+    bonus->setPos(randomPos(bonus->pixmap()));
+    return bonus;
 }

@@ -6,6 +6,7 @@
 #include "HandWeapons/HandWeapon.h"
 #include "GameObjects/Gunshells/Gunshell.h"
 #include "SpecialObjects/Subjects/Equipment.h"
+#include "HandBonuses/HandBonus.h"
 
 #include "PlayerObject.h"
 
@@ -30,9 +31,22 @@ void PlayerObject::takeWeapon(std::unique_ptr<HandWeapon> &&weapon)
     equipment_->addWeapon(std::move(weapon));
 }
 
+void PlayerObject::takeBonus(std::unique_ptr<HandBonus> &&bonus)
+{
+    bonus_ = std::move(bonus);
+}
+
 std::unique_ptr<Gunshell> PlayerObject::shoot() const
 {
     return equipment_->shoot(x() + pixmap().width()/2, y());
+}
+
+void PlayerObject::execute()
+{
+    if(bonus_)
+    {
+        bonus_->execute();
+    }
 }
 
 void PlayerObject::keyPressEvent(QKeyEvent *event)
@@ -66,7 +80,8 @@ void PlayerObject::timerEvent(QTimerEvent *event)
         { Qt::Key_Down, &PlayerObject::stepDown },
         { Qt::Key_Space, &PlayerObject::shot_sig },
         { Qt::Key_R, &PlayerObject::reloadWeapon },
-        { Qt::Key_Shift, &PlayerObject::changeWeapon }
+        { Qt::Key_Shift, &PlayerObject::changeWeapon },
+        { Qt::Key_E, &PlayerObject::execute }
     };
 
     if(pressedKeys_.empty())

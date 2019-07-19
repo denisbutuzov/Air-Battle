@@ -22,11 +22,15 @@ SET(HEADERS additionals.h
             GameObjects/Weapons/Weapon.h
             GameObjects/Weapons/Machinegun.h
             GameObjects/Weapons/Bazooka.h
+            GameObjects/Bonuses/Bonus.h
+            GameObjects/Bonuses/Detonation.h
             GameObjects/Gunshells/Gunshell.h
             HandWeapons/HandWeapon.h
             HandWeapons/HandGun.h
             HandWeapons/HandMachinegun.h
             HandWeapons/HandBazooka.h
+            HandBonuses/HandBonus.h
+            HandBonuses/HandDetonation.h
             MoveStrategies/MoveStrategy.h
             MoveStrategies/MoveByLine.h
             MoveStrategies/MoveByCurve.h
@@ -61,11 +65,15 @@ SET(SOURCES Game.cpp
             GameObjects/Weapons/Weapon.cpp
             GameObjects/Weapons/Machinegun.cpp
             GameObjects/Weapons/Bazooka.cpp
+            GameObjects/Bonuses/Bonus.cpp
+            GameObjects/Bonuses/Detonation.cpp
             GameObjects/Gunshells/Gunshell.cpp
             HandWeapons/HandWeapon.cpp
             HandWeapons/HandGun.cpp
             HandWeapons/HandMachinegun.cpp
             HandWeapons/HandBazooka.cpp
+            HandBonuses/HandBonus.cpp
+            HandBonuses/HandDetonation.cpp
             MoveStrategies/MoveStrategy.cpp
             MoveStrategies/MoveByLine.cpp
             MoveStrategies/MoveByCurve.cpp
