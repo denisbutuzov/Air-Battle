@@ -67,7 +67,7 @@ void AppSettings::load()
     objects_.gun_.patron_ = gunData["patron_image"].toString();
     objects_.gun_.shotSound_ = gunData["shot_sound"].toString();
     objects_.gun_.reloadSound_ = gunData["reload_sound"].toString();
-    objects_.gun_.capacity_ = static_cast<unsigned int>(gunData["capacity_image"].toInt());
+    objects_.gun_.capacity_ = static_cast<unsigned int>(gunData["capacity"].toInt());
     objects_.gun_.startPatrons_ = static_cast<unsigned int>(gunData["start_patrons"].toInt());
     objects_.gun_.shotDelay_ = static_cast<unsigned int>(gunData["shot_delay"].toInt());
     objects_.gun_.reloadDelay_ = static_cast<unsigned int>(gunData["reload_delay"].toInt());
@@ -78,7 +78,7 @@ void AppSettings::load()
     objects_.machinegun_.patron_ = machinegunData["patron_image"].toString();
     objects_.machinegun_.shotSound_ = machinegunData["shot_sound"].toString();
     objects_.machinegun_.reloadSound_ = machinegunData["reload_sound"].toString();
-    objects_.machinegun_.capacity_ = static_cast<unsigned int>(machinegunData["capacity_image"].toInt());
+    objects_.machinegun_.capacity_ = static_cast<unsigned int>(machinegunData["capacity"].toInt());
     objects_.machinegun_.startPatrons_ = static_cast<unsigned int>(machinegunData["start_patrons"].toInt());
     objects_.machinegun_.shotDelay_ = static_cast<unsigned int>(machinegunData["shot_delay"].toInt());
     objects_.machinegun_.reloadDelay_ = static_cast<unsigned int>(machinegunData["reload_delay"].toInt());
@@ -89,7 +89,7 @@ void AppSettings::load()
     objects_.bazooka_.patron_ = bazookaData["patron_image"].toString();
     objects_.bazooka_.shotSound_ = bazookaData["shot_sound"].toString();
     objects_.bazooka_.reloadSound_ = bazookaData["reload_sound"].toString();
-    objects_.bazooka_.capacity_ = static_cast<unsigned int>(bazookaData["capacity_image"].toInt());
+    objects_.bazooka_.capacity_ = static_cast<unsigned int>(bazookaData["capacity"].toInt());
     objects_.bazooka_.startPatrons_ = static_cast<unsigned int>(bazookaData["start_patrons"].toInt());
     objects_.bazooka_.shotDelay_ = static_cast<unsigned int>(bazookaData["shot_delay"].toInt());
     objects_.bazooka_.reloadDelay_ = static_cast<unsigned int>(bazookaData["reload_delay"].toInt());
