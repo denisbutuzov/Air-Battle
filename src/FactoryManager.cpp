@@ -15,7 +15,7 @@
 std::unique_ptr<MovableObject> FactoryManager::createSpawnObject(std::weak_ptr<QGraphicsScene> scene,
                                                                  std::weak_ptr<Level> level)
 {
-    static const std::unordered_map<unsigned int, std::function<std::unique_ptr<AbstractLevelFactory>()>> FUNCTION_MAP
+    const std::unordered_map<unsigned int, std::function<std::unique_ptr<AbstractLevelFactory>()>> FUNCTION_MAP
     {
         { 1, [scene](){ return std::make_unique<Level1Factory>(scene); } },
         { 2, [scene](){ return std::make_unique<Level2Factory>(scene); } },
