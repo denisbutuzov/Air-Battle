@@ -4,6 +4,8 @@
         <file>sounds/bullet.wav</file>
         <file>sounds/plane.wav</file>
         <file>sounds/reload.aiff</file>
+        <file>sounds/explosion.wav</file>
+        <file>sounds/Bullet_boom.wav</file>
     </qresource>
     <qresource prefix="/images">
         <file>images/Player.png</file>
@@ -20,6 +22,8 @@
         <file>images/Machinegun_patron.png</file>
         <file>images/Bazooka_patron.png</file>
         <file>images/Detonation.png</file>
+        <file>images/Enemy_boom.png</file>
+        <file>images/Gunshell_boom.png</file>
     </qresource>
     <qresource prefix="/settings">
         <file>settings.json</file>

@@ -10,7 +10,7 @@ public:
     Gunshell(std::weak_ptr<QGraphicsScene> scene,
              int damage = 1,
              std::shared_ptr<MoveStrategy> moveStrategy = std::make_shared<MoveByLine>(MoveStrategy::Direction::Up, 20));
-    virtual ~Gunshell() override = default;
+    virtual ~Gunshell() override;
     virtual void accept(AbstractVisitor &visitor) override final;
     void setDamage(int damage);
     int damage() const;
