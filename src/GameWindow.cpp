@@ -1,7 +1,7 @@
 #include <QLabel>
-#include <QDesktopWidget>
 
 #include "Game.h"
+#include "additionals.h"
 
 #include "GameWindow.h"
 #include "ui_GameWindow.h"
@@ -12,9 +12,7 @@ GameWindow::GameWindow(QWidget *parent)
 {
     ui->setupUi(this);
     ui->gameLabel->hide();
-    QRect rect = geometry();
-    rect.moveCenter(QApplication::desktop()->availableGeometry().center());
-    setGeometry(rect);
+    move_to_center(this);
 }
 
 GameWindow::~GameWindow()

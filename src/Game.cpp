@@ -1,6 +1,4 @@
 #include <QKeyEvent>
-#include <QDesktopWidget>
-#include <QApplication>
 
 #include "GameObjects/PlayerObject.h"
 #include "GameObjects/Enemies/EnemyDecorators/ShieldDecorator.h"
@@ -84,9 +82,7 @@ Game::Game()
     connect(player_.get(), SIGNAL(shot_sig()),
             this, SLOT(getGunshellFromPlayer()));
 
-    QRect rect = geometry();
-    rect.moveCenter(QApplication::desktop()->availableGeometry().center());
-    setGeometry(rect);
+    move_to_center(this);
 }
 
 void Game::start()
