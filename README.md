@@ -7,6 +7,4 @@
 
 The architecture of the classes used is shown in the figure:
 
-![Architecture](doc/images/Architecture.png)
-
 
