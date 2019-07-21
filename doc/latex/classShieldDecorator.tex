@@ -1,0 +1,48 @@
+\hypertarget{classShieldDecorator}{}\doxysection{Класс Shield\+Decorator}
+\label{classShieldDecorator}\index{ShieldDecorator@{ShieldDecorator}}
+Граф наследования\+:Shield\+Decorator\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=6.000000cm]{classShieldDecorator}
+\end{center}
+\end{figure}
+\doxysubsection*{Открытые члены}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classShieldDecorator_a12ca4d12e695bd730ea3d686adc581b9}\label{classShieldDecorator_a12ca4d12e695bd730ea3d686adc581b9}} 
+{\bfseries Shield\+Decorator} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classEnemy}{Enemy}} $>$ enemy, int hitpoint=1)
+\item 
+virtual void \mbox{\hyperlink{classShieldDecorator_a57d1d95c4c46e86c9fc4afdfe6da83db}{init}} () override final
+\begin{DoxyCompactList}\small\item\em Метод инициализации объекта на сцене. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classShieldDecorator_a1e40214bdbb7dc1f46d2f3e79268214e}\label{classShieldDecorator_a1e40214bdbb7dc1f46d2f3e79268214e}} 
+virtual void {\bfseries move} () override final
+\end{DoxyCompactItemize}
+\doxysubsection*{Дополнительные унаследованные члены}
+
+
+\doxysubsection{Методы}
+\mbox{\Hypertarget{classShieldDecorator_a57d1d95c4c46e86c9fc4afdfe6da83db}\label{classShieldDecorator_a57d1d95c4c46e86c9fc4afdfe6da83db}} 
+\index{ShieldDecorator@{ShieldDecorator}!init@{init}}
+\index{init@{init}!ShieldDecorator@{ShieldDecorator}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily void Shield\+Decorator\+::init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [final]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Метод инициализации объекта на сцене. 
+
+Добавляет объект на сцену, переданную в конструкторе.
+
+\begin{DoxyWarning}{Предупреждения}
+Перед инициализацией объекта на сцене убедитесь, что для объекта был вызван метод {\ttfamily void Q\+Graphics\+Pixmap\+Item\+::set\+Pixmap(const Q\+Pixmap \& pixmap)}. В противном случае метод вернет ошибку {\itshape You must to set a picture}. 
+\end{DoxyWarning}
+
+
+Переопределяет метод предка \mbox{\hyperlink{classAbstractEnemyDecorator_acacd3bf0119d9609a87bdfa2ae25ca8d}{Abstract\+Enemy\+Decorator}}.
+
+
+
+Объявления и описания членов классов находятся в файлах\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Game\+Objects/\+Enemies/\+Enemy\+Decorators/Shield\+Decorator.\+h\item 
+src/\+Game\+Objects/\+Enemies/\+Enemy\+Decorators/Shield\+Decorator.\+cpp\end{DoxyCompactItemize}

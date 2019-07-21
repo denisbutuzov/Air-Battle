@@ -1,0 +1,94 @@
+\hypertarget{classGameObject}{}\doxysection{Класс Game\+Object}
+\label{classGameObject}\index{GameObject@{GameObject}}
+
+
+Родительский класс всех игровых объектов сцены.  
+
+
+
+
+{\ttfamily \#include $<$Game\+Object.\+h$>$}
+
+Граф наследования\+:Game\+Object\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.148148cm]{classGameObject}
+\end{center}
+\end{figure}
+\doxysubsection*{Открытые члены}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classGameObject_a67ae2fa6e7916c799700cd659975d8ea}\label{classGameObject_a67ae2fa6e7916c799700cd659975d8ea}} 
+virtual \mbox{\hyperlink{classGameObject_a67ae2fa6e7916c799700cd659975d8ea}{$\sim$\+Game\+Object}} ()=default
+\begin{DoxyCompactList}\small\item\em Деструктор по умолчанию. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classGameObject_a9b565e5ec63bef28e5c860f724d2de7c}{init}} ()
+\begin{DoxyCompactList}\small\item\em Метод инициализации объекта на сцене. \end{DoxyCompactList}\item 
+std\+::weak\+\_\+ptr$<$ Q\+Graphics\+Scene $>$ \mbox{\hyperlink{classGameObject_a5dea3198bd0913fc6c8c1ec7774823e3}{scene}} () const
+\begin{DoxyCompactList}\small\item\em Метод, возвращающий слабый указатель на объект сцены. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Защищенные члены}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classGameObject_a96003b6b6802f45b86d3959240f18930}{Game\+Object}} (std\+::weak\+\_\+ptr$<$ Q\+Graphics\+Scene $>$ \mbox{\hyperlink{classGameObject_a5dea3198bd0913fc6c8c1ec7774823e3}{scene}})
+\begin{DoxyCompactList}\small\item\em Конструктор с одним аргументом. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Подробное описание}
+Родительский класс всех игровых объектов сцены. 
+
+\doxysubsection{Конструктор(ы)}
+\mbox{\Hypertarget{classGameObject_a96003b6b6802f45b86d3959240f18930}\label{classGameObject_a96003b6b6802f45b86d3959240f18930}} 
+\index{GameObject@{GameObject}!GameObject@{GameObject}}
+\index{GameObject@{GameObject}!GameObject@{GameObject}}
+\doxysubsubsection{\texorpdfstring{GameObject()}{GameObject()}}
+{\footnotesize\ttfamily Game\+Object\+::\+Game\+Object (\begin{DoxyParamCaption}\item[{std\+::weak\+\_\+ptr$<$ Q\+Graphics\+Scene $>$}]{scene }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Конструктор с одним аргументом. 
+
+
+\begin{DoxyParams}{Аргументы}
+{\em scene} & Слабый указатель на объект сцены. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Методы}
+\mbox{\Hypertarget{classGameObject_a9b565e5ec63bef28e5c860f724d2de7c}\label{classGameObject_a9b565e5ec63bef28e5c860f724d2de7c}} 
+\index{GameObject@{GameObject}!init@{init}}
+\index{init@{init}!GameObject@{GameObject}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily void Game\+Object\+::init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Метод инициализации объекта на сцене. 
+
+Добавляет объект на сцену, переданную в конструкторе.
+
+\begin{DoxyWarning}{Предупреждения}
+Перед инициализацией объекта на сцене убедитесь, что для объекта был вызван метод {\ttfamily void Q\+Graphics\+Pixmap\+Item\+::set\+Pixmap(const Q\+Pixmap \& pixmap)}. В противном случае метод вернет ошибку {\itshape You must to set a picture}. 
+\end{DoxyWarning}
+
+
+Переопределяется в \mbox{\hyperlink{classShieldDecorator_a57d1d95c4c46e86c9fc4afdfe6da83db}{Shield\+Decorator}} и \mbox{\hyperlink{classAbstractEnemyDecorator_acacd3bf0119d9609a87bdfa2ae25ca8d}{Abstract\+Enemy\+Decorator}}.
+
+\mbox{\Hypertarget{classGameObject_a5dea3198bd0913fc6c8c1ec7774823e3}\label{classGameObject_a5dea3198bd0913fc6c8c1ec7774823e3}} 
+\index{GameObject@{GameObject}!scene@{scene}}
+\index{scene@{scene}!GameObject@{GameObject}}
+\doxysubsubsection{\texorpdfstring{scene()}{scene()}}
+{\footnotesize\ttfamily std\+::weak\+\_\+ptr$<$ Q\+Graphics\+Scene $>$ Game\+Object\+::scene (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Метод, возвращающий слабый указатель на объект сцены. 
+
+\begin{DoxyReturn}{Возвращает}
+Слабый указатель на объект сцены. 
+\end{DoxyReturn}
+
+
+Объявления и описания членов классов находятся в файлах\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Game\+Objects/Game\+Object.\+h\item 
+src/\+Game\+Objects/Game\+Object.\+cpp\end{DoxyCompactItemize}

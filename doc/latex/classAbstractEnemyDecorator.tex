@@ -1,0 +1,55 @@
+\hypertarget{classAbstractEnemyDecorator}{}\doxysection{Класс Abstract\+Enemy\+Decorator}
+\label{classAbstractEnemyDecorator}\index{AbstractEnemyDecorator@{AbstractEnemyDecorator}}
+Граф наследования\+:Abstract\+Enemy\+Decorator\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=6.000000cm]{classAbstractEnemyDecorator}
+\end{center}
+\end{figure}
+\doxysubsection*{Открытые члены}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{classAbstractEnemyDecorator_acacd3bf0119d9609a87bdfa2ae25ca8d}{init}} () override
+\begin{DoxyCompactList}\small\item\em Метод инициализации объекта на сцене. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classAbstractEnemyDecorator_ae2ff92fde6efaf057819e9f05cff2324}\label{classAbstractEnemyDecorator_ae2ff92fde6efaf057819e9f05cff2324}} 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classEnemy}{Enemy}} $>$ \& {\bfseries enemy} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Защищенные члены}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classAbstractEnemyDecorator_a98c8bb6ea17643826b2e476d02c8996f}\label{classAbstractEnemyDecorator_a98c8bb6ea17643826b2e476d02c8996f}} 
+{\bfseries Abstract\+Enemy\+Decorator} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classEnemy}{Enemy}} $>$ enemy, int hitpoint)
+\end{DoxyCompactItemize}
+\doxysubsection*{Дополнительные унаследованные члены}
+
+
+\doxysubsection{Методы}
+\mbox{\Hypertarget{classAbstractEnemyDecorator_acacd3bf0119d9609a87bdfa2ae25ca8d}\label{classAbstractEnemyDecorator_acacd3bf0119d9609a87bdfa2ae25ca8d}} 
+\index{AbstractEnemyDecorator@{AbstractEnemyDecorator}!init@{init}}
+\index{init@{init}!AbstractEnemyDecorator@{AbstractEnemyDecorator}}
+\doxysubsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily void Abstract\+Enemy\+Decorator\+::init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Метод инициализации объекта на сцене. 
+
+Добавляет объект на сцену, переданную в конструкторе.
+
+\begin{DoxyWarning}{Предупреждения}
+Перед инициализацией объекта на сцене убедитесь, что для объекта был вызван метод {\ttfamily void Q\+Graphics\+Pixmap\+Item\+::set\+Pixmap(const Q\+Pixmap \& pixmap)}. В противном случае метод вернет ошибку {\itshape You must to set a picture}. 
+\end{DoxyWarning}
+
+
+Переопределяет метод предка \mbox{\hyperlink{classGameObject_a9b565e5ec63bef28e5c860f724d2de7c}{Game\+Object}}.
+
+
+
+Переопределяется в \mbox{\hyperlink{classShieldDecorator_a57d1d95c4c46e86c9fc4afdfe6da83db}{Shield\+Decorator}}.
+
+
+
+Объявления и описания членов классов находятся в файлах\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Game\+Objects/\+Enemies/\+Enemy\+Decorators/Abstract\+Enemy\+Decorator.\+h\item 
+src/\+Game\+Objects/\+Enemies/\+Enemy\+Decorators/Abstract\+Enemy\+Decorator.\+cpp\end{DoxyCompactItemize}

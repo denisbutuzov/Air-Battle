@@ -1,0 +1,38 @@
+\hypertarget{classMovableObject}{}\doxysection{Класс Movable\+Object}
+\label{classMovableObject}\index{MovableObject@{MovableObject}}
+Граф наследования\+:Movable\+Object\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=4.148148cm]{classMovableObject}
+\end{center}
+\end{figure}
+\doxysubsection*{Открытые члены}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classMovableObject_ab2c8ebf1a5bf9ddf15fbddc1a7f9e805}\label{classMovableObject_ab2c8ebf1a5bf9ddf15fbddc1a7f9e805}} 
+virtual void {\bfseries accept} (\mbox{\hyperlink{classAbstractVisitor}{Abstract\+Visitor}} \&visitor)=0
+\item 
+\mbox{\Hypertarget{classMovableObject_a02853446c393560f93a4c35a1e446d31}\label{classMovableObject_a02853446c393560f93a4c35a1e446d31}} 
+virtual void {\bfseries move} ()
+\item 
+\mbox{\Hypertarget{classMovableObject_a4afb1fc2a9a6500496d2d0d5b6324629}\label{classMovableObject_a4afb1fc2a9a6500496d2d0d5b6324629}} 
+void {\bfseries set\+Speed} (unsigned int speed)
+\item 
+\mbox{\Hypertarget{classMovableObject_a3f7f32a1cdfd139f4e9e13f91be25c8d}\label{classMovableObject_a3f7f32a1cdfd139f4e9e13f91be25c8d}} 
+unsigned int {\bfseries speed} () const
+\item 
+\mbox{\Hypertarget{classMovableObject_aa6200c043b055e8cf3f53211f2edfa53}\label{classMovableObject_aa6200c043b055e8cf3f53211f2edfa53}} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classMoveStrategy}{Move\+Strategy}} $>$ {\bfseries move\+Strategy} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Защищенные члены}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classMovableObject_a1ab5c2814ef16c0a35317a9423941c3c}\label{classMovableObject_a1ab5c2814ef16c0a35317a9423941c3c}} 
+{\bfseries Movable\+Object} (std\+::weak\+\_\+ptr$<$ Q\+Graphics\+Scene $>$ \mbox{\hyperlink{classGameObject_a5dea3198bd0913fc6c8c1ec7774823e3}{scene}}, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classMoveStrategy}{Move\+Strategy}} $>$ move\+Strategy)
+\end{DoxyCompactItemize}
+
+
+Объявления и описания членов классов находятся в файлах\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Game\+Objects/Movable\+Object.\+h\item 
+src/\+Game\+Objects/Movable\+Object.\+cpp\end{DoxyCompactItemize}
