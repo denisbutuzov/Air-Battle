@@ -1,0 +1,66 @@
+\hypertarget{classPlayerObject}{}\doxysection{Класс Player\+Object}
+\label{classPlayerObject}\index{PlayerObject@{PlayerObject}}
+Граф наследования\+:Player\+Object\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classPlayerObject}
+\end{center}
+\end{figure}
+\doxysubsection*{Сигналы}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classPlayerObject_a8b6f5c9fcae6e0ae3c5672a4a01e0568}\label{classPlayerObject_a8b6f5c9fcae6e0ae3c5672a4a01e0568}} 
+void {\bfseries shot\+\_\+sig} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Открытые члены}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classPlayerObject_af501619814c7bd58dd6cac01e6c472c6}\label{classPlayerObject_af501619814c7bd58dd6cac01e6c472c6}} 
+{\bfseries Player\+Object} (std\+::weak\+\_\+ptr$<$ Q\+Graphics\+Scene $>$ \mbox{\hyperlink{classGameObject_a5dea3198bd0913fc6c8c1ec7774823e3}{scene}})
+\item 
+\mbox{\Hypertarget{classPlayerObject_ac485fab00a6f43a409d203ddfc99c66d}\label{classPlayerObject_ac485fab00a6f43a409d203ddfc99c66d}} 
+void {\bfseries set\+Equipment} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classEquipment}{Equipment}} $>$ equipment)
+\item 
+\mbox{\Hypertarget{classPlayerObject_aa666f9f0b9929b731dc76a1640e93e4d}\label{classPlayerObject_aa666f9f0b9929b731dc76a1640e93e4d}} 
+void {\bfseries take\+Weapon} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classHandWeapon}{Hand\+Weapon}} $>$ \&\&weapon)
+\item 
+\mbox{\Hypertarget{classPlayerObject_abb8e25e4443195b25589f28caf301ade}\label{classPlayerObject_abb8e25e4443195b25589f28caf301ade}} 
+void {\bfseries take\+Bonus} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classHandBonus}{Hand\+Bonus}} $>$ \&\&bonus)
+\item 
+\mbox{\Hypertarget{classPlayerObject_aa6fe77e70ab0badc344fb90664824f6c}\label{classPlayerObject_aa6fe77e70ab0badc344fb90664824f6c}} 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classGunshell}{Gunshell}} $>$ {\bfseries shoot} () const
+\item 
+\mbox{\Hypertarget{classPlayerObject_a11007d7d060f439629121b72f0f24454}\label{classPlayerObject_a11007d7d060f439629121b72f0f24454}} 
+void {\bfseries execute} ()
+\item 
+\mbox{\Hypertarget{classPlayerObject_a4e764b956a15309558a65f60babfe90d}\label{classPlayerObject_a4e764b956a15309558a65f60babfe90d}} 
+void {\bfseries reload\+Weapon} ()
+\item 
+\mbox{\Hypertarget{classPlayerObject_a079550c45e6e220918e151afd48d5ec1}\label{classPlayerObject_a079550c45e6e220918e151afd48d5ec1}} 
+void {\bfseries change\+Weapon} ()
+\item 
+\mbox{\Hypertarget{classPlayerObject_addc705724503fba6b0e08f6df44d2b44}\label{classPlayerObject_addc705724503fba6b0e08f6df44d2b44}} 
+void {\bfseries step\+Left} ()
+\item 
+\mbox{\Hypertarget{classPlayerObject_a3561c9e8dda15c44e409682a9ee18051}\label{classPlayerObject_a3561c9e8dda15c44e409682a9ee18051}} 
+void {\bfseries step\+Right} ()
+\item 
+\mbox{\Hypertarget{classPlayerObject_a6cb4b446ceaf3aa71d4b4868b4d392fc}\label{classPlayerObject_a6cb4b446ceaf3aa71d4b4868b4d392fc}} 
+void {\bfseries step\+Up} ()
+\item 
+\mbox{\Hypertarget{classPlayerObject_a8fbf906d603a4d5273539b73ce7d4fe7}\label{classPlayerObject_a8fbf906d603a4d5273539b73ce7d4fe7}} 
+void {\bfseries step\+Down} ()
+\item 
+\mbox{\Hypertarget{classPlayerObject_ab84b3c52582edd7c224329cbe001aba0}\label{classPlayerObject_ab84b3c52582edd7c224329cbe001aba0}} 
+virtual void {\bfseries key\+Press\+Event} (Q\+Key\+Event $\ast$event) override final
+\item 
+\mbox{\Hypertarget{classPlayerObject_a13138a328212e3daf3491745178a3df8}\label{classPlayerObject_a13138a328212e3daf3491745178a3df8}} 
+virtual void {\bfseries key\+Release\+Event} (Q\+Key\+Event $\ast$event) override final
+\end{DoxyCompactItemize}
+\doxysubsection*{Дополнительные унаследованные члены}
+
+
+Объявления и описания членов классов находятся в файлах\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Game\+Objects/Player\+Object.\+h\item 
+src/\+Game\+Objects/Player\+Object.\+cpp\end{DoxyCompactItemize}

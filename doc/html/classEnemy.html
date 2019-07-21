@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.16"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Space-Battle: Класс Enemy</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Space-Battle
+   </div>
+   <div id="projectbrief">Космическая одиссея</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.8.16 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Поиск');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Открытые типы</a> &#124;
+<a href="#pub-methods">Открытые члены</a> &#124;
+<a href="#pro-methods">Защищенные члены</a> &#124;
+<a href="classEnemy-members.html">Полный список членов класса</a>  </div>
+  <div class="headertitle">
+<div class="title">Класс Enemy</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="dynheader">
+Граф наследования:Enemy:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classEnemy.png" usemap="#Enemy_map" alt=""/>
+  <map id="Enemy_map" name="Enemy_map">
+<area href="classMovableObject.html" alt="MovableObject" shape="rect" coords="82,112,236,136"/>
+<area href="classGameObject.html" title="Родительский класс всех игровых объектов сцены." alt="GameObject" shape="rect" coords="164,56,318,80"/>
+<area href="classAbstractEnemyDecorator.html" alt="AbstractEnemyDecorator" shape="rect" coords="82,224,236,248"/>
+<area href="classShieldDecorator.html" alt="ShieldDecorator" shape="rect" coords="82,280,236,304"/>
+  </map>
+</div></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Открытые типы</h2></td></tr>
+<tr class="memitem:a98c2ee2c2081001de17a4bc9fa8da94f"><td class="memItemLeft" align="right" valign="top"><a id="a98c2ee2c2081001de17a4bc9fa8da94f"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>EnemyType</b> { <b>Enemy</b>, 
+<b>Decorator</b>
+ }</td></tr>
+<tr class="separator:a98c2ee2c2081001de17a4bc9fa8da94f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Открытые члены</h2></td></tr>
+<tr class="memitem:a63e72a0691ec78f08a5460e4073bee08"><td class="memItemLeft" align="right" valign="top"><a id="a63e72a0691ec78f08a5460e4073bee08"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>Enemy</b> (std::weak_ptr&lt; QGraphicsScene &gt; <a class="el" href="classGameObject.html#a5dea3198bd0913fc6c8c1ec7774823e3">scene</a>, int hitpoint=1, std::shared_ptr&lt; <a class="el" href="classMoveStrategy.html">MoveStrategy</a> &gt; moveStrategy=std::make_shared&lt; <a class="el" href="classMoveByLine.html">MoveByLine</a> &gt;(MoveStrategy::Direction::Down, 6))</td></tr>
+<tr class="separator:a63e72a0691ec78f08a5460e4073bee08"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a738801b81be5668d42c5138e281917a0"><td class="memItemLeft" align="right" valign="top"><a id="a738801b81be5668d42c5138e281917a0"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>accept</b> (<a class="el" href="classAbstractVisitor.html">AbstractVisitor</a> &amp;visitor) override</td></tr>
+<tr class="separator:a738801b81be5668d42c5138e281917a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afe90c9fc7a8d4fc1b12fa9c5b5ec2bcf"><td class="memItemLeft" align="right" valign="top"><a id="afe90c9fc7a8d4fc1b12fa9c5b5ec2bcf"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setHitpoint</b> (int hitpoint)</td></tr>
+<tr class="separator:afe90c9fc7a8d4fc1b12fa9c5b5ec2bcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa632497907c598f852dc3e4f1b7daff2"><td class="memItemLeft" align="right" valign="top"><a id="aa632497907c598f852dc3e4f1b7daff2"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>hitpoint</b> () const</td></tr>
+<tr class="separator:aa632497907c598f852dc3e4f1b7daff2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classMovableObject"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classMovableObject')"><img src="closed.png" alt="-"/>&#160;Открытые члены унаследованные от <a class="el" href="classMovableObject.html">MovableObject</a></td></tr>
+<tr class="memitem:a02853446c393560f93a4c35a1e446d31 inherit pub_methods_classMovableObject"><td class="memItemLeft" align="right" valign="top"><a id="a02853446c393560f93a4c35a1e446d31"></a>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>move</b> ()</td></tr>
+<tr class="separator:a02853446c393560f93a4c35a1e446d31 inherit pub_methods_classMovableObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4afb1fc2a9a6500496d2d0d5b6324629 inherit pub_methods_classMovableObject"><td class="memItemLeft" align="right" valign="top"><a id="a4afb1fc2a9a6500496d2d0d5b6324629"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setSpeed</b> (unsigned int speed)</td></tr>
+<tr class="separator:a4afb1fc2a9a6500496d2d0d5b6324629 inherit pub_methods_classMovableObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f7f32a1cdfd139f4e9e13f91be25c8d inherit pub_methods_classMovableObject"><td class="memItemLeft" align="right" valign="top"><a id="a3f7f32a1cdfd139f4e9e13f91be25c8d"></a>
+unsigned int&#160;</td><td class="memItemRight" valign="bottom"><b>speed</b> () const</td></tr>
+<tr class="separator:a3f7f32a1cdfd139f4e9e13f91be25c8d inherit pub_methods_classMovableObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6200c043b055e8cf3f53211f2edfa53 inherit pub_methods_classMovableObject"><td class="memItemLeft" align="right" valign="top"><a id="aa6200c043b055e8cf3f53211f2edfa53"></a>
+std::shared_ptr&lt; <a class="el" href="classMoveStrategy.html">MoveStrategy</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>moveStrategy</b> () const</td></tr>
+<tr class="separator:aa6200c043b055e8cf3f53211f2edfa53 inherit pub_methods_classMovableObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classGameObject"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classGameObject')"><img src="closed.png" alt="-"/>&#160;Открытые члены унаследованные от <a class="el" href="classGameObject.html">GameObject</a></td></tr>
+<tr class="memitem:a67ae2fa6e7916c799700cd659975d8ea inherit pub_methods_classGameObject"><td class="memItemLeft" align="right" valign="top"><a id="a67ae2fa6e7916c799700cd659975d8ea"></a>
+virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGameObject.html#a67ae2fa6e7916c799700cd659975d8ea">~GameObject</a> ()=default</td></tr>
+<tr class="memdesc:a67ae2fa6e7916c799700cd659975d8ea inherit pub_methods_classGameObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Деструктор по умолчанию. <br /></td></tr>
+<tr class="separator:a67ae2fa6e7916c799700cd659975d8ea inherit pub_methods_classGameObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b565e5ec63bef28e5c860f724d2de7c inherit pub_methods_classGameObject"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGameObject.html#a9b565e5ec63bef28e5c860f724d2de7c">init</a> ()</td></tr>
+<tr class="memdesc:a9b565e5ec63bef28e5c860f724d2de7c inherit pub_methods_classGameObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Метод инициализации объекта на сцене.  <a href="classGameObject.html#a9b565e5ec63bef28e5c860f724d2de7c">Подробнее...</a><br /></td></tr>
+<tr class="separator:a9b565e5ec63bef28e5c860f724d2de7c inherit pub_methods_classGameObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5dea3198bd0913fc6c8c1ec7774823e3 inherit pub_methods_classGameObject"><td class="memItemLeft" align="right" valign="top">std::weak_ptr&lt; QGraphicsScene &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGameObject.html#a5dea3198bd0913fc6c8c1ec7774823e3">scene</a> () const</td></tr>
+<tr class="memdesc:a5dea3198bd0913fc6c8c1ec7774823e3 inherit pub_methods_classGameObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Метод, возвращающий слабый указатель на объект сцены.  <a href="classGameObject.html#a5dea3198bd0913fc6c8c1ec7774823e3">Подробнее...</a><br /></td></tr>
+<tr class="separator:a5dea3198bd0913fc6c8c1ec7774823e3 inherit pub_methods_classGameObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Защищенные члены</h2></td></tr>
+<tr class="memitem:a386bffa6bb7773b36cbdd5c8e676b39e"><td class="memItemLeft" align="right" valign="top"><a id="a386bffa6bb7773b36cbdd5c8e676b39e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>setEnemyType</b> (EnemyType type)</td></tr>
+<tr class="separator:a386bffa6bb7773b36cbdd5c8e676b39e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_classMovableObject"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classMovableObject')"><img src="closed.png" alt="-"/>&#160;Защищенные члены унаследованные от <a class="el" href="classMovableObject.html">MovableObject</a></td></tr>
+<tr class="memitem:a1ab5c2814ef16c0a35317a9423941c3c inherit pro_methods_classMovableObject"><td class="memItemLeft" align="right" valign="top"><a id="a1ab5c2814ef16c0a35317a9423941c3c"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>MovableObject</b> (std::weak_ptr&lt; QGraphicsScene &gt; <a class="el" href="classGameObject.html#a5dea3198bd0913fc6c8c1ec7774823e3">scene</a>, std::shared_ptr&lt; <a class="el" href="classMoveStrategy.html">MoveStrategy</a> &gt; moveStrategy)</td></tr>
+<tr class="separator:a1ab5c2814ef16c0a35317a9423941c3c inherit pro_methods_classMovableObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_classGameObject"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classGameObject')"><img src="closed.png" alt="-"/>&#160;Защищенные члены унаследованные от <a class="el" href="classGameObject.html">GameObject</a></td></tr>
+<tr class="memitem:a96003b6b6802f45b86d3959240f18930 inherit pro_methods_classGameObject"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGameObject.html#a96003b6b6802f45b86d3959240f18930">GameObject</a> (std::weak_ptr&lt; QGraphicsScene &gt; <a class="el" href="classGameObject.html#a5dea3198bd0913fc6c8c1ec7774823e3">scene</a>)</td></tr>
+<tr class="memdesc:a96003b6b6802f45b86d3959240f18930 inherit pro_methods_classGameObject"><td class="mdescLeft">&#160;</td><td class="mdescRight">Конструктор с одним аргументом.  <a href="classGameObject.html#a96003b6b6802f45b86d3959240f18930">Подробнее...</a><br /></td></tr>
+<tr class="separator:a96003b6b6802f45b86d3959240f18930 inherit pro_methods_classGameObject"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<hr/>Объявления и описания членов классов находятся в файлах:<ul>
+<li>src/GameObjects/Enemies/<a class="el" href="Enemy_8h_source.html">Enemy.h</a></li>
+<li>src/GameObjects/Enemies/Enemy.cpp</li>
+</ul>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Создано системой &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.16
+</small></address>
+</body>
+</html>

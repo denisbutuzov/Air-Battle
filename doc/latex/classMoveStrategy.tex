@@ -1,0 +1,43 @@
+\hypertarget{classMoveStrategy}{}\doxysection{Класс Move\+Strategy}
+\label{classMoveStrategy}\index{MoveStrategy@{MoveStrategy}}
+Граф наследования\+:Move\+Strategy\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classMoveStrategy}
+\end{center}
+\end{figure}
+\doxysubsection*{Открытые типы}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classMoveStrategy_a2914de15b35fd7ef565c8b67eac41923}\label{classMoveStrategy_a2914de15b35fd7ef565c8b67eac41923}} 
+enum {\bfseries Direction} \{ {\bfseries Up}, 
+{\bfseries Down}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Открытые члены}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classMoveStrategy_ac11602427866ef8217c02f62c7c9a8f4}\label{classMoveStrategy_ac11602427866ef8217c02f62c7c9a8f4}} 
+virtual void {\bfseries move} (\mbox{\hyperlink{classMovableObject}{Movable\+Object}} \&object)=0
+\item 
+\mbox{\Hypertarget{classMoveStrategy_a99a4c29d46d1eb603fbe275e11d00233}\label{classMoveStrategy_a99a4c29d46d1eb603fbe275e11d00233}} 
+Direction {\bfseries direction} () const
+\item 
+\mbox{\Hypertarget{classMoveStrategy_ab7110a9f18555722fe36ab122411cd94}\label{classMoveStrategy_ab7110a9f18555722fe36ab122411cd94}} 
+void {\bfseries set\+Speed} (unsigned int speed)
+\item 
+\mbox{\Hypertarget{classMoveStrategy_a36abb42ac0cf4f79bfa98978709a841b}\label{classMoveStrategy_a36abb42ac0cf4f79bfa98978709a841b}} 
+unsigned int {\bfseries speed} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Защищенные члены}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classMoveStrategy_a4c00d97b1cd72245248a91e8fc440ce0}\label{classMoveStrategy_a4c00d97b1cd72245248a91e8fc440ce0}} 
+{\bfseries Move\+Strategy} (Direction dir, unsigned int speed)
+\end{DoxyCompactItemize}
+
+
+Объявления и описания членов классов находятся в файлах\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Move\+Strategies/Move\+Strategy.\+h\item 
+src/\+Move\+Strategies/Move\+Strategy.\+cpp\end{DoxyCompactItemize}
