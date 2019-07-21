@@ -10,6 +10,7 @@ class Gunshell;
 class Equipment;
 
 /*!
+ * \ingroup Game_objects
  * \brief Класс объекта, управляемого игроком.
  *
  * Управляя объектом данного класса, игрок может:
