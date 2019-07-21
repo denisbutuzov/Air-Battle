@@ -10,8 +10,18 @@
 
 #include "PlayerObject.h"
 
+/*!
+ * \brief Переменная, определяющая часть игровой сцены, по которой
+ * игрок не может перемещаться.
+ *
+ * \note Измените значение, чтобы определить размер новой области
+ * для движения игрока.
+ */
 constexpr double INACTION_SCENE_PART = 0.66;
 
+/*!
+ * \param scene Слабый указатель на объект сцены.
+ */
 PlayerObject::PlayerObject(std::weak_ptr<QGraphicsScene> scene)
     : GameObject(scene)
     , pressKeysTimerAtWork_(false)
@@ -19,28 +29,53 @@ PlayerObject::PlayerObject(std::weak_ptr<QGraphicsScene> scene)
     equipment_ = std::make_unique<Equipment>(scene);
 }
 
+///Деструктор по умолчанию.
 PlayerObject::~PlayerObject() = default;
 
+/*!
+ * \param equipment Указатель на разделяемый объект снаряжения.
+ *
+ * Устанавливает новое снаряжения для игрока.
+ */
 void PlayerObject::setEquipment(std::shared_ptr<Equipment> equipment)
 {
     equipment_ = equipment;
 }
 
+/*!
+ * \param weapon Указатель с исключительными правами владения объектом оружия.
+ *
+ * Добавляет новое оружие в снаряжения игрока.
+ */
 void PlayerObject::takeWeapon(std::unique_ptr<HandWeapon> &&weapon)
 {
     equipment_->addWeapon(std::move(weapon));
 }
 
+/*!
+ * \param bonus Указатель с исключительными правами владения объектом бонуса.
+ *
+ * Добавляет новый бонус игроку.
+ */
 void PlayerObject::takeBonus(std::unique_ptr<HandBonus> &&bonus)
 {
     bonus_ = std::move(bonus);
 }
 
+/*!
+ * \return Указатель с исключительными правами владения объектом оружейного снаряда.
+ *
+ * Делегирует обязанности выстрела (порождения объекта оружейного снаряда) объекту
+ * снаряжения.
+ */
 std::unique_ptr<Gunshell> PlayerObject::shoot() const
 {
     return equipment_->shoot(x() + pixmap().width()/2, y());
 }
 
+/*!
+ * Использует бонус.
+ */
 void PlayerObject::execute()
 {
     if(bonus_)
@@ -49,6 +84,12 @@ void PlayerObject::execute()
     }
 }
 
+/*!
+ * \param event Событие нажатия кнопки клавиатуры.
+ *
+ * Добавляет нажатую кнопку в список, обрабатываемый методом
+ * `void PlayerObject::timerEvent(QTimerEvent *event)`.
+ */
 void PlayerObject::keyPressEvent(QKeyEvent *event)
 {
     if(!event->isAutoRepeat())
@@ -62,6 +103,12 @@ void PlayerObject::keyPressEvent(QKeyEvent *event)
     }
 }
 
+/*!
+ * \param event Событие отпускания кнопки клавиатуры.
+ *
+ * Удаляет отпущенную кнопку из списка, обрабатываемого методом
+ * `void PlayerObject::timerEvent(QTimerEvent *event)`.
+ */
 void PlayerObject::keyReleaseEvent(QKeyEvent *event)
 {
     if(!event->isAutoRepeat())
@@ -70,6 +117,11 @@ void PlayerObject::keyReleaseEvent(QKeyEvent *event)
     }
 }
 
+/*!
+ * \param event Событие срабатывания внутреннего таймера объекта.
+ *
+ * Обрабатывает все кнопки, нажатые игроком, реализуя множественные нажатия.
+ */
 void PlayerObject::timerEvent(QTimerEvent *event)
 {
     static const std::unordered_map<Qt::Key, void(PlayerObject::*)(void)> FUNCTION_MAP
@@ -107,6 +159,9 @@ void PlayerObject::timerEvent(QTimerEvent *event)
     }
 }
 
+/*!
+ * Реализует движения влево.
+ */
 void PlayerObject::stepLeft()
 {
     if(x() > 0)
@@ -115,6 +170,9 @@ void PlayerObject::stepLeft()
     }
 }
 
+/*!
+ * Реализует движения вправо.
+ */
 void PlayerObject::stepRight()
 {
     if(scene().expired())
@@ -127,6 +185,9 @@ void PlayerObject::stepRight()
     }
 }
 
+/*!
+ * Реализует движения вверх.
+ */
 void PlayerObject::stepUp()
 {
     if(scene().expired())
@@ -139,6 +200,9 @@ void PlayerObject::stepUp()
     }
 }
 
+/*!
+ * Реализует движения вниз.
+ */
 void PlayerObject::stepDown()
 {
     if(scene().expired())
@@ -151,11 +215,17 @@ void PlayerObject::stepDown()
     }
 }
 
+/*!
+ * Делегирует обязанности перезарядки оружия объекту снаряжения.
+ */
 void PlayerObject::reloadWeapon()
 {
     equipment_->reloadWeapon();
 }
 
+/*!
+ * Делегирует обязанности смены оружия объекту снаряжения.
+ */
 void PlayerObject::changeWeapon()
 {
     equipment_->changeWeapon();
