@@ -6,6 +6,7 @@ class AbstractVisitor;
 class MoveStrategy;
 
 /*!
+ * \ingroup Game_objects
  * \brief Родительский класс всех способных к движению объектов сцены (кроме PlayerObject).
  *
  * Реализует механизм движения игровых объектов на сцене.
