@@ -1,3 +1,4 @@
 *.user
 qtbuild
 build
+doc
