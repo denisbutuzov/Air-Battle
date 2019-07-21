@@ -1,0 +1,38 @@
+\hypertarget{classAbstractLevelFactory}{}\doxysection{Класс Abstract\+Level\+Factory}
+\label{classAbstractLevelFactory}\index{AbstractLevelFactory@{AbstractLevelFactory}}
+Граф наследования\+:Abstract\+Level\+Factory\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.577465cm]{classAbstractLevelFactory}
+\end{center}
+\end{figure}
+\doxysubsection*{Открытые члены}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classAbstractLevelFactory_afcb7b4695d135728dea7261d2447ad88}\label{classAbstractLevelFactory_afcb7b4695d135728dea7261d2447ad88}} 
+virtual std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classEnemy}{Enemy}} $>$ {\bfseries enemy} ()=0
+\item 
+\mbox{\Hypertarget{classAbstractLevelFactory_aa2feb3d73845b17ce162add8d2629e32}\label{classAbstractLevelFactory_aa2feb3d73845b17ce162add8d2629e32}} 
+virtual std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classWeapon}{Weapon}} $>$ {\bfseries weapon} ()=0
+\item 
+\mbox{\Hypertarget{classAbstractLevelFactory_ab539bfd114a625141f2c12342f3578e3}\label{classAbstractLevelFactory_ab539bfd114a625141f2c12342f3578e3}} 
+virtual std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classBonus}{Bonus}} $>$ {\bfseries bonus} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Защищенные члены}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classAbstractLevelFactory_ab90c966dffdeb7993e528177353ef3ff}\label{classAbstractLevelFactory_ab90c966dffdeb7993e528177353ef3ff}} 
+{\bfseries Abstract\+Level\+Factory} (std\+::weak\+\_\+ptr$<$ Q\+Graphics\+Scene $>$ scene)
+\item 
+\mbox{\Hypertarget{classAbstractLevelFactory_a9b50a744e312058bc88f464967375dbc}\label{classAbstractLevelFactory_a9b50a744e312058bc88f464967375dbc}} 
+std\+::weak\+\_\+ptr$<$ Q\+Graphics\+Scene $>$ {\bfseries scene} () const
+\item 
+\mbox{\Hypertarget{classAbstractLevelFactory_ae30d62b46504d177227b3184ded49c86}\label{classAbstractLevelFactory_ae30d62b46504d177227b3184ded49c86}} 
+Q\+PointF {\bfseries random\+Pos} (const Q\+Pixmap \&pixmap)
+\end{DoxyCompactItemize}
+
+
+Объявления и описания членов классов находятся в файлах\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Level\+Factories/Abstract\+Level\+Factory.\+h\item 
+src/\+Level\+Factories/Abstract\+Level\+Factory.\+cpp\end{DoxyCompactItemize}
