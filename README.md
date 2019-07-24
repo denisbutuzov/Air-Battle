@@ -21,7 +21,7 @@ mkdir build && cd build
 cmake .. && --build .
 ```
 Now you can run the game and enjoy!
- 
+
 ### Documentation
 
 Documentation is written in Russian language.
