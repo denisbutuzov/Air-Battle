@@ -1,11 +1,18 @@
 #include "Health.h"
 
+/*!
+ * \param maxHealth Максимальное значение здоровья игрока.
+ */
 Health::Health(int maxHealth)
     : health_(maxHealth)
     , maxHealth_(maxHealth)
 {
 }
 
+/*!
+ * Увеличивает значение здоровья игрока на одну единицу и
+ * оповещает всех наблюдателей.
+ */
 void Health::increase()
 {
     if (health_ < maxHealth_)
@@ -15,6 +22,10 @@ void Health::increase()
     }
 }
 
+/*!
+ * Уменьшает здоровье игрока на одну единицу и оповещает
+ * всех наблюдателей.
+ */
 void Health::decrease()
 {
     if (health_ > 0)
@@ -24,6 +35,9 @@ void Health::decrease()
     }
 }
 
+/*!
+ * \return Значение текущего здоровья игрока.
+ */
 int Health::value() const
 {
     return health_;
