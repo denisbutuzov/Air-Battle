@@ -3,6 +3,25 @@
 
 ***
 
+*Space-buttle*  is an arcade game where you find yourself in the epicenter of a large-scale battle. Сruel battles will not leave you indifferent to what is happening on the battlefield.
+
+### Dependencies
+*Space-Battle* is written in C++ language using the features of the standards C++11 and C++14. Also code uses **Qt5**, so If you want to build it you should download it from the [official website](https://www.qt.io/download).
+ 
+### Download
+To load the project you should run the command:
+```
+git clone https://github.com/denisbutuzov/Space-Battle.git
+```
+
+###Build
+In order to build a project go to the folder with the loaded project and execute the following commands:
+```
+mkdir build && cd build
+cmake .. && --build .
+```
+Now you can run the game and enjoy!
+ 
 ### Documentation
 
 Documentation is written in Russian language.
