@@ -14,14 +14,14 @@ To load the project you should run the command:
 git clone https://github.com/denisbutuzov/Space-Battle.git
 ```
 
-###Build
+### Build
 In order to build a project go to the folder with the loaded project and execute the following commands:
 ```
 mkdir build && cd build
 cmake .. && --build .
 ```
 Now you can run the game and enjoy!
- 
+
 ### Documentation
 
 Documentation is written in Russian language.
