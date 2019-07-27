@@ -5,6 +5,14 @@
 
 #include "HealthObserver.h"
 
+/*!
+ * \param health Слабый указатель на объект здоровья игрока.
+ * \param pixmap Путь до изображения, соответствующему единицы
+ * здоровья игрока.
+ *
+ * Прикрепляет данный наблюдатель за объектом здоровья игрока,
+ * переданного в качестве аргумента.
+ */
 HealthObserver::HealthObserver(std::weak_ptr<Health> health, const QString &pixmap)
     : subject_(health)
     , pixmap_(pixmap)
@@ -15,6 +23,9 @@ HealthObserver::HealthObserver(std::weak_ptr<Health> health, const QString &pixm
     }
 }
 
+/*!
+ * Обновляет представление в соответсвии с количеством здоровья игрока.
+ */
 void HealthObserver::update()
 {
     if(auto wp = subject_.lock())
@@ -31,6 +42,13 @@ void HealthObserver::update()
     }
 }
 
+/*!
+ * \param scene Слабый указатель на объект сцены.
+ * \param coordinate Позиция для отображения наблюдателя.
+ *
+ * Отображает объект наблюдателя на игровой сцене в позиции переданной
+ * в качестве аргумента.
+ */
 void HealthObserver::show(std::weak_ptr<QGraphicsScene> scene, QPointF coordinate)
 {
     scene_ = scene;
@@ -46,6 +64,9 @@ void HealthObserver::show(std::weak_ptr<QGraphicsScene> scene, QPointF coordinat
     }
 }
 
+/*!
+ * Добавляет изображение единицы здоровья на представление наблюдателя.
+ */
 void HealthObserver::addHeart()
 {
     auto heart = std::make_unique<QGraphicsPixmapItem>(pixmap_);
@@ -61,11 +82,21 @@ void HealthObserver::addHeart()
     hearts_.push(std::move(heart));
 }
 
+/*!
+ * Удаляет изображение единицы здоровья из представления наблюдателя.
+ */
 void HealthObserver::removeHeart()
 {
     hearts_.pop();
 }
 
+/*!
+ * \param callBack Функция для вызова.
+ * \param value Значение наблюдателя.
+ *
+ * Обновляет представление наблюдателя в соответствии с некоторым значением
+ * наблюдаемого объекта.
+ */
 void HealthObserver::repeatWhileSizesAreNotEqual(std::function<void ()> &&callBack, int value)
 {
     while(static_cast<int>(hearts_.size()) != value)
