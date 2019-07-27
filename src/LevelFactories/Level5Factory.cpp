@@ -5,11 +5,18 @@
 
 #include "Level5Factory.h"
 
+/*!
+ * \param scene Слабый указатель на объект сцены.
+ */
 Level5Factory::Level5Factory(std::weak_ptr<QGraphicsScene> scene)
     : AbstractLevelFactory(scene)
 {
 }
 
+/*!
+ * \return Указатель с исключительными правами владения на
+ * объект врага, защищенного щитом.
+ */
 std::unique_ptr<Enemy> Level5Factory::enemy()
 {
     auto enemy = std::make_unique<Enemy>(scene(), 2, std::make_shared<MoveByCurve>(MoveStrategy::Direction::Down, 7));
@@ -20,6 +27,10 @@ std::unique_ptr<Enemy> Level5Factory::enemy()
     return shieldEnemy;
 }
 
+/*!
+ * \return Указатель с исключительными правами владения на
+ * объект базуки.
+ */
 std::unique_ptr<Weapon> Level5Factory::weapon()
 {
     auto weapon = std::make_unique<Bazooka>(scene());
