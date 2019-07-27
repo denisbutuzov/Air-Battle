@@ -3,7 +3,7 @@
 
 ***
 
-*Space-buttle* is an arcade game where a player finds himself in the epicenter of a large-scale battle. Intense attacks of inter galaxian invaders won't let you go of the game.
+*Space-battle* is an arcade game where a player finds himself in the epicenter of a large-scale battle. Intense attacks of inter galaxian invaders won't let you go of the game.
 
 ### Dependencies
 *Space-Battle* is written in C++ language using the features of C++11 and C++14 standards. Also code uses **Qt5** library, so If you want to build it you should download it from the [official website](https://www.qt.io/download).
