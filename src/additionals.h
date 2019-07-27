@@ -2,6 +2,8 @@
 
 #include <memory>
 
+class QWidget;
+
 template<typename ToClass, typename FromClass>
 std::unique_ptr<ToClass> dynamic_unique_cast(std::unique_ptr<FromClass> &&from)
 {
@@ -13,3 +15,5 @@ std::unique_ptr<ToClass> dynamic_unique_cast(std::unique_ptr<FromClass> &&from)
     }
     return std::unique_ptr<ToClass>(nullptr);
 }
+
+void move_to_center(QWidget *wgt);

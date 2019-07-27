@@ -81,6 +81,8 @@ Game::Game()
 
     connect(player_.get(), SIGNAL(shot_sig()),
             this, SLOT(getGunshellFromPlayer()));
+
+    move_to_center(this);
 }
 
 void Game::start()

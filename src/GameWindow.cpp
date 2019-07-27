@@ -1,6 +1,7 @@
 #include <QLabel>
 
 #include "Game.h"
+#include "additionals.h"
 
 #include "GameWindow.h"
 #include "ui_GameWindow.h"
@@ -11,6 +12,7 @@ GameWindow::GameWindow(QWidget *parent)
 {
     ui->setupUi(this);
     ui->gameLabel->hide();
+    move_to_center(this);
 }
 
 GameWindow::~GameWindow()
