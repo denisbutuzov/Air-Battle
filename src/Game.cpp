@@ -21,6 +21,10 @@
 
 #include "Game.h"
 
+/*!
+ * Реализует инициализацию полей игры и соединение сигналов
+ * со слотами объектов.
+ */
 Game::Game()
 {
     const auto &sceneSettings = AppSettings::instance().scene();
@@ -85,6 +89,10 @@ Game::Game()
     move_to_center(this);
 }
 
+/*!
+ * Реализует отображение окна игры и запуск механизмов порождения,
+ * перемещения, удаления и обнаружения коллизий между объектами.
+ */
 void Game::start()
 {
     show();
@@ -95,6 +103,10 @@ void Game::start()
     checkCollisionTimer_.start();
 }
 
+/*!
+ * Реализует сокрытие окна игры и остановку механизмов порождения,
+ * перемещения, удаления и обнаружения коллизиий между объектами.
+ */
 void Game::pause()
 {
     hide();
@@ -106,12 +118,19 @@ void Game::pause()
     checkCollisionTimer_.stop();
 }
 
+/*!
+ * Реализует перемещение объектов по игровой сцене.
+ */
 void Game::moveGameObjects()
 {
     MoveVisitor visitor;
     objectsStorage_.accept(visitor);
 }
 
+/*!
+ * Реализует порождение нового игрового объекта и передачу его в объект
+ * хранилища игровых объектов GameObjectStorage.
+ */
 void Game::getSpawnObjectFromFactory()
 {
     auto spawnObject = FactoryManager::createSpawnObject(scene_, level_);
@@ -119,6 +138,10 @@ void Game::getSpawnObjectFromFactory()
     objectsStorage_.pushMovableObject(std::move(spawnObject));
 }
 
+/*!
+ * Реализует порождение оружейного снаряда при выстреле объектом игрока
+ * и передачу его в объект хранилища игровых объектов GameObjectStorage.
+ */
 void Game::getGunshellFromPlayer()
 {
     auto gunshell = player_->shoot();
@@ -129,6 +152,9 @@ void Game::getGunshellFromPlayer()
     }
 }
 
+/*!
+ * Реализует удаление игровых объектов при выходе за пределы игровой сцены.
+ */
 void Game::removeObjectsFromScene()
 {
     objectsStorage_.weapons().remove_if([&](auto &obj){ return obj->y() > scene_->height(); });
@@ -153,6 +179,9 @@ void Game::removeObjectsFromScene()
     }
 }
 
+/*!
+ * Реализует обнаружение коллизий между объектами игровой сцены.
+ */
 void Game::checkCollisionBetweenGameObjects()
 {
     objectsStorage_.gunshells().remove_if
@@ -228,11 +257,19 @@ void Game::checkCollisionBetweenGameObjects()
             );
 }
 
+/*!
+ * Реализует смену уровней игры.
+ */
 void Game::levelChange()
 {
     level_->increase();
 }
 
+/*!
+ * \param event Событие нажатия на кнопку.
+ *
+ * Реализует обработку события нажатия на кнопку игроком.
+ */
 void Game::keyPressEvent(QKeyEvent *event)
 {
     if(event->key() == Qt::Key_Escape)
@@ -246,14 +283,26 @@ void Game::keyPressEvent(QKeyEvent *event)
     }
 }
 
+/*!
+ * \param event Событие отпускания кнопки.
+ *
+ * Реализует обработку события отпускания кнопки игроком.
+ */
 void Game::keyReleaseEvent(QKeyEvent *event)
 {
     player_->keyReleaseEvent(event);
 }
 
+/*!
+ * \param event Событие закрытия окна игры.
+ *
+ * Реализует обработку события закрытия окна игры, путем
+ * посылания сигнала `close_sig()`.
+ */
 void Game::closeEvent(QCloseEvent *event)
 {
     emit close_sig();
 }
 
+///Деструктор по умолчанию.
 Game::~Game() = default;
