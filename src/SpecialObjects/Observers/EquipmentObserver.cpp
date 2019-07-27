@@ -7,6 +7,12 @@
 
 #include "EquipmentObserver.h"
 
+/*!
+ * \param equipment Слабый указатель на объект снаряжения игрока.
+ *
+ * Прикрепляет данный наблюдатель за объектом снаряжения игрока,
+ * переданного в качестве аргумента.
+ */
 EquipmentObserver::EquipmentObserver(std::weak_ptr<Equipment> equipment)
     : subject_(equipment)
 {
@@ -19,6 +25,9 @@ EquipmentObserver::EquipmentObserver(std::weak_ptr<Equipment> equipment)
     }
 }
 
+/*!
+ * Обновляет представление в соответствии с текущим состоянием снаряжения игрока.
+ */
 void EquipmentObserver::update()
 {
     if(auto wp = subject_.lock())
@@ -41,6 +50,13 @@ void EquipmentObserver::update()
     }
 }
 
+/*!
+ * \param scene Слабый указатель на объект сцены.
+ * \param coordinate Позиция для отображения наблюдателя.
+ *
+ * Отображает объект наблюдателя на игровой сцене в позиции переданной
+ * в качестве аргумента.
+ */
 void EquipmentObserver::show(std::weak_ptr<QGraphicsScene> scene, QPointF coordinate)
 {
     scene_ = scene;
@@ -60,6 +76,9 @@ void EquipmentObserver::show(std::weak_ptr<QGraphicsScene> scene, QPointF coordi
     }
 }
 
+/*!
+ * Добавляет изображение соответствующего патрона на представление наблюдателя.
+ */
 void EquipmentObserver::addPatron()
 {
     static const std::map<Equipment::WeaponType, QString> PATRON_TYPE
@@ -84,6 +103,9 @@ void EquipmentObserver::addPatron()
     patrons_.push(std::move(patron));
 }
 
+/*!
+ * Удаляет изображение патрона из представления наблюдателя.
+ */
 void EquipmentObserver::removePatron()
 {
     patrons_.pop();
@@ -98,6 +120,11 @@ void EquipmentObserver::repeatWhileSizesAreNotEqual(std::function<void ()> &&cal
     }
 }
 
+/*!
+ * \param weapon Название вида оружия.
+ *
+ * Устанавливает название вида оружия для отображения наблюдателем.
+ */
 void EquipmentObserver::setText(Equipment::WeaponType weapon)
 {
     static const std::map<Equipment::WeaponType, QString> WEAPON_TYPE
@@ -121,6 +148,9 @@ void EquipmentObserver::setText(Equipment::WeaponType weapon)
     weaponType_.setPlainText(text);
 }
 
+/*!
+ * Удаляет отображения всех патронов с представления наблюдателя.
+ */
 void EquipmentObserver::clearMagazine()
 {
     while(!patrons_.empty())

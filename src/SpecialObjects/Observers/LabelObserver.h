@@ -9,20 +9,40 @@
 
 constexpr const char *DEFAULT_TEXT = "Subject expired";
 
+/*!
+ * \ingroup Observers
+ * \brief Класс простого текстового наблюдателя.
+ *
+ * Реализует наблюдатель, следящий за изменением численного поля
+ * наблюдаемого класса.
+ *
+ * \warning Наблюдаемый класс должен иметь метод `value()`, возвращаемый
+ * численное значение.
+ */
 template<class T>
 class LabelObserver
         : public QGraphicsTextItem
         , public AbstractObserver
 {
 public:
+    ///Конструктор с двумя аргументами.
     LabelObserver(std::weak_ptr<T> subject, const QString &title);
+    ///Метод для обновления представления.
     virtual void update() override;
+    ///Метод для отображения наблюдателя.
     void show(std::weak_ptr<QGraphicsScene> scene, QPointF coordinate = QPointF(0.0, 0.0));
 private:
     std::weak_ptr<T> subject_;
     QString title_;
 };
 
+/*!
+  * \param subject Слабый указатель на наблюдаемый объект.
+  * \param title Заголовок текста наблюдателя.
+  *
+  * Прикрепляет наблюдателя за объектом наблюдения, переданного
+  * в качестве аргумента.
+  */
 template<class T>
 LabelObserver<T>::LabelObserver(std::weak_ptr<T> subject, const QString &title)
     : subject_(subject)
@@ -36,6 +56,10 @@ LabelObserver<T>::LabelObserver(std::weak_ptr<T> subject, const QString &title)
     }
 }
 
+/*!
+ * Обновляет значение, соответствующее изменяемому полю
+ * наблюдаемого класса.
+ */
 template<class T>
 void LabelObserver<T>::update()
 {
@@ -49,6 +73,13 @@ void LabelObserver<T>::update()
     }
 }
 
+/*!
+ * \param scene Слабый указатель на объект сцены.
+ * \param coordinate Позиция для отображения наблюдателя.
+ *
+ * Отображает объект наблюдателя на игровой сцене в позиции переданной
+ * в качестве аргумента.
+ */
 template<class T>
 void LabelObserver<T>::show(std::weak_ptr<QGraphicsScene> scene, QPointF coordinate)
 {

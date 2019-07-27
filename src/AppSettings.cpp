@@ -5,32 +5,50 @@
 
 constexpr const char *SETTINGS_FILE = ":/settings/settings.json";
 
+/*!
+ * \return Объект с настройками игры.
+ */
 AppSettings &AppSettings::instance()
 {
     static AppSettings appSettings;
     return appSettings;
 }
 
+/*!
+ * \return Структуру, содержащую настройки игровой сцены.
+ */
 const AppSettings::Scene &AppSettings::scene() const
 {
     return scene_;
 }
 
+/*!
+ * \return Структуру, содержащую настройки различных временных задержек.
+ */
 const AppSettings::Time &AppSettings::time() const
 {
     return time_;
 }
 
+/*!
+ * \return Структуру, содержащую настройки игровых объектов.
+ */
 const AppSettings::Objects &AppSettings::objects() const
 {
     return objects_;
 }
 
+/*!
+ * При конструировании загружает настройки из *.json файла.
+ */
 AppSettings::AppSettings()
 {
     load();
 }
 
+/*!
+ * Загружает настройки из *.json файла.
+ */
 void AppSettings::load()
 {
     QFile settingsFile(SETTINGS_FILE);

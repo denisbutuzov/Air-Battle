@@ -3,6 +3,9 @@
 
 #include "HandMachinegun.h"
 
+/*!
+ * \param scene Слабый указатель на объект сцены.
+ */
 HandMachinegun::HandMachinegun(std::weak_ptr<QGraphicsScene> scene)
     : HandWeapon(scene, AppSettings::instance().objects().machinegun_.capacity_,
                  AppSettings::instance().objects().machinegun_.startPatrons_,
@@ -11,6 +14,16 @@ HandMachinegun::HandMachinegun(std::weak_ptr<QGraphicsScene> scene)
 {
 }
 
+/*!
+ * \param x Координата по оси Х на игровой сцене для порождения
+ * оружейного снаряда пулемета.
+ * \param y Координата по оси Y на игровой сцене для порождения
+ * оружейного снаряда пулемета.
+ *
+ * \return Порожденный оружейный снаряд ручным пулеметом.
+ *
+ * Реализует создание оружейного снаряда ручным пулеметом.
+ */
 std::unique_ptr<Gunshell> HandMachinegun::createGunshell(qreal x, qreal y)
 {
     static enum class SIDE {LEFT, RIGHT} side;

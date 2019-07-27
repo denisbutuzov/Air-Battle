@@ -5,11 +5,18 @@
 
 #include "Level3Factory.h"
 
+/*!
+ * \param scene Слабый указатель на объект сцены.
+ */
 Level3Factory::Level3Factory(std::weak_ptr<QGraphicsScene> scene)
     : AbstractLevelFactory(scene)
 {
 }
 
+/*!
+ * \return Указатель с исключительными правами владения на
+ * объект врага, защищенного щитом.
+ */
 std::unique_ptr<Enemy> Level3Factory::enemy()
 {
     auto enemy = std::make_unique<Enemy>(scene());
@@ -20,6 +27,10 @@ std::unique_ptr<Enemy> Level3Factory::enemy()
     return shieldEnemy;
 }
 
+/*!
+ * \return Указатель с исключительными правами владения на
+ * объект пулемета или базуки.
+ */
 std::unique_ptr<Weapon> Level3Factory::weapon()
 {
     static unsigned int queue = 0;

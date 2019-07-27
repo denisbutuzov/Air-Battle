@@ -56,7 +56,8 @@ SET(HEADERS additionals.h
             Visitors/MoveVisitor.h
 )
 
-SET(SOURCES AppSettings.cpp
+SET(SOURCES additionals.cpp
+            AppSettings.cpp
             GameWindow.cpp
             Game.cpp
             FactoryManager.cpp

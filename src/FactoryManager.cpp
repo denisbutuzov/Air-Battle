@@ -12,6 +12,14 @@
 
 #include "FactoryManager.h"
 
+/*!
+ * \param scene Слабый указатель на объект игровой сцены.
+ * \param level Слабый указатель на объект уровня в игре.
+ *
+ * \return Способный к движению игровой объект.
+ *
+ * Реализует создание игрового объекта в зависимости от текущего уровня в игре.
+ */
 std::unique_ptr<MovableObject> FactoryManager::createSpawnObject(std::weak_ptr<QGraphicsScene> scene,
                                                                  std::weak_ptr<Level> level)
 {
@@ -38,6 +46,14 @@ std::unique_ptr<MovableObject> FactoryManager::createSpawnObject(std::weak_ptr<Q
     return callFactory(std::move(levelFactory));
 }
 
+/*!
+ * \param factory Конкретная игровая фабрика.
+ *
+ * \return Способный к движению игровой объект.
+ *
+ * Реализует механизм поочередного создания игровых объектов конкретной
+ * игровой фабрикой, переданной в качестве аргумента.
+ */
 std::unique_ptr<MovableObject> FactoryManager::callFactory(std::unique_ptr<AbstractLevelFactory> &&factory)
 {
     static unsigned int queue = 0;
